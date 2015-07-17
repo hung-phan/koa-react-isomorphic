@@ -1,0 +1,41 @@
+{
+  "name": "all-hail-the-R",
+  "devDependencies": {
+    "del": "*",
+    "gulp": "*",
+    "gulp-util": "*",
+    "minimist": "*",
+    "node-notifier": "*",
+    "jsdom": "*",
+    "mocha": "*",
+    "istanbul": "*",
+    "chai": "*",
+    "react-hot-loader": "*",
+    "webpack-dev-server": "*"
+  },
+  "dependencies": {
+    "webpack": "*",
+    "chunk-manifest-webpack-plugin": "*",
+    "babel": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-runtime": "*",
+    "exports-loader": "*",
+    "imports-loader": "*",
+    "expose-loader": "*",
+    "bundle-loader": "*",
+    "jquery": "*",
+    "lodash": "*",
+    "react": "*",
+    "react-router": "*"
+  },
+  "scripts": {
+    "test": "mocha --watch --compilers js:compiler.js 'app/frontend/javascripts/**/*-test.js'",
+    "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/frontend/javascripts/**/*-test.js'",
+    "webpack-dev": "webpack-dev-server --config config/webpack/development.config.js --hot --progress --inline"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
+  }
+}
