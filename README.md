@@ -5,5 +5,4 @@ This repo is to try new concepts for all the libraries starting with R which go 
 # Library
 - React
 - Ramda
-- Ramda-fantasy
 - Rxjs

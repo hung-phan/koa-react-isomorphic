@@ -1,16 +1,17 @@
 {
   "name": "all-hail-the-R",
   "devDependencies": {
+    "chai": "*",
     "del": "*",
     "gulp": "*",
     "gulp-util": "*",
-    "minimist": "*",
-    "node-notifier": "*",
-    "jsdom": "*",
-    "mocha": "*",
     "istanbul": "*",
-    "chai": "*",
+    "jsdom": "*",
+    "minimist": "*",
+    "mocha": "*",
+    "node-notifier": "*",
     "react-hot-loader": "*",
+    "babel-plugin-typecheck": "^1.1.0",
     "webpack-dev-server": "*"
   },
   "dependencies": {
@@ -24,15 +25,19 @@
     "imports-loader": "*",
     "expose-loader": "*",
     "bundle-loader": "*",
-    "jquery": "*",
+    "koa": "*",
     "lodash": "*",
+    "rx": "*",
+    "ramda": "*",
+    "ramda-fantasy": "*",
     "react": "*",
+    "jquery": "*",
     "react-router": "*"
   },
   "scripts": {
-    "test": "mocha --watch --compilers js:compiler.js 'app/frontend/javascripts/**/*-test.js'",
-    "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/frontend/javascripts/**/*-test.js'",
-    "webpack-dev": "webpack-dev-server --config config/webpack/development.config.js --hot --progress --inline"
+    "test": "mocha --watch --compilers js:compiler.js 'src/**/*-test.js'",
+    "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'src/**/*-test.js'",
+    "webpack-dev": "webpack-dev-server --config webpack/development.config.js --hot --progress --inline"
   },
   "license": "MIT",
   "engines": {

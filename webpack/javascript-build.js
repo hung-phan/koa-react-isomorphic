@@ -35,9 +35,9 @@ gulp.task('javascript:dev', ['javascript:clean'], function (cb) {
         gutil.log('[webpack]', stats.toString({colors: true}));
         if (!started) {
           started = true;
-          return cb();
+          cb();
         }
-      }
+      };
 
   bundler.watch(200, bundle);
 });
@@ -54,9 +54,9 @@ gulp.task('javascript:build', ['javascript:clean'], function(cb) {
         gutil.log('[webpack]', stats.toString({colors: true}));
         if (!started) {
           started = true;
-          return cb();
+          cb();
         }
-      }
+      };
 
   bundler.run(bundle);
 });
