@@ -1,43 +1,45 @@
 {
   "name": "all-hail-the-R",
   "devDependencies": {
-    "chai": "*",
     "del": "*",
     "gulp": "*",
     "gulp-util": "*",
     "istanbul": "*",
     "jsdom": "*",
+    "koa": "^0.21.0",
     "minimist": "*",
     "mocha": "*",
     "node-notifier": "*",
     "react-hot-loader": "*",
-    "babel-plugin-typecheck": "^1.1.0",
+    "shelljs": "^0.5.1",
     "webpack-dev-server": "*"
   },
   "dependencies": {
-    "webpack": "*",
-    "chunk-manifest-webpack-plugin": "*",
     "babel": "*",
     "babel-core": "*",
     "babel-loader": "*",
+    "babel-plugin-typecheck": "^1.1.0",
     "babel-runtime": "*",
-    "exports-loader": "*",
-    "imports-loader": "*",
-    "expose-loader": "*",
+    "chunk-manifest-webpack-plugin": "*",
     "bundle-loader": "*",
+    "exports-loader": "*",
+    "expose-loader": "*",
+    "imports-loader": "*",
     "koa": "*",
+    "pm2": "^0.14.3",
+    "jquery": "*",
     "lodash": "*",
-    "rx": "*",
     "ramda": "*",
     "ramda-fantasy": "*",
     "react": "*",
-    "jquery": "*",
-    "react-router": "*"
+    "react-router": "*",
+    "rx": "*",
+    "webpack": "*"
   },
   "scripts": {
     "test": "mocha --watch --compilers js:compiler.js 'src/**/*-test.js'",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'src/**/*-test.js'",
-    "webpack-frontend-dev": "webpack-dev-server --config config/frontend/development.config.js --hot --progress --inline"
+    "frontend-dev": "webpack-dev-server --port 8080 --config config/environments/development/frontend.config.js --hot --progress --inline"
   },
   "license": "MIT",
   "engines": {

@@ -1,6 +1,0 @@
-{
-  "webpack": {
-    "path": "./src/client/",
-    "build": "./dist/"
-  }
-}

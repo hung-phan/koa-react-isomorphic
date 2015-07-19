@@ -1,18 +1,18 @@
 'use strict';
 
 var _             = require('lodash'),
-    defaultConfig = require('./default.config'),
-    webpack       = require('webpack');
+    webpack       = require('webpack'),
+    defaultConfig = require('./../../frontend.config');
 
 module.exports = _.merge(defaultConfig, {
   entry: {
-    main: [
-      'webpack-dev-server/client?http://localhost:8080/dist/',
+    index: [
+      'webpack-dev-server/client?http://localhost:8080/build/client/',
       'webpack/hot/only-dev-server'
     ]
   }, // Hot Module Replacement
   output: {
-    publicPath: 'http://localhost:8080/dist/'
+    publicPath: 'http://localhost:8080/build/client/'
   }, // Hot Module Replacement
   cache: true,
   debug: true,

@@ -1,0 +1,10 @@
+{
+  "frontend": {
+    "path": "./src/client/",
+    "build": "./build/client/"
+  },
+  "backend": {
+    "path": "./src/server/",
+    "build": "./build/server/"
+  }
+}

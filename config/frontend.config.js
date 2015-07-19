@@ -5,13 +5,13 @@ var path    = require('path'),
     config  = require('./config.json');
 
 module.exports = {
-  context: path.join(__dirname, '../', '../'),
+  context: path.join(__dirname, '../'),
   entry: {
-    main: config.webpack.path + 'index'
+    index: config.frontend.path + 'index'
   },
   output: {
-    path: config.webpack.build,
-    publicPath: config.webpack.build,
+    path: config.frontend.build,
+    publicPath: config.frontend.build,
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js'
   },
