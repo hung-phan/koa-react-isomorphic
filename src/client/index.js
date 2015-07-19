@@ -3,13 +3,15 @@
 require('expose?jQuery!expose?$!jquery');
 require('expose?React!react/addons');
 
-import $      from 'jquery';
 import React  from 'react/addons';
-import Router from 'react-router';
 
 function sendMessage (to: User, message: string): boolean {
   return socket.send(to, message);
 }
+
+require.ensure(['react-router'], function(require) {
+  require('react-router');
+});
 
 // import MainComponent from './components/main-component';
 // import AppActions    from './actions/app-actions';

@@ -7,7 +7,7 @@ var _             = require('lodash'),
 module.exports = _.merge(defaultConfig, {
   entry: {
     main: [
-      'webpack-dev-server/client?http://localhost:8080/assets/',
+      'webpack-dev-server/client?http://localhost:8080/dist/',
       'webpack/hot/only-dev-server'
     ]
   }, // Hot Module Replacement
