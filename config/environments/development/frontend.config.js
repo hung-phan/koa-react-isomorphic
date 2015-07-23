@@ -1,8 +1,8 @@
 'use strict';
 
-var _             = require('lodash'),
-    webpack       = require('webpack'),
-    defaultConfig = require('./../../frontend.config');
+var _             = require('lodash');
+var webpack       = require('webpack');
+var defaultConfig = require('./../../frontend.config');
 
 module.exports = _.merge(defaultConfig, {
   entry: {

@@ -1,7 +1,6 @@
 'use strict';
 
 import koa from 'koa';
-import handler from 'handler';
 
 const app = koa();
 
@@ -18,3 +17,4 @@ app.use(function *(){
 });
 
 app.listen(3000);
+console.log('Server listening on port 3000');

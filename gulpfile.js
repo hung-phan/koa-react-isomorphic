@@ -1,17 +1,17 @@
 'use strict';
 
-var _         = require('lodash'),
-    del       = require('del'),
-    gulp      = require('gulp'),
-    gutil     = require('gulp-util'),
-    minimist  = require('minimist'),
-    webpack   = require('webpack'),
-    DevServer = require('webpack-dev-server'),
-    notifier  = require('node-notifier'),
-    shell     = require('shelljs'),
-    pm2       = require('pm2'),
-    config    = require('./config/config.json');
+var _                = require('lodash');
+var del              = require('del');
+var gulp             = require('gulp');
+var gutil            = require('gulp-util');
+var webpack          = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
+var notifier         = require('node-notifier');
+var shell            = require('shelljs');
+var pm2              = require('pm2');
+var config           = require('./config/config.json');
 
+gulp.task('frontend:clean', cleanTask([config.frontend.dist]));
 gulp.task('frontend:watch', shell.exec.bind(this, 'npm run frontend-dev'));
 gulp.task('frontend:build', ['frontend:clean'], function(cb) {
   var bundler = webpack(
@@ -28,6 +28,7 @@ gulp.task('frontend:build', ['frontend:clean'], function(cb) {
   bundler.run(handler);
 });
 
+gulp.task('backend:clean', cleanTask([config.backend.dist]));
 gulp.task('backend:watch', function(cb) {
   var started = false;
 
@@ -57,7 +58,7 @@ gulp.task('backend:build', ['backend:clean'], function(done) {
   bundler.run(handler);
 });
 
-gulp.task('clean', cleanTask([config.frontend.build, config.backend.build]));
+gulp.task('clean', cleanTask([config.frontend.dist, config.backend.dist]));
 
 gulp.task('start-server', function() {
   shell.exec('pm2 start build/server/index.js --name local-dev-server');

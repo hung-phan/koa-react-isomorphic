@@ -1,10 +1,10 @@
 {
   "frontend": {
-    "path": "./src/client/",
-    "build": "./build/client/"
+    "src": "./src/client/",
+    "dist": "./dist/client/"
   },
   "backend": {
-    "path": "./src/server/",
-    "build": "./build/server/"
+    "src": "./src/server/",
+    "dist": "./dist/server/"
   }
 }

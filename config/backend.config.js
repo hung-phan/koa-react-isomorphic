@@ -1,21 +1,21 @@
 'use strict';
 
-var _           = require('lodash'),
-    fs          = require('fs'),
-    path        = require('path'),
-    webpack     = require('webpack'),
-    config      = require('./config.json'),
-    nodeModules = {};
-
-// add all node_modules to externals
-_(fs.readdirSync('node_modules'))
-  .filter(function(x) {
-    return ['.bin'].indexOf(x) === -1;
-  })
-  .each(function(mod) {
-    nodeModules[mod] = 'commonjs ' + mod;
-  })
-  .value();
+var fs          = require('fs');
+var path        = require('path');
+var webpack     = require('webpack');
+var _           = require('lodash');
+var config      = require('./config.json');
+var nodeModules = _.reduce(
+                    // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
+                    _.filter(fs.readdirSync('node_modules'), function(x) {
+                      return ['.bin'].indexOf(x) === -1;
+                    }),
+                    function(modules, mod) {
+                      modules[mod] = 'commonjs ' + mod;
+                      return modules;
+                    },
+                    {}
+                  );
 
 module.exports = {
   context: path.join(__dirname, '../'),
@@ -25,11 +25,11 @@ module.exports = {
     __filename: true
   },
   entry: {
-    index: config.backend.path + 'index'
+    index: config.backend.src + 'index'
   },
   output: {
-    path: config.backend.build,
-    publicPath: config.backend.build,
+    path: config.backend.dist,
+    publicPath: config.backend.dist,
     filename: '[name].js',
     chunkFilename: '[id].js'
   },

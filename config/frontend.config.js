@@ -1,17 +1,17 @@
 'use strict';
 
-var path    = require('path'),
-    webpack = require('webpack'),
-    config  = require('./config.json');
+var path    = require('path');
+var webpack = require('webpack');
+var config  = require('./config.json');
 
 module.exports = {
   context: path.join(__dirname, '../'),
   entry: {
-    index: config.frontend.path + 'index'
+    index: config.frontend.src + 'index'
   },
   output: {
-    path: config.frontend.build,
-    publicPath: config.frontend.build,
+    path: config.frontend.dist,
+    publicPath: config.frontend.dist,
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js'
   },
