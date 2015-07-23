@@ -7,12 +7,12 @@ var defaultConfig = require('./../../frontend.config');
 module.exports = _.merge(defaultConfig, {
   entry: {
     index: [
-      'webpack-dev-server/client?http://localhost:8080/build/client/',
+      'webpack-dev-server/client?http://localhost:8080/dist/client/',
       'webpack/hot/only-dev-server'
     ]
   }, // Hot Module Replacement
   output: {
-    publicPath: 'http://localhost:8080/build/client/'
+    publicPath: 'http://localhost:8080/dist/client/'
   }, // Hot Module Replacement
   cache: true,
   debug: true,

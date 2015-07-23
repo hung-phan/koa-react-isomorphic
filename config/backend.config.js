@@ -45,7 +45,7 @@ module.exports = {
       loader: 'babel-loader?optional=runtime'
     }]
   },
-  recordsPath: path.join(__dirname, '../', 'build/server/_records'),
+  recordsPath: path.join(__dirname, '../', config.backend.dist, '_records'),
   plugins: [
     new webpack.IgnorePlugin(/\.(css|less)$/)
   ]
