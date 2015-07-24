@@ -4,8 +4,11 @@ require('expose?jQuery!expose?$!jquery');
 require('expose?React!react/addons');
 
 import React from 'react/addons';
-import Greeting from './components/greeting';
 
 $(document).ready(function() {
-  React.render(<Greeting />, document.getElementById('app'));
+  require.ensure(['./components/greeting'], function(require) {
+    var Greeting = require('./components/greeting');
+
+    React.render(<Greeting />, document.getElementById('app'));
+  });
 });

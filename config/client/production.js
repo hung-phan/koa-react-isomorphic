@@ -2,6 +2,7 @@
 
 var _                   = require('lodash');
 var webpack             = require('webpack');
+var ManifestPlugin      = require('webpack-manifest-plugin');
 var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 var defaultConfig       = require('./default');
 
@@ -13,9 +14,12 @@ module.exports = _.merge(defaultConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"', '__DEV__': false }),
+    new ManifestPlugin({
+      fileName: 'webpack-asset-manifest.json'
+    }),
     new ChunkManifestPlugin({
       filename: 'webpack-common-manifest.json',
-      manfiestVariable: 'webpackBundleManifest'
+      manfiestVariable: 'webpackManifest'
     }),
     new webpack.optimize.UglifyJsPlugin()
   ]

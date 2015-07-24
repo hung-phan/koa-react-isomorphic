@@ -1,6 +1,7 @@
 'use strict';
 
 var _                = require('lodash');
+var fs               = require('fs');
 var del              = require('del');
 var gulp             = require('gulp');
 var gutil            = require('gulp-util');
@@ -12,20 +13,22 @@ var pm2              = require('pm2');
 var config           = require('./config/config.json');
 
 gulp.task('frontend:watch', function(done) {
-  shell.exec('npm run frontend-dev');
-
-  done();
+  shell.exec('npm run client-watch', function() {
+    done();
+  });
 });
 
-gulp.task('frontend:build', ['clean'], function(cb) {
+gulp.task('frontend:build', ['clean'], function(done) {
   var bundler = webpack(require('./config/client/production')),
       handler = function (err, stats) {
-        if (err) {
-          notifier.notify({ message: 'Error: ' + err.message });
-          throw new gutil.PluginError('webpack', err);
-        }
-        gutil.log('[webpack]', stats.toString({colors: true}));
-      };
+                  if (err) {
+                    notifier.notify({ message: 'Error: ' + err.message });
+                    throw new gutil.PluginError('webpack', err);
+                  }
+
+                  gutil.log('[webpack]', stats.toString({colors: true}));
+                  done();
+                };
 
   bundler.run(handler);
 });
@@ -43,7 +46,7 @@ gulp.task('backend:watch', function(cb) {
   });
 });
 
-gulp.task('backend:build', ['backend:clean'], function(done) {
+gulp.task('backend:build', ['clean'], function(done) {
   var bundler = webpack(require('./config/server/production')),
       handler = function (err, stats) {
         if (err) {
@@ -56,7 +59,7 @@ gulp.task('backend:build', ['backend:clean'], function(done) {
   bundler.run(handler);
 });
 
-gulp.task('clean', cleanTask([config.path.dist]));
+gulp.task('clean', cleanTask(['.' + config.path.dist]));
 
 gulp.task('start-server', function() {
   shell.exec('pm2 start build/server/index.js --name local-dev-server');

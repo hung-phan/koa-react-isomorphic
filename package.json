@@ -19,27 +19,28 @@
     "babel-loader": "*",
     "babel-plugin-typecheck": "^1.1.0",
     "babel-runtime": "*",
-    "chunk-manifest-webpack-plugin": "*",
     "bundle-loader": "*",
+    "chunk-manifest-webpack-plugin": "*",
     "exports-loader": "*",
     "expose-loader": "*",
     "imports-loader": "*",
-    "nconf": "*",
-    "koa": "*",
-    "pm2": "^0.14.3",
     "jquery": "*",
+    "koa": "*",
     "lodash": "*",
+    "nconf": "*",
+    "pm2": "^0.14.3",
     "ramda": "*",
     "ramda-fantasy": "*",
     "react": "*",
     "react-router": "*",
     "rx": "*",
-    "webpack": "*"
+    "webpack": "*",
+    "webpack-manifest-plugin": "^0.3.0"
   },
   "scripts": {
     "test": "mocha --watch --compilers js:compiler.js 'src/**/*-test.js'",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'src/**/*-test.js'",
-    "frontend-dev": "webpack-dev-server --config config/client/development.js"
+    "client-watch": "webpack-dev-server --config config/client/development.js"
   },
   "license": "MIT",
   "engines": {
