@@ -2,11 +2,11 @@
   "apps": [
     {
       "name": "All hail the R",
-      "script": "dist/server/index.js",
+      "script": "dist/server.js",
       "watch": true,
       "env": {
         "NODE_ENV": "development"
       }
     }
-  ]
+  ],
 }

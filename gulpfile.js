@@ -18,7 +18,7 @@ gulp.task('frontend:watch', function(done) {
   });
 });
 
-gulp.task('frontend:build', ['clean'], function(done) {
+gulp.task('frontend:build', function(done) {
   var bundler = webpack(require('./config/client/production')),
       handler = function (err, stats) {
                   if (err) {
@@ -46,7 +46,7 @@ gulp.task('backend:watch', function(cb) {
   });
 });
 
-gulp.task('backend:build', ['clean'], function(done) {
+gulp.task('backend:build', function(done) {
   var bundler = webpack(require('./config/server/production')),
       handler = function (err, stats) {
         if (err) {
@@ -60,9 +60,10 @@ gulp.task('backend:build', ['clean'], function(done) {
 });
 
 gulp.task('clean', cleanTask(['.' + config.path.dist]));
+gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
 
 gulp.task('start-server', function() {
-  shell.exec('pm2 start build/server/index.js --name local-dev-server');
+  shell.exec('pm2 start dist/server.js --name local-dev-server');
 });
 
 gulp.task('stop-server', function() {

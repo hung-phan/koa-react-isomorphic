@@ -2,12 +2,12 @@
   "apps": [
     {
       "name": "All hail the R",
-      "script": "dist/server/index.js",
+      "script": "dist/server.js",
       "env": {
         "NODE_ENV": "production"
       },
       "instances": 0,
       "max_restarts": 100
     }
-  ]
+  ],
 }

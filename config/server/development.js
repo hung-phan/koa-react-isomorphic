@@ -1,15 +1,22 @@
 'use strict';
 
 var _             = require('lodash');
+var path          = require('path');
 var webpack       = require('webpack');
-var defaultConfig = require('./../../backend.config');
+var defaultConfig = require('./default');
 
 module.exports = _.merge(defaultConfig, {
   entry: {
-    index: [
+    server: [
       'webpack/hot/signal.js'
     ]
   }, // Hot Module Replacement
+  devtool: 'source-map',
+  devServer: {
+    contentBase: path.join(__dirname, './../../'),
+    hot: true,
+    inline: true
+  },
   module: {
     loaders: [{
       test: /.js$/,
@@ -18,8 +25,7 @@ module.exports = _.merge(defaultConfig, {
     }]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin({ quiet: true }), new webpack.NoErrorsPlugin(), // Hot Module Replacement
-    /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting
+    new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"', 'process.env.NO_SERVER_RENDERING': true, '__DEV__': true })
   ]
 }, function(obj1, obj2) {

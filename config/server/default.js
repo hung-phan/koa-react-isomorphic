@@ -4,7 +4,8 @@ var fs          = require('fs');
 var path        = require('path');
 var webpack     = require('webpack');
 var _           = require('lodash');
-var config      = require('./config.json');
+var config      = require('./../config.json');
+var rootPath    = path.join(__dirname, './../../');
 var nodeModules = _.reduce(
                     // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
                     _.filter(fs.readdirSync('node_modules'), function(x) {
@@ -12,24 +13,25 @@ var nodeModules = _.reduce(
                     }),
                     function(modules, mod) {
                       modules[mod] = 'commonjs ' + mod;
+
                       return modules;
                     },
                     {}
                   );
 
 module.exports = {
-  context: path.join(__dirname, '../'),
+  context: rootPath,
   target: 'node',
   node: {
     __dirname: true,
     __filename: true
   },
   entry: {
-    index: config.backend.src + 'index'
+    server: path.join(rootPath, config.path.src, 'server')
   },
   output: {
-    path: config.backend.dist,
-    publicPath: config.backend.dist,
+    path: path.join(rootPath, config.path.dist),
+    publicPath: path.join(rootPath, config.path.dist),
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
@@ -45,7 +47,7 @@ module.exports = {
       loader: 'babel-loader?optional=runtime'
     }]
   },
-  recordsPath: path.join(__dirname, '../', config.backend.dist, '_records'),
+  recordsPath: path.join(rootPath, config.path.dist, '_records'),
   plugins: [
     new webpack.IgnorePlugin(/\.(css|less)$/)
   ]
