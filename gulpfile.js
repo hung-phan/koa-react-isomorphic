@@ -12,20 +12,11 @@ var pm2              = require('pm2');
 var config           = require('./config/config.json');
 
 gulp.task('frontend:watch', function(done) {
-  var frontEndConfig = require('./config/client/development');
-  var server         = new WebpackDevServer(webpack(frontEndConfig), {
-    contentBase: __dirname,
-    hot: true,
-    publicPath: frontEndConfig.output.publicPath
-  }).listen(8080, 'localhost', function (err, result) {
-    if(err) {
-      console.log(err);
-    } else {
-      console.log('webpack dev server listening at localhost:8080');
-    }
-  });
+  shell.exec('npm run frontend-dev');
+
   done();
 });
+
 gulp.task('frontend:build', ['clean'], function(cb) {
   var bundler = webpack(require('./config/client/production')),
       handler = function (err, stats) {
@@ -51,6 +42,7 @@ gulp.task('backend:watch', function(cb) {
     gutil.log('[webpack]', stats.toString({colors: true}));
   });
 });
+
 gulp.task('backend:build', ['backend:clean'], function(done) {
   var bundler = webpack(require('./config/server/production')),
       handler = function (err, stats) {

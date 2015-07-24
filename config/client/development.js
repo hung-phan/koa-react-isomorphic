@@ -1,5 +1,6 @@
 'use strict';
 
+var path          = require('path');
 var _             = require('lodash');
 var webpack       = require('webpack');
 var defaultConfig = require('./default');
@@ -8,8 +9,7 @@ var config        = require('./../config.json');
 module.exports = _.merge(defaultConfig, {
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:8080' + config.path.dist,
-      'webpack/hot/only-dev-server'
+      'webpack-dev-server/client?http://localhost:8080' + config.path.dist
     ]
   }, // Hot Module Replacement
   output: {
@@ -19,6 +19,11 @@ module.exports = _.merge(defaultConfig, {
   debug: true,
   outputPathinfo: true,
   devtool: 'source-map',
+  devServer: {
+    contentBase: path.join(__dirname, './../../'),
+    hot: true,
+    inline: true
+  },
   module: {
     loaders: [{
       test: /.js$/,
