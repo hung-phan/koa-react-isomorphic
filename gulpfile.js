@@ -11,12 +11,23 @@ var shell            = require('shelljs');
 var pm2              = require('pm2');
 var config           = require('./config/config.json');
 
-gulp.task('frontend:clean', cleanTask([config.frontend.dist]));
-gulp.task('frontend:watch', shell.exec.bind(this, 'npm run frontend-dev'));
-gulp.task('frontend:build', ['frontend:clean'], function(cb) {
-  var bundler = webpack(
-                  require('./config/environments/production/frontend.config')
-                ),
+gulp.task('frontend:watch', function(done) {
+  var frontEndConfig = require('./config/client/development');
+  var server         = new WebpackDevServer(webpack(frontEndConfig), {
+    contentBase: __dirname,
+    hot: true,
+    publicPath: frontEndConfig.output.publicPath
+  }).listen(8080, 'localhost', function (err, result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log('webpack dev server listening at localhost:8080');
+    }
+  });
+  done();
+});
+gulp.task('frontend:build', ['clean'], function(cb) {
+  var bundler = webpack(require('./config/client/production')),
       handler = function (err, stats) {
         if (err) {
           notifier.notify({ message: 'Error: ' + err.message });
@@ -28,13 +39,10 @@ gulp.task('frontend:build', ['frontend:clean'], function(cb) {
   bundler.run(handler);
 });
 
-gulp.task('backend:clean', cleanTask([config.backend.dist]));
 gulp.task('backend:watch', function(cb) {
   var started = false;
 
-  webpack(
-    require('./config/environments/development/backend.config')
-  ).watch(100, function(err, stats) {
+  webpack(require('./config/server/development')).watch(100, function(err, stats) {
     if(!started) {
       started = true;
       cb();
@@ -44,9 +52,7 @@ gulp.task('backend:watch', function(cb) {
   });
 });
 gulp.task('backend:build', ['backend:clean'], function(done) {
-  var bundler = webpack(
-                  require('./config/environments/production/backend.config')
-                ),
+  var bundler = webpack(require('./config/server/production')),
       handler = function (err, stats) {
         if (err) {
           notifier.notify({ message: 'Error: ' + err.message });
@@ -58,7 +64,7 @@ gulp.task('backend:build', ['backend:clean'], function(done) {
   bundler.run(handler);
 });
 
-gulp.task('clean', cleanTask([config.frontend.dist, config.backend.dist]));
+gulp.task('clean', cleanTask([config.path.dist]));
 
 gulp.task('start-server', function() {
   shell.exec('pm2 start build/server/index.js --name local-dev-server');

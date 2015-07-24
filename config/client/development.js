@@ -2,17 +2,18 @@
 
 var _             = require('lodash');
 var webpack       = require('webpack');
-var defaultConfig = require('./../../frontend.config');
+var defaultConfig = require('./default');
+var config        = require('./../config.json');
 
 module.exports = _.merge(defaultConfig, {
   entry: {
-    index: [
-      'webpack-dev-server/client?http://localhost:8080/dist/client/',
+    app: [
+      'webpack-dev-server/client?http://localhost:8080' + config.path.dist,
       'webpack/hot/only-dev-server'
     ]
   }, // Hot Module Replacement
   output: {
-    publicPath: 'http://localhost:8080/dist/client/'
+    publicPath: 'http://localhost:8080' + config.path.dist
   }, // Hot Module Replacement
   cache: true,
   debug: true,
@@ -26,7 +27,7 @@ module.exports = _.merge(defaultConfig, {
     }]
   }, // Hot Module Replacement
   plugins: [
-    new webpack.NoErrorsPlugin(), // Hot Module Replacement
+    new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"', '__DEV__': true })
   ]

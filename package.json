@@ -39,7 +39,7 @@
   "scripts": {
     "test": "mocha --watch --compilers js:compiler.js 'src/**/*-test.js'",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'src/**/*-test.js'",
-    "frontend-dev": "webpack-dev-server --port 8080 --config config/environments/development/frontend.config.js --hot --progress --inline"
+    "frontend-dev": "webpack-dev-server --config config/client/development.js --hot --inline"
   },
   "license": "MIT",
   "engines": {

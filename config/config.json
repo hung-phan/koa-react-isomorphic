@@ -1,10 +1,6 @@
 {
-  "frontend": {
-    "src": "./src/client/",
-    "dist": "./dist/client/"
-  },
-  "backend": {
-    "src": "./src/server/",
-    "dist": "./dist/server/"
+  "path": {
+    "src": "/src/",
+    "dist": "/dist/"
   }
 }

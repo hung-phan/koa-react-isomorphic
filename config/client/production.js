@@ -1,9 +1,9 @@
 'use strict';
 
-var _                   = require('lodash'),
-    webpack             = require('webpack'),
-    ChunkManifestPlugin = require('chunk-manifest-webpack-plugin'),
-    defaultConfig       = require('./../../frontend.config');
+var _                   = require('lodash');
+var webpack             = require('webpack');
+var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+var defaultConfig       = require('./default');
 
 module.exports = _.merge(defaultConfig, {
   devtool: false,

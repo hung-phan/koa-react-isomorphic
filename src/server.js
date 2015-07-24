@@ -3,7 +3,6 @@
 import koa from 'koa';
 
 const app = koa();
-let a = 10;
 
 app.use(function *(next){
   var start = new Date;
@@ -14,7 +13,7 @@ app.use(function *(next){
 
 // response
 app.use(function *(){
-  this.body = 'Hello World ' + a;
+  this.body = 'Hello World';
 });
 
 app.listen(3000);
