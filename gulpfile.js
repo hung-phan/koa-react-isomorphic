@@ -60,6 +60,7 @@ gulp.task('backend:build', function(done) {
 });
 
 gulp.task('clean', cleanTask(['.' + config.path.dist]));
+gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
 gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
 
 gulp.task('start-server', function() {

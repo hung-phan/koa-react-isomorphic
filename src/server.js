@@ -1,6 +1,10 @@
 'use strict';
 
 import koa from 'koa';
+import nunjucks from 'nunjucks';
+
+// config nunjucks
+nunjucks.configure('views', { autoescape: true });
 
 const app = koa();
 
@@ -13,7 +17,7 @@ app.use(function *(next){
 
 // response
 app.use(function *(){
-  this.body = 'Hello World';
+  this.body = nunjucks.render('index.html');
 });
 
 app.listen(3000);
