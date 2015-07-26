@@ -19,6 +19,9 @@ var nodeModules = _.reduce(
                     {}
                   );
 
+nodeModules[path.join(rootPath, './dist/webpack-asset-manifest.json')] = true;
+nodeModules[path.join(rootPath, './dist/webpack-common-manifest.json')] = true;
+
 module.exports = {
   context: rootPath,
   target: 'node',
@@ -35,7 +38,12 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
-  externals: nodeModules,
+  externals: [
+    nodeModules,
+    function(context, request, callback) {
+      return /^external!/.test(request) ? callback(null, 'commonjs ' + request.substr(9)) : callback();
+    }
+  ],
   resolve: {
     modulesDirectories: ['node_modules'],
     extensions: ['', '.js']

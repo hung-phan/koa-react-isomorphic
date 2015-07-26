@@ -1,0 +1,18 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Index</title>
+</head>
+
+<body>
+  {% import 'helpers/application.html' as application_helper %}
+
+  {% block main_content %}{% endblock %}
+
+  {{ application_helper.webpack_manifest_script(env, assetManifest) }}
+  {{ application_helper.webpack_bundle_tag(env, 'app', assetManifest) }}
+</body>
+</html>

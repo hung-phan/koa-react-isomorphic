@@ -64,7 +64,7 @@ gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
 gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
 
 gulp.task('start-server', function() {
-  shell.exec('pm2 start dist/server.js --name local-dev-server');
+  shell.exec('pm2 start dist/server.js --name local-dev-server --watch');
 });
 
 gulp.task('stop-server', function() {

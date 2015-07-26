@@ -1,0 +1,23 @@
+{% macro stylesheet_link_tag(src) %}
+  <link rel="stylesheet" media="all" href="{{ src }}” />
+{% endmacro %}
+
+{% macro javascript_include_tag(src) %}
+  <script type="text/javascript" src="{{ src }}"></script>
+{% endmacro %}
+
+{% macro webpack_manifest_script(env, assetManifest) %}
+  {% if env == 'production' %}
+    <script type="text/javascript">
+      window.webpackManifest = {{ assetManifest | safe }};
+    </script>
+  {% endif %}
+{% endmacro %}
+
+{% macro webpack_bundle_tag(env, name, assetManifest={}) %}
+  {% if env == 'production' %}
+    {{ javascript_include_tag(assetManifest[name]) }}
+  {% else %}
+    {{ javascript_include_tag('http://localhost:8080/dist/' + name + '.bundle.js') }}
+  {% endif %}
+{% endmacro %}
