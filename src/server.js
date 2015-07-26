@@ -1,19 +1,15 @@
 'use strict';
 
-import koa from 'koa';
-import nunjucks from 'nunjucks';
-
-// config nunjucks
-nunjucks.configure('views', { autoescape: true });
+import koa            from 'koa';
+import nunjucks       from 'nunjucks';
+import logger         from './server/logger';
+import nunjucksConfig from './server/nunjucks-config';
 
 const app = koa();
 
-app.use(function *(next){
-  var start = new Date;
-  yield next;
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
-});
+// settings
+logger(app);
+nunjucksConfig(nunjucks);
 
 // response
 app.use(function *(){
@@ -22,3 +18,5 @@ app.use(function *(){
 
 app.listen(3000);
 console.log('Server listening on port 3000');
+
+export default app;

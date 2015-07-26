@@ -11,7 +11,8 @@
     "node-notifier": "*",
     "react-hot-loader": "*",
     "shelljs": "^0.5.1",
-    "webpack-dev-server": "*"
+    "webpack-dev-server": "*",
+    "chalk": "*"
   },
   "dependencies": {
     "babel": "*",
