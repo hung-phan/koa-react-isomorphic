@@ -26,7 +26,7 @@ module.exports = _.merge(defaultConfig, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"', 'process.env.NO_SERVER_RENDERING': true, '__DEV__': true })
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"', 'process.env.NO_SERVER_RENDERING': true })
   ]
 }, function(obj1, obj2) {
   return _.isArray(obj2) ? obj2.concat(obj1) : undefined;
