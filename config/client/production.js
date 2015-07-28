@@ -13,7 +13,9 @@ module.exports = _.merge(defaultConfig, {
     chunkFilename: '[id]-[chunkhash].bundle.js'
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"', '__DEV__': false }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    }),
     new ManifestPlugin({
       fileName: 'webpack-asset-manifest.json'
     }),

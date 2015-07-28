@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     path: path.join(rootPath, config.path.publicAssets),
-    publicPath: path.join(rootPath, config.path.publicAssets),
+    publicPath: config.path.assets,
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js'
   },

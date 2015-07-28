@@ -16,7 +16,7 @@
 
 {% macro webpack_bundle_tag(env, name, assetManifest={}) %}
   {% if env == 'production' %}
-    {{ javascript_include_tag(assetManifest[name] + '.js') }}
+    {{ javascript_include_tag('/assets/' + assetManifest[name + '.js']) }}
   {% else %}
     {{ javascript_include_tag('http://localhost:8080/build/' + name + '.bundle.js') }}
   {% endif %}

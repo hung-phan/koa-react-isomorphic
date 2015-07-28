@@ -31,7 +31,6 @@ module.exports = {
   },
   output: {
     path: path.join(rootPath, config.path.build),
-    publicPath: path.join(rootPath, config.path.build),
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
