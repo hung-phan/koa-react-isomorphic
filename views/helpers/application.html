@@ -9,7 +9,7 @@
 {% macro webpack_manifest_script(env, commonManifest) %}
   {% if env == 'production' %}
     <script type="text/javascript">
-      window.webpackManifest = {{ commonManifest | safe }};
+      window.webpackManifest = {{ commonManifest | json | safe }};
     </script>
   {% endif %}
 {% endmacro %}
