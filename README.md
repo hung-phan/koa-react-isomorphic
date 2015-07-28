@@ -10,17 +10,32 @@ explain them in details for people to have a clear overview about what it can do
 
 # Inspired setup and documents
 - https://github.com/jlongster/blog
+- https://github.com/webpack/react-starter
+
+# Start developing
+
+```bash
+$ npm run watch
+$ iojs build/server.js # or start pm2
+```
+
+# Build
+
+```bash
+$ npm run build
+$ iojs build/server.js # or start pm2
+```
 
 # So far
-- `Koa.js` up and running
+- `koa.js` up and running
 - `Webpack bunlder` for both client and server
 - `ES6` supports
-- Babel type check
+- `Babel type check`
+- `Nunjucks` template for `koa.js`
 
 # Working on
 - CSS framework - Bootstrap
 - Webpack hot module reload for server
-- Server template for `Koa.js`
 - Best practices for server and client
 - Test
 - Test coverage for server and client
