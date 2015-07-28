@@ -1,8 +1,8 @@
 'use strict';
 
-var _ = require('lodash');
-var path = require('path');
-var webpack = require('webpack');
+var _             = require('lodash');
+var path          = require('path');
+var webpack       = require('webpack');
 var defaultConfig = require('./default');
 
 module.exports = _.merge(defaultConfig, {
