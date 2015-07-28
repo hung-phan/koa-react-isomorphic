@@ -13,7 +13,7 @@ var pm2              = require('pm2');
 var config           = require('./config/config.json');
 
 gulp.task('frontend:watch', function(done) {
-  shell.exec('npm run client-watch', function() {
+  shell.exec('npm run frontend:watch', function() {
     done();
   });
 });
@@ -53,6 +53,7 @@ gulp.task('backend:build', function(done) {
           notifier.notify({ message: 'Error: ' + err.message });
           throw new gutil.PluginError('webpack', err);
         }
+
         gutil.log('[webpack]', stats.toString({colors: true}));
       };
 

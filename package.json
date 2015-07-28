@@ -44,7 +44,10 @@
   "scripts": {
     "test": "mocha --watch --compilers js:compiler.js 'app/**/*-test.js'",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js'",
-    "client-watch": "webpack-dev-server --config config/client/development.js"
+    "frontend:watch": "webpack-dev-server --config config/client/development.js",
+    "watch": "npm run frontend:watch & gulp backend:watch",
+    "clean": "gulp clean",
+    "build": "gulp build"
   },
   "license": "MIT",
   "engines": {
