@@ -27,7 +27,7 @@ module.exports = _.merge(defaultConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
+      'process.env.NODE_ENV': '"development"',
       'process.env.NO_SERVER_RENDERING': true
     })
   ]
