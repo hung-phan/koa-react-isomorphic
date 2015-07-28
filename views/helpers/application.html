@@ -6,18 +6,18 @@
   <script type="text/javascript" src="{{ src }}"></script>
 {% endmacro %}
 
-{% macro webpack_manifest_script(env, assetManifest) %}
+{% macro webpack_manifest_script(env, commonManifest) %}
   {% if env == 'production' %}
     <script type="text/javascript">
-      window.webpackManifest = {{ assetManifest | safe }};
+      window.webpackManifest = {{ commonManifest | safe }};
     </script>
   {% endif %}
 {% endmacro %}
 
 {% macro webpack_bundle_tag(env, name, assetManifest={}) %}
   {% if env == 'production' %}
-    {{ javascript_include_tag(assetManifest[name]) }}
+    {{ javascript_include_tag(assetManifest[name] + '.js') }}
   {% else %}
-    {{ javascript_include_tag('http://localhost:8080/dist/' + name + '.bundle.js') }}
+    {{ javascript_include_tag('http://localhost:8080/build/' + name + '.bundle.js') }}
   {% endif %}
 {% endmacro %}

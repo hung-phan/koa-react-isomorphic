@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "All hail the R",
-      "script": "dist/server.js",
+      "script": "build/server.js",
       "env": {
         "NODE_ENV": "production"
       },

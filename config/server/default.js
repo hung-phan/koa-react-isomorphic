@@ -19,9 +19,6 @@ var nodeModules = _.reduce(
                     {}
                   );
 
-nodeModules[path.join(rootPath, './dist/webpack-asset-manifest.json')] = true;
-nodeModules[path.join(rootPath, './dist/webpack-common-manifest.json')] = true;
-
 module.exports = {
   context: rootPath,
   target: 'node',
@@ -30,18 +27,22 @@ module.exports = {
     __filename: true
   },
   entry: {
-    server: path.join(rootPath, config.path.src, 'server')
+    server: path.join(rootPath, config.path.app, 'server')
   },
   output: {
-    path: path.join(rootPath, config.path.dist),
-    publicPath: path.join(rootPath, config.path.dist),
+    path: path.join(rootPath, config.path.build),
+    publicPath: path.join(rootPath, config.path.build),
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
   externals: [
     nodeModules,
     function(context, request, callback) {
-      return /^external!/.test(request) ? callback(null, 'commonjs ' + request.substr(9)) : callback();
+      var external = 'external!';
+
+      return (new RegExp('^' + external)).test(request)
+        ? callback(null, 'commonjs ' + path.join(rootPath, request.substr(external.length)))
+        : callback();
     }
   ],
   resolve: {
@@ -55,7 +56,7 @@ module.exports = {
       loader: 'babel-loader?optional=runtime'
     }]
   },
-  recordsPath: path.join(rootPath, config.path.dist, '_records'),
+  recordsPath: path.join(rootPath, config.path.build, '_records'),
   plugins: [
     new webpack.IgnorePlugin(/\.(css|less)$/)
   ]

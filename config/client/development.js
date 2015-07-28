@@ -9,11 +9,11 @@ var config        = require('./../config.json');
 module.exports = _.merge(defaultConfig, {
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:8080' + config.path.dist
+      'webpack-dev-server/client?http://localhost:8080' + config.path.build
     ]
   }, // Hot Module Replacement
   output: {
-    publicPath: 'http://localhost:8080' + config.path.dist
+    publicPath: 'http://localhost:8080' + config.path.build
   }, // Hot Module Replacement
   cache: true,
   debug: true,

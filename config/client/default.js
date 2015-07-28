@@ -8,11 +8,11 @@ var rootPath = path.join(__dirname, './../../');
 module.exports = {
   context: rootPath,
   entry: {
-    app: path.join(rootPath, config.path.src, 'app')
+    app: path.join(rootPath, config.path.app, 'app')
   },
   output: {
-    path: path.join(rootPath, config.path.dist),
-    publicPath: path.join(rootPath, config.path.dist),
+    path: path.join(rootPath, config.path.publicAssets),
+    publicPath: path.join(rootPath, config.path.publicAssets),
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js'
   },

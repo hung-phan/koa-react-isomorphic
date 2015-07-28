@@ -12,9 +12,7 @@
 
   {% block main_content %}{% endblock %}
 
-  ENV: {{env}}
-
-  {{ application_helper.webpack_manifest_script(env, assetManifest) }}
+  {{ application_helper.webpack_manifest_script(env, commonManifest) }}
   {{ application_helper.webpack_bundle_tag(env, 'app', assetManifest) }}
 </body>
 </html>

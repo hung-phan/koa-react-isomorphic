@@ -59,12 +59,12 @@ gulp.task('backend:build', function(done) {
   bundler.run(handler);
 });
 
-gulp.task('clean', cleanTask(['.' + config.path.dist]));
+gulp.task('clean', cleanTask(['.' + config.path.build, '.' + config.path.publicAssets]));
 gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
 gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
 
 gulp.task('start-server', function() {
-  shell.exec('pm2 start dist/server.js --name local-dev-server --watch');
+  shell.exec('pm2 start build/server.js --name local-dev-server --watch');
 });
 
 gulp.task('stop-server', function() {

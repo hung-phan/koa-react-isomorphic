@@ -1,6 +1,7 @@
 {
   "path": {
-    "src": "/src/",
-    "dist": "/dist/"
+    "app": "/app/",
+    "publicAssets": "/public/assets/",
+    "build": "/build/"
   }
 }
