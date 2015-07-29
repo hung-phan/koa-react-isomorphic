@@ -6,7 +6,7 @@ require('./client/lib/index');
 import $      from 'jquery';
 import React  from 'react/addons';
 import Router from 'react-router';
-import Home   from './client/components/home/hello';
+import Home   from './client/components/home/home';
 
 $(document).ready(function() {
   const routes = (
