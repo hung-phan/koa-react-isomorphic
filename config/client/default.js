@@ -23,29 +23,18 @@ module.exports = {
     extensions: ['', '.js']
   },
   module: {
-    loaders: [{
-      test: /.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader'
-    },
-    // fonts
-    {
-      test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: 'file-loader'
-    },
-    // css
-    {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-    },
-    {
-      test: /\.less$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
-    },
-    {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
-    }]
+    loaders: [
+      {
+        test: /.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      // fonts
+      {
+        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader'
+      }
+    ]
   },
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin(),

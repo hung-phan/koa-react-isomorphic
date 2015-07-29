@@ -55,7 +55,6 @@ module.exports = {
       loader: 'babel-loader'
     }]
   },
-  recordsPath: path.join(rootPath, config.path.build, '_records'),
   plugins: [
     new webpack.IgnorePlugin(/\.(css|less)$/)
   ]

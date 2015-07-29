@@ -4,6 +4,8 @@ var _             = require('lodash');
 var path          = require('path');
 var webpack       = require('webpack');
 var defaultConfig = require('./default');
+var config        = require('./../config.json');
+var rootPath      = path.join(__dirname, './../../');
 
 module.exports = _.merge(defaultConfig, {
   entry: {
@@ -24,6 +26,7 @@ module.exports = _.merge(defaultConfig, {
       loader: 'monkey-hot'
     }]
   },
+  recordsPath: path.join(rootPath, config.path.build, '_records'),
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     new webpack.DefinePlugin({

@@ -6,6 +6,7 @@ var webpack           = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var defaultConfig     = require('./default');
 var config            = require('./../config.json');
+var rootPath          = path.join(__dirname, './../../');
 
 module.exports = _.merge(defaultConfig, {
   entry: {
@@ -26,16 +27,28 @@ module.exports = _.merge(defaultConfig, {
     inline: true
   },
   module: {
-    loaders: [{
-      test: /.js$/,
-      exclude: /node_modules/,
-      loader: 'react-hot'
-    }]
+    loaders: [
+      {
+        test: /.js$/,
+        exclude: /node_modules/,
+        loader: 'react-hot'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css!less'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass'
+      }
+    ]
   }, // Hot Module Replacement
+  recordsPath: path.join(rootPath, config.path.build, '_recordsClient'),
   plugins: [
-    new ExtractTextPlugin('[name].css', {
-      allChunks: true
-    }),
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting
     new webpack.DefinePlugin({

@@ -25,7 +25,5 @@
 {% macro webpack_css_bundle_tag(env, name, assetManifest={}) %}
   {% if env == 'production' %}
     {{ stylesheet_link_tag('/assets/' + assetManifest[name + '.css']) }}
-  {% else %}
-    {{ stylesheet_link_tag('http://localhost:8080/build/' + name + '.css') }}
   {% endif %}
 {% endmacro %}
