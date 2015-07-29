@@ -47,7 +47,7 @@ module.exports = _.merge(defaultConfig, {
       }
     ]
   }, // Hot Module Replacement
-  recordsPath: path.join(rootPath, config.path.build, '_recordsClient'),
+  // recordsPath: path.join(rootPath, config.path.build, '_recordsClient'),
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting
