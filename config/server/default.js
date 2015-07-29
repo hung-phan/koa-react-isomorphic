@@ -52,7 +52,7 @@ module.exports = {
     loaders: [{
       test: /.js$/,
       exclude: /node_modules/,
-      loader: 'babel-loader?optional=runtime'
+      loader: 'babel-loader'
     }]
   },
   recordsPath: path.join(rootPath, config.path.build, '_records'),

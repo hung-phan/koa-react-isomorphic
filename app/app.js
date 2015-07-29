@@ -3,6 +3,7 @@
 require('expose?jQuery!expose?$!jquery');
 require('expose?React!react/addons');
 
+import $     from 'jquery';
 import React from 'react/addons';
 
 $(document).ready(function() {
