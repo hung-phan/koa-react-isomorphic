@@ -4,5 +4,6 @@
 require('expose?jQuery!expose?$!jquery');
 require('expose?React!react/addons');
 
-// load lib
+// load libs
 require('./twitter-bootstrap');
+require('./font-awesome');

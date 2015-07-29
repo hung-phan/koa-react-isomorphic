@@ -21,6 +21,7 @@
     "babel-plugin-typecheck": "*",
     "babel-runtime": "*",
     "bootstrap": "*",
+    "font-awesome": "*",
     "bundle-loader": "*",
     "chunk-manifest-webpack-plugin": "*",
     "extract-text-webpack-plugin": "*",

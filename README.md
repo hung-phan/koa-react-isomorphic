@@ -33,6 +33,7 @@ $ iojs build/server.js # or start pm2
 - `Babel type check`
 - `Nunjucks` template for `koa.js`
 - CSS framework - Bootstrap
+- FontAwesome
 - Test coverage for server and client
 - Test
 
