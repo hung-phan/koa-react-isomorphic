@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react/addons';
+import React, { TestUtils } from 'react/addons';
 import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 import assert from 'assert';
 import { jsdom } from 'jsdom';
@@ -14,21 +14,20 @@ if (typeof document === 'undefined') {
   global.navigator = window.navigator;
 }
 
+const Home = require('./home');
 describe('Home Component', () => {
   it('should bind to DOM node', () => {
-    let {TestUtils} = React.addons;
-    let Home = require('./home');
 
-    let Component = TestUtils.renderIntoDocument(
+    let component = TestUtils.renderIntoDocument(
       React.createElement(Home)
     );
 
-    assert.equal(Component.state.text, 'Click Me!');
+    assert.equal(component.state.text, 'Click Me!');
 
     TestUtils.Simulate.click(
-      TestUtils.findRenderedDOMComponentWithClass(Component, 'clickMe')
+      TestUtils.findRenderedDOMComponentWithClass(component, 'clickMe')
     );
 
-    assert.equal(Component.state.text, '!eM kcilC');
+    assert.equal(component.state.text, '!eM kcilC');
   });
 });
