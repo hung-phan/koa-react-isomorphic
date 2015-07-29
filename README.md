@@ -32,10 +32,10 @@ $ iojs build/server.js # or start pm2
 - `ES6` supports
 - `Babel type check`
 - `Nunjucks` template for `koa.js`
+- CSS framework - Bootstrap
+- Test coverage for server and client
+- Test
 
 # Working on
-- CSS framework - Bootstrap
 - Webpack hot module reload for server
 - Best practices for server and client
-- Test
-- Test coverage for server and client
