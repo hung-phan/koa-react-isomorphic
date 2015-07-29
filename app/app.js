@@ -3,13 +3,17 @@
 require('babel/polyfill');
 require('./client/lib/index');
 
-import $     from 'jquery';
-import React from 'react/addons';
+import $      from 'jquery';
+import React  from 'react/addons';
+import Router from 'react-router';
+import Home   from './client/components/home/hello';
 
 $(document).ready(function() {
-  require.ensure(['./client/components/greeting'], function(require) {
-    var Greeting = require('./client/components/greeting');
+  const routes = (
+    <Router.Route name='main_page' path='/' handler={Home}></Router.Route>
+  );
 
-    React.render(<Greeting />, document.getElementById('app'));
+  Router.run(routes, Router.HashLocation, function(Handler) {
+    React.render(React.createFactory(Handler)(), document.getElementById('app'));
   });
 });
