@@ -1,10 +1,11 @@
 'use strict';
 
-var path          = require('path');
-var _             = require('lodash');
-var webpack       = require('webpack');
-var defaultConfig = require('./default');
-var config        = require('./../config.json');
+var _                 = require('lodash');
+var path              = require('path');
+var webpack           = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var defaultConfig     = require('./default');
+var config            = require('./../config.json');
 
 module.exports = _.merge(defaultConfig, {
   entry: {
@@ -32,6 +33,9 @@ module.exports = _.merge(defaultConfig, {
     }]
   }, // Hot Module Replacement
   plugins: [
+    new ExtractTextPlugin('[name].css', {
+      allChunks: true
+    }),
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting
     new webpack.DefinePlugin({

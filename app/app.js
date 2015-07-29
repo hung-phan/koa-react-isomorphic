@@ -2,6 +2,7 @@
 
 require('expose?jQuery!expose?$!jquery');
 require('expose?React!react/addons');
+require('./client/bootstrap');
 
 import $     from 'jquery';
 import React from 'react/addons';

@@ -4,6 +4,7 @@ var _                   = require('lodash');
 var webpack             = require('webpack');
 var ManifestPlugin      = require('webpack-manifest-plugin');
 var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+var ExtractTextPlugin   = require('extract-text-webpack-plugin');
 var defaultConfig       = require('./default');
 
 module.exports = _.merge(defaultConfig, {
@@ -15,6 +16,9 @@ module.exports = _.merge(defaultConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
+    }),
+    new ExtractTextPlugin('[name]-[contenthash].css', {
+      allChunks: true
     }),
     new ManifestPlugin({
       fileName: 'webpack-asset-manifest.json'

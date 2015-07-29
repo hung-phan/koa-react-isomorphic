@@ -1,9 +1,9 @@
-{% macro stylesheet_link_tag(src) %}
-  <link rel="stylesheet" media="all" href="{{ src }}” />
-{% endmacro %}
-
 {% macro javascript_include_tag(src) %}
-  <script type="text/javascript" src="{{ src }}"></script>
+  <script type="text/javascript" src={{ src }}></script>
+  {% endmacro %}
+
+{% macro stylesheet_link_tag(src) %}
+  <link rel="stylesheet" media="all" href={{ src }} />
 {% endmacro %}
 
 {% macro webpack_manifest_script(env, commonManifest) %}
@@ -19,5 +19,13 @@
     {{ javascript_include_tag('/assets/' + assetManifest[name + '.js']) }}
   {% else %}
     {{ javascript_include_tag('http://localhost:8080/build/' + name + '.bundle.js') }}
+  {% endif %}
+{% endmacro %}
+
+{% macro webpack_css_bundle_tag(env, name, assetManifest={}) %}
+  {% if env == 'production' %}
+    {{ stylesheet_link_tag('/assets/' + assetManifest[name + '.css']) }}
+  {% else %}
+    {{ stylesheet_link_tag('http://localhost:8080/build/' + name + '.css') }}
   {% endif %}
 {% endmacro %}

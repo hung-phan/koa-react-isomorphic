@@ -1,9 +1,10 @@
 'use strict';
 
-var path     = require('path');
-var webpack  = require('webpack');
-var config   = require('./../config.json');
-var rootPath = path.join(__dirname, './../../');
+var path              = require('path');
+var webpack           = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var config            = require('./../config.json');
+var rootPath          = path.join(__dirname, './../../');
 
 module.exports = {
   context: rootPath,
@@ -26,6 +27,24 @@ module.exports = {
       test: /.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader'
+    },
+    // fonts
+    {
+      test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'file-loader'
+    },
+    // css
+    {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+    },
+    {
+      test: /\.less$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
+    },
+    {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
     }]
   },
   plugins: [
