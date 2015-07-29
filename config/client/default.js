@@ -1,10 +1,9 @@
 'use strict';
 
-var path              = require('path');
-var webpack           = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var config            = require('./../config.json');
-var rootPath          = path.join(__dirname, './../../');
+var path     = require('path');
+var webpack  = require('webpack');
+var config   = require('./../config.json');
+var rootPath = path.join(__dirname, './../../');
 
 module.exports = {
   context: rootPath,

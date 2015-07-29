@@ -1,12 +1,11 @@
 'use strict';
 
-var _                 = require('lodash');
-var path              = require('path');
-var webpack           = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var defaultConfig     = require('./default');
-var config            = require('./../config.json');
-var rootPath          = path.join(__dirname, './../../');
+var _             = require('lodash');
+var path          = require('path');
+var webpack       = require('webpack');
+var defaultConfig = require('./default');
+var config        = require('./../config.json');
+var rootPath      = path.join(__dirname, './../../');
 
 module.exports = _.merge(defaultConfig, {
   entry: {
@@ -47,7 +46,6 @@ module.exports = _.merge(defaultConfig, {
       }
     ]
   }, // Hot Module Replacement
-  // recordsPath: path.join(rootPath, config.path.build, '_recordsClient'),
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting

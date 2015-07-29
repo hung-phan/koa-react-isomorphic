@@ -56,6 +56,6 @@ module.exports = {
     }]
   },
   plugins: [
-    new webpack.IgnorePlugin(/\.(css|less)$/)
+    new webpack.IgnorePlugin(/\.(css|less|sass)$/)
   ]
 };
