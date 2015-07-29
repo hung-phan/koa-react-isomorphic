@@ -1,5 +1,4 @@
-node_modules
-build
-dist
+node_modules/
+build/
 *tern-port
-public/assets
+public/assets/
