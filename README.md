@@ -16,14 +16,14 @@ explain them in details for people to have a clear overview about what it can do
 
 ```bash
 $ npm run watch
-$ iojs build/server.js # or start pm2
+$ npm start # or start pm2
 ```
 
 # Build
 
 ```bash
-$ npm run build
-$ iojs build/server.js # or start pm2
+$ gulp build
+$ npm start # or start pm2
 ```
 
 # So far
