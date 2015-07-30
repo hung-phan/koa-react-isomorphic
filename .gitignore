@@ -1,4 +1,4 @@
 node_modules/
 build/
+bower_components/
 *tern-port
-public/assets/

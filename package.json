@@ -25,6 +25,7 @@
     "bundle-loader": "*",
     "chunk-manifest-webpack-plugin": "*",
     "extract-text-webpack-plugin": "*",
+    "script-loader": "*",
     "exports-loader": "*",
     "expose-loader": "*",
     "imports-loader": "*",
