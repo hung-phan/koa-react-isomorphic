@@ -55,7 +55,7 @@
     "webpack-manifest-plugin": "*"
   },
   "scripts": {
-    "start": "iojs build/server.js",
+    "start": "sh scripts/start",
     "test": "mocha --watch --compilers js:compiler.js 'app/**/*-test.js'",
     "postinstall": "sh scripts/build",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js'",

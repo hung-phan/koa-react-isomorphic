@@ -1,7 +1,7 @@
 'use strict';
 
-import koa               from 'koa';
-import nunjucksConfig    from 'config/initializers/nunjucks';
+import koa from 'koa';
+import nunjucksConfig from 'config/initializers/nunjucks';
 import middlewaresConfig from 'config/initializers/middlewares';
 
 const app = koa();
@@ -14,7 +14,9 @@ app.use(function* () {
   this.body = this.render('application/index.html');
 });
 
-app.listen(3000);
-console.log('Server listening on port 3000');
+const PORT = env.get('PORT') || 3000;
+
+app.listen(PORT);
+console.log(`Server listening on port ${PORT}`);
 
 export default app;
