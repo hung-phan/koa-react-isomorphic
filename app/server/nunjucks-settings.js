@@ -1,10 +1,7 @@
 'use strict';
 
-import nunjucks from 'nunjucks';
+export default function(nunjucks) {
+  const Template = nunjucks.configure('views', { autoescape: true });
 
-const nunjucksEnv = nunjucks.configure('views', { autoescape: true });
-
-// filters
-nunjucksEnv.addFilter('json', obj => JSON.stringify(obj));
-
-export default nunjucksEnv;
+  Template.addFilter('json', (obj) => JSON.stringify(obj));
+}
