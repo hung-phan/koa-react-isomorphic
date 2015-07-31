@@ -1,19 +1,15 @@
 'use strict';
 
-require('babel/polyfill');
-require('./client/lib/index');
+import 'babel/polyfill';
+import './client/lib/index';
 
 import $      from 'jquery';
-import React  from 'react/addons';
+import React  from 'react';
 import Router from 'react-router';
-import Home   from './client/components/home/home';
+import routes from './routes';
 
 $(document).ready(function() {
-  const routes = (
-    <Router.Route name='main_page' path='/' handler={Home}></Router.Route>
-  );
-
-  Router.run(routes, Router.HashLocation, function(Handler) {
-    React.render(React.createFactory(Handler)(), document.getElementById('app'));
+  Router.run(routes, Router.HistoryLocation, function(Handler) {
+    React.render(<Handler />, document.getElementById('app'));
   });
 });

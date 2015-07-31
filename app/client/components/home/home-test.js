@@ -1,28 +1,22 @@
 'use strict';
 
-import React from 'react/addons';
-import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
-import assert from 'assert';
-import { jsdom } from 'jsdom';
+import 'app/client/components/helpers/jsdom-support.js';
 
-// config React DOM
-ExecutionEnvironment.canUseDOM = true;
-
-if (typeof document === 'undefined') {
-  global.document = jsdom('<html><body></body></html>');
-  global.window = document.defaultView;
-  global.navigator = window.navigator;
-}
-
-const Home = require('./home');
-const { TestUtils } = React.addons;
+import { assert }        from 'chai';
+import React, { addons } from 'react/addons';
+import Home              from './home';
 
 describe('Home Component', () => {
-  it('should bind to DOM node', () => {
+  const { TestUtils } = addons;
 
-    let component = TestUtils.renderIntoDocument(
-      React.createElement(Home)
-    );
+  it('should be defined', () => {
+    const component = TestUtils.renderIntoDocument(<Home />);
+
+    assert.ok(component);
+  });
+
+  it('should bind interaction to DOM node', () => {
+    const component = TestUtils.renderIntoDocument(<Home />);
 
     assert.equal(component.state.text, 'Click Me!');
 

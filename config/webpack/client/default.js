@@ -36,11 +36,16 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.NormalModuleReplacementPlugin(/'react'/, 'react/addons'),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.ResolverPlugin([
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      '__CLIENT__': true,
+      '__SERVER__': false
+    })
   ]
 };

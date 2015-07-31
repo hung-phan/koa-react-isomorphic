@@ -1,8 +1,8 @@
 'use strict';
 
-import React from 'react/addons';
+import React, { Component } from 'react';
 
-class Home extends React.Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -21,24 +21,24 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="header">
-          <ul className="nav nav-pills pull-right">
-            <li className="active"><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+      <div className='container'>
+        <div className='header'>
+          <ul className='nav nav-pills pull-right'>
+            <li className='active'><a href='/'>Home</a></li>
+            <li><a href='/about'>About</a></li>
+            <li><a href='/contact'>Contact</a></li>
           </ul>
-          <h3 className="text-muted">ReactJs <i className="fa fa-cog fa-spin"></i></h3>
+          <h3 className='text-muted'>React.Js <i className='fa fa-cog fa-spin'></i></h3>
         </div>
 
-        <div className="jumbotron">
-          <h1>Hello </h1>
-          <p className="lead">Always a pleasure scaffolding your apps.</p>
-          <p><a className="btn btn-lg btn-success" href="#">Splendid!</a></p>
+        <div className='jumbotron'>
+          <h1>Hello world</h1>
+          <p className='lead'>Always a pleasure scaffolding your apps.</p>
+          <p><a className='btn btn-lg btn-success' href='#'>Splendid!</a></p>
         </div>
 
-        <div className="row marketing">
-          <div className="col-lg-6">
+        <div className='row marketing'>
+          <div className='col-lg-6'>
             <h4>HTML5 Boilerplate</h4>
             <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
 
@@ -51,14 +51,14 @@ class Home extends React.Component {
             <h4>ReactJs</h4>
             <h1 className='clickMe' onClick={this.clickMeUpdate}>{this.state.text}</h1>
           </div>
-          <div className="col-lg-6">
+          <div className='col-lg-6'>
             <h4>Webpack</h4>
             <p>webpack is a module bundler.</p>
             <p>webpack takes modules with dependencies and generates static assets representing those modules.</p>
           </div>
         </div>
 
-        <div className="footer">
+        <div className='footer'>
           <p>♥ from the Yeoman team</p>
         </div>
       </div>

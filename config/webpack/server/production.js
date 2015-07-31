@@ -13,7 +13,8 @@ module.exports = _.merge(defaultConfig, {
       }
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
+      'process.env.SERVER_RENDERING': true
     })
   ]
 }, function(obj1, obj2) {

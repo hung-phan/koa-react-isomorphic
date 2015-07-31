@@ -1,4 +1,4 @@
-# All Hail The R
+# React and Koa boilerplate
 
 The ideas of this repository are to try out all new concepts and libraries which work great with React.js.
 Additionally, this will be the boilerplate for koa isomorphic or universal application.
@@ -8,18 +8,13 @@ Additionally, this will be the boilerplate for koa isomorphic or universal appli
 Main purpose is to learn actually. However, I just luckily to gather best practices from the community.
 Also I think that I will explain the structure and configuration in details.
 
-## Adknowledgement
-- https://github.com/jlongster/blog
-- https://github.com/webpack/react-starter
-- https://github.com/focusaurus/express_code_structure
-
 ## Development
 
 Single run
 
 ```bash
 $ npm run watch
-$ npm start
+$ npm start # or npm start development 3000
 ```
 
 Or with hot reload
@@ -32,13 +27,16 @@ $ gulp dev-server-delete # kill server
 
 See [pm2](https://github.com/Unitech/pm2) for more info
 
-
 ## Build
 
 ```bash
 $ gulp build
-$ npm start # or start pm2
+$ SECRET_KEY=your_env_key npm start # or start pm2
 ```
+
+## Production
+
+export SECRET_KEY in production
 
 ## Current setup
 - Koa.js server up and running
@@ -49,12 +47,12 @@ $ npm start # or start pm2
 - CSS prebundle with bootstrap and FontAwesome
 - Mocha unit test
 - Test coverage by Istanbul
+- Server rendering
+- Best practices for server and client
 
 ## Working on
-- Best practices for server and client
 - E2E testing
 - API
-- Server rendering
 
 ## Structure
 

@@ -1,6 +1,7 @@
 'use strict';
 
 var path          = require('path');
+var crypto        = require('crypto');
 var _             = require('lodash');
 var webpack       = require('webpack');
 var defaultConfig = require('./default');
@@ -30,7 +31,9 @@ module.exports = _.merge(defaultConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"'
+      'process.env.NODE_ENV': '"development"',
+      'process.env.SECRET_KEY': `"${crypto.randomBytes(24).toString('hex')}"`,
+      'process.env.SERVER_RENDERING': false
     })
   ]
 }, function (obj1, obj2) {

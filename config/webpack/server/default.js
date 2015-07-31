@@ -56,6 +56,11 @@ module.exports = {
     }]
   },
   plugins: [
-    new webpack.IgnorePlugin(/\.(css|less|sass)$/)
+    new webpack.NormalModuleReplacementPlugin(/'react'/, 'react/addons'),
+    new webpack.IgnorePlugin(/\.(css|less|sass)$/),
+    new webpack.DefinePlugin({
+      '__CLIENT__': false,
+      '__SERVER__': true
+    })
   ]
 };

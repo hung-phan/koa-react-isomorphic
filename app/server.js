@@ -1,20 +1,28 @@
 'use strict';
 
-import koa               from 'koa';
-import nunjucksConfig    from 'config/initializers/nunjucks';
-import middlewaresConfig from 'config/initializers/middlewares';
+import 'babel/polyfill';
 
-const app = koa();
+import koa              from 'koa';
+import debug            from 'debug';
+import nunjucksSetup    from 'config/initializers/nunjucks';
+import middlewaresSetup from 'config/middlewares/index';
 
-middlewaresConfig(app);
-nunjucksConfig(app);
+const PORT: number = process.env.PORT || 3000;
+const app: Object = koa();
+
+nunjucksSetup();
+middlewaresSetup(app);
 
 // response
 app.use(function* () {
-  this.body = this.render('application/index.html');
+  this.body = this.prerender('application/index.html');
 });
 
-app.listen(3000);
-console.log('Server listening on port 3000');
+app.on('error', function(error) {
+  debug('error')(error);
+});
+
+app.listen(PORT);
+console.log(`Server listening on port ${PORT}`);
 
 export default app;

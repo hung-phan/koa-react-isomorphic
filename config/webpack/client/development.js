@@ -9,9 +9,7 @@ var ROOT          = require('config/path-helper').ROOT;
 
 module.exports = _.merge(defaultConfig, {
   entry: {
-    app: [
-      'webpack-dev-server/client?http://localhost:8080' + config.path.build
-    ]
+    app: []
   }, // Hot Module Replacement
   output: {
     publicPath: 'http://localhost:8080' + config.path.build
@@ -22,6 +20,7 @@ module.exports = _.merge(defaultConfig, {
   devtool: 'source-map',
   devServer: {
     contentBase: ROOT,
+    noInfo: true,
     hot: true,
     inline: true
   },
@@ -30,19 +29,19 @@ module.exports = _.merge(defaultConfig, {
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loaders: ['monkey-hot', 'react-hot']
+        loaders: ['react-hot']
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style!css!autoprefixer'
       },
       {
         test: /\.less$/,
-        loader: 'style!css!less'
+        loader: 'style!css!autoprefixer!less'
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        loader: 'style!css!autoprefixer!sass'
       }
     ]
   }, // Hot Module Replacement
