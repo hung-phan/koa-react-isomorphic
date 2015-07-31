@@ -13,12 +13,13 @@ require('./server/nunjucks-settings')(nunjucks);
 
 // response
 app.use(function* () {
+  console.log(settings);
   this.body = nunjucks.render('application/index.html', {
     ...settings, csrf: this.csrf
   });
 });
 
-app.listen(env.get('env:PORT'));
-console.log(`Server listening on port ${env.get('env:PORT')}`);
+app.listen(3000);
+console.log('Server listening on port 3000');
 
 export default app;

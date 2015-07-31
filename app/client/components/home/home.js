@@ -32,7 +32,7 @@ class Home extends React.Component {
         </div>
 
         <div className="jumbotron">
-          <h1>'Allo, 'Allo!</h1>
+          <h1>Hello </h1>
           <p className="lead">Always a pleasure scaffolding your apps.</p>
           <p><a className="btn btn-lg btn-success" href="#">Splendid!</a></p>
         </div>

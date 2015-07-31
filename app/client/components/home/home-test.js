@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { TestUtils } from 'react/addons';
+import React from 'react/addons';
 import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 import assert from 'assert';
 import { jsdom } from 'jsdom';
@@ -15,6 +15,8 @@ if (typeof document === 'undefined') {
 }
 
 const Home = require('./home');
+const { TestUtils } = React.addons;
+
 describe('Home Component', () => {
   it('should bind to DOM node', () => {
 

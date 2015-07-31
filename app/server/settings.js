@@ -7,14 +7,14 @@ let settings = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  const assetManigest  = require('external!./public/assets/webpack-asset-manifest.json');
+  const assetManifest  = require('external!./public/assets/webpack-asset-manifest.json');
   const commonManifest = fs.existsSync('./public/assets/webpack-common-manifest.json')
                            ? require('external!./public/assets/webpack-common-manifest.json')
                            : {};
 
   settings = {
     ...settings,
-    assetManigest,
+    assetManifest,
     commonManifest,
   };
 }
