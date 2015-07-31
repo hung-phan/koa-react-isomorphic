@@ -13,7 +13,6 @@ require('./server/nunjucks-settings')(nunjucks);
 
 // response
 app.use(function* () {
-  console.log(settings);
   this.body = nunjucks.render('application/index.html', {
     ...settings, csrf: this.csrf
   });

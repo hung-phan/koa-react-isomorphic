@@ -14,10 +14,8 @@ export default function(app) {
     removeComments: true,
     preserveLineBreaks: process.env.NODE_ENV === 'development'
   }));
+  app.use(middlewares.staticCache(PUBLIC_PATH, { gzip: true }));
 
-  if (process.env.NODE_ENV === 'development') {
-    app.use(middlewares.staticCache(PUBLIC_PATH, { gzip: true }));
-  }
   // csrf
   app.keys = ['session secret'];
   middlewares.csrf(app);
