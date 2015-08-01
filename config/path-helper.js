@@ -1,7 +1,6 @@
 'use strict';
 
 var path = require('path');
-
 var ROOT = path.join(__dirname, './../');
 var PUBLIC = path.join(ROOT, 'public');
 

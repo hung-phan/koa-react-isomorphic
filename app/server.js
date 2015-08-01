@@ -2,14 +2,12 @@
 
 import koa      from 'koa';
 import nunjucks from 'nunjucks';
-import env      from './server/env';
-import settings from './server/settings';
+import settings from 'config/initializers/settings';
 
 const app = koa();
 
-require('./server/secret');
-require('./server/middlewares')(app);
-require('./server/nunjucks-settings')(nunjucks);
+require('config/initializers/middlewares')(app);
+require('config/initializers/nunjucks-settings')(nunjucks);
 
 // response
 app.use(function* () {

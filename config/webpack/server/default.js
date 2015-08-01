@@ -2,10 +2,10 @@
 
 var fs          = require('fs');
 var path        = require('path');
-var webpack     = require('webpack');
 var _           = require('lodash');
+var webpack     = require('webpack');
 var config      = require('config/config.json');
-var ROOT        = require('config/path').ROOT;
+var ROOT        = require('config/path-helper').ROOT;
 var nodeModules = _.reduce(
                     // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
                     _.filter(fs.readdirSync('node_modules'), function(x) {

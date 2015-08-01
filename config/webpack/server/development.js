@@ -1,11 +1,11 @@
 'use strict';
 
-var _             = require('lodash');
 var path          = require('path');
+var _             = require('lodash');
 var webpack       = require('webpack');
 var defaultConfig = require('./default');
 var config        = require('config/config.json');
-var ROOT          = require('config/path').ROOT;
+var ROOT          = require('config/path-helper').ROOT;
 
 module.exports = _.merge(defaultConfig, {
   entry: {

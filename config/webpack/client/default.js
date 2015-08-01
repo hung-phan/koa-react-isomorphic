@@ -3,7 +3,7 @@
 var path    = require('path');
 var webpack = require('webpack');
 var config  = require('config/config.json');
-var ROOT    = require('config/path').ROOT;
+var ROOT    = require('config/path-helper').ROOT;
 
 module.exports = {
   context: ROOT,
