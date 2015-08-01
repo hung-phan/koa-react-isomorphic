@@ -4,6 +4,9 @@ import koa from 'koa';
 import nunjucksConfig from 'config/initializers/nunjucks';
 import middlewaresConfig from 'config/initializers/middlewares';
 
+
+require('./engine/config-loader');
+
 const app = koa();
 
 middlewaresConfig(app);
