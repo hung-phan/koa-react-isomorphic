@@ -1,12 +1,16 @@
-{% macro javascript_include_tag(src) %}
-  <script type="text/javascript" src={{ src }}></script>
-  {% endmacro %}
+{% macro csrfMetaTags(csrf) %}
+  <meta content="{{ csrf }}" name="csrf-token">
+{% endmacro %}
 
-{% macro stylesheet_link_tag(src) %}
+{% macro javascriptIncludeTag(src) %}
+  <script type="text/javascript" src={{ src }}></script>
+{% endmacro %}
+
+{% macro stylesheetLinkTag(src) %}
   <link rel="stylesheet" media="all" href={{ src }} />
 {% endmacro %}
 
-{% macro webpack_manifest_script(env, commonManifest) %}
+{% macro webpackManifestScript(env, commonManifest) %}
   {% if env == 'production' %}
     <script type="text/javascript">
       window.webpackManifest = {{ commonManifest | json | safe }};
@@ -14,16 +18,16 @@
   {% endif %}
 {% endmacro %}
 
-{% macro webpack_bundle_tag(env, name, assetManifest={}) %}
+{% macro webpackBundleTag(env, name, assetManifest={}) %}
   {% if env == 'production' %}
-    {{ javascript_include_tag('/assets/' + assetManifest[name + '.js']) }}
+    {{ javascriptIncludeTag('/assets/' + assetManifest[name + '.js']) }}
   {% else %}
-    {{ javascript_include_tag('http://localhost:8080/build/' + name + '.bundle.js') }}
+    {{ javascriptIncludeTag('http://localhost:8080/build/' + name + '.bundle.js') }}
   {% endif %}
 {% endmacro %}
 
-{% macro webpack_css_bundle_tag(env, name, assetManifest={}) %}
+{% macro webpackCssBundleTag(env, name, assetManifest={}) %}
   {% if env == 'production' %}
-    {{ stylesheet_link_tag('/assets/' + assetManifest[name + '.css']) }}
+    {{ stylesheetLinkTag('/assets/' + assetManifest[name + '.css']) }}
   {% endif %}
 {% endmacro %}

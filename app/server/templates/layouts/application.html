@@ -1,4 +1,4 @@
-{% import 'helpers/application.html' as application_helper %}
+{% import 'helpers/application.html' as applicationHelper %}
 
 <!doctype html>
 <html lang="en">
@@ -6,19 +6,18 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta content="{{ csrf }}" name="csrf-token">
-      <title>Index</title>
+      {{ applicationHelper.csrfMetaTags(csrf) }}
+
+      <title>Application</title>
 
       <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
-      {{ application_helper.webpack_css_bundle_tag(env, 'app', assetManifest) }}
+      {{ applicationHelper.webpackCssBundleTag(env, 'app', assetManifest) }}
   </head>
 
   <body>
+    {% block mainContent %}{% endblock %}
 
-    {% block main_content %}{% endblock %}
-
-    {{ application_helper.webpack_manifest_script(env, commonManifest) }}
-    {{ application_helper.webpack_bundle_tag(env, 'app', assetManifest) }}
+    {{ applicationHelper.webpackManifestScript(env, commonManifest) }}
+    {{ applicationHelper.webpackBundleTag(env, 'app', assetManifest) }}
   </body>
 </html>
