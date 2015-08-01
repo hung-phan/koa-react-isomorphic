@@ -41,6 +41,7 @@
     "koa-html-minifier": "*",
     "koa-middlewares": "*",
     "koa-helmet": "*",
+    "koa-cors": "*",
     "lodash": "*",
     "nconf": "*",
     "nunjucks": "*",

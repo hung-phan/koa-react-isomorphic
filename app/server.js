@@ -1,13 +1,15 @@
 'use strict';
 
-import koa      from 'koa';
-import nunjucks from 'nunjucks';
-import settings from 'config/initializers/settings';
+import koa               from 'koa';
+import nunjucks          from 'nunjucks';
+import nunjucksConfig    from 'config/initializers/nunjucks';
+import middlewaresConfig from 'config/initializers/middlewares';
+import settings          from 'config/initializers/settings';
 
 const app = koa();
 
-require('config/initializers/middlewares')(app);
-require('config/initializers/nunjucks-settings')(nunjucks);
+middlewaresConfig(app);
+nunjucksConfig(nunjucks);
 
 // response
 app.use(function* () {
