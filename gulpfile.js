@@ -64,12 +64,28 @@ gulp.task('clean', cleanTask(['.' + config.path.build, '.' + config.path.publicA
 gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
 gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
 
-gulp.task('start-server', function() {
-  shell.exec('pm2 start build/server.js --name local-dev-server --watch');
+gulp.task('dev-server', function(done) {
+  shell.exec('pm2 start config/pm2/development.json', function() {
+    done();
+  });
 });
 
-gulp.task('stop-server', function() {
-  shell.exec('pm2 delete local-dev-server');
+gulp.task('dev-server-delete', function(done) {
+  shell.exec('pm2 delete config/pm2/development.json', function() {
+    done();
+  });
+});
+
+gulp.task('pro-server', function(done) {
+  shell.exec('pm2 start config/pm2/production.json', function() {
+    done();
+  });
+});
+
+gulp.task('dev-server-delete', function(done) {
+  shell.exec('pm2 delete config/pm2/production.json', function() {
+    done();
+  });
 });
 
 // clean task
