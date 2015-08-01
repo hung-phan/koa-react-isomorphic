@@ -1,4 +1,5 @@
-node_modules/
 build/
+node_modules/
 bower_components/
-*tern-port
+public/assets/
+tmp/

@@ -4,8 +4,8 @@ var fs          = require('fs');
 var path        = require('path');
 var webpack     = require('webpack');
 var _           = require('lodash');
-var config      = require('./../config.json');
-var rootPath    = path.join(__dirname, './../../');
+var config      = require('config/config.json');
+var ROOT        = require('config/path').ROOT;
 var nodeModules = _.reduce(
                     // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
                     _.filter(fs.readdirSync('node_modules'), function(x) {
@@ -20,17 +20,17 @@ var nodeModules = _.reduce(
                   );
 
 module.exports = {
-  context: rootPath,
+  context: ROOT,
   target: 'node',
   node: {
     __dirname: true,
     __filename: true
   },
   entry: {
-    server: path.join(rootPath, config.path.app, 'server')
+    server: path.join(ROOT, config.path.app, 'server')
   },
   output: {
-    path: path.join(rootPath, config.path.build),
+    path: path.join(ROOT, config.path.build),
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
@@ -40,7 +40,7 @@ module.exports = {
       var external = 'external!';
 
       return (new RegExp('^' + external)).test(request)
-        ? callback(null, 'commonjs ' + path.join(rootPath, request.substr(external.length)))
+        ? callback(null, 'commonjs ' + path.join(ROOT, request.substr(external.length)))
         : callback();
     }
   ],

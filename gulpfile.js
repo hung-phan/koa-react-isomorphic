@@ -10,7 +10,7 @@ var WebpackDevServer = require('webpack-dev-server');
 var notifier         = require('node-notifier');
 var shell            = require('shelljs');
 var pm2              = require('pm2');
-var config           = require('./config/config.json');
+var config           = require('config/config.json');
 
 gulp.task('frontend:watch', function(done) {
   shell.exec('npm run frontend:watch', function() {
@@ -19,7 +19,7 @@ gulp.task('frontend:watch', function(done) {
 });
 
 gulp.task('frontend:build', function(done) {
-  var bundler = webpack(require('./config/client/production')),
+  var bundler = webpack(require('config/webpack/client/production')),
       handler = function (err, stats) {
                   if (err) {
                     notifier.notify({ message: 'Error: ' + err.message });
@@ -36,7 +36,7 @@ gulp.task('frontend:build', function(done) {
 gulp.task('backend:watch', function(cb) {
   var started = false;
 
-  webpack(require('./config/server/development')).watch(100, function(err, stats) {
+  webpack(require('config/webpack/server/development')).watch(100, function(err, stats) {
     if(!started) {
       started = true;
       cb();
@@ -47,7 +47,7 @@ gulp.task('backend:watch', function(cb) {
 });
 
 gulp.task('backend:build', function(done) {
-  var bundler = webpack(require('./config/server/production')),
+  var bundler = webpack(require('config/webpack/server/production')),
       handler = function (err, stats) {
         if (err) {
           notifier.notify({ message: 'Error: ' + err.message });

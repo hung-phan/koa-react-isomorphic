@@ -4,8 +4,8 @@ var _             = require('lodash');
 var path          = require('path');
 var webpack       = require('webpack');
 var defaultConfig = require('./default');
-var config        = require('./../config.json');
-var rootPath      = path.join(__dirname, './../../');
+var config        = require('config/config.json');
+var ROOT          = require('config/path').ROOT;
 
 module.exports = _.merge(defaultConfig, {
   entry: {
@@ -21,7 +21,7 @@ module.exports = _.merge(defaultConfig, {
   outputPathinfo: true,
   devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, './../../'),
+    contentBase: ROOT,
     hot: true,
     inline: true
   },

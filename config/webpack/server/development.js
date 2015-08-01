@@ -4,8 +4,8 @@ var _             = require('lodash');
 var path          = require('path');
 var webpack       = require('webpack');
 var defaultConfig = require('./default');
-var config        = require('./../config.json');
-var rootPath      = path.join(__dirname, './../../');
+var config        = require('config/config.json');
+var ROOT          = require('config/path').ROOT;
 
 module.exports = _.merge(defaultConfig, {
   entry: {
@@ -15,7 +15,7 @@ module.exports = _.merge(defaultConfig, {
   }, // Hot Module Replacement
   devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, './../../'),
+    contentBase: ROOT,
     hot: true,
     inline: true
   },
@@ -26,7 +26,7 @@ module.exports = _.merge(defaultConfig, {
       loader: 'monkey-hot'
     }]
   },
-  recordsPath: path.join(rootPath, config.path.build, '_records'),
+  recordsPath: path.join(ROOT, config.path.build, '_records'),
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     new webpack.DefinePlugin({
