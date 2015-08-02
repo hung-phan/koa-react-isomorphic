@@ -12,6 +12,8 @@ const reversed = {}
 
 // create app instance
 const app = koa()
+app.listen(http.port)
+logger.info("Start http server on port:", http.port)
 
 // load basic middlewares (see: https://github.com/cnpm/koa-middlewares)
 import km from 'koa-middlewares';
@@ -36,7 +38,7 @@ function cascade(...args) {
 const middlewaresLength = http.middlewares.orders.length;
 logger.debug("trying to load %s middlewares", middlewaresLength)
 http.middlewares.orders.forEach((mid, index) => {
-  const label = ` >>> [${ index + 1}/${ middlewaresLength }]   ${ mid } loaded in`;
+  const label = ` >>> [${ index + 1}/${ middlewaresLength }] ${ mid.bold } loaded in`;
   try {
     // try from koa-middlewares
     console.time(label)

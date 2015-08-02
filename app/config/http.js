@@ -21,5 +21,6 @@ const middlewares = {
 
 
 export default {
-  middlewares
+  middlewares,
+  port: process.env.PORT || 3000
 }

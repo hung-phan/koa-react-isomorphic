@@ -24,6 +24,7 @@
     "bootstrap": "*",
     "bundle-loader": "*",
     "chunk-manifest-webpack-plugin": "*",
+    "colors": "^1.1.2",
     "css-loader": "*",
     "exports-loader": "*",
     "expose-loader": "*",
