@@ -1,2 +1,2 @@
-require('bootstrap');
-require('bootstrap/less/bootstrap.less');
+import 'bootstrap';
+import 'bootstrap/less/bootstrap.less';

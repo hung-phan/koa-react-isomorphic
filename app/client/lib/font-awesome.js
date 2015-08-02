@@ -1,1 +1,1 @@
-require('font-awesome/less/font-awesome.less');
+import 'font-awesome/less/font-awesome.less';

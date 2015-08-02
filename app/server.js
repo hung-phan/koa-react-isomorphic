@@ -21,4 +21,8 @@ app.use(function* () {
 app.listen(3000);
 console.log('Server listening on port 3000');
 
+function __eval() {
+  console.log('here and there');
+}
+
 export default app;
