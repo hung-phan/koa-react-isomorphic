@@ -13,13 +13,15 @@ export default function(app : koa) {
 
   env.addFilter('json', JSON.stringify);
 
-  app.use(function* views(next) {
+  app.use(function* (next) {
     if (!this.render) {
       this.render = function(template, parameters) {
         parameters = parameters || {};
 
         return nunjucks.render(template, {
-          ...parameters, ...settingsConfig, csrf: this.csrf
+          ...parameters,
+          ...settingsConfig,
+          csrf: this.csrf
         });
       };
     }
