@@ -30,7 +30,7 @@ module.exports = _.merge(defaultConfig, {
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'react-hot'
+        loaders: ['monkey-hot', 'react-hot']
       },
       {
         test: /\.css$/,
