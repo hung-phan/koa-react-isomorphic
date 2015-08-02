@@ -10,7 +10,7 @@ var ROOT          = require('config/path-helper').ROOT;
 module.exports = _.merge(defaultConfig, {
   entry: {
     server: [
-      'webpack/hot/signal.js'
+      'webpack/hot/poll?1000'
     ]
   }, // Hot Module Replacement
   devtool: 'source-map',

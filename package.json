@@ -55,7 +55,7 @@
     "webpack-manifest-plugin": "*"
   },
   "scripts": {
-    "start": "node --harmony build/server.js",
+    "start": "iojs build/server.js",
     "test": "mocha --watch --compilers js:compiler.js 'app/**/*-test.js'",
     "postinstall": "sh scripts/build",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js'",
@@ -64,6 +64,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 0.10",
+    "iojs": ">= 2.0.0"
   }
 }

@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var _                = require('lodash');
 var fs               = require('fs');
 var del              = require('del');
@@ -9,7 +10,6 @@ var webpack          = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var notifier         = require('node-notifier');
 var shell            = require('shelljs');
-var pm2              = require('pm2');
 var config           = require('config/config.json');
 
 gulp.task('frontend:watch', function(done) {
