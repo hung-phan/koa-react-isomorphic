@@ -1,42 +1,113 @@
 # All Hail The R
 
-The idea behind this `All Hail the R` is to try out all new ideas and concepts for React. Additionally, it
-will be the boilerplate for isomorphic javascripts application.
+The ideas of this repository are to try out all new concepts and libraries which work great with React.js.
+Additionally, this will be the boilerplate for koa isomorphic or universal application.
 
-# Why another one
+## Why another one
 
-Benefit of `All Hail The R` is to include the best practices and possible setups from the community, then
-explain them in details for people to have a clear overview about what it can do, and why?
+Main purpose is to learn actually. However, I just luckily to gather best practices from the community.
+Also I think that I will explain the structure and configuration in details.
 
-# Inspired setup and documents
+## Adknowledgement
 - https://github.com/jlongster/blog
 - https://github.com/webpack/react-starter
+- https://github.com/focusaurus/express_code_structure
 
-# Start developing
+## Development
+
+Single run
 
 ```bash
 $ npm run watch
-$ npm start # or start pm2
+$ npm start
 ```
 
-# Build
+Or with hot reload
+
+```bash
+$ npm run watch
+$ gulp dev-server # start server
+$ gulp dev-server-delete # kill server
+```
+
+See [pm2](https://github.com/Unitech/pm2) for more info
+
+
+## Build
 
 ```bash
 $ gulp build
 $ npm start # or start pm2
 ```
 
-# So far
-- `koa.js` up and running
-- `Webpack bunlder` for both client and server
-- `ES6` supports
-- `Babel type check`
-- `Nunjucks` template for `koa.js`
-- CSS framework - Bootstrap
-- FontAwesome
-- Test coverage for server and client
-- Test
+## Current setup
+- Koa.js server up and running
+- Webpack bundle with hot reload for both server and client
+- Utilize es6 syntax
+- Flowtype checking using `babel-type-check`
+- Nunjucks template and macro setups
+- CSS prebundle with bootstrap and FontAwesome
+- Mocha unit test
+- Test coverage by Istanbul
 
-# Working on
-- Webpack hot module reload for server
+## Working on
 - Best practices for server and client
+- E2E testing
+- API
+- Server rendering
+
+## Structure
+
+```
+- app/
+ |- client/
+  |- components/
+   |- home/
+    |  home-test.js
+    |  home.js
+  |- lib/
+   |  font-awesome.js
+   |  index.js
+   |  twitter-bootstrap.js
+ |- server/
+  |- models/
+  |- templates/
+   |+ application/
+   |+ helpers/
+   |- layouts/
+    |  application.html
+ |  app.js
+ |  server.js
++ bower_components/
++ build/
+- config/
+ |- initializers/
+  |  middlewares.js
+  |  nunjucks.js
+  |  settings.js
+ |- pm2/
+  |  development.json
+  |  production.json
+ |- webpack/
+  |- client/
+   |  default.js
+   |  development.js
+   |  production.js
+  |- server/
+   |  default.js
+   |  development.js
+   |  production.js
+ |  config.json
+ |  path-helper.js
++ node_modules/
++ public/
+- scripts/
+ |  build
+  bower.json
+  compiler.js
+  gulpfile.js
+  LICENSE
+  npm-debug.log
+  package.json
+  README.md
+```
