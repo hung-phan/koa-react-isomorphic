@@ -19,7 +19,7 @@ Single run
 
 ```bash
 $ npm run watch
-$ npm start
+$ npm start # or npm start development 3000
 ```
 
 Or with hot reload
