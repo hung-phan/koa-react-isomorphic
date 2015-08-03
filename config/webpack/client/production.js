@@ -17,15 +17,15 @@ module.exports = _.merge(defaultConfig, {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader')
       },
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!sass-loader')
       }
     ]
   },

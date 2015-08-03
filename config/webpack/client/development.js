@@ -34,15 +34,15 @@ module.exports = _.merge(defaultConfig, {
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style!css!autoprefixer'
       },
       {
         test: /\.less$/,
-        loader: 'style!css!less'
+        loader: 'style!css!autoprefixer!less'
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        loader: 'style!css!autoprefixer!sass'
       }
     ]
   }, // Hot Module Replacement

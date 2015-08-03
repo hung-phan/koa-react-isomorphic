@@ -1,8 +1,8 @@
 'use strict';
 
-import React from 'react/addons';
+import React, { Component } from 'react/addons';
 
-class Home extends React.Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
