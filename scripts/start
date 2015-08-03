@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-export NODE_ENV=${1:-development}
-export PORT=${2:-3000}
+if [[ -z "${NODE_ENV}" ]]; then
+  export NODE_ENV=${1:-development}
+fi
+
+if [[ -z "${PORT}" ]]; then
+  export PORT=${2:-3000}
+fi
+
 node --harmony build/server.js
