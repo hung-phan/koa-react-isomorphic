@@ -6,9 +6,10 @@ const middlewares = {
     'logger',
     'compress',
     'favicon',
-    'koa-html-minifier',
+    // 'koa-html-minifier',
     'staticCache',
     'csrf',
+    'router',
     'cookieSession'
   ],
 

@@ -16,6 +16,8 @@ import http from '../config/http'
 
 // engine-specific middlewares
 const reversed = {}
+const routerLayer = km.router()
+reversed.router = routerLayer.routes
 
 const factory = (config) => {
   config = {
