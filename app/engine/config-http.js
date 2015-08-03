@@ -34,7 +34,8 @@ const factory = (config) => {
       try {
         value = fn()
       } catch (ex) {
-        // do nothing
+        logger.warn(ex, fn.toString())
+          // do nothing
       }
 
       // stop when value is defined
@@ -49,12 +50,15 @@ const factory = (config) => {
   config.middlewares.orders.forEach((mid, index) => {
     const label = ` >>> [${ index + 1}/${ middlewaresLength }] ${ mid.bold } loaded in`;
     try {
-      // try from koa-middlewares
+      const req = require.context('../../node_modules/', false)
+        // try from koa-middlewares
       console.time(label)
-      let middleware = cascade(
-        () => reversed[mid], () => km[mid], () => require(mid), () => require(
-          `koa-${ mid }`)
-      )
+      const tryRequire = [
+        () => reversed[mid],
+        () => km[mid],
+        () => req('external!node_modules/' + mid)
+      ]
+      let middleware = cascade(...tryRequire)
 
 
       if (middleware) {

@@ -6,6 +6,7 @@ const middlewares = {
     'logger',
     'compress',
     'favicon',
+    'koa-html-minifier',
     'staticCache',
     'csrf',
     'cookieSession'
@@ -13,12 +14,16 @@ const middlewares = {
 
   favicon: [PUBLIC_PATH],
 
+  'koa-html-minifier': [{
+    collapseWhitespace: true,
+    removeComments: true,
+    preserveLineBreaks: process.env.NODE_ENV === 'development'
+  }],
+
   cookieSession: (app) => {
     return [app]
   }
 }
-
-
 
 export default {
   middlewares,

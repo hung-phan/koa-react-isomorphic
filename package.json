@@ -62,7 +62,7 @@
   "scripts": {
     "start": "sh scripts/start",
     "test": "mocha --watch --compilers js:compiler.js 'app/**/*-test.js'",
-    "postinstall": "sh scripts/build",
+    "postinstall": "sh scripts/build && cd node_modules && ln -nsf ../app",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js'",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "watch": "npm run frontend:watch & gulp backend:watch"

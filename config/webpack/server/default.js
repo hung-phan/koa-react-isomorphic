@@ -1,23 +1,22 @@
 'use strict';
 
-var fs          = require('fs');
-var path        = require('path');
-var _           = require('lodash');
-var webpack     = require('webpack');
-var config      = require('config/config.json');
-var ROOT        = require('config/path-helper').ROOT;
+var fs = require('fs');
+var path = require('path');
+var _ = require('lodash');
+var webpack = require('webpack');
+var config = require('config/config.json');
+var ROOT = require('config/path-helper').ROOT;
 var nodeModules = _.reduce(
-                    // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
-                    _.filter(fs.readdirSync('node_modules'), function(x) {
-                      return ['.bin'].indexOf(x) === -1;
-                    }),
-                    function(modules, mod) {
-                      modules[mod] = 'commonjs ' + mod;
+  // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
+  _.filter(fs.readdirSync('node_modules'), function (x) {
+    return ['.bin'].indexOf(x) === -1;
+  }),
+  function (modules, mod) {
+    modules[mod] = 'commonjs ' + mod;
 
-                      return modules;
-                    },
-                    {}
-                  );
+    return modules;
+  }, {}
+);
 
 module.exports = {
   context: ROOT,
@@ -36,12 +35,10 @@ module.exports = {
   },
   externals: [
     nodeModules,
-    function(context, request, callback) {
+    function (context, request, callback) {
       var external = 'external!';
-
-      return (new RegExp('^' + external)).test(request)
-        ? callback(null, 'commonjs ' + path.join(ROOT, request.substr(external.length)))
-        : callback();
+      return (new RegExp('^' + external)).test(request) ? callback(null, 'commonjs ' + path.join(
+        ROOT, request.substr(external.length))) : callback();
     }
   ],
   resolve: {
