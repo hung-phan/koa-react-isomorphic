@@ -24,6 +24,6 @@
     "tests"
   ],
   "dependencies": {
-    "modernizr": "~2.8.3"
+    "modernizr": "*"
   }
 }
