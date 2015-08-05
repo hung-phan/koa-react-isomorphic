@@ -17,6 +17,7 @@
   <body>
     {% block mainContent %}{% endblock %}
 
+    {{ applicationHelper.prerenderData(prerenderData) }}
     {{ applicationHelper.javascriptIncludeTag('https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') }}
     {{ applicationHelper.webpackManifestScript(env, commonManifest) }}
     {{ applicationHelper.webpackBundleTag(env, 'app', assetManifest) }}
