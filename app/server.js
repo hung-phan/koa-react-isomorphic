@@ -10,8 +10,8 @@ middlewaresConfig(app);
 nunjucksConfig(app);
 
 // response
-app.use(function* () {
-  this.body = this.render('application/index.html');
+app.use(function* (next) {
+  this.body = this.prerender('application/index.html');
 });
 
 const PORT = process.env.PORT || 3000;

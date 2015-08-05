@@ -18,10 +18,12 @@
   {% endif %}
 {% endmacro %}
 
-{% macro prerenderData(data) %}
-  <script type="text/javascript">
-    window.__data = {{ data | json | safe }};
-  </script>
+{% macro prerenderData(data, flag) %}
+  {% if flag %}
+    <script type="text/javascript">
+      window.__data = {{ data | json | safe }};
+    </script>
+  {% endif %}
 {% endmacro %}
 
 {% macro webpackBundleTag(env, name, assetManifest={}) %}
