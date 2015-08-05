@@ -7,6 +7,7 @@
     "istanbul": "*",
     "jsdom": "*",
     "mocha": "*",
+    "chai": "*",
     "monkey-hot-loader": "*",
     "node-notifier": "*",
     "react-hot-loader": "*",
