@@ -51,6 +51,7 @@
     "ramda": "*",
     "ramda-fantasy": "*",
     "react": "*",
+    "react-dom": "*",
     "react-router": "*",
     "rx": "*",
     "webpack": "*",

@@ -1,11 +1,12 @@
 'use strict';
 
-import koa            from 'koa';
-import nunjucks       from 'nunjucks';
-import settingsConfig from './settings';
-import Router         from 'react-router';
-import React          from 'react/addons';
-import routes         from 'app/routes';
+import koa                from 'koa';
+import nunjucks           from 'nunjucks';
+import settingsConfig     from './settings';
+import React              from 'react';
+import { renderToString } from 'react-dom/server';
+import Router             from 'react-router';
+import routes             from 'app/routes';
 
 const options = {
   autoescape: true
@@ -27,7 +28,7 @@ export default function(app : koa) {
       let prerenderComponent;
 
       Router.run(routes, this.request.path, (Handler) => {
-        prerenderComponent = React.renderToString(<Handler />);
+        prerenderComponent = renderToString(<Handler />);
       });
 
       return nunjucks.render(template, {

@@ -2,7 +2,7 @@
 
 import { jsdom }            from 'jsdom';
 import assert               from 'assert';
-import React                from 'react/addons';
+import React, { addons }    from 'react/addons';
 import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 
 // config React DOM
@@ -15,7 +15,7 @@ if (typeof document === 'undefined') {
 }
 
 const Home          = require('./home');
-const { TestUtils } = React.addons;
+const { TestUtils } = addons;
 
 describe('Home Component', () => {
   it('should bind to DOM node', () => {
