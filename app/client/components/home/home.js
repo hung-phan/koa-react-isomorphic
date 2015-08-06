@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { Link }             from 'react-router';
 
 class Home extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class Home extends Component {
           <ul className="nav nav-pills pull-right">
             <li className="active"><a href="#">Home</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><Link to="/contact">Contant</Link></li>
           </ul>
           <h3 className="text-muted">ReactJs <i className="fa fa-cog fa-spin"></i></h3>
         </div>
