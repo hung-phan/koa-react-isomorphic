@@ -4,7 +4,7 @@ require('babel/polyfill');
 require('./client/lib/index');
 
 import $      from 'jquery';
-import React  from 'react/addons';
+import React  from 'react';
 import Router from 'react-router';
 import routes from './routes';
 

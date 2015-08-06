@@ -3,7 +3,7 @@
 import koa                from 'koa';
 import nunjucks           from 'nunjucks';
 import settingsConfig     from './settings';
-import React              from 'react/addons';
+import React              from 'react';
 import Router             from 'react-router';
 import routes             from 'app/routes';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react/addons';
+import React, { Component } from 'react';
 
 class Home extends Component {
   constructor(props) {
