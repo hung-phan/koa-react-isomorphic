@@ -25,8 +25,8 @@ class Home extends Component {
         <div className="header">
           <ul className="nav nav-pills pull-right">
             <li className="active"><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
           <h3 className="text-muted">ReactJs <i className="fa fa-cog fa-spin"></i></h3>
         </div>
