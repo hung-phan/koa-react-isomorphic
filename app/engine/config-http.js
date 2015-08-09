@@ -17,7 +17,7 @@ import http from '../config/http'
 // engine-specific middlewares
 const reversed = {}
 const routerLayer = km.router()
-reversed.router = routerLayer.routes
+reversed.router = routerLayer.routes.bind(routerLayer)
 
 const factory = (config) => {
   config = {
@@ -27,7 +27,6 @@ const factory = (config) => {
 
   // create app instance
   const app = koa()
-
 
   function cascade(...args) {
     let value = void 0
@@ -62,7 +61,6 @@ const factory = (config) => {
       ]
       let middleware = cascade(...tryRequire)
 
-
       if (middleware) {
         let mdwCfg = config.middlewares[mid];
         // console.log('mdwCfg', mid, mdwCfg);
@@ -75,8 +73,12 @@ const factory = (config) => {
           }
         }
 
-        // logger.trace("Using %s with params: ", mid, params)
-        app.use(middleware(...params));
+        if (mid == 'router') {
+          app.use(middleware())
+        } else {
+          // logger.trace("Using %s with params: ", mid, params)
+          app.use(middleware(...params));
+        }
       } else {
         logger.warn(`middleware [${ mid }] cannot load: Not found`)
       }
