@@ -4,7 +4,14 @@ import koa from 'koa';
 import nunjucksConfig from 'config/initializers/nunjucks';
 import middlewaresConfig from 'config/initializers/middlewares';
 
-const app = koa();
+
+import Engine from './engine/index';
+
+
+const engine = new Engine()
+engine.start()
+
+const app = engine.app;
 
 middlewaresConfig(app);
 nunjucksConfig(app);
@@ -13,10 +20,5 @@ nunjucksConfig(app);
 app.use(function* (next) {
   this.body = this.prerender('application/index.html');
 });
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT);
-console.log(`Server listening on port ${PORT}`);
 
 export default app;
