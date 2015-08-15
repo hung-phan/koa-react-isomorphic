@@ -18,8 +18,8 @@
   {% endif %}
 {% endmacro %}
 
-{% macro prerenderData(data, flag) %}
-  {% if flag %}
+{% macro prerenderData(data) %}
+  {% if data %}
     <script type="text/javascript">
       window.__data = {{ data | json | safe }};
     </script>

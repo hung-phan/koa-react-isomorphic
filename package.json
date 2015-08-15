@@ -52,7 +52,16 @@
     "nunjucks": "*",
     "pm2": "*",
     "react": "*",
-    "react-router": "*"
+    "react-router": "*",
+    "redux": "*",
+    "react-redux": "*",
+    "redux-devtools": "*",
+    "redux-thunk": "*",
+    "redux-logger": "*",
+    "ramda": "*",
+    "rx": "*",
+    "immutable": "*",
+    "whatwg-fetch": "*"
   },
   "scripts": {
     "start": "sh scripts/start",

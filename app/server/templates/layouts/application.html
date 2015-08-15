@@ -17,10 +17,10 @@
   <body>
     {% block mainContent %}{% endblock %}
 
-    {{ applicationHelper.prerenderData(prerenderData, false) }}
     {% if env == 'production' %}
       {{ applicationHelper.javascriptIncludeTag('https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') }}
     {% endif %}
+    {{ applicationHelper.prerenderData(prerenderData) }}
     {{ applicationHelper.webpackManifestScript(env, commonManifest) }}
     {{ applicationHelper.webpackBundleTag(env, 'app', assetManifest) }}
   </body>
