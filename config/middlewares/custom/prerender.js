@@ -16,11 +16,13 @@ export default function* (next) {
         let prerenderComponent;
         let prerenderData;
 
-        Router.run(routes, this.request.path, (Handler) => {
+        Router.run(routes, this.request.path, (Handler, routerState) => {
           prerenderComponent = React.renderToString(
-            <Provider key='provider' store={store}>
-              {() => <Handler />}
-            </Provider>
+            <div>
+              <Provider key='provider' store={store}>
+                {() => <Handler routerState={routerState} />}
+              </Provider>
+            </div>
           );
           prerenderData = store.getState();
         });

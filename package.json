@@ -71,6 +71,9 @@
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "watch": "gulp clean && npm run frontend:watch & gulp backend:watch"
   },
+  "keywords": [
+    "koa", "rxjs", "react", "redux", "ramda", "es6", "mocha"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">= 0.10",

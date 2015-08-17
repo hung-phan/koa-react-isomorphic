@@ -1,25 +1,16 @@
 'use strict';
 
-import React, { Component } from 'react';
-import { RouteHandler }     from 'react-router';
-import { connect }          from 'react-redux';
+import React            from 'react';
+import { RouteHandler } from 'react-router';
 
-class App extends Component {
+class App extends React.Component {
   render() {
-    console.log(this.props);
     return (
-      <div>
-        <RouteHandler {...this.props} {...this.state} />
+      <div className='container'>
+        <RouteHandler {...this.props} {...this.state}/>
       </div>
     );
   }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    todos: state.todos
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

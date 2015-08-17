@@ -49,6 +49,7 @@ export SECRET_KEY in production
 - Test coverage by Istanbul
 - Server rendering
 - Best practices for server and client
+- Redux
 
 ## Working on
 - E2E testing
