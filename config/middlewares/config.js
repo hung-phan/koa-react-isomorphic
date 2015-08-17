@@ -6,9 +6,9 @@ import cors         from 'koa-cors';
 import middlewares  from 'koa-middlewares';
 import htmlMinifier from 'koa-html-minifier';
 import helmet       from 'koa-helmet';
-import render       from './customs/render';
-import prerender    from './customs/prerender';
-import error        from './customs/error';
+import render       from './custom/render';
+import prerender    from './custom/prerender';
+import error        from './custom/error';
 
 export default [
   {
