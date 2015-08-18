@@ -38,6 +38,7 @@
     "url-loader": "*",
     "json-loader": "*",
     "autoprefixer-loader": "*",
+    "node-noop": "*",
     "koa": "*",
     "koa-html-minifier": "*",
     "koa-middlewares": "*",
