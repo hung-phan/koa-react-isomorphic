@@ -1,15 +1,15 @@
 'use strict';
 
-import nunjucks       from 'nunjucks';
-import settings       from 'config/initializers/settings';
-import configureStore from 'app/client/stores/index';
+import nunjucks from 'nunjucks';
+import settings from 'config/initializers/settings';
 
 export default function* (next) {
   if (process.env.SERVER_RENDERING) {
-    const React        = require('react');
-    const Router       = require('react-router');
-    const { Provider } = require('react-redux');
-    const routes       = require('app/routes');
+    const React          = require('react');
+    const Router         = require('react-router');
+    const { Provider }   = require('react-redux');
+    const routes         = require('app/routes');
+    const configureStore = require('app/client/stores/index');
 
     this.prerender = this.prerender ||
       function(template: string, store = configureStore(), parameters: Object = {}) {

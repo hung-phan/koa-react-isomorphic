@@ -58,55 +58,59 @@ export SECRET_KEY in production
 ## Structure
 
 ```
-- app/
- |- client/
-  |- components/
-   |- home/
-    |  home-test.js
-    |  home.js
-  |- lib/
-   |  font-awesome.js
-   |  index.js
-   |  twitter-bootstrap.js
- |- server/
-  |- models/
-  |- templates/
-   |+ application/
-   |+ helpers/
-   |- layouts/
-    |  application.html
- |  app.js
- |  server.js
-+ bower_components/
-+ build/
-- config/
- |- initializers/
-  |  middlewares.js
-  |  nunjucks.js
-  |  settings.js
- |- pm2/
-  |  development.json
-  |  production.json
- |- webpack/
-  |- client/
-   |  default.js
-   |  development.js
-   |  production.js
-  |- server/
-   |  default.js
-   |  development.js
-   |  production.js
- |  config.json
- |  path-helper.js
-+ node_modules/
-+ public/
-- scripts/
- |  build
-  bower.json
-  compiler.js
-  gulpfile.js
-  LICENSE
-  npm-debug.log
-  package.json
-  README.md
+- app/                         
+ |- client/                    
+  |+ actions/                  
+  |+ components/               
+  |+ lib/                      
+  |- reducers/                 
+   |  index.js                 
+   |  todos.js                 
+  |- stores/                   
+   |  index.js                 
+ |- server/                    
+  |+ models/                   
+  |- templates/                
+   |+ application/             
+   |+ helpers/                 
+   |+ layouts/                 
+ |  app.js                     
+ |  routes.js                  
+ |  server.js                  
++ bower_components/            
++ build/                       
+- config/                      
+ |- initializers/              
+  |  nunjucks.js               
+  |  settings.js               
+ |- middlewares/               
+  |- custom/                   
+   |  error.js                 
+   |  prerender.js             
+   |  render.js                
+  |  config.js                 
+  |  index.js                  
+ |- pm2/                       
+  |  development.json          
+  |  production.json           
+ |- webpack/                   
+  |- client/                   
+   |  default.js               
+   |  development.js           
+   |  production.js            
+  |- server/                   
+   |  default.js               
+   |  development.js           
+   |  production.js            
+ |  config.json                
+ |  path-helper.js             
++ node_modules/                
++ public/                      
++ scripts/                     
+  bower.json                   
+  compiler.js                  
+  gulpfile.js                  
+  LICENSE                      
+  package.json                 
+  README.md                    
 ```

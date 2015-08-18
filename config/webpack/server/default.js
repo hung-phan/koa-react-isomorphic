@@ -57,7 +57,7 @@ module.exports = {
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/'react'/, 'react/addons'),
-    new webpack.IgnorePlugin(/\.(css|less|sass)$/),
+    new webpack.IgnorePlugin(/\.(css|less|scss|ttf|eot|svg|woff|woff2)$/),
     new webpack.DefinePlugin({
       '__CLIENT__': false,
       '__SERVER__': true
