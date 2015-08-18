@@ -57,7 +57,7 @@ module.exports = {
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/'react'/, 'react/addons'),
-    new webpack.NormalModuleReplacementPlugin(/\.(css|less|scss|ttf|eot|svg|woff|woff2)$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/\.(css|less|scss|gif|jpg|png|svg|ttf|eot|woff|woff2)$/, 'node-noop'),
     new webpack.DefinePlugin({
       '__CLIENT__': false,
       '__SERVER__': true
