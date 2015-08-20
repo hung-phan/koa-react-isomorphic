@@ -12,7 +12,8 @@ export default function* (next) {
     const configureStore = require('app/client/stores/index');
 
     this.prerender = this.prerender ||
-      function(template: string, store = configureStore(), parameters: Object = {}) {
+      function(template: string, state: Object = {}, parameters: Object = {}) {
+        const store = configureStore(state);
         let prerenderComponent;
         let prerenderData;
 
