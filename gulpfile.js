@@ -82,7 +82,7 @@ gulp.task('pro-server', function(done) {
   });
 });
 
-gulp.task('dev-server-delete', function(done) {
+gulp.task('pro-server-delete', function(done) {
   shell.exec('pm2 delete config/pm2/production.json', function() {
     done();
   });
