@@ -1,5 +1,3 @@
-'use strict';
-
 import { jsdom }            from 'jsdom';
 import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 

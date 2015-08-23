@@ -1,5 +1,3 @@
-'use strict';
-
 import nunjucks from 'nunjucks';
 import settings from 'config/initializers/settings';
 
@@ -33,7 +31,7 @@ export default function* (next) {
         });
       };
   } else {
-    this.prerender = this.prerender || this.render;
+    this.prerender = this.render;
   }
 
   yield next;

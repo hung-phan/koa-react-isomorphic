@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { addons } from 'react/addons';
 
 const { TestUtils } = addons;

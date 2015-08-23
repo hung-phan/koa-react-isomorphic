@@ -1,5 +1,3 @@
-'use strict';
-
 import path         from 'path';
 import { PUBLIC }   from 'config/path-helper';
 import cors         from 'koa-cors';
@@ -10,123 +8,70 @@ import render       from './custom/render';
 import prerender    from './custom/prerender';
 import error        from './custom/error';
 
-export default [
-  {
-    // https://github.com/koajs/logger
-    name: 'logger',
-    enable: true,
-    setup(app) {
-      app.use(middlewares.logger());
-    }
-  },
-  {
-    // https://github.com/koajs/session
-    // https://github.com/koajs/csrf
-    enable: true,
-    name: 'session, csrf',
-    setup(app) {
-      app.keys = [process.env.SECRET_KEY];
-      middlewares.csrf(app);
+export function initialLayer(app) {
+  const router = middlewares.router();
 
-      app.use(middlewares.cookieSession(app));
-      app.use(middlewares.csrf.middleware);
-    }
-  },
-  {
-    // https://github.com/venables/koa-helmet
-    enable: process.env.NODE_ENV === 'production',
-    name: 'helmet',
-    setup(app) {
-      app.use(helmet());
-    }
-  },
-  {
-    // https://github.com/koajs/bodyparser
-    enable: true,
-    name: 'bodyParser',
-    setup(app) {
-      app.use(middlewares.bodyParser());
-    }
-  },
-  {
-    enable: true,
-    name: 'render',
-    setup(app) {
-      app.use(render);
-    }
-  },
-  {
-    enable: true,
-    name: 'prerender',
-    setup(app) {
-      app.use(prerender);
-    }
-  },
-  {
-    enable: true,
-    name: 'errorHandler',
-    setup(app) {
-      app.use(error);
-    }
-  },
-  {
-    // https://github.com/koajs/conditional-get
-    enable: process.env.NODE_ENV === 'production',
-    name: 'conditional',
-    setup(app) {
-      app.use(middlewares.conditional());
-    }
-  },
-  {
-    // https://github.com/koajs/etag
-    name: 'etag',
-    enable: process.env.NODE_ENV === 'production',
-    setup(app) {
-      app.use(middlewares.conditional());
-    }
-  },
-  {
-    // https://github.com/koajs/cors
-    name: 'cors',
-    enable: false,
-    setup(app) {
-      app.use(middlewares.cors());
-    }
-  },
-  {
-    // https://github.com/koajs/favicon
-    name: 'favicon',
-    enable: true,
-    setup(app) {
-      app.use(middlewares.favicon(path.join(PUBLIC, 'favicon.ico')));
-    }
-  },
-  {
-    // https://github.com/koajs/static-cache
-    name: 'staticCache',
-    enable: true,
-    setup(app) {
-      app.use(middlewares.staticCache(PUBLIC, { gzip: true }));
-    }
-  },
-  {
-    // https://github.com/kangax/html-minifier
-    name: 'htmlMinifier',
-    enable: true,
-    setup(app) {
-      app.use(htmlMinifier({
-        collapseWhitespace: true,
-        removeComments: true,
-        preserveLineBreaks: process.env.NODE_ENV === 'development'
-      }));
-    }
-  },
-  {
-    // https://github.com/koajs/compress
-    name: 'compress',
-    enable: process.env.NODE_ENV === 'production',
-    setup(app) {
-      app.use(middlewares.compress());
-    }
-  }
-];
+  router.use(
+    middlewares.logger(), // https://github.com/koajs/logger
+    middlewares.bodyParser() // https://github.com/koajs/bodyparser
+  );
+
+  // remove this config if you have nginx already serves the public folder
+  app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
+  app.use(router.routes());
+
+  return router;
+}
+
+export function apiLayer(app, apiRoutes) {
+  const router = middlewares.router();
+
+  router.use(
+    middlewares.conditional(), // https://github.com/koajs/conditional-get
+    middlewares.etag(), // https://github.com/koajs/etag
+    cors() // https://github.com/koajs/cors
+  );
+
+  apiRoutes(router);
+  app.use(router.routes());
+
+  return router;
+}
+
+export function securityLayer(app) {
+  const router = middlewares.router();
+
+  app.keys = [process.env.SECRET_KEY];
+  middlewares.csrf(app);
+
+  router.use(
+    middlewares.cookieSession(app), // https://github.com/koajs/session
+    middlewares.csrf.middleware, // https://github.com/koajs/csrf
+    helmet() // https://github.com/venables/koa-helmet
+  );
+
+  app.use(router.routes());
+
+  return router;
+}
+
+export function renderLayer(app, templateRoutes) {
+  const router = middlewares.router();
+
+  router.use(
+    render,
+    prerender,
+    error,
+    htmlMinifier({
+      collapseWhitespace: true,
+      removeComments: true,
+      preserveLineBreaks: false,
+      removeIgnored: true
+    }), // https://github.com/kangax/html-minifier
+    middlewares.compress() // https://github.com/koajs/compress
+  );
+  templateRoutes(router);
+  app.use(router.routes());
+
+  return router;
+}

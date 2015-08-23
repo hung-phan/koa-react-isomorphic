@@ -1,21 +1,22 @@
-'use strict';
+import fs       from 'fs';
+import nunjucks from './nunjucks';
 
-/**
- * @author Hung Phan
- */
+// initialize nunjucks template with predefined filter
+nunjucks();
 
-import fs from 'fs';
-
+// default settings
 let settings = {
-  env: process.env.NODE_ENV
+  env: {
+    NODE_ENV: process.env.NODE_ENV
+  }
 };
 
 // manage public assets in production mode
 if (process.env.NODE_ENV === 'production') {
-  settings['assetManifest'] = require('external!./public/assets/webpack-asset-manifest.json');
-  settings['commonManifest'] = fs.existsSync('./public/assets/webpack-common-manifest.json')
-                                 ? require('external!./public/assets/webpack-common-manifest.json')
-                                 : {};
+  settings.assetManifest  = require('external!./public/assets/webpack-asset-manifest.json');
+  settings.commonManifest = fs.existsSync('./public/assets/webpack-common-manifest.json')
+                              ? require('external!./public/assets/webpack-common-manifest.json')
+                              : {};
 }
 
 export default settings;

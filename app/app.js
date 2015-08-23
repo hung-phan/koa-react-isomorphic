@@ -1,5 +1,3 @@
-'use strict';
-
 import 'babel/polyfill';
 import './client/lib/index';
 

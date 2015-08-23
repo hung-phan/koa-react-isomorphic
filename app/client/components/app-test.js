@@ -1,5 +1,3 @@
-'use strict';
-
 import 'app/client/components/helpers/jsdom-support.js';
 
 import { assert }        from 'chai';

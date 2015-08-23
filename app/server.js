@@ -1,23 +1,26 @@
-'use strict';
-
 import 'babel/polyfill';
+import {
+  initialLayer,
+  apiLayer,
+  securityLayer,
+  renderLayer
+} from 'config/middlewares/config';
 
-import koa              from 'koa';
-import debug            from 'debug';
-import nunjucksSetup    from 'config/initializers/nunjucks';
-import middlewaresSetup from 'config/middlewares/index';
+import koa         from 'koa';
+import debug       from 'debug';
+import apis        from './server/apis/base';
+import controllers from './server/controllers/base';
 
-const PORT: number = process.env.PORT || 3000;
-const app: Object = koa();
+const PORT = process.env.PORT || 3000;
+const app = koa();
 
-nunjucksSetup();
-middlewaresSetup(app);
+// setup middlewares
+initialLayer(app);
+apiLayer(app, apis);
+securityLayer(app);
+renderLayer(app, controllers);
 
-// response
-app.use(function* () {
-  this.body = this.prerender('application/index.html');
-});
-
+// error logs
 app.on('error', function(error) {
   debug('error')(error);
 });
