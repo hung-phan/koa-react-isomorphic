@@ -6,8 +6,8 @@
       "env": {
         "NODE_ENV": "production"
       },
-      "instances": 0,
-      "max_restarts": 100
+      "instances": 4,
+      "max_restarts": 10
     }
   ],
 }
