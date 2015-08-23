@@ -46,11 +46,11 @@ export function securityLayer(app) {
 
   router.use(
     middlewares.cookieSession(app), // https://github.com/koajs/session
-    middlewares.csrf.middleware, // https://github.com/koajs/csrf
-    helmet() // https://github.com/venables/koa-helmet
+    middlewares.csrf.middleware // https://github.com/koajs/csrf
   );
 
   app.use(router.routes());
+  app.use(helmet()); // https://github.com/venables/koa-helmet
 
   return router;
 }
