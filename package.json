@@ -1,21 +1,21 @@
 {
   "name": "all-hail-the-R",
   "devDependencies": {
-    "del": "*",
-    "gulp": "*",
-    "gulp-util": "*",
     "istanbul": "*",
     "jsdom": "*",
     "mocha": "*",
     "chai": "*",
     "monkey-hot-loader": "*",
-    "node-notifier": "*",
-    "react-hot-loader": "*",
-    "shelljs": "*",
-    "webpack-dev-server": "*",
-    "chalk": "*"
+    "react-hot-loader": "*"
   },
   "dependencies": {
+    "chalk": "*",
+    "del": "*",
+    "gulp": "*",
+    "gulp-util": "*",
+    "shelljs": "*",
+    "node-notifier": "*",
+    "webpack-dev-server": "*",
     "babel": "*",
     "babel-core": "*",
     "babel-loader": "*",

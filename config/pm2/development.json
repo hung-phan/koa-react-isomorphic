@@ -2,8 +2,10 @@
   "apps": [
     {
       "name": "All hail the R",
+      "node_args": ["--harmony"],
       "script": "build/server.js",
       "env": {
+        "DEBUG": "error",
         "NODE_ENV": "development"
       }
     }

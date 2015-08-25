@@ -2,12 +2,14 @@
   "apps": [
     {
       "name": "All hail the R",
+      "node_args": ["--harmony"],
       "script": "build/server.js",
       "env": {
+        "DEBUG": "error",
         "NODE_ENV": "production"
       },
       "instances": 4,
       "max_restarts": 10
     }
-  ],
+  ]
 }
