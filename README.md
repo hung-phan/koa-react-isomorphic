@@ -3,12 +3,14 @@
 The ideas of this repository are to try out all new concepts and libraries which work great with React.js.
 Additionally, this will be the boilerplate for koa isomorphic or universal application.
 
-## Why another one
-
-Main purpose is to learn actually. However, I just luckily to gather best practices from the community.
-Also I think that I will explain the structure and configuration in details.
-
 ## Development
+Clone this repo
+
+```bash
+$ git clone git@github.com:hung-phan/koa-react-isomorphic.git
+$ cd koa-react-isomorphic
+$ npm install
+```
 
 Single run
 
@@ -21,22 +23,21 @@ Or with hot reload
 
 ```bash
 $ npm run watch
-$ gulp dev-server # start server
-$ gulp dev-server-delete # kill server
+$ npm run dev # start server
 ```
-
-See [pm2](https://github.com/Unitech/pm2) for more info
 
 ## Build
 
 ```bash
 $ gulp build
-$ SECRET_KEY=your_env_key npm start # or start pm2
+$ SECRET_KEY=your_env_key npm start # or start pm2 in config/pm2/production.json
 ```
 
 ## Production
 
-export SECRET_KEY in production
+```bash
+$ export SECRET_KEY=your_secret_key
+```
 
 ## Current setup
 - Koa.js server up and running
@@ -59,22 +60,18 @@ export SECRET_KEY in production
 ## Structure
 
 ```
-- app/
+ - app/
  |- client/
   |+ actions/
   |+ components/
   |+ lib/
-  |- reducers/
-   |  index.js
-   |  todos.js
-  |- stores/
-   |  index.js
+  |+ reducers/
+  |+ stores/
  |- server/
+  |+ apis/
+  |+ controllers/
   |+ models/
-  |- templates/
-   |+ application/
-   |+ helpers/
-   |+ layouts/
+  |+ templates/
  |  app.js
  |  routes.js
  |  server.js
@@ -90,19 +87,8 @@ export SECRET_KEY in production
    |  prerender.js
    |  render.js
   |  config.js
-  |  index.js
- |- pm2/
-  |  development.json
-  |  production.json
- |- webpack/
-  |- client/
-   |  default.js
-   |  development.js
-   |  production.js
-  |- server/
-   |  default.js
-   |  development.js
-   |  production.js
+ |+ pm2/
+ |+ webpack/
  |  config.json
  |  path-helper.js
 + node_modules/
@@ -112,6 +98,8 @@ export SECRET_KEY in production
   compiler.js
   gulpfile.js
   LICENSE
+  nodemon.json
   package.json
   README.md
+ README.md
 ```
