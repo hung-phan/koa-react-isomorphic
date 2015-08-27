@@ -52,6 +52,7 @@
     "nconf": "*",
     "nunjucks": "*",
     "pm2": "*",
+    "nodemon": "*",
     "react": "*",
     "react-router": "*",
     "redux": "*",
@@ -66,6 +67,7 @@
   },
   "scripts": {
     "start": "sh scripts/start",
+    "dev": "nodemon --harmony build/server.js",
     "test": "mocha --watch --compilers js:compiler.js 'app/**/*-test.js'",
     "postinstall": "sh scripts/build",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js'",

@@ -1,0 +1,9 @@
+{
+  "watch": [
+    "config/initializers",
+    "config/middlewares",
+    "app/server/apis",
+    "app/server/controllers",
+    "app/server.js"
+  ]
+}

@@ -64,18 +64,6 @@ gulp.task('clean', cleanTask(['.' + config.path.build, '.' + config.path.publicA
 gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
 gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
 
-gulp.task('dev-server', function(done) {
-  shell.exec('pm2 start config/pm2/development.json', function() {
-    done();
-  });
-});
-
-gulp.task('dev-server-delete', function(done) {
-  shell.exec('pm2 delete config/pm2/development.json', function() {
-    done();
-  });
-});
-
 gulp.task('pro-server', function(done) {
   shell.exec('pm2 start config/pm2/production.json', function() {
     done();
