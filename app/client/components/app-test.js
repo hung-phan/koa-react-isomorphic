@@ -2,8 +2,6 @@ import 'app/client/components/helpers/jsdom-support.js';
 
 import { assert }        from 'chai';
 import React, { addons } from 'react/addons';
-import Router            from 'react-router';
-import routes            from 'app/routes';
 import stubRouterContext from 'app/client/components/helpers/stub-router-context';
 import App               from './app';
 

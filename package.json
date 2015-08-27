@@ -5,6 +5,7 @@
     "jsdom": "*",
     "mocha": "*",
     "chai": "*",
+    "sinon": "*",
     "monkey-hot-loader": "*",
     "react-hot-loader": "*"
   },
