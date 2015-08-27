@@ -6,7 +6,6 @@ import htmlMinifier from 'koa-html-minifier';
 import helmet       from 'koa-helmet';
 import render       from './custom/render';
 import prerender    from './custom/prerender';
-import error        from './custom/error';
 
 export function initialLayer(app) {
   const router = middlewares.router();
@@ -61,7 +60,6 @@ export function renderLayer(app, templateRoutes) {
   router.use(
     render,
     prerender,
-    error,
     htmlMinifier({
       collapseWhitespace: true,
       removeComments: true,
