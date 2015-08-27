@@ -1,9 +1,9 @@
 'use strict';
 
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunkMiddleware                                            from 'redux-thunk';
-import loggerMiddleware                                           from 'redux-logger';
-import root                                                       from './../reducers/index';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware                           from 'redux-thunk';
+import loggerMiddleware                          from 'redux-logger';
+import root                                      from './../reducers/index';
 
 let finalCreateStore;
 
