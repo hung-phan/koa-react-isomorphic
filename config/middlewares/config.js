@@ -6,6 +6,7 @@ import htmlMinifier from 'koa-html-minifier';
 import helmet       from 'koa-helmet';
 import render       from './custom/render';
 import prerender    from './custom/prerender';
+import error        from './custom/error';
 
 export function initialLayer(app) {
   const router = middlewares.router();
@@ -16,7 +17,10 @@ export function initialLayer(app) {
   );
 
   // remove this config if you have nginx already serves the public folder
-  app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
+  // in production mode
+  if (process.env.NODE_ENV === 'development') {
+    app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
+  }
   app.use(router.routes());
 
   return router;
@@ -72,4 +76,8 @@ export function renderLayer(app, templateRoutes) {
   app.use(router.routes());
 
   return router;
+}
+
+export function errorLayer(app) {
+  app.use(error());
 }

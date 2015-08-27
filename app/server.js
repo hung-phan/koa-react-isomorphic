@@ -3,7 +3,8 @@ import {
   initialLayer,
   apiLayer,
   securityLayer,
-  renderLayer
+  renderLayer,
+  errorLayer
 } from 'config/middlewares/config';
 
 import koa         from 'koa';
@@ -16,6 +17,7 @@ const app = koa();
 
 // setup middlewares
 initialLayer(app);
+errorLayer(app);
 apiLayer(app, apis);
 securityLayer(app);
 renderLayer(app, controllers);

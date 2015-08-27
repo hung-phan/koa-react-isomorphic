@@ -5,7 +5,7 @@
       "node_args": ["--harmony"],
       "script": "build/server.js",
       "env": {
-        "DEBUG": "error",
+        "DEBUG": "*",
         "NODE_ENV": "development"
       }
     }
