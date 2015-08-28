@@ -11,11 +11,10 @@ import error        from './custom/error';
 export function initialLayer(app) {
   app.use(middlewares.logger()); // https://github.com/koajs/logger
   app.use(middlewares.bodyParser()); // https://github.com/koajs/bodyparser
+
   // remove this config if you have nginx already serves the public folder
   // in production mode
-  if (process.env.NODE_ENV === 'development') {
-    app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
-  }
+  app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
 }
 
 export function apiLayer(app, apiRoutes) {

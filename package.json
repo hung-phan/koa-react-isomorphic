@@ -64,7 +64,7 @@
     "ramda": "*",
     "rx": "*",
     "immutable": "*",
-    "whatwg-fetch": "*"
+    "isomorphic-fetch": "*"
   },
   "scripts": {
     "start": "sh scripts/start",

@@ -1,14 +1,22 @@
-import React            from 'react';
-import { RouteHandler } from 'react-router';
+import React        from 'react';
+import { Provider } from 'react-redux';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className='container'>
-        <RouteHandler {...this.props} {...this.state}/>
-      </div>
-    );
-  }
-}
+export default function(store, Handler, routerState) {
+  return (
+    <div>
+      <Provider key='provider' store={store}>
+        {() => <Handler routerState={routerState} />}
+      </Provider>
 
-export default App;
+      {process.env.NODE_ENV === 'development' && (function() {
+        const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
+
+        return (
+          <DebugPanel top right bottom>
+            <DevTools store={store} monitor={LogMonitor} />
+          </DebugPanel>
+        );
+      })()}
+    </div>
+  );
+};

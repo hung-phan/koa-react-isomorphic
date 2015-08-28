@@ -5,7 +5,7 @@ export default function* (next) {
   if (process.env.SERVER_RENDERING) {
     const React          = require('react');
     const Router         = require('react-router');
-    const { Provider }   = require('react-redux');
+    const app            = require('app/client/components/app');
     const routes         = require('app/routes');
     const configureStore = require('app/client/stores/index');
 
@@ -16,13 +16,7 @@ export default function* (next) {
         let prerenderData;
 
         Router.run(routes, this.request.path, (Handler, routerState) => {
-          prerenderComponent = React.renderToString(
-            <div>
-              <Provider key='provider' store={store}>
-                {() => <Handler routerState={routerState} />}
-              </Provider>
-            </div>
-          );
+          prerenderComponent = React.renderToString(app(store, Handler, routerState));
           prerenderData = store.getState();
         });
 
