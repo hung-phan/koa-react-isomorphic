@@ -33,7 +33,7 @@ module.exports = _.merge(defaultConfig, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"',
       'process.env.SECRET_KEY': `"${crypto.randomBytes(8).toString('hex')}"`,
-      'process.env.SERVER_RENDERING': false
+      'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false
     })
   ]
 }, function (obj1, obj2) {

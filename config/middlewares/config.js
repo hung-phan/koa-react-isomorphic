@@ -59,6 +59,7 @@ export function renderLayer(app, templateRoutes) {
       collapseWhitespace: true,
       removeComments: true,
       preserveLineBreaks: false,
+      removeEmptyAttributes: false,
       removeIgnored: true
     }), // https://github.com/kangax/html-minifier
     middlewares.compress() // https://github.com/koajs/compress

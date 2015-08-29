@@ -3,7 +3,7 @@ import React             from 'react';
 import { fetchTodos }    from 'app/client/actions/todos';
 import fetchDataEnhancer from './../helpers/fetch-data-enhancer';
 
-@fetchDataEnhancer((store) => store.dispatch(fetchTodos()))
+@fetchDataEnhancer(store => store.dispatch(fetchTodos()))
 class Todos extends React.Component {
   render() {
     return (

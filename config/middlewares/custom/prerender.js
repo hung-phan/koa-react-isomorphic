@@ -1,15 +1,14 @@
-import nunjucks from 'nunjucks';
-import settings from 'config/initializers/settings';
+if (process.env.SERVER_RENDERING) {
+  const nunjucks       = require('nunjucks');
+  const React          = require('react');
+  const Router         = require('react-router');
+  const routes         = require('app/routes');
+  const app            = require('app/client/components/main/app');
+  const fetchData      = require('app/client/helpers/fetch-data');
+  const settings       = require('config/initializers/settings');
+  const configureStore = require('app/client/stores/index');
 
-export default function* (next) {
-  if (process.env.SERVER_RENDERING) {
-    const React          = require('react');
-    const Router         = require('react-router');
-    const app            = require('app/client/components/main/app');
-    const fetchData      = require('app/client/helpers/fetch-data');
-    const routes         = require('app/routes');
-    const configureStore = require('app/client/stores/index');
-
+  module.exports = function* (next) {
     this.prerender = this.prerender ||
       function(template: string, initialState: Object = {}, parameters: Object = {}) {
         const store = configureStore(initialState);
@@ -33,9 +32,11 @@ export default function* (next) {
           });
         });
       };
-  } else {
-    this.prerender = this.render;
+    yield next;
   }
-
-  yield next;
+} else {
+  module.exports = function* (next) {
+    this.prerender = this.render;
+    yield next;
+  }
 }
