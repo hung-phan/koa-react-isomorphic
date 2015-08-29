@@ -5,23 +5,32 @@ export default function* (next) {
   if (process.env.SERVER_RENDERING) {
     const React          = require('react');
     const Router         = require('react-router');
-    const app            = require('app/client/components/app');
+    const app            = require('app/client/components/main/app');
+    const fetchData      = require('app/client/helpers/fetch-data');
     const routes         = require('app/routes');
     const configureStore = require('app/client/stores/index');
 
     this.prerender = this.prerender ||
-      function(template: string, state: Object = {}, parameters: Object = {}) {
-        const store = configureStore(state);
-        let prerenderComponent;
-        let prerenderData;
+      function(template: string, initialState: Object = {}, parameters: Object = {}) {
+        const store = configureStore(initialState);
 
-        Router.run(routes, this.request.path, (Handler, routerState) => {
-          prerenderComponent = React.renderToString(app(store, Handler, routerState));
-          prerenderData = store.getState();
-        });
+        return new Promise((resolve, reject) => {
+          Router.run(routes, this.request.path, (Handler, routerState) => {
+            fetchData(store, routerState)
+              .then(([data]) => {
+                const prerenderComponent = React.renderToString(app(store, Handler, routerState));
+                const prerenderData = store.getState();
 
-        return nunjucks.render(template, {
-            ...parameters, ...settings, prerenderComponent, prerenderData, csrf: this.csrf
+                resolve(
+                  nunjucks.render(template, {
+                    ...parameters, ...settings, prerenderComponent, prerenderData, csrf: this.csrf
+                  })
+                );
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
         });
       };
   } else {

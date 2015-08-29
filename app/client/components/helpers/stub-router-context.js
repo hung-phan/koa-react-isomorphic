@@ -1,7 +1,7 @@
 import 'babel/polyfill';
 import React from 'react/addons';
 
-export default function(Component, props = {}, stubs = {}) {
+export default function(ComposedComponent, props = {}, stubs = {}) {
   function RouterStub() { }
 
   Object.assign(RouterStub, {
@@ -35,7 +35,7 @@ export default function(Component, props = {}, stubs = {}) {
 
     render () {
       return (
-        <Component {...props} />
+        <ComposedComponent {...props} />
       );
     }
   });

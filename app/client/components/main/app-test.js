@@ -14,15 +14,16 @@ class Handler extends React.Component {
   }
 }
 
-describe('app', () => {
+describe('Main: app', () => {
   const { TestUtils } = addons;
   const store = configureStore();
 
   it('should be a function', () => {
+    assert.ok(app);
     assert.isFunction(app);
   });
 
-  it('should render Provider component and bind the store to it', () => {
+  it("should render 'Provider' component with the current store", () => {
     const component = TestUtils.renderIntoDocument(app(store, Handler, {}));
     const providerComponent = TestUtils.findRenderedComponentWithType(component, Provider);
 
@@ -30,7 +31,7 @@ describe('app', () => {
     assert.ok(providerComponent.props.store);
   });
 
-  it('should render Handler component', () => {
+  it("should render 'Handler' component", () => {
     const component = TestUtils.renderIntoDocument(app(store, Handler, {}));
     const innerHTML = React.findDOMNode(component).innerHTML;
 

@@ -76,7 +76,15 @@
     "watch": "gulp clean && npm run frontend:watch & gulp backend:watch"
   },
   "keywords": [
-    "koa", "rxjs", "react", "redux", "ramda", "es6", "mocha"
+    "koa",
+    "rxjs",
+    "react",
+    "redux",
+    "ramda",
+    "es6",
+    "mocha",
+    "isomorphic",
+    "universal"
   ],
   "license": "MIT",
   "engines": {

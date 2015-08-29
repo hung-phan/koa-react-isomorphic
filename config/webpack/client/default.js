@@ -44,8 +44,7 @@ module.exports = {
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
     ]),
     new webpack.DefinePlugin({
-      'process.env.__CLIENT__': true,
-      'process.env.__SERVER__': false
+      'process.env.runtimeEnv': '"client"'
     })
   ]
 };

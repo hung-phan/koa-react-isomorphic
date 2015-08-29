@@ -6,7 +6,7 @@ import React, { addons } from 'react/addons';
 import stubRouterContext from 'app/client/components/helpers/stub-router-context';
 import AddTodo           from './add-todo';
 
-describe('AddTodo Component', () => {
+describe('Component: AddTodo', () => {
   const { TestUtils } = addons;
 
   it('should be defined', () => {

@@ -59,8 +59,7 @@ module.exports = {
     new webpack.NormalModuleReplacementPlugin(/'react'/, 'react/addons'),
     new webpack.NormalModuleReplacementPlugin(/\.(css|less|scss|gif|jpg|png|svg|ttf|eot|woff|woff2)$/, 'node-noop'),
     new webpack.DefinePlugin({
-      'process.env.__CLIENT__': false,
-      'process.env.__SERVER__': true
+      'process.env.runtimeEnv': '"server"'
     })
   ]
 };

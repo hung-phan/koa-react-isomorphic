@@ -1,4 +1,9 @@
-import { ADD_TODO, REMOVE_TODO, COMPLETE_TODO } from './../actions/todos';
+import {
+  ADD_TODO,
+  REMOVE_TODO,
+  COMPLETE_TODO,
+  SET_TODOS
+} from './../actions/todos';
 
 export default function(state: Array = [], action: Object) {
   switch (action.type) {
@@ -20,6 +25,9 @@ export default function(state: Array = [], action: Object) {
       Object.assign({}, state[action.index], { complete: true }),
       ...state.slice(action.index + 1)
     ];
+
+  case SET_TODOS:
+    return action.todos;
 
   default:
     return state;
