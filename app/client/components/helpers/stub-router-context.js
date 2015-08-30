@@ -1,6 +1,6 @@
-import 'babel/polyfill';
 import React from 'react/addons';
 
+/* istanbul ignore next */
 export default function(ComposedComponent, props = {}, stubs = {}) {
   function RouterStub() { }
 
