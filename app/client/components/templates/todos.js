@@ -12,9 +12,6 @@ import fetchDataEnhancer       from './../helpers/fetch-data-enhancer';
   return { actions };
 })
 class Todos extends React.Component {
-  componentDidMount() {
-    this.props.actions.fetchTodos();
-  }
   render() {
     return (
       <div className='container'>
