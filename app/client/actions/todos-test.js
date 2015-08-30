@@ -107,7 +107,6 @@ describe('Action: Todos', () => {
       assert(callback.called);
       assert(callback.calledWith(
         sinon.match((value) => {
-          console.log(value);
           assert.deepEqual(value, setTodos(todos));
 
           return true;
