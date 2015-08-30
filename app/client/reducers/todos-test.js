@@ -54,5 +54,10 @@ describe('Reducer: Todos', () => {
       reducer([{ text: 'do chore', complete: false }], completeTodo(0)),
       [{ text: 'do chore', complete: true }]
     );
+
+    assert.deepEqual(
+      reducer([{ text: 'do chore', complete: true }], completeTodo(0)),
+      [{ text: 'do chore', complete: false }]
+    );
   });
 });

@@ -5,13 +5,16 @@ import React, { addons } from 'react/addons';
 import configureStore    from 'app/client/stores/index';
 import ProviderMock      from 'app/client/components/helpers/provider-mock';
 import Todos             from './todos';
-import AddTodo           from './../todos/add-todo/add-todo';
+import TodosHeader       from './../todos/todos-header/todos-header';
+import TodosAdd          from './../todos/todos-add/todos-add';
+import TodosBody         from './../todos/todos-body/todos-body';
 
 describe('Component: Todos', () => {
   const { TestUtils } = addons;
   const todos = [{ text: 'Todo 1', complete: false }];
   const store = configureStore({ todos });
   let Component;
+  let component;
 
   beforeEach(() => {
     Component = (
@@ -19,6 +22,7 @@ describe('Component: Todos', () => {
         {() => <Todos />}
       </ProviderMock>
     );
+    component = TestUtils.renderIntoDocument(Component);
   });
 
   it('should be defined', () => {
@@ -27,15 +31,7 @@ describe('Component: Todos', () => {
   });
 
   it("should render 'Todos' component", () => {
-    const component = TestUtils.renderIntoDocument(Component);
     assert.ok(component);
-  });
-
-  it("should have title 'Todos List'", () => {
-    const component = TestUtils.renderIntoDocument(Component);
-    const innerHTML = React.findDOMNode(component).innerHTML;
-
-    assert.include(innerHTML, 'Todos List');
   });
 
   it("should have static 'fetchData' method", () => {
@@ -44,7 +40,6 @@ describe('Component: Todos', () => {
   });
 
   it("should have props 'todos' and 'actions' after rendering", () => {
-    const component = TestUtils.renderIntoDocument(Component);
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
     // mocking react-redux object
@@ -55,16 +50,38 @@ describe('Component: Todos', () => {
   });
 
   it("should have props 'actions.addTodo'", () => {
-    const component = TestUtils.renderIntoDocument(Component);
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
     assert.deepProperty(todosComponent, 'state.dispatchProps.actions.addTodo');
   });
 
-  it("should contain 'AddTodo' component", () => {
-    const component = TestUtils.renderIntoDocument(Component);
-    const addTodoComponent = TestUtils.findRenderedComponentWithType(component, AddTodo);
+  it("should have props 'actions.removeTodo'", () => {
+    const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
-    assert.ok(addTodoComponent);
+    assert.deepProperty(todosComponent, 'state.dispatchProps.actions.removeTodo');
+  });
+
+  it("should have props 'actions.completeTodo'", () => {
+    const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
+
+    assert.deepProperty(todosComponent, 'state.dispatchProps.actions.completeTodo');
+  });
+
+  it("should have 'TodosHeader' component", () => {
+    const headerComponent = TestUtils.findRenderedComponentWithType(component, TodosHeader);
+
+    assert.ok(headerComponent);
+  });
+
+  it("should have 'TodosAdd' component", () => {
+    const todosAddComponent = TestUtils.findRenderedComponentWithType(component, TodosAdd);
+
+    assert.ok(todosAddComponent);
+  });
+
+  it("should have 'TodosBody' component", () => {
+    const todosBodyComponent = TestUtils.findRenderedComponentWithType(component, TodosBody);
+
+    assert.ok(todosBodyComponent);
   });
 });

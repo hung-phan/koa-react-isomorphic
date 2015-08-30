@@ -22,7 +22,7 @@ export default function(state: Array = [], action: Object) {
   case COMPLETE_TODO:
     return [
       ...state.slice(0, action.index),
-      Object.assign({}, state[action.index], { complete: true }),
+      Object.assign({}, state[action.index], { complete: !state[action.index].complete }),
       ...state.slice(action.index + 1)
     ];
 

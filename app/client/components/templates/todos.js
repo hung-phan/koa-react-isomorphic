@@ -1,30 +1,40 @@
-import R                       from 'ramda';
-import React                   from 'react';
-import { bindActionCreators }  from 'redux';
-import { connect }             from 'react-redux';
-import { addTodo, fetchTodos } from 'app/client/actions/todos';
-import AddTodo                 from './../todos/add-todo/add-todo';
-import fetchDataEnhancer       from './../helpers/fetch-data-enhancer';
+import {
+  addTodo,
+  removeTodo,
+  completeTodo,
+  fetchTodos
+} from 'app/client/actions/todos';
+
+import R                      from 'ramda';
+import React                  from 'react';
+import { bindActionCreators } from 'redux';
+import { connect }            from 'react-redux';
+import fetchDataEnhancer      from './../helpers/fetch-data-enhancer';
+import TodosAdd               from './../todos/todos-add/todos-add';
+import TodosHeader            from './../todos/todos-header/todos-header';
+import TodosBody              from './../todos/todos-body/todos-body';
 
 @fetchDataEnhancer(store => store.dispatch(fetchTodos()))
 @connect(R.pick(['todos']), (dispatch) => {
-  const actions = bindActionCreators({ addTodo, fetchTodos }, dispatch);
-  return { actions };
+  return {
+    actions: bindActionCreators({
+      addTodo,
+      removeTodo,
+      completeTodo,
+      fetchTodos
+    }, dispatch)
+  };
 })
 class Todos extends React.Component {
   render() {
     return (
       <div className='container'>
         <div className='row'>
-          <div className='col-md-12'>
-            <h1>Todos List</h1>
-          </div>
-          <div className='col-md-12'>
-            <AddTodo addTodo={this.props.actions.addTodo} />
-          </div>
-          <div className='col-md-12'>
-            <pre>{JSON.stringify(this.props.todos)}</pre>
-          </div>
+          <TodosHeader />
+          <TodosAdd addTodo={this.props.actions.addTodo} />
+          <TodosBody todos={this.props.todos}
+            removeTodo={this.props.actions.removeTodo}
+            completeTodo={this.props.actions.completeTodo} />
         </div>
       </div>
     );
