@@ -1,6 +1,7 @@
 # React and Koa boilerplate
 
 [![build status](https://secure.travis-ci.org/hung-phan/koa-react-isomorphic.svg)](http://travis-ci.org/hung-phan/koa-react-isomorphic/)
+[![NPM](https://nodei.co/npm/koa-react-isomorphic.png?downloads=true)](https://nodei.co/npm/koa-react-isomorphic/)
 
 The idea of this repository are to try out all new concepts and libraries which work great for React.js.
 Additionally, this will be the boilerplate for koa isomorphic (or universal) application.
@@ -15,8 +16,6 @@ So far, I manage to put together these following technologies:
 * [Bootstrap](http://getbootstrap.com/css/) and [FontAwesome](https://fortawesome.github.io/Font-Awesome/)
 * [Redux](https://github.com/rackt/redux)
 * [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
-
-[![NPM](https://nodei.co/npm/koa-react-isomorphic.png?downloads=true)](https://nodei.co/npm/koa-react-isomorphic/)
 
 ## Explanation
 
