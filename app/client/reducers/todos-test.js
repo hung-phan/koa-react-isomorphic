@@ -8,6 +8,19 @@ import {
 } from './../actions/todos';
 
 describe('Reducer: Todos', () => {
+  it('should be a fucntion', () => {
+    assert.ok(reducer);
+    assert.isFunction(reducer);
+  });
+
+  it('should throw error when passing the wrong params type', () => {
+    const fn1 = () => reducer({}, {});
+    const fn2 = () => reducer([], false);
+
+    assert.throw(fn1);
+    assert.throw(fn2);
+  });
+
   it('should return the default state', () => {
     assert.deepEqual(
       reducer([], { type: 'ANOTHER_ACTION', random: 'random value' }),
