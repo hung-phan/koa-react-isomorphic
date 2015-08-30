@@ -10,6 +10,11 @@ describe('Component: AddTodo', () => {
   const { TestUtils } = addons;
 
   it('should be defined', () => {
+    assert.ok(AddTodo);
+    assert.isFunction(AddTodo);
+  });
+
+  it("should render 'AddTodo' component", () => {
     const component = TestUtils.renderIntoDocument(<AddTodo />);
 
     assert.ok(component);

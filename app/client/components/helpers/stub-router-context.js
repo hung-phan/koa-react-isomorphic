@@ -20,23 +20,23 @@ export default function(ComposedComponent, props = {}, stubs = {}) {
     setRouteComponentAtDepth() {}
   }, stubs);
 
-  return React.createClass({
-    childContextTypes: {
+  return class extends React.Component {
+    static childContextTypes = {
       router: React.PropTypes.func,
       routeDepth: React.PropTypes.number
-    },
+    }
 
     getChildContext () {
       return {
         router: RouterStub,
         routeDepth: 0
       };
-    },
+    }
 
     render () {
       return (
         <ComposedComponent {...props} />
       );
     }
-  });
+  };
 }

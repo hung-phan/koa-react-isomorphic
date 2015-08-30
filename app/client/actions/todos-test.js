@@ -98,7 +98,7 @@ describe('Action: Todos', () => {
       assert.isFunction(fetchTodos);
     });
 
-    it("should return a function when calls 'fetchData'", function *() {
+    it("should return a function when calls 'fetchData' then return 'setTodos' action", function *() {
       const callback = sinon.spy();
       const action = fetchTodos();
 

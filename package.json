@@ -8,6 +8,7 @@
     "chai": "*",
     "sinon": "*",
     "nock": "*",
+    "node-inspector": "*",
     "supertest": "*",
     "monkey-hot-loader": "*",
     "react-hot-loader": "*"
