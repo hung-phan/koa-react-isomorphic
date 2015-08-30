@@ -4,6 +4,7 @@
     "istanbul": "*",
     "jsdom": "*",
     "mocha": "*",
+    "co-mocha": "*",
     "chai": "*",
     "sinon": "*",
     "monkey-hot-loader": "*",
@@ -69,7 +70,7 @@
   "scripts": {
     "start": "sh scripts/start",
     "dev": "nodemon --harmony build/server.js",
-    "test": "mocha --watch --compilers js:compiler.js 'app/**/*-test.js'",
+    "test": "mocha --reporter nyan --watch --compilers js:compiler.js --require co-mocha 'app/**/*-test.js'",
     "postinstall": "sh scripts/build",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js'",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",

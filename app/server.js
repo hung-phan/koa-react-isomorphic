@@ -1,14 +1,8 @@
 import 'babel/polyfill';
-import {
-  initialLayer,
-  apiLayer,
-  securityLayer,
-  renderLayer,
-  errorLayer
-} from 'config/middlewares/config';
 
 import koa         from 'koa';
 import debug       from 'debug';
+import * as config from 'config/middlewares/config';
 import apis        from './server/apis/base';
 import controllers from './server/controllers/base';
 
@@ -16,11 +10,11 @@ const PORT = process.env.PORT || 3000;
 const app = koa();
 
 // setup middlewares
-initialLayer(app);
-errorLayer(app);
-apiLayer(app, apis);
-securityLayer(app);
-renderLayer(app, controllers);
+config.initialLayer(app);
+config.errorLayer(app);
+config.apiLayer(app, apis);
+config.securityLayer(app);
+config.renderLayer(app, controllers);
 
 // error logs
 app.on('error', function(error) {
