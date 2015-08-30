@@ -1,5 +1,6 @@
 {
-  "name": "all-hail-the-R",
+  "name": "koa-react-isomorphic",
+  "version": "0.1.0",
   "devDependencies": {
     "istanbul": "*",
     "jsdom": "*",

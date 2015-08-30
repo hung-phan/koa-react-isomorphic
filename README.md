@@ -1,10 +1,58 @@
 # React and Koa boilerplate
 
-The ideas of this repository are to try out all new concepts and libraries which work great with React.js.
-Additionally, this will be the boilerplate for koa isomorphic or universal application.
+[![build status](https://secure.travis-ci.org/hung-phan/koa-react-isomorphic.svg)](http://travis-ci.org/hung-phan/koa-react-isomorphic/)
+
+The idea of this repository are to try out all new concepts and libraries which work great for React.js.
+Additionally, this will be the boilerplate for koa isomorphic (or universal) application.
+
+So far, I manage to put together these following technologies:
+
+* [Koa.js](https://github.com/koajs/koa)
+* [Webpack](https://github.com/webpack/webpack)
+* [Babel](https://babeljs.io/)
+* [Flowtype](http://flowtype.org/)
+* [Nunjucks](https://mozilla.github.io/nunjucks/)
+* [Bootstrap](http://getbootstrap.com/css/) and [FontAwesome](https://fortawesome.github.io/Font-Awesome/)
+* [Redux](https://github.com/rackt/redux)
+* [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
+
+[![NPM](https://nodei.co/npm/koa-react-isomorphic.png?downloads=true)](https://nodei.co/npm/koa-react-isomorphic/)
+
+## Explanation
+
+What initially gets run is `build/server.js`, which is complied by Webpack to utilise the power of ES6 and ES7 in server-side code.
+In `server.js`, I initialse all middlewares from `config/middleware/config`, then start server at `localhost:3000`. API calls
+from client side eventually will request to `/api/*`, which are created by `app/server/apis`. Rendering tasks will be delegated to
+[React-Router](https://github.com/rackt/react-router) to do server rendering for React.
+
+### app/route.js
+
+Contains all components and routing.
+
+### app/app.js
+
+Binds root component to `<div id='app'></div>`, and prepopulate redux store with server-rendering data from `window.__data`
+
+### app/server.js
+
+Handles routing for server, and generates page which will be returned by react-router and nunjucks. I make a facade `getUrl` for data fetching in both client and server.
+Then performs server-side process.
+
+### Server-side data fetching
+
+We ask react-router for a list of all the routes that match the current request and we check to see if any of the matched routes has a static `fetchData()` function.
+If it does, we pass the redux dispatcher to it and collect the promises returned. Those promises will be resolved when each matching route has loaded its
+necessary data from the API server.
+
+Takes a look at `templates/todos`, we will have sth like `@fetchDataEnhancer(store => store.dispatch(fetchTodos()))` to let the server calls `fetchData()` function
+on a component from the server.
+
+## Upcoming
+
+* Immutablejs
+* Rxjs
 
 ## Development
-Clone this repo
 
 ```bash
 $ git clone git@github.com:hung-phan/koa-react-isomorphic.git
@@ -12,50 +60,37 @@ $ cd koa-react-isomorphic
 $ npm install
 ```
 
-Single run
+### Hot reload
 
 ```bash
 $ npm run watch
-$ npm start # or npm start development 3000
+$ npm run dev
 ```
 
-Or with hot reload
+### With server rendering - encourage for testing only
 
 ```bash
-$ npm run watch
-$ npm run dev # start server
-```
-
-## Build
-
-```bash
-$ gulp build
-$ SECRET_KEY=your_env_key npm start # or start pm2 in config/pm2/production.json
+$ SERVER_RENDERING=true npm run watch
+$ npm run dev
 ```
 
 ## Production
 
+### Normal run
+
 ```bash
-$ export SECRET_KEY=your_secret_key
+$ gulp build
+$ SECRET_KEY=your_env_key npm start
 ```
 
-## Current setup
-- Koa.js server up and running
-- Webpack bundle with hot reload for both server and client
-- Utilize es6 syntax
-- Flowtype checking using `babel-type-check`
-- Nunjucks template and macro setups
-- CSS prebundle with bootstrap and FontAwesome
-- Mocha unit test
-- Test coverage by Istanbul
-- Server rendering
-- Best practices for server and client
-- Redux
-- API
-- Data fetching for redux
-- E2E testing
+### With pm2
 
-## Structure
+```bash
+$ gulp build
+$ SECRET_KEY=your_env_key gulp pro-server
+```
+
+## Application structure
 
 ```
 - app/
