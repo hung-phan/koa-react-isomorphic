@@ -1,7 +1,5 @@
 {% extends 'layouts/application.html' %}
 
 {% block mainContent %}
-  <div class="container">
-    <div id="app">{{ prerenderComponent | safe }}</div>
-  </div>
+  <div id="app">{{ prerenderComponent | safe }}</div>
 {% endblock %}

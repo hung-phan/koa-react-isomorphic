@@ -5,6 +5,7 @@ import React, { addons } from 'react/addons';
 import configureStore    from 'app/client/stores/index';
 import ProviderMock      from 'app/client/components/helpers/provider-mock';
 import Todos             from './todos';
+import AddTodo           from './../todos/add-todo/add-todo';
 
 describe('Component: Todos', () => {
   const { TestUtils } = addons;
@@ -42,13 +43,28 @@ describe('Component: Todos', () => {
     assert.isFunction(Todos.fetchData);
   });
 
-  it("should have props 'todos' and 'dispatch' after rendering", () => {
+  it("should have props 'todos' and 'actions' after rendering", () => {
     const component = TestUtils.renderIntoDocument(Component);
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
-    // mocking redux object
-    assert.property(todosComponent.state.stateProps, 'todos');
-    assert.propertyVal(todosComponent.state.stateProps, 'todos', todos);
-    assert.property(todosComponent.state.dispatchProps, 'dispatch');
+    // mocking react-redux object
+    assert.deepProperty(todosComponent, 'state.stateProps.todos');
+    assert.deepPropertyVal(todosComponent, 'state.stateProps.todos', todos);
+
+    assert.deepProperty(todosComponent, 'state.dispatchProps.actions');
+  });
+
+  it("should have props 'actions.addTodo'", () => {
+    const component = TestUtils.renderIntoDocument(Component);
+    const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
+
+    assert.deepProperty(todosComponent, 'state.dispatchProps.actions.addTodo');
+  });
+
+  it("should contain 'AddTodo' component", () => {
+    const component = TestUtils.renderIntoDocument(Component);
+    const addTodoComponent = TestUtils.findRenderedComponentWithType(component, AddTodo);
+
+    assert.ok(addTodoComponent);
   });
 });
