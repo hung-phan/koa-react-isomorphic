@@ -1,71 +1,118 @@
 import { assert } from 'chai';
-import {
-  addTodo,
-  removeTodo,
-  completeTodo,
-  setTodos,
-  fetchTodos
-} from './todos';
+import sinon      from 'sinon';
+import nock       from 'nock';
+import fetch      from 'isomorphic-fetch';
 
 describe('Action: Todos', () => {
-  it("should define 'addTodo' function", () => {
-    assert.ok(addTodo);
-    assert.isFunction(addTodo);
-  });
+  context('sync', () => {
+    const { addTodo, removeTodo, completeTodo, setTodos } = require('./todos');
 
-  it("should define 'removeTodo' function", () => {
-    assert.ok(removeTodo);
-    assert.isFunction(removeTodo);
-  });
+    it("should define 'addTodo' function", () => {
+      assert.ok(addTodo);
+      assert.isFunction(addTodo);
+    });
 
-  it("should define 'completeTodo' function", () => {
-    assert.ok(completeTodo);
-    assert.isFunction(completeTodo);
-  });
+    it("should define 'removeTodo' function", () => {
+      assert.ok(removeTodo);
+      assert.isFunction(removeTodo);
+    });
 
-  it("should define 'setTodos' function", () => {
-    assert.ok(setTodos);
-    assert.isFunction(setTodos);
-  });
+    it("should define 'completeTodo' function", () => {
+      assert.ok(completeTodo);
+      assert.isFunction(completeTodo);
+    });
 
-  it("should define 'fetchTodos' function", () => {
-    assert.ok(fetchTodos);
-    assert.isFunction(fetchTodos);
-  });
+    it("should define 'setTodos' function", () => {
+      assert.ok(setTodos);
+      assert.isFunction(setTodos);
+    });
 
-  it("should return action when calls 'addTodo' with 'do chore'", () => {
-    assert.deepEqual(addTodo('do chore'), {
-      type: 'ADD_TODO',
-      text: 'do chore'
+
+    it("should return action when calls 'addTodo' with 'do chore'", () => {
+      assert.deepEqual(addTodo('do chore'), {
+        type: 'ADD_TODO',
+        text: 'do chore'
+      });
+    });
+
+    it("should return action when calls 'removeTodo' with 1", () => {
+      const index = 1;
+      assert.deepEqual(removeTodo(index), {
+        type: 'REMOVE_TODO',
+        index
+      });
+    });
+
+    it("should return action when calls 'completeTodo' with 1", () => {
+      const index = 1;
+      assert.deepEqual(completeTodo(index), {
+        type: 'COMPLETE_TODO',
+        index
+      });
+    });
+
+    it("should return action when calls 'setTodos' with todos list", () => {
+      const todos = [{ text: 'do chore', complete: false }];
+
+      assert.deepEqual(setTodos(todos), {
+        type: 'SET_TODOS',
+        todos
+      });
     });
   });
 
-  it("should return action when calls 'removeTodo' with 1", () => {
-    const index = 1;
-    assert.deepEqual(removeTodo(index), {
-      type: 'REMOVE_TODO',
-      index
+  context('async', () => {
+    const todos = [
+      { text: 'Todo 1', complete: false },
+      { text: 'Todo 2', complete: false },
+      { text: 'Todo 3', complete: false },
+      { text: 'Todo 4', complete: false }
+    ];
+    let setTodos;
+    let fetchTodos;
+    let runtimeEnv;
+    let port;
+
+    before(function () {
+      runtimeEnv = process.env.runtimeEnv;
+      port = process.env.PORT;
+
+      process.env.PORT = 3000;
+      process.env.runtimeEnv = 'server';
+
+      nock('http://localhost:3000')
+        .get('/api/v1/todos')
+        .reply(200, todos);
+
+      fetchTodos = require('./todos').fetchTodos;
+      setTodos = require('./todos').setTodos;
     });
-  });
 
-  it("should return action when calls 'completeTodo' with 1", () => {
-    const index = 1;
-    assert.deepEqual(completeTodo(index), {
-      type: 'COMPLETE_TODO',
-      index
+    after(function () {
+      process.env.runtimeEnv = runtimeEnv;
+      process.env.PORT = port;
     });
-  });
 
-  it("should return action when calls 'setTodos' with todos list", () => {
-    const todos = [{ text: 'do chore', complete: false }];
-
-    assert.deepEqual(setTodos(todos), {
-      type: 'SET_TODOS',
-      todos
+    it("should define 'fetchTodos' function", () => {
+      assert.ok(fetchTodos);
+      assert.isFunction(fetchTodos);
     });
-  });
 
-  it("should return a function when calls 'fetchTodos'", () => {
-    assert.ok(fetchTodos);
+    it("should return a function when calls 'fetchData'", function *() {
+      const callback = sinon.spy();
+      const action = fetchTodos();
+
+      yield action(callback);
+
+      assert(callback.called);
+      assert(callback.calledWith(
+        sinon.match((value) => {
+          console.log(value);
+          assert.deepEqual(value, setTodos(todos));
+
+          return true;
+        })
+      ));
+    });
   });
 });
