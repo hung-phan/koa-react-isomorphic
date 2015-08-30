@@ -52,25 +52,53 @@ $ export SECRET_KEY=your_secret_key
 - Best practices for server and client
 - Redux
 - API
-
-## Working on
 - Data fetching for redux
 - E2E testing
 
 ## Structure
 
 ```
- - app/
+- app/
  |- client/
-  |+ actions/
-  |+ components/
-  |+ lib/
-  |+ reducers/
-  |+ stores/
+  |- actions/
+   |  todos-test.js
+   |  todos.js
+  |- components/
+   |+ helpers/
+   |- main/
+    |  app-test.js
+    |  app.js
+   |- templates/
+    |  todos-test.js
+    |  todos.js
+   |- todos/
+    |+ todos-add/
+    |+ todos-body/
+    |+ todos-header/
+  |- helpers/
+   |  fetch-data-test.js
+   |  fetch-data.js
+   |  get-url-test.js
+   |  get-url.js
+  |- lib/
+   |  font-awesome.js
+   |  index.js
+   |  twitter-bootstrap.js
+  |- reducers/
+   |  index.js
+   |  todos-test.js
+   |  todos.js
+  |- stores/
+   |  index-test.js
+   |  index.js
  |- server/
-  |+ apis/
-  |+ controllers/
-  |+ models/
+  |- apis/
+   |+ v1/
+   |  base.js
+  |- controllers/
+   |  application.js
+   |  base.js
+  |- models/
   |+ templates/
  |  app.js
  |  routes.js
@@ -93,13 +121,15 @@ $ export SECRET_KEY=your_secret_key
  |  path-helper.js
 + node_modules/
 + public/
-+ scripts/
+- scripts/
+ |  build
+ |  start
   bower.json
   compiler.js
   gulpfile.js
   LICENSE
   nodemon.json
+  npm-debug.log
   package.json
   README.md
- README.md
 ```
