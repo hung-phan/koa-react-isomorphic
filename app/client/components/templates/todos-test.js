@@ -39,14 +39,12 @@ describe('Component: Todos', () => {
     assert.isFunction(Todos.fetchData);
   });
 
-  it("should have props 'todos' and 'actions' after rendering", () => {
+  it("should have props 'todos'", () => {
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
     // mocking react-redux object
     assert.deepProperty(todosComponent, 'state.stateProps.todos');
     assert.deepPropertyVal(todosComponent, 'state.stateProps.todos', todos);
-
-    assert.deepProperty(todosComponent, 'state.dispatchProps.actions');
   });
 
   it("should have props 'actions.addTodo'", () => {
