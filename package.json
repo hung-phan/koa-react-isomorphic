@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "devDependencies": {
     "istanbul": "*",
     "jsdom": "*",
