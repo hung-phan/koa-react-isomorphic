@@ -43,26 +43,28 @@ describe('Component: Todos', () => {
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
     // mocking react-redux object
-    assert.deepProperty(todosComponent, 'state.stateProps.todos');
-    assert.deepPropertyVal(todosComponent, 'state.stateProps.todos', todos);
+    assert.deepEqual(todosComponent.stateProps.todos, todos);
   });
 
   it("should have props 'actions.addTodo'", () => {
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
-    assert.deepProperty(todosComponent, 'state.dispatchProps.actions.addTodo');
+    assert.ok(todosComponent.dispatchProps.actions.addTodo);
+    assert.isFunction(todosComponent.dispatchProps.actions.addTodo);
   });
 
   it("should have props 'actions.removeTodo'", () => {
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
-    assert.deepProperty(todosComponent, 'state.dispatchProps.actions.removeTodo');
+    assert.ok(todosComponent.dispatchProps.actions.removeTodo);
+    assert.isFunction(todosComponent.dispatchProps.actions.removeTodo);
   });
 
   it("should have props 'actions.completeTodo'", () => {
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
-    assert.deepProperty(todosComponent, 'state.dispatchProps.actions.completeTodo');
+    assert.ok(todosComponent.dispatchProps.actions.completeTodo);
+    assert.isFunction(todosComponent.dispatchProps.actions.completeTodo);
   });
 
   it("should have 'TodosHeader' component", () => {
