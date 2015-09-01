@@ -16,7 +16,7 @@ if (process.env.SERVER_RENDERING) {
         return new Promise((resolve, reject) => {
           Router.run(routes, this.request.path, (Handler, routerState) => {
             fetchData(store, routerState)
-              .then(([data]) => {
+              .then(() => {
                 const prerenderComponent = React.renderToString(app(store, Handler, routerState));
                 const prerenderData = store.getState();
 

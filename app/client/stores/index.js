@@ -12,16 +12,14 @@ if (process.env.NODE_ENV === 'development') {
       thunkMiddleware,
       require('redux-logger')
     ),
-    require('redux-devtools').devTools(),
-    createStore
-  );
+    require('redux-devtools').devTools()
+  )(createStore);
 } else {
   finalCreateStore = compose(
     applyMiddleware(
       thunkMiddleware
-    ),
-    createStore
-  );
+    )
+  )(createStore);
 }
 
 export default function configureStore(initialState = {}) {

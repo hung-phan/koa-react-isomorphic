@@ -2,7 +2,7 @@ import 'babel/polyfill';
 
 import koa         from 'koa';
 import debug       from 'debug';
-import * as config from 'config/middlewares/config';
+import * as config from 'config/middlewares/index';
 import apis        from './server/apis/base';
 import controllers from './server/controllers/base';
 
