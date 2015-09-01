@@ -2,7 +2,6 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware                           from 'redux-thunk';
-import loggerMiddleware                          from 'redux-logger';
 import root                                      from './../reducers/index';
 
 let finalCreateStore;
@@ -11,7 +10,7 @@ if (process.env.NODE_ENV === 'development') {
   finalCreateStore = compose(
     applyMiddleware(
       thunkMiddleware,
-      loggerMiddleware
+      require('redux-logger')
     ),
     require('redux-devtools').devTools(),
     createStore
