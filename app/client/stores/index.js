@@ -1,23 +1,24 @@
-'use strict';
-
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware                           from 'redux-thunk';
-import root                                      from './../reducers/index';
+import thunkMiddleware from 'redux-thunk';
+import { batchedUpdatesMiddleware } from 'redux-batched-updates';
+import root from './../reducers/index';
 
 let finalCreateStore;
 
 if (process.env.NODE_ENV === 'development') {
   finalCreateStore = compose(
     applyMiddleware(
+      require('redux-logger'),
       thunkMiddleware,
-      require('redux-logger')
+      batchedUpdatesMiddleware
     ),
     require('redux-devtools').devTools()
   )(createStore);
 } else {
   finalCreateStore = compose(
     applyMiddleware(
-      thunkMiddleware
+      thunkMiddleware,
+      batchedUpdatesMiddleware
     )
   )(createStore);
 }

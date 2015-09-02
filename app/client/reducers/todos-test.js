@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import reducer    from './todos';
+import reducer from './todos';
 import {
   addTodo,
   removeTodo,

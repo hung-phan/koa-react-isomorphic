@@ -1,13 +1,13 @@
 import 'app/client/components/helpers/jsdom-support.js';
 
-import { assert }        from 'chai';
+import { assert } from 'chai';
 import React, { addons } from 'react/addons';
-import configureStore    from 'app/client/stores/index';
-import ProviderMock      from 'app/client/components/helpers/provider-mock';
-import Todos             from './todos';
-import TodosHeader       from './../todos/todos-header/todos-header';
-import TodosAdd          from './../todos/todos-add/todos-add';
-import TodosBody         from './../todos/todos-body/todos-body';
+import configureStore from 'app/client/stores/index';
+import ProviderMock from 'app/client/components/helpers/provider-mock';
+import Todos from './todos';
+import TodosHeader from './../todos/todos-header/todos-header';
+import TodosAdd from './../todos/todos-add/todos-add';
+import TodosBody from './../todos/todos-body/todos-body';
 
 describe('Component: Todos', () => {
   const { TestUtils } = addons;

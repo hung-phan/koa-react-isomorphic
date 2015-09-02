@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import getUrl     from './get-url';
+import getUrl from './get-url';
 
 describe('Helper: getUrl', () => {
   it('should be defined', () => {

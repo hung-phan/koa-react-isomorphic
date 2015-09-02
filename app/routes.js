@@ -1,6 +1,6 @@
-import React     from 'react';
+import React from 'react';
 import { Route } from 'react-router';
-import Todos     from './client/components/templates/todos';
+import Todos from './client/components/templates/todos';
 
 export default (
   <Route>

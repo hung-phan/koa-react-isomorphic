@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import fetchData  from './fetch-data';
+import fetchData from './fetch-data';
 
 describe('Helper: fetchData', () => {
   it('should be a function', () => {

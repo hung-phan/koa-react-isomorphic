@@ -1,4 +1,4 @@
-import { jsdom }            from 'jsdom';
+import { jsdom } from 'jsdom';
 import ExecutionEnvironment from 'react/lib/ExecutionEnvironment';
 
 // config React DOM

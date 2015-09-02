@@ -1,4 +1,4 @@
-import React        from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 
 export default function(store, Handler, routerState) {

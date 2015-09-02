@@ -1,9 +1,9 @@
 import 'babel/polyfill';
 
-import koa         from 'koa';
-import debug       from 'debug';
+import koa from 'koa';
+import debug from 'debug';
 import * as config from 'config/middlewares/index';
-import apis        from './server/apis/base';
+import apis from './server/apis/base';
 import controllers from './server/controllers/base';
 
 const PORT = process.env.PORT || 3000;

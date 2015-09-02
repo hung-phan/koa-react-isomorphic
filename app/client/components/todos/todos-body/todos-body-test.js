@@ -1,10 +1,10 @@
 import 'app/client/components/helpers/jsdom-support.js';
 
-import { assert }        from 'chai';
-import sinon             from 'sinon';
+import { assert } from 'chai';
+import sinon from 'sinon';
 import React, { addons } from 'react/addons';
-import TodosBody         from './todos-body';
-import { noop }          from 'node-noop';
+import TodosBody from './todos-body';
+import { noop } from 'node-noop';
 
 describe('Component: TodosBody', () => {
   const { TestUtils } = addons;

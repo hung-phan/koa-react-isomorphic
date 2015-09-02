@@ -1,6 +1,6 @@
+import { assert } from 'chai';
+import sinon from 'sinon';
 import React, { addons } from 'react/addons';
-import { assert }        from 'chai';
-import sinon             from 'sinon';
 import fetchDataEnhancer from './fetch-data-enhancer';
 
 class Handler extends React.Component {

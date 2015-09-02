@@ -1,10 +1,10 @@
 import 'app/client/components/helpers/jsdom-support.js';
 
-import { assert }        from 'chai';
-import sinon             from 'sinon';
+import { assert } from 'chai';
+import sinon from 'sinon';
 import React, { addons } from 'react/addons';
 import stubRouterContext from 'app/client/components/helpers/stub-router-context';
-import TodosAdd          from './todos-add';
+import TodosAdd from './todos-add';
 
 describe('Component: TodosAdd', () => {
   const { TestUtils } = addons;

@@ -1,10 +1,10 @@
 import 'app/client/components/helpers/jsdom-support.js';
 
-import { assert }        from 'chai';
+import { assert } from 'chai';
 import React, { addons } from 'react/addons';
-import { Provider }      from 'react-redux';
-import configureStore    from 'app/client/stores/index';
-import app               from './app';
+import { Provider } from 'react-redux';
+import configureStore from 'app/client/stores/index';
+import app from './app';
 
 class Handler extends React.Component {
   render() {

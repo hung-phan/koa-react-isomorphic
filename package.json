@@ -62,6 +62,7 @@
     "react": "*",
     "react-router": "*",
     "redux": "*",
+    "redux-batched-updates": "*",
     "react-redux": "*",
     "redux-devtools": "*",
     "redux-thunk": "*",

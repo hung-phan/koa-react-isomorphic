@@ -1,2 +1,2 @@
 import { assert } from 'chai';
-import server     from 'server';
+import server from 'server';

@@ -1,8 +1,8 @@
 import 'app/client/components/helpers/jsdom-support.js';
 
-import { assert }        from 'chai';
+import { assert } from 'chai';
 import React, { addons } from 'react';
-import TodosHeader       from './todos-header';
+import TodosHeader from './todos-header';
 
 describe('Component: TodosHeader', () => {
   const { TestUtils } = addons;
