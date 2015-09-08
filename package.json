@@ -11,6 +11,7 @@
     "nock": "*",
     "node-inspector": "*",
     "supertest": "*",
+    "co-supertest": "*",
     "monkey-hot-loader": "*",
     "babel-plugin-react-transform": "*",
     "react-transform-catch-errors": "*",
@@ -78,7 +79,8 @@
   "scripts": {
     "start": "sh scripts/start",
     "dev": "nodemon --harmony build/server.js",
-    "test": "NODE_ENV=test mocha --reporter nyan --compilers js:compiler.js --require co-mocha 'app/**/*-test.js'",
+    "test": "NODE_ENV=test PORT=3001 mocha --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
+    "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter nyan --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
     "postinstall": "sh scripts/build",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js --require co-mocha 'app/**/*-test.js'",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
