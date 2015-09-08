@@ -78,7 +78,7 @@
   "scripts": {
     "start": "sh scripts/start",
     "dev": "nodemon --harmony build/server.js",
-    "test": "mocha --reporter nyan --compilers js:compiler.js --require co-mocha 'app/**/*-test.js'",
+    "test": "NODE_ENV=test mocha --reporter nyan --compilers js:compiler.js --require co-mocha 'app/**/*-test.js'",
     "postinstall": "sh scripts/build",
     "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js --require co-mocha 'app/**/*-test.js'",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
