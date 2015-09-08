@@ -12,7 +12,10 @@
     "node-inspector": "*",
     "supertest": "*",
     "monkey-hot-loader": "*",
-    "react-hot-loader": "*"
+    "babel-plugin-react-transform": "*",
+    "react-transform-catch-errors": "*",
+    "react-transform-webpack-hmr": "*",
+    "redbox-react": "*"
   },
   "dependencies": {
     "chalk": "*",

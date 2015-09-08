@@ -26,11 +26,11 @@ module.exports = _.merge(defaultConfig, {
   },
   module: {
     loaders: [
-      {
-        test: /.js$/,
-        exclude: /node_modules/,
-        loaders: ['react-hot']
-      },
+      // {
+      //   test: /.js$/,
+      //   exclude: /node_modules/,
+      //   loaders: ['react-hot']
+      // },
       {
         test: /\.css$/,
         loader: 'style!css!autoprefixer'
