@@ -12,7 +12,20 @@ $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.__data);
 
-  Router.run(routes, Router.HistoryLocation, (Handler, routerState) => {
-    React.render(app(store, Handler, routerState), appDOM);
-  });
+  if (process.env.NODE_ENV === 'development') {
+    const fetchData = require('./client/helpers/fetch-data');
+    let areFetchedData = false;
+
+    Router.run(routes, Router.HistoryLocation, (Handler, routerState) => {
+      if (!areFetchedData) {
+        fetchData(store, routerState);
+        areFetchedData = true;
+      }
+      React.render(app(store, Handler, routerState), appDOM);
+    });
+  } else {
+    Router.run(routes, Router.HistoryLocation, (Handler, routerState) => {
+      React.render(app(store, Handler, routerState), appDOM);
+    });
+  }
 });
