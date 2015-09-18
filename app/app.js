@@ -12,20 +12,12 @@ $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.__data);
 
-  if (process.env.NODE_ENV === 'development') {
-    const fetchData = require('./client/helpers/fetch-data');
-    let areFetchedData = false;
+  Router.run(routes, Router.HistoryLocation, (Handler, routerState) => {
+    if (process.env.NODE_ENV === 'development') {
+      const clientFetchData = require('./client/helpers/client-fetch-data');
+      clientFetchData(store, routerState);
+    }
 
-    Router.run(routes, Router.HistoryLocation, (Handler, routerState) => {
-      if (!areFetchedData) {
-        fetchData(store, routerState);
-        areFetchedData = true;
-      }
-      React.render(app(store, Handler, routerState), appDOM);
-    });
-  } else {
-    Router.run(routes, Router.HistoryLocation, (Handler, routerState) => {
-      React.render(app(store, Handler, routerState), appDOM);
-    });
-  }
+    React.render(app(store, Handler, routerState), appDOM);
+  });
 });
