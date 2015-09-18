@@ -6,9 +6,14 @@ import root from './../reducers/index';
 let finalCreateStore;
 
 if (process.env.NODE_ENV === 'development') {
+  const createLogger = require('redux-logger');
+  const logger = createLogger({
+    level: 'info'
+  });
+
   finalCreateStore = compose(
     applyMiddleware(
-      require('redux-logger'),
+      logger,
       thunkMiddleware,
       batchedUpdatesMiddleware
     ),
