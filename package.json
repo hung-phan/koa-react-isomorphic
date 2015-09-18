@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "devDependencies": {
     "istanbul": "*",
     "jsdom": "*",
@@ -82,7 +82,7 @@
     "test": "NODE_ENV=test PORT=3001 mocha --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
     "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter nyan --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
     "postinstall": "sh scripts/build",
-    "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js --require co-mocha 'app/**/*-test.js'",
+    "test-coverage": "istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "watch": "gulp clean && npm run frontend:watch & gulp backend:watch"
   },
