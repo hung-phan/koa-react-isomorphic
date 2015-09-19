@@ -88,6 +88,10 @@ $ gulp build
 $ SECRET_KEY=your_env_key gulp pro-server
 ```
 
+### Phusion Passenger server with Nginx
+
+Upcoming
+
 ## Application structure
 
 ```

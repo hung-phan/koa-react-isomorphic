@@ -9,6 +9,7 @@
     "chai": "*",
     "sinon": "*",
     "nock": "*",
+    "require-subvert": "*",
     "node-inspector": "*",
     "supertest": "*",
     "co-supertest": "*",
