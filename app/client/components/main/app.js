@@ -8,15 +8,16 @@ export default function(store, Handler, routerState) {
         {() => <Handler routerState={routerState} />}
       </Provider>
 
-      {process.env.NODE_ENV === 'development' && (function() {
-        const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
+      {process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING &&
+        (function() {
+          const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
 
-        return (
-          <DebugPanel top right bottom>
-            <DevTools store={store} monitor={LogMonitor} />
-          </DebugPanel>
-        );
-      })()}
+          return (
+            <DebugPanel top right bottom>
+              <DevTools store={store} monitor={LogMonitor} />
+            </DebugPanel>
+          );
+        })()}
     </div>
   );
 };

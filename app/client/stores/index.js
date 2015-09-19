@@ -5,7 +5,7 @@ import root from './../reducers/index';
 
 let finalCreateStore;
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const createLogger = require('redux-logger');
   const logger = createLogger({
     level: 'info'
