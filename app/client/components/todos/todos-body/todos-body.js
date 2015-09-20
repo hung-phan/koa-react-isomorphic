@@ -1,8 +1,9 @@
 import React from 'react';
+import { List } from 'immutable';
 
 class TodosBody extends React.Component {
   static propsType = {
-    todos: React.PropTypes.array.isRequired,
+    todos: React.PropTypes.instanceOf(List),
     removeTodo: React.PropTypes.func.isRequired,
     completeTodo: React.PropTypes.func.isRequired
   }
@@ -26,8 +27,8 @@ class TodosBody extends React.Component {
   }
 }
 
-function renderTodos(todos: Array, removeTodo: Function, completeTodo: Function) {
-  return todos.map((todo: Object, index) => {
+function renderTodos(todos: List, removeTodo: Function, completeTodo: Function) {
+  return todos.toJS().map((todo: Object, index) => {
     const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
 
     return (

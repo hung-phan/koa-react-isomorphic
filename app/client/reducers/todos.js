@@ -4,32 +4,18 @@ import {
   COMPLETE_TODO,
   SET_TODOS
 } from './../actions/todos';
+import { List, fromJS } from 'immutable';
+import { createReducer } from 'redux-immutablejs';
 
-export default function(state: Array = [], action: Object) {
-  switch (action.type) {
-  case ADD_TODO:
-    return [...state, {
-      text: action.text,
-      complete: false
-    }];
+const initialState = List();
 
-  case REMOVE_TODO:
-    return [
-      ...state.slice(0, action.index),
-      ...state.slice(action.index + 1)
-    ];
-
-  case COMPLETE_TODO:
-    return [
-      ...state.slice(0, action.index),
-      Object.assign({}, state[action.index], { complete: !state[action.index].complete }),
-      ...state.slice(action.index + 1)
-    ];
-
-  case SET_TODOS:
-    return action.todos;
-
-  default:
-    return state;
-  }
-}
+export default createReducer(initialState, {
+  [ADD_TODO]: (state, { text }) => state.push(
+    fromJS({ text, complete: false })
+  ),
+  [REMOVE_TODO]: (state, { index }) => state.delete(index),
+  [COMPLETE_TODO]: (state, { index }) => state.updateIn(
+    [index, 'complete'], value => !state.getIn([index, 'complete'])
+  ),
+  [SET_TODOS]: (state, { todos }) => fromJS(todos)
+});

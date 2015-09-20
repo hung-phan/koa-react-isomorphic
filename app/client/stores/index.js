@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { batchedUpdatesMiddleware } from 'redux-batched-updates';
@@ -8,7 +9,8 @@ let finalCreateStore;
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const createLogger = require('redux-logger');
   const logger = createLogger({
-    level: 'info'
+    level: 'info',
+    transformer: state => state.toJS()
   });
 
   finalCreateStore = compose(
@@ -29,5 +31,5 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
 }
 
 export default function configureStore(initialState = {}) {
-  return finalCreateStore(root, initialState);
+  return finalCreateStore(root, fromJS(initialState));
 }

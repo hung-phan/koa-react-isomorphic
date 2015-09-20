@@ -1,3 +1,4 @@
+import { fromJS, is } from 'immutable';
 import { assert } from 'chai';
 import reducer from './todos';
 import {
@@ -13,51 +14,43 @@ describe('Reducer: Todos', () => {
     assert.isFunction(reducer);
   });
 
-  it('should throw error when passing the wrong params type', () => {
-    const fn1 = () => reducer({}, {});
-    const fn2 = () => reducer([], false);
-
-    assert.throw(fn1);
-    assert.throw(fn2);
-  });
-
   it('should return the default state', () => {
-    assert.deepEqual(
+    assert(is(
       reducer([], { type: 'ANOTHER_ACTION', random: 'random value' }),
-      []
-    );
+      fromJS([])
+    ));
   });
 
   it("should return a todos list with 1 todo item when calls 'addTodo' action", () => {
-    assert.deepEqual(
+    assert(is(
       reducer([], addTodo('do chore')),
-      [{ text: 'do chore', complete: false }]
-    );
+      fromJS([{ text: 'do chore', complete: false }])
+    ));
   });
 
   it("should return an empty todos list when calls 'removeTodo' action", () => {
-    assert.deepEqual(
+    assert(is(
       reducer([{ text: 'do chore', complete: false }], removeTodo(0)),
-      []
-    );
+      fromJS([])
+    ));
   });
 
   it("should return an todos list when calls 'setTodos' action", () => {
-    assert.deepEqual(
+    assert(is(
       reducer([], setTodos([{ text: 'do chore', complete: false }])),
-      [{ text: 'do chore', complete: false }]
-    );
+      fromJS([{ text: 'do chore', complete: false }])
+    ));
   });
 
   it("should return a todos list with 1 completed todo when calls 'completeTodo' action", () => {
-    assert.deepEqual(
+    assert(is(
       reducer([{ text: 'do chore', complete: false }], completeTodo(0)),
-      [{ text: 'do chore', complete: true }]
-    );
+      fromJS([{ text: 'do chore', complete: true }])
+    ));
 
-    assert.deepEqual(
+    assert(is(
       reducer([{ text: 'do chore', complete: true }], completeTodo(0)),
-      [{ text: 'do chore', complete: false }]
-    );
+      fromJS([{ text: 'do chore', complete: false }])
+    ));
   });
 });

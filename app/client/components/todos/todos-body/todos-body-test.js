@@ -2,6 +2,7 @@ import 'app/client/components/helpers/jsdom-support.js';
 
 import { assert } from 'chai';
 import sinon from 'sinon';
+import { fromJS } from 'immutable';
 import React, { addons } from 'react/addons';
 import TodosBody from './todos-body';
 import { noop } from 'node-noop';
@@ -22,7 +23,7 @@ describe('Component: TodosBody', () => {
 
   it('should display a list of todos', () => {
     const component = TestUtils.renderIntoDocument(
-      <TodosBody todos={todos} removeTodo={noop} completeTodo={noop} />
+      <TodosBody todos={fromJS(todos)} removeTodo={noop} completeTodo={noop} />
     );
     const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
 
@@ -32,7 +33,7 @@ describe('Component: TodosBody', () => {
   it("should call 'removeTodo' when click on the delete button", () => {
     const removeTodo = sinon.spy();
     const component = TestUtils.renderIntoDocument(
-      <TodosBody todos={todos} removeTodo={removeTodo} completeTodo={noop} />
+      <TodosBody todos={fromJS(todos)} removeTodo={removeTodo} completeTodo={noop} />
     );
     const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
 
@@ -50,7 +51,7 @@ describe('Component: TodosBody', () => {
   it("should call 'completeTodo' when click on the complete button", () => {
     const completeTodo = sinon.spy();
     const component = TestUtils.renderIntoDocument(
-      <TodosBody todos={todos} removeTodo={noop} completeTodo={completeTodo} />
+      <TodosBody todos={fromJS(todos)} removeTodo={noop} completeTodo={completeTodo} />
     );
     const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
     trComponents.forEach((tr, index) => {

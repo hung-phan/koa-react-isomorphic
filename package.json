@@ -62,6 +62,7 @@
     "pm2": "*",
     "ramda": "*",
     "react": "*",
+    "react-immutable-render-mixin": "*",
     "react-redux": "*",
     "react-router": "*",
     "redux": "*",

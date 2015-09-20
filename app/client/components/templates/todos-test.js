@@ -42,8 +42,7 @@ describe('Component: Todos', () => {
   it("should have props 'todos'", () => {
     const todosComponent = TestUtils.findRenderedComponentWithType(component, Todos);
 
-    // mocking react-redux object
-    assert.deepEqual(todosComponent.stateProps.todos, todos);
+    assert.deepEqual(todosComponent.stateProps.todos.toJS(), todos);
   });
 
   it("should have props 'actions.addTodo'", () => {

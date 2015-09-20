@@ -16,7 +16,7 @@ describe('Store', () => {
 
     beforeEach(() => {
       store = configureStore();
-      state = store.getState();
+      state = store.getState().toJS();
     });
 
     it('should define an object with todos property', () => {
@@ -44,7 +44,7 @@ describe('Store', () => {
 
     beforeEach(() => {
       store = configureStore();
-      state = store.getState();
+      state = store.getState().toJS();
     });
 
     it('should define an object with todos property', () => {
@@ -72,7 +72,7 @@ describe('Store', () => {
 
     beforeEach(() => {
       store = configureStore({ todos: [{ text: 'do chore', complete: true }]});
-      state = store.getState();
+      state = store.getState().toJS();
     });
 
     it('should define an object with todos property', () => {
@@ -100,7 +100,7 @@ describe('Store', () => {
 
     beforeEach(() => {
       store = configureStore({ todos: [{ text: 'do chore', complete: true }]});
-      state = store.getState();
+      state = store.getState().toJS();
     });
 
     it('should define an object with todos property', () => {

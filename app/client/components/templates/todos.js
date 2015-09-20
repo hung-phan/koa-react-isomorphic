@@ -1,5 +1,5 @@
-import R from 'ramda';
 import React from 'react';
+import shallowEqualImmutable from 'react-immutable-render-mixin/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import fetchDataEnhancer from './../helpers/fetch-data-enhancer';
@@ -9,17 +9,22 @@ import TodosBody from './../todos/todos-body/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
 @fetchDataEnhancer(store => store.dispatch(fetchTodos()))
-@connect(R.pick(['todos']), (dispatch) => {
-  return {
+@connect(
+  state => ({ todos: state.get('todos') }),
+  dispatch => ({
     actions: bindActionCreators({
       addTodo,
       removeTodo,
       completeTodo,
       fetchTodos
     }, dispatch)
-  };
-})
+  })
+)
 class Todos extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !shallowEqualImmutable(nextProps.todos, this.props.todos);
+  }
+
   render() {
     return (
       <div className='container'>
@@ -32,6 +37,10 @@ class Todos extends React.Component {
         </div>
       </div>
     );
+  }
+
+  static contextTypes = {
+    store: React.PropTypes.object.isRequired
   }
 }
 
