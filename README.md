@@ -45,9 +45,12 @@ necessary data from the API server.
 Takes a look at `templates/todos`, we will have sth like `@fetchDataEnhancer(store => store.dispatch(fetchTodos()))` to let the server calls `fetchData()` function
 on a component from the server.
 
+## Features
+
+* Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
+
 ## Upcoming
 
-* Immutablejs
 * Rxjs
 
 ## Development
