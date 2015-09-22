@@ -77,8 +77,8 @@ $ npm run dev
 ### Normal run
 
 ```bash
-$ NODE_ENV=production gulp build
-$ SECRET_KEY=your_env_key NODE_ENV=production npm start
+$ gulp build
+$ SECRET_KEY=your_env_key npm start
 ```
 
 ### With pm2
