@@ -3,7 +3,7 @@ import corequest from 'co-supertest';
 import app from 'app/server-index';
 
 describe('API: v1/todos', () => {
-  const request = corequest(app.listen(process.env.PORT));
+  const request = corequest(app.listen());
 
   it('should return json todos when calling GET request', function *() {
     const expected = [

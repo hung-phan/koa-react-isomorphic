@@ -3,7 +3,7 @@ import corequest from 'co-supertest';
 import app from 'app/server-index';
 
 describe('Controller: application', () => {
-  const request = corequest(app.listen(process.env.PORT));
+  const request = corequest(app.listen());
 
   it('should render Todos page', function *() {
     const result = yield request
