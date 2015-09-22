@@ -28,7 +28,7 @@ class TodosBody extends React.Component {
 
 function renderTodos(todos: Array, removeTodo: Function, completeTodo: Function) {
   return todos.map((todo: Object, index) => {
-    const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>
+    const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
 
     return (
       <tr key={index}>
