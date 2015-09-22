@@ -4,7 +4,7 @@
   "optional": ["runtime"],
   "env": {
     "development": {
-      "plugins": ["react-transform"],
+      "plugins": ["react-transform", "react-autoprefix"],
       "extra": {
         "react-transform": [
           {

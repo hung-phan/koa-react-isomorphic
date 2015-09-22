@@ -24,6 +24,7 @@
     "babel": "*",
     "babel-core": "*",
     "babel-loader": "*",
+    "babel-plugin-react-autoprefix": "*",
     "babel-plugin-typecheck": "*",
     "babel-runtime": "*",
     "bootstrap": "*",
