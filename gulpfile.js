@@ -6,6 +6,7 @@ var fs               = require('fs');
 var del              = require('del');
 var gulp             = require('gulp');
 var gutil            = require('gulp-util');
+var env              = require('gulp-env');
 var webpack          = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var notifier         = require('node-notifier');
@@ -60,9 +61,17 @@ gulp.task('backend:build', function(done) {
   bundler.run(handler);
 });
 
+gulp.task('set-production-env', () => {
+  env({
+    vars: {
+      NODE_ENV: 'production'
+    }
+  });
+});
+
 gulp.task('clean', cleanTask(['.' + config.path.build, '.' + config.path.publicAssets]));
 gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
-gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
+gulp.task('build', ['clean', 'set-production-env', 'frontend:build', 'backend:build']);
 
 gulp.task('pro-server', function(done) {
   shell.exec('pm2 start config/pm2/production.json', function() {

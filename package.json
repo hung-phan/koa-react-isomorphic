@@ -16,7 +16,7 @@
     "monkey-hot-loader": "*",
     "babel-plugin-react-transform": "*",
     "react-transform-catch-errors": "*",
-    "react-transform-webpack-hmr": "*",
+    "react-transform-hmr": "*",
     "redbox-react": "*"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "del": "*",
     "gulp": "*",
     "gulp-util": "*",
+    "gulp-env": "*",
     "shelljs": "*",
     "node-notifier": "*",
     "webpack-dev-server": "*",
