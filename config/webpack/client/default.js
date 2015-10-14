@@ -36,7 +36,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(/'react'/, 'react/addons'),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
