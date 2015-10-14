@@ -3,6 +3,7 @@ import './client/lib/index';
 
 import $ from 'jquery';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Router from 'react-router';
 import app from 'app/client/components/main/app';
 import routes from './routes';
@@ -18,6 +19,6 @@ $(document).ready(() => {
       clientFetchData(store, routerState);
     }
 
-    React.render(app(store, Handler, routerState), appDOM);
+    ReactDOM.render(app(store, Handler, routerState), appDOM);
   });
 });

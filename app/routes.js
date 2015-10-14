@@ -4,6 +4,6 @@ import Todos from './client/components/templates/todos';
 
 export default (
   <Route>
-    <Route path='/' handler={Todos} />
+    <Route path='/' component={Todos} />
   </Route>
 );
