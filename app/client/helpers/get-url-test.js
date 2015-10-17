@@ -11,7 +11,7 @@ describe('Helper: getUrl', () => {
   });
 
   it("should return url '/api/v1/todos' in client environment", () => {
-    process.env.runtimeEnv = 'client';
+    process.env.RUNTIME_ENV = 'client';
 
     const url = '/api/v1/todos';
     assert.equal(getUrl(url), url);
@@ -19,7 +19,7 @@ describe('Helper: getUrl', () => {
 
   it("should return url 'http://localhost:3000/api/v1/todos' in server environment", () => {
     process.env.PORT = 3000;
-    process.env.runtimeEnv = 'server';
+    process.env.RUNTIME_ENV = 'server';
 
     const url = '/api/v1/todos';
     assert.equal(getUrl(url), `http://localhost:3000${url}`);

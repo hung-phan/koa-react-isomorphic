@@ -70,15 +70,15 @@ describe('Action: Todos', () => {
     ];
     let setTodos;
     let fetchTodos;
-    let runtimeEnv;
+    let RUNTIME_ENV;
     let port;
 
     before(function () {
-      runtimeEnv = process.env.runtimeEnv;
+      RUNTIME_ENV = process.env.RUNTIME_ENV;
       port = process.env.PORT;
 
       process.env.PORT = 3000;
-      process.env.runtimeEnv = 'server';
+      process.env.RUNTIME_ENV = 'server';
 
       nock('http://localhost:3000')
         .get('/api/v1/todos')
@@ -89,7 +89,7 @@ describe('Action: Todos', () => {
     });
 
     after(function () {
-      process.env.runtimeEnv = runtimeEnv;
+      process.env.RUNTIME_ENV = RUNTIME_ENV;
       process.env.PORT = port;
     });
 

@@ -58,7 +58,7 @@ module.exports = {
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/\.(css|less|scss|gif|jpg|png|svg|ttf|eot|woff|woff2)$/, 'node-noop'),
     new webpack.DefinePlugin({
-      'process.env.runtimeEnv': '"server"'
+      'process.env.RUNTIME_ENV': '"server"'
     })
   ]
 };
