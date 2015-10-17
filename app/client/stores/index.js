@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { batchedUpdatesMiddleware } from 'redux-batched-updates';
 import root from './../reducers/index';
 
 let finalCreateStore;
@@ -14,16 +13,14 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   finalCreateStore = compose(
     applyMiddleware(
       logger,
-      thunkMiddleware,
-      batchedUpdatesMiddleware
+      thunkMiddleware
     ),
     require('redux-devtools').devTools()
   )(createStore);
 } else {
   finalCreateStore = compose(
     applyMiddleware(
-      thunkMiddleware,
-      batchedUpdatesMiddleware
+      thunkMiddleware
     )
   )(createStore);
 }

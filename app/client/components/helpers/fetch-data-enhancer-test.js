@@ -1,6 +1,8 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
-import React, { addons } from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import fetchDataEnhancer from './fetch-data-enhancer';
 
 class Handler extends React.Component {
@@ -12,8 +14,6 @@ class Handler extends React.Component {
 }
 
 describe('Helper: fetchDataEnhancer', () => {
-  const { TestUtils } = addons;
-
   it('should be a function', () => {
     assert.ok(fetchDataEnhancer);
     assert.isFunction(fetchDataEnhancer);
@@ -28,7 +28,7 @@ describe('Helper: fetchDataEnhancer', () => {
     const callback = sinon.spy();
     const Component = fetchDataEnhancer(callback)(Handler);
     const component = TestUtils.renderIntoDocument(<Component message='Hello world' />);
-    const innerHTML = React.findDOMNode(component).innerHTML;
+    const innerHTML = ReactDOM.findDOMNode(component).innerHTML;
 
     assert.include(innerHTML, 'Hello world');
   });

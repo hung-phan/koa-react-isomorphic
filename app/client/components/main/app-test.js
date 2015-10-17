@@ -1,10 +1,13 @@
 import 'app/client/components/helpers/jsdom-support.js';
 
 import { assert } from 'chai';
-import React, { addons } from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import { Provider } from 'react-redux';
+import wrapStateless from './../helpers/stateless-wrapper';
 import configureStore from 'app/client/stores/index';
-import app from './app';
+import App from './app';
 
 class Handler extends React.Component {
   render() {
@@ -14,17 +17,23 @@ class Handler extends React.Component {
   }
 }
 
-describe('Main: app', () => {
-  const { TestUtils } = addons;
+describe('Main: App', () => {
   const store = configureStore();
+  const routes = <Handler />;
+  let component;
+
+  beforeEach(() => {
+    component = TestUtils.renderIntoDocument(
+      wrapStateless(<App store={store} routes={routes} />)
+    );
+  });
 
   it('should be a function', () => {
-    assert.ok(app);
-    assert.isFunction(app);
+    assert.ok(App);
+    assert.isFunction(App);
   });
 
   it("should render 'Provider' component with the current store", () => {
-    const component = TestUtils.renderIntoDocument(app(store, Handler, {}));
     const providerComponent = TestUtils.findRenderedComponentWithType(component, Provider);
 
     assert.ok(providerComponent);
@@ -32,8 +41,7 @@ describe('Main: app', () => {
   });
 
   it("should render 'Handler' component", () => {
-    const component = TestUtils.renderIntoDocument(app(store, Handler, {}));
-    const innerHTML = React.findDOMNode(component).innerHTML;
+    const innerHTML = ReactDOM.findDOMNode(component).innerHTML;
 
     assert.include(innerHTML, 'Handler component');
   });

@@ -2,12 +2,13 @@ import 'app/client/components/helpers/jsdom-support.js';
 
 import { assert } from 'chai';
 import sinon from 'sinon';
-import React, { addons } from 'react/addons';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import wrapStateless from './../../helpers/stateless-wrapper';
 import TodosBody from './todos-body';
 import { noop } from 'node-noop';
 
 describe('Component: TodosBody', () => {
-  const { TestUtils } = addons;
   const todos = [
     { text: 'Todo 1', complete: false },
     { text: 'Todo 2', complete: false },
@@ -37,7 +38,7 @@ describe('Component: TodosBody', () => {
     const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
 
     trComponents.forEach((tr, index) => {
-      const removeButton = TestUtils.findRenderedDOMComponentWithClass(tr, 'btn-danger');
+      const removeButton = tr.querySelector('.btn-danger');
       TestUtils.Simulate.click(removeButton);
 
       assert.ok(removeButton);
@@ -54,7 +55,7 @@ describe('Component: TodosBody', () => {
     );
     const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
     trComponents.forEach((tr, index) => {
-      const completeButton = TestUtils.findRenderedDOMComponentWithClass(tr, 'btn-success');
+      const completeButton = tr.querySelector('.btn-success');
       TestUtils.Simulate.click(completeButton);
 
       assert.ok(completeButton);

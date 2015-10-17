@@ -8,17 +8,13 @@ class TodosBody extends React.Component {
   }
 
   render() {
-    const todos = renderTodos(
-      this.props.todos,
-      this.props.removeTodo,
-      this.props.completeTodo
-    );
+    const { todos, removeTodo, completeTodo } = this.props;
 
     return (
       <div className='col-md-12'>
         <table className='table'>
           <tbody>
-            {todos}
+            {renderTodos(todos, removeTodo, completeTodo)}
           </tbody>
         </table>
       </div>
