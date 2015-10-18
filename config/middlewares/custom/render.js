@@ -7,7 +7,9 @@ export default function* (next) {
       return new Promise(resolve => {
         resolve(
           nunjucks.render(template, {
-            ...parameters, ...settings, csrf: this.csrf
+            ...settings,
+            ...parameters,
+            csrf: this.csrf
           })
         );
       });
