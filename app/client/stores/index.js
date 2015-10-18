@@ -1,27 +1,32 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import { reduxReactRouter, ReduxRouter } from 'redux-router';
+import routes from 'app/routes';
 import root from './../reducers/index';
 
+const createHistory = process.env.RUNTIME_ENV === 'client'
+                      ? require('history/lib/createBrowserHistory')
+                      : require('history/lib/createMemoryHistory');
 let finalCreateStore;
 
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
-  const createLogger = require('redux-logger');
-  const logger = createLogger({
-    level: 'info'
-  });
+  const logger = require('redux-logger')({ level: 'info' });
+  const devTools = require('redux-devtools').devTools();
 
   finalCreateStore = compose(
     applyMiddleware(
       logger,
       thunkMiddleware
     ),
-    require('redux-devtools').devTools()
+    reduxReactRouter({ routes, createHistory }),
+    devTools
   )(createStore);
 } else {
   finalCreateStore = compose(
     applyMiddleware(
       thunkMiddleware
-    )
+    ),
+    reduxReactRouter({ routes, createHistory })
   )(createStore);
 }
 
