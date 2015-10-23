@@ -1,10 +1,10 @@
 {
   "stage": 0,
-  "plugins": ["typecheck"],
+  "plugins": ["typecheck", "react-autoprefix"],
   "optional": ["runtime"],
   "env": {
     "development": {
-      "plugins": ["react-transform", "react-autoprefix"],
+      "plugins": ["react-transform"],
       "extra": {
         "react-transform": {
           "transforms": [{

@@ -13,9 +13,5 @@ $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.__data);
 
-  // if (process.env.NODE_ENV === 'development') {
-  //   const clientFetchData = require('./client/helpers/client-fetch-data');
-  //   clientFetchData(store, routerState);
-  // }
   ReactDOM.render(<App store={store} routes={routes} />, appDOM);
 });

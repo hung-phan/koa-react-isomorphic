@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
 import { reduxReactRouter, ReduxRouter } from 'redux-router';
+import thunkMiddleware from 'redux-thunk';
+import transitionMiddleware from './../middlewares/transition-middleware';
 import routes from 'app/routes';
 import root from './../reducers/index';
 
