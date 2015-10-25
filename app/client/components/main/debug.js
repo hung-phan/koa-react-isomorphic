@@ -1,4 +1,4 @@
-export default function() {
+export default function(store) {
   if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
     const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
 

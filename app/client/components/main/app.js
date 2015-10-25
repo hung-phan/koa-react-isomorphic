@@ -8,7 +8,7 @@ export default ({ store, routes }) => {
       <Provider key='provider' store={store}>
         {routes}
       </Provider>
-      {debug}
+      {debug(store)}
     </div>
   );
 };
