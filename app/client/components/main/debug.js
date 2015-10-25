@@ -1,13 +1,15 @@
-export default function(store) {
-  if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
-    const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
+let component = false;
 
-    return (
-      <DebugPanel top right bottom>
-        <DevTools store={store} monitor={LogMonitor} />
-      </DebugPanel>
-    );
-  } else {
-    return false;
-  }
+if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
+  const { createDevTools } = require('redux-devtools');
+  const LogMonitor = require('redux-devtools-log-monitor');
+  const DockMonitor = require('redux-devtools-dock-monitor');
+
+  component = createDevTools(
+    <DockMonitor toggleVisibilityKey='H' changePositionKey='Q'>
+      <LogMonitor />
+    </DockMonitor>
+  );
 }
+
+export default component;

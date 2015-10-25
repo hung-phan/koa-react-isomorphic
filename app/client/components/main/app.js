@@ -1,14 +1,17 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import debug from './debug';
+import { ReduxRouter } from 'redux-router';
+import Debug from './debug';
 
 export default ({ store, routes }) => {
   return (
     <div>
       <Provider key='provider' store={store}>
-        {routes}
+        <div>
+          <ReduxRouter routes={routes} />
+          <Debug />
+        </div>
       </Provider>
-      {debug(store)}
     </div>
   );
 };
