@@ -27,7 +27,12 @@ const finalCreateStore = compose(
   reduxReactRouter({
     routes,
     createHistory,
-    routerStateSelector: state => state.get('router')
+    routerStateSelector: state => ({
+      location: {
+        pathname: undefined
+      },
+      ...state.get('router')
+    })
   }),
   ...developmentMiddlewares
 )(createStore);
