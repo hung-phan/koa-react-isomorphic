@@ -31,7 +31,7 @@ module.exports = _.merge(defaultConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': "'production'"
     }),
     new ExtractTextPlugin('[name]-[contenthash].css'),
     new ManifestPlugin({

@@ -1,7 +1,7 @@
 export default function fetchData(store, { routes, params }) {
   const promises = routes
-                     .filter(route => route.handler.fetchData)
-                     .map(route => route.handler.fetchData(store, params));
+                     .filter(route => route.component && route.component.fetchData)
+                     .map(route => route.component.fetchData(store, params));
 
   return Promise.all(promises);
 }

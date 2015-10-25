@@ -1,6 +1,5 @@
-import React, { addons } from 'react/addons';
-
-const { TestUtils } = addons;
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 
 export default function createComponent(Component: Function, props: Object = {}) {
   const shallowRenderer = TestUtils.createRenderer();

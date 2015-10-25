@@ -8,9 +8,13 @@ import TodosHeader from './../todos/todos-header/todos-header';
 import TodosBody from './../todos/todos-body/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
-@fetchDataEnhancer(store => store.dispatch(fetchTodos()))
+@fetchDataEnhancer(
+  store => store.dispatch(fetchTodos())
+)
 @connect(
-  state => ({ todos: state.get('todos') }),
+  ({ todos, router }) => ({
+    todos, router
+  }),
   dispatch => ({
     actions: bindActionCreators({
       addTodo,

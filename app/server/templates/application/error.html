@@ -34,20 +34,18 @@
         <div id="error">
             <h1>Error</h1>
             <p>Looks like something broke!</p>
-            {% if env.NODE_ENV == 'development' %}
-                <h2>Message:</h2>
-                <pre>
-                    <code>
-                        {{ error }}
-                    </code>
-                </pre>
-                <h2>Stack:</h2>
-                <pre>
-                    <code>
-                        {{ stack }}
-                    </code>
-                </pre>
-            {% endif %}
+            <h2>Message:</h2>
+            <pre>
+                <code>
+                    {{ error }}
+                </code>
+            </pre>
+            <h2>Stack:</h2>
+            <pre>
+                <code>
+                    {{ stack }}
+                </code>
+            </pre>
         </div>
     </body>
 </html>

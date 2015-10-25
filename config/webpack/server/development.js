@@ -31,7 +31,7 @@ module.exports = _.merge(defaultConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"',
+      'process.env.NODE_ENV': "'development'",
       'process.env.SECRET_KEY': '"' + crypto.randomBytes(8).toString('hex') + '"',
       'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false
     })

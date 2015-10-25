@@ -1,35 +1,33 @@
 import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { reduxReactRouter } from 'redux-router';
 import thunkMiddleware from 'redux-thunk';
-import { batchedUpdatesMiddleware } from 'redux-batched-updates';
-import root from './../reducers/index';
+import routes from 'app/routes';
+import reducer from './../reducers/index';
 
-let finalCreateStore;
+let middlewares = [thunkMiddleware];
+let developmentMiddlewares = [];
 
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
-  const createLogger = require('redux-logger');
-  const logger = createLogger({
+  const logger = require('redux-logger')({
     level: 'info',
     transformer: state => state.toJS()
   });
 
-  finalCreateStore = compose(
-    applyMiddleware(
-      logger,
-      thunkMiddleware,
-      batchedUpdatesMiddleware
-    ),
-    require('redux-devtools').devTools()
-  )(createStore);
-} else {
-  finalCreateStore = compose(
-    applyMiddleware(
-      thunkMiddleware,
-      batchedUpdatesMiddleware
-    )
-  )(createStore);
+  middlewares = [logger, ...middlewares];
+  developmentMiddlewares = [require('./../components/main/debug').instrument()];
 }
 
+const createHistory = process.env.RUNTIME_ENV === 'client'
+                      ? require('history/lib/createBrowserHistory')
+                      : require('history/lib/createMemoryHistory');
+
+const finalCreateStore = compose(
+  applyMiddleware(...middlewares),
+  reduxReactRouter({ routes, createHistory }),
+  ...developmentMiddlewares
+)(createStore);
+
 export default function configureStore(initialState = {}) {
-  return finalCreateStore(root, fromJS(initialState));
+  return finalCreateStore(reducer, fromJS(initialState));
 }

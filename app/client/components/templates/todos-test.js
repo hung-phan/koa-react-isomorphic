@@ -1,7 +1,8 @@
 import 'app/client/components/helpers/jsdom-support.js';
 
 import { assert } from 'chai';
-import React, { addons } from 'react/addons';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import configureStore from 'app/client/stores/index';
 import ProviderMock from 'app/client/components/helpers/provider-mock';
 import Todos from './todos';
@@ -10,7 +11,6 @@ import TodosAdd from './../todos/todos-add/todos-add';
 import TodosBody from './../todos/todos-body/todos-body';
 
 describe('Component: Todos', () => {
-  const { TestUtils } = addons;
   const todos = [{ text: 'Todo 1', complete: false }];
   const store = configureStore({ todos });
   let Component;

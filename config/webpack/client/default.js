@@ -28,15 +28,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
-      // fonts
       {
-        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(gif|jpg|png|svg|ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader'
       }
     ]
   },
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(/'react'/, 'react/addons'),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -44,7 +42,7 @@ module.exports = {
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
     ]),
     new webpack.DefinePlugin({
-      'process.env.runtimeEnv': '"client"'
+      'process.env.RUNTIME_ENV': "'client'"
     })
   ]
 };
