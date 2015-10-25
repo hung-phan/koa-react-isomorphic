@@ -19,9 +19,8 @@ $(document).ready(() => {
 
   if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
     const fetchData = require('./client/helpers/fetch-data');
-    const routerState = store.getState().router;
 
-    fetchData(store, routerState).then(() => {
+    fetchData(store, store.getState().router).then(() => {
       render(store, appDOM);
     });
   } else {
