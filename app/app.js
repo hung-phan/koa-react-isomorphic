@@ -17,7 +17,7 @@ $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.__data);
 
-  if (process.env.NODE_ENV === 'development' ) {
+  if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
     const fetchData = require('./client/helpers/fetch-data');
     const routerState = store.getState().router;
 

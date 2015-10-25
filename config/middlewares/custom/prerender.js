@@ -3,6 +3,7 @@ if (process.env.SERVER_RENDERING) {
   const React = require('react');
   const { renderToString } = require('react-dom/server');
   const { match, RoutingContext} = require('react-router');
+  const fetchData = require('app/client/helpers/fetch-data');
   const routes = require('app/routes');
   const App = require('app/client/components/main/app');
   const settings = require('config/initializers/settings');
@@ -20,19 +21,22 @@ if (process.env.SERVER_RENDERING) {
             } else if (redirectLocation) {
               this.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
-              const currentRoutes = <RoutingContext { ...renderProps } />;
-              const prerenderComponent = renderToString(<App store={store} routes={currentRoutes} />);
-              const prerenderData = store.getState();
+              fetchData(store, store.getState().router)
+                .then(() => {
+                  const prerenderData = store.getState();
+                  const currentRoutes = <RoutingContext { ...renderProps } />;
+                  const prerenderComponent = renderToString(<App store={store} routes={currentRoutes} />);
 
-              resolve(
-                nunjucks.render(template, {
-                  ...settings,
-                  ...parameters,
-                  prerenderComponent,
-                  prerenderData,
-                  csrf: this.csrf
-                })
-              );
+                  resolve(
+                    nunjucks.render(template, {
+                      ...settings,
+                      ...parameters,
+                      prerenderComponent,
+                      prerenderData,
+                      csrf: this.csrf
+                    })
+                  );
+                });
             } else {
               this.throw(404);
             }
