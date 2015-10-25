@@ -21,7 +21,7 @@ if (process.env.SERVER_RENDERING) {
             } else if (redirectLocation) {
               this.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
-              fetchData(store, store.getState().router)
+              fetchData(store, store.getState().toJS().router)
                 .then(() => {
                   const prerenderData = store.getState();
                   const currentRoutes = <RoutingContext { ...renderProps } />;
