@@ -9,9 +9,22 @@ import App from 'app/client/components/main/app';
 import routes from './routes';
 import configureStore from './client/stores/index';
 
+function render(store, appDOM) {
+  ReactDOM.render(<App store={store} routes={routes} />, appDOM);
+}
+
 $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.__data);
 
-  ReactDOM.render(<App store={store} routes={routes} />, appDOM);
+  if (process.env.NODE_ENV === 'development' ) {
+    const fetchData = require('./client/helpers/fetch-data');
+    const routerState = store.getState().router;
+
+    fetchData(store, routerState).then(() => {
+      render(store, appDOM);
+    });
+  } else {
+    render(store, appDOM);
+  }
 });
