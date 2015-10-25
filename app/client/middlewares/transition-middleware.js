@@ -1,6 +1,6 @@
 import { ROUTER_DID_CHANGE } from 'redux-router/lib/constants';
 import R from 'ramda';
-import fetchData from 'app/client/helpers';
+import fetchData from 'app/client/helpers/fetch-data';
 
 export default ({ getState, dispatch }) => next => action => {
   if (action.type === ROUTER_DID_CHANGE) {

@@ -3,7 +3,6 @@ import fetchData from './fetch-data';
 
 describe('Helper: fetchData', () => {
   it('should be a function', () => {
-    assert.ok(fetchData);
     assert.isFunction(fetchData);
   });
 
@@ -12,14 +11,14 @@ describe('Helper: fetchData', () => {
     const fakeRouterState = {
       routes: [
         {
-          handler: {
+          component: {
             fetchData(store, params) {
               return Promise.resolve('route 1');
             }
           }
         },
         {
-          handler: {
+          component: {
             fetchData(store, params) {
               return Promise.resolve('route 2');
             }
