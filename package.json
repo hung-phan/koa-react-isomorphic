@@ -9,6 +9,7 @@
     "istanbul": "^0.4.0",
     "jsdom": "^7.0.2",
     "mocha": "^2.3.3",
+    "mockery": "^1.4.0",
     "monkey-hot-loader": "0.0.3",
     "nock": "^2.15.0",
     "node-inspector": "^0.12.3",

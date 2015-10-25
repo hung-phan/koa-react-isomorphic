@@ -4,7 +4,6 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import wrapStateless from './../../helpers/stateless-wrapper';
 import TodosBody from './todos-body';
 import { noop } from 'node-noop';
 

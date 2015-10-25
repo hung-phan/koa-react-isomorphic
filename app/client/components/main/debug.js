@@ -1,4 +1,6 @@
-let component = false;
+import React from 'react';
+
+let component = () => <div />;
 
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const { createDevTools } = require('redux-devtools');
