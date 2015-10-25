@@ -20,9 +20,9 @@ $(document).ready(() => {
   if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
     const fetchData = require('./client/helpers/fetch-data');
 
-    fetchData(store, store.getState().toJS().router).then(() => {
+    // fetchData(store, store.getState().toJS().router).then(() => {
       render(store, appDOM);
-    });
+    // });
   } else {
     render(store, appDOM);
   }

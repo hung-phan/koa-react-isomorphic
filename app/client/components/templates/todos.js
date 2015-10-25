@@ -12,8 +12,9 @@ import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/action
   store => store.dispatch(fetchTodos())
 )
 @connect(
-  ({ todos, router }) => ({
-    todos, router
+  state => ({
+    todos: state.get('todos'),
+    router: state.get('router')
   }),
   dispatch => ({
     actions: bindActionCreators({

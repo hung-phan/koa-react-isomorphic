@@ -24,7 +24,11 @@ const createHistory = process.env.RUNTIME_ENV === 'client'
 
 const finalCreateStore = compose(
   applyMiddleware(...middlewares),
-  reduxReactRouter({ routes, createHistory }),
+  reduxReactRouter({
+    routes,
+    createHistory,
+    routerStateSelector: state => state.get('router')
+  }),
   ...developmentMiddlewares
 )(createStore);
 
