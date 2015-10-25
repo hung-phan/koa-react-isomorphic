@@ -5,31 +5,25 @@ import transitionMiddleware from './../middlewares/transition-middleware';
 import routes from 'app/routes';
 import root from './../reducers/index';
 
-const createHistory = process.env.RUNTIME_ENV === 'client'
-                      ? require('history/lib/createBrowserHistory')
-                      : require('history/lib/createMemoryHistory');
-let finalCreateStore;
+let middlewares = [thunkMiddleware, transitionMiddleware];
+let developmentMiddlewares = [];
 
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const logger = require('redux-logger')({ level: 'info' });
-  const devTools = require('redux-devtools').devTools();
 
-  finalCreateStore = compose(
-    applyMiddleware(
-      logger,
-      thunkMiddleware
-    ),
-    reduxReactRouter({ routes, createHistory }),
-    devTools
-  )(createStore);
-} else {
-  finalCreateStore = compose(
-    applyMiddleware(
-      thunkMiddleware
-    ),
-    reduxReactRouter({ routes, createHistory })
-  )(createStore);
+  middlewares = [logger, ...middlewares];
+  developmentMiddlewares = [require('redux-devtools').devTools()];
 }
+
+const createHistory = process.env.RUNTIME_ENV === 'client'
+                      ? require('history/lib/createBrowserHistory')
+                      : require('history/lib/createMemoryHistory');
+
+const finalCreateStore = compose(
+  applyMiddleware(...middlewares),
+  reduxReactRouter({ routes, createHistory }),
+  ...developmentMiddlewares
+)(createStore);
 
 export default function configureStore(initialState = {}) {
   return finalCreateStore(root, initialState);

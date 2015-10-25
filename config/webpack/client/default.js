@@ -28,9 +28,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
-      // fonts
       {
-        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(gif|jpg|png|svg|ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader'
       }
     ]

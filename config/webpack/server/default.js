@@ -31,6 +31,7 @@ module.exports = {
   },
   output: {
     path: path.join(ROOT, config.path.build),
+    publicPath: config.path.assets,
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
@@ -49,14 +50,20 @@ module.exports = {
     extensions: ['', '.js']
   },
   module: {
-    loaders: [{
-      test: /.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader'
-    }]
+    loaders: [
+      {
+        test: /.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.(gif|jpg|png|svg)$/,
+        loader: 'file-loader'
+      }
+    ]
   },
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(/\.(css|less|scss|gif|jpg|png|svg|ttf|eot|woff|woff2)$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/\.(css|less|scss|eot|woff|woff2)$/, 'node-noop'),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'server'"
     })
