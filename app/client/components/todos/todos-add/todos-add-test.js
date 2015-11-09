@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import stubRouterContext from 'app/client/components/helpers/stub-router-context';
 import TodosAdd from './todos-add';
 
 describe('Component: TodosAdd', () => {
