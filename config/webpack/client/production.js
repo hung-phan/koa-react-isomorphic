@@ -5,6 +5,8 @@ var webpack             = require('webpack');
 var ManifestPlugin      = require('webpack-manifest-plugin');
 var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 var ExtractTextPlugin   = require('extract-text-webpack-plugin');
+var cssnext             = require('cssnext');
+var cssnano             = require('cssnano');
 var defaultConfig       = require('./default');
 
 module.exports = _.merge(defaultConfig, {
@@ -17,17 +19,20 @@ module.exports = _.merge(defaultConfig, {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
       },
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less-loader')
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!sass-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader')
       }
     ]
+  },
+  postcss: function () {
+    return [cssnext(), cssnano];
   },
   plugins: [
     new webpack.DefinePlugin({

@@ -14,6 +14,9 @@ So far, I manage to put together these following technologies:
 * [Nunjucks](https://mozilla.github.io/nunjucks/)
 * [Bootstrap](http://getbootstrap.com/css/) and [FontAwesome](https://fortawesome.github.io/Font-Awesome/)
 * [Redux](https://github.com/rackt/redux)
+* [PostCSS](https://github.com/postcss/postcss)
+* [CSSNext](http://cssnext.io/)
+* [CSSNano](http://cssnano.co/)
 * [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
 
 ## Explanation

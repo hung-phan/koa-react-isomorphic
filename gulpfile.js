@@ -61,7 +61,7 @@ gulp.task('backend:build', function(done) {
   bundler.run(handler);
 });
 
-gulp.task('set-production-env', () => {
+gulp.task('set-production-env', function() {
   env({
     vars: {
       NODE_ENV: 'production'
