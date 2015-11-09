@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "devDependencies": {
     "babel-plugin-react-transform": "^1.1.1",
     "chai": "^3.4.0",
