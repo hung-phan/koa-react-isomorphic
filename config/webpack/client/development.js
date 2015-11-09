@@ -3,6 +3,7 @@
 var path          = require('path');
 var _             = require('lodash');
 var webpack       = require('webpack');
+var cssnext       = require('cssnext');
 var defaultConfig = require('./default');
 var config        = require('config/config.json');
 var ROOT          = require('config/path-helper').ROOT;
@@ -28,18 +29,21 @@ module.exports = _.merge(defaultConfig, {
     loaders: [
       {
         test: /\.css$/,
-        loader: 'style!css!autoprefixer'
+        loader: 'style!css!postcss'
       },
       {
         test: /\.less$/,
-        loader: 'style!css!autoprefixer!less'
+        loader: 'style!css!postcss!less'
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!autoprefixer!sass'
+        loader: 'style!css!postcss!sass'
       }
     ]
   }, // Hot Module Replacement
+  postcss: function () {
+    return [cssnext()];
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
     /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting

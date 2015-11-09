@@ -1,6 +1,6 @@
 import React from 'react';
 
-let component = () => <div />;
+let component;
 
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const { createDevTools } = require('redux-devtools');
@@ -12,6 +12,8 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
       <LogMonitor />
     </DockMonitor>
   );
+} else {
+  component = () => <div />;
 }
 
 export default component;
