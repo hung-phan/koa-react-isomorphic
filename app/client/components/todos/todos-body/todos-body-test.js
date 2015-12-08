@@ -1,11 +1,11 @@
-import 'app/client/components/helpers/jsdom-support.js';
+import 'app/client/components/test-helpers/jsdom-support.js';
 
 import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-import TodosBody from './todos-body';
+import { mount } from 'enzyme';
 import { noop } from 'node-noop';
+import TodosBody from './todos-body';
 
 describe('Component: TodosBody', () => {
   const todos = [
@@ -15,30 +15,25 @@ describe('Component: TodosBody', () => {
     { text: 'Todo 4', complete: false }
   ];
 
-  it('should be a function', () => {
-    assert.ok(TodosBody);
-    assert.isFunction(TodosBody);
-  });
-
   it('should display a list of todos', () => {
-    const component = TestUtils.renderIntoDocument(
+    const component = mount(
       <TodosBody todos={todos} removeTodo={noop} completeTodo={noop} />
     );
-    const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
+    const trComponents = component.find('tr');
 
     assert.lengthOf(trComponents, todos.length);
   });
 
-  it("should call 'removeTodo' when click on the delete button", () => {
+  it(`should call 'removeTodo' when click on the delete button`, () => {
     const removeTodo = sinon.spy();
-    const component = TestUtils.renderIntoDocument(
+    const component = mount(
       <TodosBody todos={todos} removeTodo={removeTodo} completeTodo={noop} />
     );
-    const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
+    const trComponents = component.find('tr');
 
     trComponents.forEach((tr, index) => {
-      const removeButton = tr.querySelector('.btn-danger');
-      TestUtils.Simulate.click(removeButton);
+      const removeButton = tr.find('.btn-danger');
+      removeButton.simulate('click');
 
       assert.ok(removeButton);
       assert(removeTodo.called);
@@ -47,15 +42,16 @@ describe('Component: TodosBody', () => {
     assert.equal(removeTodo.callCount, todos.length);
   });
 
-  it("should call 'completeTodo' when click on the complete button", () => {
+  it(`should call 'completeTodo' when click on the complete button`, () => {
     const completeTodo = sinon.spy();
-    const component = TestUtils.renderIntoDocument(
+    const component = mount(
       <TodosBody todos={todos} removeTodo={noop} completeTodo={completeTodo} />
     );
-    const trComponents = TestUtils.scryRenderedDOMComponentsWithTag(component, 'tr');
+    const trComponents = component.find('tr');
+
     trComponents.forEach((tr, index) => {
-      const completeButton = tr.querySelector('.btn-success');
-      TestUtils.Simulate.click(completeButton);
+      const completeButton = tr.find('.btn-success');
+      completeButton.simulate('click');
 
       assert.ok(completeButton);
       assert(completeTodo.called);
