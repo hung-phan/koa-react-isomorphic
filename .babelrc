@@ -1,12 +1,10 @@
 {
-  "stage": 0,
-  "plugins": ["typecheck", "react-autoprefix"],
-  "optional": ["runtime"],
+  "presets": ["es2015", "react", "stage-0"],
+  "plugins": ["typecheck", "transform-runtime"],
   "env": {
     "development": {
-      "plugins": ["react-transform"],
-      "extra": {
-        "react-transform": {
+      "plugins": [
+        ["react-transform", {
           "transforms": [{
             "transform": "react-transform-hmr",
             "imports": ["react"],
@@ -15,8 +13,8 @@
             "transform": "react-transform-catch-errors",
             "imports": ["react", "redbox-react"]
           }]
-        }
-      }
+        }]
+      ]
     }
   }
 }

@@ -94,6 +94,13 @@ $ gulp build
 $ SECRET_KEY=your_env_key gulp pro-server
 ```
 
+## Testing
+
+```bash
+$ npm test
+$ npm run coverage
+```
+
 ### Phusion Passenger server with Nginx
 
 Upcoming

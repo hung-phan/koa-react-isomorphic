@@ -1,4 +1,4 @@
-import 'babel/polyfill';
+import 'babel-polyfill';
 import app from './server-index';
 
 const PORT = process.env.PORT || 3000;
