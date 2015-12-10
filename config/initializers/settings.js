@@ -1,4 +1,4 @@
-import fs       from 'fs';
+import fs from 'fs';
 import nunjucks from './nunjucks';
 
 // initialize nunjucks template with predefined filter
@@ -8,12 +8,19 @@ nunjucks();
 let settings = {
   env: {
     NODE_ENV: process.env.NODE_ENV
+  },
+  assetManifest: global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets() || {
+    javascript: {
+      app: 'localhost:3000/app.bundle.js'
+    },
+    styles: {
+      app: 'localhost:3000/app.css'
+    }
   }
 };
 
 // manage public assets in production mode
 if (process.env.NODE_ENV === 'production') {
-  settings.assetManifest  = require('external!./public/assets/webpack-asset-manifest.json');
   settings.commonManifest = fs.existsSync('./public/assets/webpack-common-manifest.json')
                               ? require('external!./public/assets/webpack-common-manifest.json')
                               : {};
