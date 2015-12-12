@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: path.join(ROOT, config.path.publicAssets)
   },
-  externals: {},
+  externals: [],
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js']
