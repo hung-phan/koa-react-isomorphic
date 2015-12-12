@@ -145,6 +145,7 @@ Upcoming
   |+ templates/
  |  app.js
  |  routes.js
+ |  server-init.js
  |  server.js
 + bower_components/
 + build/
@@ -172,7 +173,7 @@ Upcoming
   gulpfile.js
   LICENSE
   nodemon.json
-  npm-debug.log
   package.json
+  prod-server.log
   README.md
 ```
