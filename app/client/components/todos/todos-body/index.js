@@ -1,4 +1,4 @@
-import style from 'external!./style.css';
+import style from './style.css';
 import React from 'react';
 import { List } from 'immutable';
 
