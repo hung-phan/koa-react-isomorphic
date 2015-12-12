@@ -6,8 +6,10 @@ import Debug from './debug';
 export default ({ store, routes }) => {
   return (
     <Provider key='provider' store={store}>
-      <ReduxRouter routes={routes} />
-      <Debug />
+      <div>
+        <ReduxRouter routes={routes} />
+        <Debug />
+      </div>
     </Provider>
   );
 };

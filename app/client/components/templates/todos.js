@@ -3,9 +3,9 @@ import shallowEqualImmutable from 'react-immutable-render-mixin/shallowEqualImmu
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import fetchDataEnhancer from './../helpers/fetch-data-enhancer';
-import TodosAdd from './../todos/todos-add/todos-add';
-import TodosHeader from './../todos/todos-header/todos-header';
-import TodosBody from './../todos/todos-body/todos-body';
+import TodosAdd from './../todos/todos-add';
+import TodosHeader from './../todos/todos-header';
+import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
 @fetchDataEnhancer(

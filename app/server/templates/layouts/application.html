@@ -11,7 +11,7 @@
       <title>Application</title>
 
       <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-      {{ applicationHelper.webpackCssBundleTag(env.NODE_ENV, 'app', assetManifest) }}
+      {{ applicationHelper.webpackCssBundleTag(env.NODE_ENV, 'app', assetManifest.styles) }}
   </head>
 
   <body>
@@ -19,9 +19,12 @@
 
     {% if env.NODE_ENV == 'production' %}
       {{ applicationHelper.javascriptIncludeTag('https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') }}
-    {% endif %}
+      {% endif %}
+
     {{ applicationHelper.prerenderData(prerenderData) }}
     {{ applicationHelper.webpackManifestScript(env.NODE_ENV, commonManifest) }}
-    {{ applicationHelper.webpackBundleTag(env.NODE_ENV, 'app', assetManifest) }}
+
+    <!-- {{ applicationHelper.webpackBundleTag('common', assetManifest.javascript) }} -->
+    {{ applicationHelper.webpackBundleTag('app', assetManifest.javascript) }}
   </body>
 </html>

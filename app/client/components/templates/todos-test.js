@@ -6,9 +6,9 @@ import { mount } from 'enzyme';
 import configureStore from 'app/client/stores/index';
 import ProviderMock from 'app/client/components/test-helpers/provider-mock';
 import Todos from './todos';
-import TodosHeader from './../todos/todos-header/todos-header';
-import TodosAdd from './../todos/todos-add/todos-add';
-import TodosBody from './../todos/todos-body/todos-body';
+import TodosHeader from './../todos/todos-header';
+import TodosAdd from './../todos/todos-add';
+import TodosBody from './../todos/todos-body';
 
 describe('Component: Todos', () => {
   const todos = [{ text: 'Todo 1', complete: false }];

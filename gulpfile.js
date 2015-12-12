@@ -19,7 +19,7 @@ gulp.task('frontend:watch', function(done) {
   });
 });
 
-gulp.task('frontend:build', function(done) {
+gulp.task('frontend:build', ['set-production-env'], function(done) {
   var bundler = webpack(require('config/webpack/client/production')),
       handler = function (err, stats) {
                   if (err) {
@@ -47,7 +47,7 @@ gulp.task('backend:watch', function(cb) {
   });
 });
 
-gulp.task('backend:build', function(done) {
+gulp.task('backend:build', ['set-production-env'], function(done) {
   var bundler = webpack(require('config/webpack/server/production')),
       handler = function (err, stats) {
         if (err) {
@@ -71,7 +71,7 @@ gulp.task('set-production-env', function() {
 
 gulp.task('clean', cleanTask(['.' + config.path.build, '.' + config.path.publicAssets]));
 gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
-gulp.task('build', ['clean', 'set-production-env', 'frontend:build', 'backend:build']);
+gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
 
 gulp.task('pro-server', function(done) {
   shell.exec('pm2 start config/pm2/production.json', function() {

@@ -1,3 +1,4 @@
+import style from './style.css';
 import React from 'react';
 import { List } from 'immutable';
 
@@ -12,7 +13,7 @@ class TodosBody extends React.Component {
     const { todos, removeTodo, completeTodo } = this.props;
 
     return (
-      <div className='col-md-12'>
+      <div className={`col-md-12 ${style.container}`}>
         <table className='table'>
           <tbody>
             {renderTodos(todos, removeTodo, completeTodo)}

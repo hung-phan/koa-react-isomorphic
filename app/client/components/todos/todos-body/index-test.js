@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 import React from 'react';
 import { mount } from 'enzyme';
 import { noop } from 'node-noop';
-import TodosBody from './todos-body';
+import TodosBody from './index';
 
 describe('Component: TodosBody', () => {
   const todos = [

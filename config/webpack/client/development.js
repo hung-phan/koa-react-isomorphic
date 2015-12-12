@@ -1,20 +1,23 @@
 'use strict';
 
-var path          = require('path');
-var _             = require('lodash');
-var webpack       = require('webpack');
-var cssnext       = require('cssnext');
-var defaultConfig = require('./default');
-var config        = require('config/config.json');
-var ROOT          = require('config/path-helper').ROOT;
+const _ = require('lodash');
+const path = require('path');
+const ROOT = require('config/path-helper').ROOT;
+const config = require('config/config.json');
+const cssnext = require('cssnext');
+const webpack = require('webpack');
+const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
+  require('config/webpack/webpack-isomorphic-tools')
+);
+let developmentConfig = require('./default');
 
-module.exports = _.merge(defaultConfig, {
-  entry: {
-    app: []
-  }, // Hot Module Replacement
+_.merge(developmentConfig, {
   output: {
-    publicPath: 'http://localhost:8080' + config.path.build
-  }, // Hot Module Replacement
+    publicPath: 'http://localhost:8080' + config.path.build,
+    filename: '[name].js',
+    chunkFilename: '[id].js'
+  },
   cache: true,
   debug: true,
   outputPathinfo: true,
@@ -25,33 +28,36 @@ module.exports = _.merge(defaultConfig, {
     hot: true,
     inline: true
   },
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: 'style!css!postcss'
-      },
-      {
-        test: /\.less$/,
-        loader: 'style!css!postcss!less'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style!css!postcss!sass'
-      }
-    ]
-  }, // Hot Module Replacement
-  postcss: function () {
+  postcss() {
     return [cssnext()];
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
-    /*new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'),*/ // Code splitting
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': "'development'",
-      'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false
-    })
-  ]
-}, function(obj1, obj2) {
+  }
+}, (obj1, obj2) => {
   return _.isArray(obj2) ? obj2.concat(obj1) : undefined;
 });
+
+developmentConfig.module.loaders.push(
+  {
+    test: /\.css$/,
+    loader: `style!css${config.cssModules}!postcss`
+  },
+  {
+    test: /\.less$/,
+    loader: `style!css${config.cssModules}!postcss!less`
+  },
+  {
+    test: /\.scss$/,
+    loader: `style!css${config.cssModules}!postcss!sass`
+  }
+);
+
+developmentConfig.plugins.push(
+  // new webpack.optimize.CommonsChunkPlugin('common', 'common.bundle.js'), // Code splitting
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': "'development'",
+    'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false
+  }),
+  new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
+  webpackIsomorphicToolsPlugin.development()
+);
+
+module.exports = developmentConfig;

@@ -4,6 +4,8 @@
     "config/middlewares",
     "app/server/apis",
     "app/server/controllers",
-    "app/server.js"
+    "app/server-init.js",
+    "app/server.js",
+    "prod-server.js"
   ]
 }

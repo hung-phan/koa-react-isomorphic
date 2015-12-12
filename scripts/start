@@ -6,4 +6,4 @@ if [ -z "${PORT}" ]; then
   export PORT=${2:-3000}
 fi
 
-node --harmony build/server.js
+node prod-server.js
