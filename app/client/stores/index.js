@@ -11,7 +11,7 @@ let developmentMiddlewares = [];
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const logger = require('redux-logger')({
     level: 'info',
-    transformer: state => state.toJS()
+    stateTransformer: state => state.toJS()
   });
 
   middlewares = [logger, ...middlewares];
