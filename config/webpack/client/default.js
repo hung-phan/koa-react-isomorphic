@@ -40,6 +40,9 @@ module.exports = {
     new webpack.ResolverPlugin([
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
     ]),
+    new webpack.NormalModuleReplacementPlugin(/external!/, (result) => {
+      result.request = result.request.replace(/external!/, '');
+    }),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'client'"
     })
