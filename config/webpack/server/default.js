@@ -37,7 +37,7 @@ module.exports = {
       const external = 'external!';
 
       return (new RegExp(`^${external}`)).test(request)
-        ? callback(null, `commonjs ${path.join(ROOT, request.substr(external.length))}`)
+        ? callback(null, `commonjs ${path.resolve(context, request.substr(external.length))}`)
         : callback();
     }
   ],
