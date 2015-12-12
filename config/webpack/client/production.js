@@ -31,15 +31,15 @@ _.merge(productionConfig, {
 productionConfig.module.loaders.push(
   {
     test: /\.css$/,
-    loader: ExtractTextPlugin.extract('style', 'css!postcss')
+    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss`)
   },
   {
     test: /\.less$/,
-    loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
+    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss!less`)
   },
   {
     test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
+    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss!sass`)
   }
 );
 

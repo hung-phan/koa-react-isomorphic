@@ -58,15 +58,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'css/locals'
+        loader: `css/locals${config.cssModules}`
       },
       {
         test: /\.less$/,
-        loader: 'css/locals!less'
+        loader: `css/locals${config.cssModules}!less`
       },
       {
         test: /\.scss$/,
-        loader: 'css/locals!sass'
+        loader: `css/locals${config.cssModules}!sass`
       }
     ]
   },

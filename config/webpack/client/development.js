@@ -38,15 +38,15 @@ _.merge(developmentConfig, {
 developmentConfig.module.loaders.push(
   {
     test: /\.css$/,
-    loader: 'style!css!postcss'
+    loader: `style!css${config.cssModules}!postcss`
   },
   {
     test: /\.less$/,
-    loader: 'style!css!postcss!less'
+    loader: `style!css${config.cssModules}!postcss!less`
   },
   {
     test: /\.scss$/,
-    loader: 'style!css!postcss!sass'
+    loader: `style!css${config.cssModules}!postcss!sass`
   }
 );
 
