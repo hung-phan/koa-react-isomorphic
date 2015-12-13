@@ -24,7 +24,6 @@
     "babel": "^6.3.13",
     "babel-core": "^6.3.15",
     "babel-loader": "^6.2.0",
-    "babel-plugin-react-autoprefix": "^0.2.6",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-plugin-typecheck": "^3.4.6",
     "babel-polyfill": "^6.3.14",
