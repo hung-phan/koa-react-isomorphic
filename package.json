@@ -50,7 +50,7 @@
     "gulp": "*",
     "gulp-env": "^0.2.0",
     "gulp-util": "^3.0.7",
-    "history": "^1.15.0",
+    "history": "1.13.0",
     "immutable": "^3.7.5",
     "imports-loader": "*",
     "isomorphic-fetch": "^2.2.0",
@@ -64,6 +64,7 @@
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
     "lodash": "^3.10.1",
+    "log4js": "^0.6.29",
     "nconf": "^0.8.2",
     "node-noop": "*",
     "node-notifier": "^4.4.0",
@@ -75,7 +76,7 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
-    "react-router": "^1.0.1",
+    "react-router": "^1.0.2",
     "reagent": "^1.0.1",
     "recompose": "^0.11.2",
     "redux": "^3.0.4",
@@ -94,7 +95,8 @@
     "style-loader": "*",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
+    "webpack-dev-server": "^1.14.0",
+    "webpack-isomorphic-tools": "^2.2.21"
   },
   "scripts": {
     "start": "sh scripts/start",
