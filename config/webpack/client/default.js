@@ -1,22 +1,21 @@
 'use strict';
 
-var path    = require('path');
-var webpack = require('webpack');
-var config  = require('config/config.json');
-var ROOT    = require('config/path-helper').ROOT;
+const path = require('path');
+const ROOT = require('config/path-helper').ROOT;
+const config = require('config/config.json');
+const webpack = require('webpack');
 
 module.exports = {
   context: ROOT,
   entry: {
-    app: path.join(ROOT, config.path.app, 'app')
+    app: [
+      path.join(ROOT, config.path.app, 'app')
+    ]
   },
   output: {
-    path: path.join(ROOT, config.path.publicAssets),
-    publicPath: config.path.assets,
-    filename: '[name].bundle.js',
-    chunkFilename: '[id].bundle.js'
+    path: path.join(ROOT, config.path.publicAssets)
   },
-  externals: {},
+  externals: [],
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js']
@@ -29,7 +28,7 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.(gif|jpg|png|svg|ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(gif|jpg|jpeg|png|svg|ttf|eot|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader'
       }
     ]

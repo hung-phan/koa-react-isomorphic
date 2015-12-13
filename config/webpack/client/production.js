@@ -1,53 +1,60 @@
 'use strict';
 
-var _                   = require('lodash');
-var webpack             = require('webpack');
-var ManifestPlugin      = require('webpack-manifest-plugin');
-var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
-var ExtractTextPlugin   = require('extract-text-webpack-plugin');
-var cssnext             = require('cssnext');
-var cssnano             = require('cssnano');
-var defaultConfig       = require('./default');
+const _ = require('lodash');
+const ROOT = require('config/path-helper').ROOT;
+const config = require('config/config.json');
+const cssnext = require('cssnext');
+const cssnano = require('cssnano');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
+  require('config/webpack/webpack-isomorphic-tools')
+);
+let productionConfig = require('./default');
 
-module.exports = _.merge(defaultConfig, {
+_.merge(productionConfig, {
   devtool: false,
   output: {
+    publicPath: config.path.assets,
     filename: '[name]-[chunkhash].bundle.js',
     chunkFilename: '[id]-[chunkhash].bundle.js'
   },
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less-loader')
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader')
-      }
-    ]
-  },
-  postcss: function () {
+  postcss() {
     return [cssnext(), cssnano];
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': "'production'"
-    }),
-    new ExtractTextPlugin('[name]-[contenthash].css'),
-    new ManifestPlugin({
-      fileName: 'webpack-asset-manifest.json'
-    }),
-    new ChunkManifestPlugin({
-      filename: 'webpack-common-manifest.json',
-      manfiestVariable: 'webpackManifest'
-    }),
-    new webpack.optimize.UglifyJsPlugin()
-  ]
-}, function(obj1, obj2) {
+  }
+}, (obj1, obj2) => {
   return _.isArray(obj2) ? obj2.concat(obj1) : undefined;
 });
+
+productionConfig.module.loaders.push(
+  {
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss`)
+  },
+  {
+    test: /\.less$/,
+    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss!less`)
+  },
+  {
+    test: /\.scss$/,
+    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss!sass`)
+  }
+);
+
+productionConfig.plugins.push(
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': "'production'",
+    'process.env.SERVER_RENDERING': true
+  }),
+  new ExtractTextPlugin('[name]-[contenthash].css'),
+  new ChunkManifestPlugin({
+    filename: 'webpack-common-manifest.json',
+    manfiestVariable: 'webpackManifest'
+  }),
+  new webpack.optimize.UglifyJsPlugin(),
+  webpackIsomorphicToolsPlugin
+);
+
+module.exports = productionConfig;

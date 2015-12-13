@@ -94,12 +94,11 @@
     "style-loader": "*",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0",
-    "webpack-manifest-plugin": "^0.5.0"
+    "webpack-dev-server": "^1.14.0"
   },
   "scripts": {
     "start": "sh scripts/start",
-    "dev": "nodemon --harmony build/server.js",
+    "dev": "NODE_ENV=development nodemon prod-server.js",
     "test": "NODE_ENV=test PORT=3001 mocha --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
     "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter nyan --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
     "coverage": "NODE_ENV=test PORT=3001 istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",

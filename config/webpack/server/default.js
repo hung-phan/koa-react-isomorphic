@@ -1,23 +1,17 @@
 'use strict';
 
-var fs          = require('fs');
-var path        = require('path');
-var _           = require('lodash');
-var webpack     = require('webpack');
-var config      = require('config/config.json');
-var ROOT        = require('config/path-helper').ROOT;
-var nodeModules = _.reduce(
-                    // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
-                    _.filter(fs.readdirSync('node_modules'), function(x) {
-                      return ['.bin'].indexOf(x) === -1;
-                    }),
-                    function(modules, mod) {
-                      modules[mod] = 'commonjs ' + mod;
-
-                      return modules;
-                    },
-                    {}
-                  );
+const _ = require('lodash');
+const fs = require('fs');
+const path = require('path');
+const ROOT = require('config/path-helper').ROOT;
+const config = require('config/config.json');
+const webpack = require('webpack');
+const nodeModules = _.reduce(
+                      // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
+                      _.filter(fs.readdirSync('node_modules'), (x) => ['.bin'].indexOf(x) === -1),
+                      (modules, mod) => Object.assign(modules, { [mod]: `commonjs ${mod}` }),
+                      {}
+                    );
 
 module.exports = {
   context: ROOT,
@@ -27,7 +21,9 @@ module.exports = {
     __filename: true
   },
   entry: {
-    server: path.join(ROOT, config.path.app, 'server')
+    server: [
+      path.join(ROOT, config.path.app, 'server')
+    ]
   },
   output: {
     path: path.join(ROOT, config.path.build),
@@ -38,12 +34,19 @@ module.exports = {
   externals: [
     nodeModules,
     function(context, request, callback) {
-      var external = 'external!';
+      const external = 'external!';
 
-      return (new RegExp('^' + external)).test(request)
-        ? callback(null, 'commonjs ' + path.join(ROOT, request.substr(external.length)))
+      return (new RegExp(`^${external}`)).test(request)
+        ? callback(null, `commonjs ${path.resolve(context, request.substr(external.length))}`)
         : callback();
-    }
+    },
+    function(context, request, callback) {
+      const style = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
+
+      return (new RegExp(`${style}$`)).test(request)
+        ? callback(null, `commonjs ${path.resolve(context, request)}`)
+        : callback();
+    },
   ],
   resolve: {
     modulesDirectories: ['node_modules'],
@@ -55,15 +58,10 @@ module.exports = {
         test: /.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.(gif|jpg|png|svg)$/,
-        loader: 'file-loader'
       }
     ]
   },
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(/\.(css|less|scss|eot|woff|woff2)$/, 'node-noop'),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'server'"
     })

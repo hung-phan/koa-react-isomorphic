@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import corequest from 'co-supertest';
-import app from 'app/server-index';
+import app from 'app/server-init';
 
 describe('API: v1/todos', () => {
   const request = corequest(app.listen());

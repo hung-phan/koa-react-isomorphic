@@ -26,6 +26,21 @@ In `server.js`, I initialse all middlewares from `config/middleware/config`, the
 from client side eventually will request to `/api/*`, which are created by `app/server/apis`. Rendering tasks will be delegated to
 [React-Router](https://github.com/rackt/react-router) to do server rendering for React.
 
+### Require assets in server
+
+Leverage the power of [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to hack `require` module with
+the support of external webpack.
+
+```javascript
+    function(context, request, callback) {
+      const style = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
+
+      return (new RegExp(`${style}$`)).test(request)
+        ? callback(null, `commonjs ${path.resolve(context, request)}`)
+        : callback();
+    },
+```
+
 ### app/route.js
 
 Contains all components and routing.
@@ -152,6 +167,7 @@ Upcoming
   |+ templates/
  |  app.js
  |  routes.js
+ |  server-init.js
  |  server.js
 + bower_components/
 + build/
@@ -179,7 +195,7 @@ Upcoming
   gulpfile.js
   LICENSE
   nodemon.json
-  npm-debug.log
   package.json
+  prod-server.log
   README.md
 ```

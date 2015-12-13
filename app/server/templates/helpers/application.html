@@ -26,16 +26,12 @@
   {% endif %}
 {% endmacro %}
 
-{% macro webpackBundleTag(env, name, assetManifest={}) %}
-  {% if env == 'production' %}
-    {{ javascriptIncludeTag('/assets/' + assetManifest[name + '.js']) }}
-  {% else %}
-    {{ javascriptIncludeTag('http://localhost:8080/build/' + name + '.bundle.js') }}
-  {% endif %}
+{% macro webpackBundleTag(name, assetManifest={}) %}
+  {{ javascriptIncludeTag(assetManifest[name]) }}
 {% endmacro %}
 
 {% macro webpackCssBundleTag(env, name, assetManifest={}) %}
   {% if env == 'production' %}
-    {{ stylesheetLinkTag('/assets/' + assetManifest[name + '.css']) }}
+    {{ stylesheetLinkTag(assetManifest[name]) }}
   {% endif %}
 {% endmacro %}
