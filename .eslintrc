@@ -1,0 +1,23 @@
+{
+  "env": {
+    "node": true,
+    "mocha": true,
+    "browser": true
+  },
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": ["mocha"],
+  "env": {
+    "mocha": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "func-names": [0],
+    "comma-dangle": [0],
+    "react/jsx-indent-props": [0],
+    "react/jsx-closing-bracket-location": [0],
+    "jsx-quotes": [1, "prefer-single"],
+    "mocha/no-exclusive-tests": 2
+  }
+}

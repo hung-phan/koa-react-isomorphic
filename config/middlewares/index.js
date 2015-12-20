@@ -1,12 +1,11 @@
-import path         from 'path';
-import { PUBLIC }   from 'config/path-helper';
-import cors         from 'koa-cors';
-import middlewares  from 'koa-middlewares';
+import { PUBLIC } from 'config/path-helper';
+import cors from 'koa-cors';
+import middlewares from 'koa-middlewares';
 import htmlMinifier from 'koa-html-minifier';
-import helmet       from 'koa-helmet';
-import render       from './custom/render';
-import prerender    from './custom/prerender';
-import error        from './custom/error';
+import helmet from 'koa-helmet';
+import render from './custom/render';
+import prerender from './custom/prerender';
+import error from './custom/error';
 
 export function initialLayer(app) {
   app.use(middlewares.logger()); // https://github.com/koajs/logger

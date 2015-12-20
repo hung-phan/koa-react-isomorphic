@@ -86,6 +86,13 @@ $ npm run watch
 $ npm run dev
 ```
 
+## Test
+
+```bash
+$ npm run test:watch
+$ npm run test:lint
+```
+
 ### With server rendering - encourage for testing only
 
 ```bash

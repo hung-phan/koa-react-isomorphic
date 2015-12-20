@@ -11,8 +11,8 @@ import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/action
   store => store.dispatch(fetchTodos())
 )
 @connect(
-  ({ todos, router }) => ({
-    todos, router
+  ({ todos }) => ({
+    todos
   }),
   dispatch => ({
     actions: bindActionCreators({
@@ -24,6 +24,11 @@ import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/action
   })
 )
 class Todos extends React.Component {
+  static propTypes = {
+    todos: React.PropTypes.array,
+    actions: React.PropTypes.object
+  }
+
   render() {
     return (
       <div className='container'>
@@ -31,8 +36,8 @@ class Todos extends React.Component {
           <TodosHeader />
           <TodosAdd addTodo={this.props.actions.addTodo} />
           <TodosBody todos={this.props.todos}
-            removeTodo={this.props.actions.removeTodo}
-            completeTodo={this.props.actions.completeTodo} />
+                     removeTodo={this.props.actions.removeTodo}
+                     completeTodo={this.props.actions.completeTodo} />
         </div>
       </div>
     );
