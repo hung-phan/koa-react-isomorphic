@@ -1,4 +1,5 @@
 import React from 'react';
+import { List } from 'immutable';
 import shallowEqualImmutable from 'react-immutable-render-mixin/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -26,7 +27,7 @@ import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/action
 )
 class Todos extends React.Component {
   static propTypes = {
-    todos: React.PropTypes.array,
+    todos: React.PropTypes.instanceOf(List).isRequired,
     actions: React.PropTypes.object
   }
 

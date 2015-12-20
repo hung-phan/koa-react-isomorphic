@@ -1,3 +1,4 @@
+/* eslint new-cap: [0] */
 import {
   ADD_TODO,
   REMOVE_TODO,
@@ -15,7 +16,7 @@ export default createReducer(initialState, {
   ),
   [REMOVE_TODO]: (state, { index }) => state.delete(index),
   [COMPLETE_TODO]: (state, { index }) => state.updateIn(
-    [index, 'complete'], value => !state.getIn([index, 'complete'])
+    [index, 'complete'], () => !state.getIn([index, 'complete'])
   ),
   [SET_TODOS]: (state, { todos }) => fromJS(todos)
 });
