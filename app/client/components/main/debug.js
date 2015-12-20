@@ -4,11 +4,11 @@ let component;
 
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const { createDevTools } = require('redux-devtools');
-  const LogMonitor = require('redux-devtools-log-monitor');
-  const DockMonitor = require('redux-devtools-dock-monitor');
+  const DockMonitor = require('redux-devtools-dock-monitor').default;
+  const LogMonitor = require('redux-devtools-log-monitor').default;
 
   component = createDevTools(
-    <DockMonitor toggleVisibilityKey='H' changePositionKey='Q'>
+    <DockMonitor toggleVisibilityKey='ctrl-h' changePositionKey='ctrl-q'>
       <LogMonitor />
     </DockMonitor>
   );
