@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function(callback) {
+export default function (callback) {
   return ComposedComponent => class extends ComposedComponent {
     static fetchData() {
       return callback(...arguments);
@@ -11,5 +11,5 @@ export default function(callback) {
         <ComposedComponent {...this.props} />
       );
     }
-  }
+  };
 }

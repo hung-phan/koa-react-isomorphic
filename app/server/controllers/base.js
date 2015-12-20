@@ -1,5 +1,5 @@
 import application from './application';
 
-export default function(router) {
+export default function (router) {
   application(router);
 }

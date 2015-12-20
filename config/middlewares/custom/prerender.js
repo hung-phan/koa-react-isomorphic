@@ -2,7 +2,7 @@ if (process.env.SERVER_RENDERING) {
   const nunjucks = require('nunjucks');
   const React = require('react');
   const { renderToString } = require('react-dom/server');
-  const { match, RoutingContext} = require('react-router');
+  const { match, RoutingContext } = require('react-router');
   const fetchData = require('app/client/helpers/fetch-data');
   const routes = require('app/routes');
   const App = require('app/client/components/main/app');
@@ -11,10 +11,10 @@ if (process.env.SERVER_RENDERING) {
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
-      function(template: string, initialState: Object = {}, parameters: Object = {}) {
+      function (template: string, initialState: Object = {}, parameters: Object = {}) {
         const store = configureStore(initialState);
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           match({ routes, location: this.req.url }, (error, redirectLocation, renderProps) => {
             if (error) {
               this.throw(500, error.message);
@@ -44,10 +44,10 @@ if (process.env.SERVER_RENDERING) {
         });
       };
     yield next;
-  }
+  };
 } else {
   module.exports = function* (next) {
     this.prerender = this.render;
     yield next;
-  }
+  };
 }

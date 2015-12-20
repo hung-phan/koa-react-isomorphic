@@ -1,10 +1,9 @@
-import http     from 'http';
-import debug    from 'debug';
+import http from 'http';
 import nunjucks from 'nunjucks';
 import settings from 'config/initializers/settings';
 
-export default function error(opts = {}) {
-  return function *error(next){
+export default function error() {
+  return function* (next) {
     try {
       yield next;
 
@@ -19,43 +18,45 @@ export default function error(opts = {}) {
 
       // accepted types
       switch (this.accepts('html', 'text', 'json')) {
-      case 'text':
-        this.type = 'text/plain';
-        if (process.env.NODE_ENV === 'development' || err.expose) {
-          this.body = err.message;
-        } else {
-          throw err;
-        }
-        break;
-
-      case 'json':
-        this.type = 'application/json';
-        if (process.env.NODE_ENV === 'development' || err.expose) {
-          this.body = {
-            error: err.message
-          };
-        } else {
-          this.body = {
-            error: http.STATUS_CODES[this.status]
-          };
-        }
-        break;
-
-      case 'html':
-        this.type = 'text/html';
-        if (process.env.NODE_ENV === 'development' || process.env.DEBUG) {
-          this.body = nunjucks.render('application/error.html', {
-            ...settings, ctx: this, request: this.request, response: this.response,
-            status: this.status, error: err.message, stack: err.stack, code: err.code
-          });
-        } else {
-          if ([404, 422].includes(this.status)) {
-            this.redirect(`/${this.status}.html`);
+        case 'text':
+          this.type = 'text/plain';
+          if (process.env.NODE_ENV === 'development' || err.expose) {
+            this.body = err.message;
           } else {
-            this.redirect('/500.html');
+            throw err;
           }
-        }
-        break;
+          break;
+
+        case 'json':
+          this.type = 'application/json';
+          if (process.env.NODE_ENV === 'development' || err.expose) {
+            this.body = {
+              error: err.message
+            };
+          } else {
+            this.body = {
+              error: http.STATUS_CODES[this.status]
+            };
+          }
+          break;
+
+        case 'html':
+          this.type = 'text/html';
+          if (process.env.NODE_ENV === 'development' || process.env.DEBUG) {
+            this.body = nunjucks.render('application/error.html', {
+              ...settings, ctx: this, request: this.request, response: this.response,
+              status: this.status, error: err.message, stack: err.stack, code: err.code
+            });
+          } else {
+            if ([404, 422].includes(this.status)) {
+              this.redirect(`/${this.status}.html`);
+            } else {
+              this.redirect('/500.html');
+            }
+          }
+          break;
+        default:
+          throw err;
       }
     }
   };

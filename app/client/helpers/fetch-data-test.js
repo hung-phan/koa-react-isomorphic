@@ -12,14 +12,14 @@ describe('Helper: fetchData', () => {
       routes: [
         {
           component: {
-            fetchData(store, params) {
+            fetchData() {
               return Promise.resolve('route 1');
             }
           }
         },
         {
           component: {
-            fetchData(store, params) {
+            fetchData() {
               return Promise.resolve('route 2');
             }
           }

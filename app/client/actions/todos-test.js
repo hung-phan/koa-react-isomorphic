@@ -1,7 +1,6 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 import nock from 'nock';
-import fetch from 'isomorphic-fetch';
 
 describe('Action: Todos', () => {
   context('sync', () => {
