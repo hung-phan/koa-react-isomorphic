@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { reduxReactRouter } from 'redux-router';
 import thunkMiddleware from 'redux-thunk';
 import routes from 'app/routes';
-import reducer from './../reducers/index';
+import reducers from './../reducers';
 
 let middlewares = [thunkMiddleware];
 let developmentMiddlewares = [];
@@ -38,5 +38,13 @@ const finalCreateStore = compose(
 )(createStore);
 
 export default function configureStore(initialState = {}) {
-  return finalCreateStore(reducer, fromJS(initialState));
+  const store = finalCreateStore(reducer, fromJS(initialState));
+
+  if (module.hot) {
+    module.hot.accept('../reducers', () =>
+      store.replaceReducer(require('../reducers'))
+    );
+  }
+
+  return store;
 }
