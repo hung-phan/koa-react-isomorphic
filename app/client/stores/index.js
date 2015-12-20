@@ -38,7 +38,7 @@ const finalCreateStore = compose(
 )(createStore);
 
 export default function configureStore(initialState = {}) {
-  const store = finalCreateStore(reducer, fromJS(initialState));
+  const store = finalCreateStore(reducers, fromJS(initialState));
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
