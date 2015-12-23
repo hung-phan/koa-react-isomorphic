@@ -3,6 +3,7 @@
   "plugins": [
     [
       "transform-runtime",
+      "add-module-exports",
       "typecheck", {
         "disable": {
           "production": true
