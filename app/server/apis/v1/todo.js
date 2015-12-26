@@ -1,4 +1,4 @@
-export default function(router) {
+export default function (router) {
   router.get('/api/v1/todos', function *() {
     this.body = [
       {

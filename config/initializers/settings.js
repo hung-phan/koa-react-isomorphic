@@ -1,3 +1,4 @@
+/* eslint prefer-const: [0] */
 import fs from 'fs';
 import nunjucks from './nunjucks';
 

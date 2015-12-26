@@ -93,6 +93,13 @@ $ SERVER_RENDERING=true npm run watch
 $ npm run dev
 ```
 
+## Test
+
+```bash
+$ npm run test:watch
+$ npm run test:lint
+```
+
 ## Production
 
 ### Normal run

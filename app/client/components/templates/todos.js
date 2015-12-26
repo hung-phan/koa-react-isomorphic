@@ -8,7 +8,28 @@ import TodosHeader from './../todos/todos-header';
 import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
+@fetchDataEnhancer(
+  store => store.dispatch(fetchTodos())
+)
+@connect(
+  ({ todos }) => ({
+    todos
+  }),
+  dispatch => ({
+    actions: bindActionCreators({
+      addTodo,
+      removeTodo,
+      completeTodo,
+      fetchTodos
+    }, dispatch)
+  })
+)
 class Todos extends React.Component {
+  static propTypes = {
+    todos: React.PropTypes.array,
+    actions: React.PropTypes.object
+  }
+
   render() {
     return (
       <div className='container'>
@@ -16,29 +37,12 @@ class Todos extends React.Component {
           <TodosHeader />
           <TodosAdd addTodo={this.props.actions.addTodo} />
           <TodosBody todos={this.props.todos}
-            removeTodo={this.props.actions.removeTodo}
-            completeTodo={this.props.actions.completeTodo} />
+                     removeTodo={this.props.actions.removeTodo}
+                     completeTodo={this.props.actions.completeTodo} />
         </div>
       </div>
     );
   }
 }
 
-export default compose(
-  fetchDataEnhancer(
-    store => store.dispatch(fetchTodos())
-  ),
-  connect(
-    ({ todos, router }) => ({
-      todos, router
-    }),
-    dispatch => ({
-      actions: bindActionCreators({
-        addTodo,
-        removeTodo,
-        completeTodo,
-        fetchTodos
-      }, dispatch)
-    })
-  )
-)(Todos);
+export default Todos;
