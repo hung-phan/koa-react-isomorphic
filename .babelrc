@@ -5,7 +5,11 @@
       "transform-decorators-legacy",
       "transform-runtime",
     ],
-    "typecheck"
+    ["typecheck", {
+      "disable": {
+        "production": true
+      }
+    }]
   ],
   "env": {
     "development": {
