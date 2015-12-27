@@ -10,8 +10,8 @@ let developmentMiddlewares = [];
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const logger = require('redux-logger')({ level: 'info' });
 
-  middlewares = [logger, ...middlewares];
-  developmentMiddlewares = [require('./../components/main/debug').instrument()];
+  middlewares = [...middlewares, logger];
+  developmentMiddlewares = [require('./../components/main/debug').default.instrument()];
 }
 
 const createHistory = process.env.RUNTIME_ENV === 'client'
@@ -29,7 +29,7 @@ export default function configureStore(initialState = {}) {
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers'))
+      store.replaceReducer(require('../reducers').default)
     );
   }
 

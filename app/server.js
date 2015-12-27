@@ -1,5 +1,5 @@
 /* eslint no-console: [0] */
-import 'babel/polyfill';
+import 'babel-polyfill';
 
 import app from './server-init';
 import log4js from 'log4js';
