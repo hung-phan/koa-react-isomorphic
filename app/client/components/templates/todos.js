@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import fetchDataEnhancer from './../helpers/fetch-data-enhancer';
@@ -7,21 +8,23 @@ import TodosHeader from './../todos/todos-header';
 import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
-@fetchDataEnhancer(
-  store => store.dispatch(fetchTodos())
-)
-@connect(
-  ({ todos }) => ({
-    todos
-  }),
-  dispatch => ({
-    actions: bindActionCreators({
-      addTodo,
-      removeTodo,
-      completeTodo,
-      fetchTodos
-    }, dispatch)
-  })
+@compose(
+  connect(
+    ({ todos }) => ({
+      todos
+    }),
+    dispatch => ({
+      actions: bindActionCreators({
+        addTodo,
+        removeTodo,
+        completeTodo,
+        fetchTodos
+      }, dispatch)
+    })
+  ),
+  fetchDataEnhancer(
+    store => store.dispatch(fetchTodos())
+  )
 )
 class Todos extends React.Component {
   static propTypes = {
