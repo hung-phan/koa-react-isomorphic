@@ -9,9 +9,6 @@ import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
 @compose(
-  fetchDataEnhancer(
-    store => store.dispatch(fetchTodos())
-  ),
   connect(
     ({ todos }) => ({
       todos
@@ -24,6 +21,9 @@ import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/action
         fetchTodos
       }, dispatch)
     })
+  ),
+  fetchDataEnhancer(
+    store => store.dispatch(fetchTodos())
   )
 )
 class Todos extends React.Component {
