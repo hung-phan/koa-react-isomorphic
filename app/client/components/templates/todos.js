@@ -8,21 +8,23 @@ import TodosHeader from './../todos/todos-header';
 import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
-@fetchDataEnhancer(
-  store => store.dispatch(fetchTodos())
-)
-@connect(
-  ({ todos }) => ({
-    todos
-  }),
-  dispatch => ({
-    actions: bindActionCreators({
-      addTodo,
-      removeTodo,
-      completeTodo,
-      fetchTodos
-    }, dispatch)
-  })
+@compose(
+  fetchDataEnhancer(
+    store => store.dispatch(fetchTodos())
+  ),
+  connect(
+    ({ todos }) => ({
+      todos
+    }),
+    dispatch => ({
+      actions: bindActionCreators({
+        addTodo,
+        removeTodo,
+        completeTodo,
+        fetchTodos
+      }, dispatch)
+    })
+  )
 )
 class Todos extends React.Component {
   static propTypes = {
