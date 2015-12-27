@@ -4,8 +4,8 @@
     [
       "transform-decorators-legacy",
       "transform-runtime",
-      "typecheck"
-    ]
+    ],
+    "typecheck"
   ],
   "env": {
     "development": {
