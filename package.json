@@ -86,7 +86,6 @@
     "react-redux": "^4.0.0",
     "react-redux": "^4.0.2",
     "react-router": "^1.0.2",
-    "reagent": "^1.0.1",
     "recompose": "^0.13.0",
     "redux": "^3.0.5",
     "redux-batched-updates": "*",
