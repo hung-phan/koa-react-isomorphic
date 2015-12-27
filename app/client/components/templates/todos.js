@@ -1,5 +1,6 @@
 import React from 'react';
 import { List } from 'immutable';
+import { compose } from 'recompose';
 import shallowEqualImmutable from 'react-immutable-render-mixin/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,21 +10,23 @@ import TodosHeader from './../todos/todos-header';
 import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
-@fetchDataEnhancer(
-  store => store.dispatch(fetchTodos())
-)
-@connect(
-  state => ({
-    todos: state.get('todos')
-  }),
-  dispatch => ({
-    actions: bindActionCreators({
-      addTodo,
-      removeTodo,
-      completeTodo,
-      fetchTodos
-    }, dispatch)
-  })
+@compose(
+  connect(
+    state => ({
+      todos: state.get('todos')
+    }),
+    dispatch => ({
+      actions: bindActionCreators({
+        addTodo,
+        removeTodo,
+        completeTodo,
+        fetchTodos
+      }, dispatch)
+    })
+  ),
+  fetchDataEnhancer(
+    store => store.dispatch(fetchTodos())
+  )
 )
 class Todos extends React.Component {
   static propTypes = {
