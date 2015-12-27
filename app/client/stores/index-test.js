@@ -8,7 +8,7 @@ describe('Store', () => {
 
     before(() => {
       process.env.NODE_ENV = 'development';
-      configureStore = require('./index');
+      configureStore = require('./index').default;
     });
     after(() => {
       process.env.NODE_ENV = 'test';
@@ -36,7 +36,7 @@ describe('Store', () => {
 
     before(() => {
       process.env.NODE_ENV = 'production';
-      configureStore = require('./index');
+      configureStore = require('./index').default;
     });
     after(() => {
       process.env.NODE_ENV = 'test';
@@ -64,7 +64,7 @@ describe('Store', () => {
 
     before(() => {
       process.env.NODE_ENV = 'development';
-      configureStore = require('./index');
+      configureStore = require('./index').default;
     });
     after(() => {
       process.env.NODE_ENV = 'test';
@@ -92,7 +92,7 @@ describe('Store', () => {
 
     before(() => {
       process.env.NODE_ENV = 'production';
-      configureStore = require('./index');
+      configureStore = require('./index').default;
     });
     after(() => {
       process.env.NODE_ENV = 'test';

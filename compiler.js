@@ -1,6 +1,7 @@
 'use strict';
 
-require('babel/register');
+require('babel-polyfill');
+require('babel-core/register');
 
 var noop = function(module, file) {
   module._compile('', file);
