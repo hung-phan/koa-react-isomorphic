@@ -1,4 +1,5 @@
 import React from 'react';
+import autobind from 'autobind-decorator';
 
 class AddTodo extends React.Component {
   static propTypes = {
@@ -9,15 +10,14 @@ class AddTodo extends React.Component {
     super(...arguments);
 
     this.state = { todo: '' };
-
-    this.addTodo = this.addTodo.bind(this);
-    this.updateTodo = this.updateTodo.bind(this);
   }
 
+  @autobind
   updateTodo(e) {
     this.setState({ todo: e.target.value });
   }
 
+  @autobind
   addTodo() {
     this.props.addTodo(this.state.todo);
     this.setState({ todo: '' });

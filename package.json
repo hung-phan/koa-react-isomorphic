@@ -29,6 +29,7 @@
     "supertest": "^1.1.0"
   },
   "dependencies": {
+    "autobind-decorator": "^1.3.2",
     "babel": "^6.3.26",
     "babel-core": "^6.3.26",
     "babel-loader": "^6.2.0",
