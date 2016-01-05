@@ -1,5 +1,3 @@
-import 'app/client/components/test-helpers/jsdom-support.js';
-
 import sinon from 'sinon';
 import React from 'react';
 import { noop } from 'node-noop';

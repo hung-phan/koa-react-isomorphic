@@ -1,7 +1,15 @@
 'use strict';
 
-require('babel-polyfill');
 require('babel-core/register');
+require('babel-polyfill');
+
+// jsdom for testing
+if (typeof document === 'undefined') {
+  const jsdom = require('jsdom').jsdom;
+  global.document = jsdom('<html><body></body></html>');
+  global.window = document.defaultView;
+  global.navigator = window.navigator;
+}
 
 var noop = function(module, file) {
   module._compile('', file);

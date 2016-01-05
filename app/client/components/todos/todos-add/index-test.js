@@ -1,5 +1,3 @@
-import 'app/client/components/test-helpers/jsdom-support.js';
-
 import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
