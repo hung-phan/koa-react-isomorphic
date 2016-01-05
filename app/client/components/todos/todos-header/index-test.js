@@ -1,5 +1,3 @@
-import 'app/client/components/test-helpers/jsdom-support.js';
-
 import { assert } from 'chai';
 import React from 'react';
 import { mount } from 'enzyme';
