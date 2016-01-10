@@ -75,7 +75,6 @@
     "log4js": "^0.6.29",
     "nconf": "^0.8.2",
     "node-noop": "*",
-    "node-notifier": "^4.4.0",
     "node-sass": "^3.4.2",
     "nodemon": "^1.8.1",
     "nunjucks": "^2.2.0",
