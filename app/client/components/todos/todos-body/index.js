@@ -1,3 +1,4 @@
+import autobind from 'autobind-decorator';
 import style from './style.css';
 import React from 'react';
 
@@ -8,6 +9,20 @@ class TodosBody extends React.Component {
     completeTodo: React.PropTypes.func.isRequired
   };
 
+  @autobind
+  _completeTodo(index) {
+    return () => {
+      this.props.completeTodo(index);
+    };
+  }
+
+  @autobind
+  _removeTodo(index) {
+    return () => {
+      this.props.removeTodo(index);
+    };
+  }
+
   _renderTodos() {
     return this.props.todos.map((todo, index) => {
       const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
@@ -17,12 +32,14 @@ class TodosBody extends React.Component {
           <td><span>{index + 1}</span></td>
           <td>{text}</td>
           <td>
-            <button type='button' className='btn btn-xs btn-success' onClick={this.props.completeTodo.bind(null, index)}>
+          <button type='button' className='btn btn-xs btn-success'
+        onClick={this._completeTodo(index)}>
               <i className='fa fa-check'></i>
             </button>
           </td>
           <td>
-            <button type='button' className='btn btn-xs btn-danger' onClick={this.props.removeTodo.bind(null, index)}>
+          <button type='button' className='btn btn-xs btn-danger'
+            onClick={this._removeTodo(index)}>
               <i className='fa fa-remove'></i>
             </button>
           </td>
