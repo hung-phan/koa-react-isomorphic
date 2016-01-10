@@ -34,10 +34,6 @@ class Todos extends React.Component {
     actions: React.PropTypes.object
   };
 
-  static contextTypes = {
-    store: React.PropTypes.object.isRequired
-  }
-
   shouldComponentUpdate(nextProps) {
     return !shallowEqualImmutable(nextProps.todos, this.props.todos);
   }
