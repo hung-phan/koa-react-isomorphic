@@ -30,7 +30,7 @@ class Todos extends React.Component {
   static propTypes = {
     todos: React.PropTypes.array,
     actions: React.PropTypes.object
-  }
+  };
 
   render() {
     return (

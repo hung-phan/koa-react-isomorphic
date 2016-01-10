@@ -6,7 +6,7 @@ class TodosBody extends React.Component {
     todos: React.PropTypes.array.isRequired,
     removeTodo: React.PropTypes.func.isRequired,
     completeTodo: React.PropTypes.func.isRequired
-  }
+  };
 
   _renderTodos() {
     return this.props.todos.map((todo, index) => {
