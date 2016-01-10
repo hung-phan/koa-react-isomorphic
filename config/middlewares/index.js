@@ -32,6 +32,7 @@ export function apiLayer(app, apiRoutes) {
 }
 
 export function securityLayer(app) {
+  /* eslint no-param-reassign: [0] */
   const router = middlewares.router();
 
   app.keys = [process.env.SECRET_KEY];

@@ -25,7 +25,9 @@ if (process.env.SERVER_RENDERING) {
                 .then(() => {
                   const prerenderData = store.getState();
                   const currentRoutes = <RoutingContext { ...renderProps } />;
-                  const prerenderComponent = renderToString(<App store={store} routes={currentRoutes} />);
+                  const prerenderComponent = renderToString(
+                    <App store={store} routes={currentRoutes} />
+                  );
 
                   resolve(
                     nunjucks.render(template, {
