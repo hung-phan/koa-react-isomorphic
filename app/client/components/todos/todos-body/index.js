@@ -7,7 +7,7 @@ class TodosBody extends React.Component {
     todos: React.PropTypes.instanceOf(List).isRequired,
     removeTodo: React.PropTypes.func.isRequired,
     completeTodo: React.PropTypes.func.isRequired
-  }
+  };
 
   _renderTodos() {
     return this.props.todos.toJS().map((todo, index) => {

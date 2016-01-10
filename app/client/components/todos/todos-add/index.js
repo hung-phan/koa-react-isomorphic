@@ -4,7 +4,7 @@ import autobind from 'autobind-decorator';
 class AddTodo extends React.Component {
   static propTypes = {
     addTodo: React.PropTypes.func
-  }
+  };
 
   constructor() {
     super(...arguments);

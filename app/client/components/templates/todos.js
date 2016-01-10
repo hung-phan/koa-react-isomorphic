@@ -32,7 +32,7 @@ class Todos extends React.Component {
   static propTypes = {
     todos: React.PropTypes.instanceOf(List).isRequired,
     actions: React.PropTypes.object
-  }
+  };
 
   static contextTypes = {
     store: React.PropTypes.object.isRequired
