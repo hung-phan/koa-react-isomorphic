@@ -3,7 +3,7 @@ const ROOT = path.join(__dirname);
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(
-  require('config/webpack/webpack-isomorphic-tools')
+  require('./config/webpack/webpack-isomorphic-tools')
 );
 
 global.webpackIsomorphicTools
