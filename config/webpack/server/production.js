@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const webpack = require('webpack');
 const defaultConfig = require('./default');
-let productionConfig = require('./default');
+const productionConfig = require('./default');
 
 _.merge(defaultConfig, {
   devtool: false

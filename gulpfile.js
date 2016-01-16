@@ -6,7 +6,7 @@ const gutil = require('gulp-util');
 const env = require('gulp-env');
 const webpack = require('webpack');
 const shell = require('shelljs');
-const config = require('config/config.json');
+const config = require('./config/config.json');
 
 // clean task
 function cleanTask(files) {
@@ -24,7 +24,7 @@ gulp.task('frontend:watch', (done) => {
 });
 
 gulp.task('frontend:build', ['set-production-env'], (done) => {
-  const bundler = webpack(require('config/webpack/client/production'));
+  const bundler = webpack(require('./config/webpack/client/production'));
   const handler = (err, stats) => {
     if (err) {
       throw new gutil.PluginError('webpack', err);
@@ -40,7 +40,7 @@ gulp.task('frontend:build', ['set-production-env'], (done) => {
 gulp.task('backend:watch', (done) => {
   let started = false;
 
-  webpack(require('config/webpack/server/development'))
+  webpack(require('./config/webpack/server/development'))
     .watch(100, (err, stats) => {
       if (!started) {
         started = true;
@@ -52,7 +52,7 @@ gulp.task('backend:watch', (done) => {
 });
 
 gulp.task('backend:build', ['set-production-env'], (done) => {
-  const bundler = webpack(require('config/webpack/server/production'));
+  const bundler = webpack(require('./config/webpack/server/production'));
   const handler = function (err, stats) {
     if (err) {
       throw new gutil.PluginError('webpack', err);

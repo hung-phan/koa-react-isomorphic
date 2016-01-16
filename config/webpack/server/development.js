@@ -2,11 +2,11 @@
 
 const _ = require('lodash');
 const path = require('path');
-const ROOT = require('config/path-helper').ROOT;
-const config = require('config/config.json');
+const ROOT = require('./../../path-helper').ROOT;
+const config = require('./../../config.json');
 const crypto = require('crypto');
 const webpack = require('webpack');
-let developmentConfig = require('./default');
+const developmentConfig = require('./default');
 
 _.merge(developmentConfig, {
   entry: {

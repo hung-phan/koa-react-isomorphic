@@ -3,8 +3,8 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
-const ROOT = require('config/path-helper').ROOT;
-const config = require('config/config.json');
+const ROOT = require('./../../path-helper').ROOT;
+const config = require('./../../config.json');
 const webpack = require('webpack');
 const nodeModules = _.reduce(
                       // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
@@ -33,14 +33,14 @@ module.exports = {
   },
   externals: [
     nodeModules,
-    function(context, request, callback) {
+    function (context, request, callback) {
       const external = 'external!';
 
       return (new RegExp(`^${external}`)).test(request)
         ? callback(null, `commonjs ${path.resolve(context, request.substr(external.length))}`)
         : callback();
     },
-    function(context, request, callback) {
+    function (context, request, callback) {
       const style = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
 
       return (new RegExp(`${style}$`)).test(request)
