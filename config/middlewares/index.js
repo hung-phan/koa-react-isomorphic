@@ -3,6 +3,8 @@ import cors from 'koa-cors';
 import middlewares from 'koa-middlewares';
 import htmlMinifier from 'koa-html-minifier';
 import helmet from 'koa-helmet';
+import mount from 'koa-mount';
+import graphqlHTTP from 'koa-graphql';
 import render from './custom/render';
 import prerender from './custom/prerender';
 import error from './custom/error';
@@ -14,6 +16,16 @@ export function initialLayer(app) {
   // remove this config if you have nginx already serves the public folder
   // in production mode
   app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
+}
+
+export function graphQLLayer(app, schema) {
+  app.use(
+    mount('/graphql', graphqlHTTP({
+      schema,
+      graphiql: process.env.NODE_ENV === 'development',
+      pretty: process.env.NODE_ENV === 'development'
+    })
+  ));
 }
 
 export function apiLayer(app, apiRoutes) {
