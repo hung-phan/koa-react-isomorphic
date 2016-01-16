@@ -1,8 +1,8 @@
 'use strict';
 
 const path = require('path');
-const ROOT = require('config/path-helper').ROOT;
-const config = require('config/config.json');
+const ROOT = require('./../../path-helper').ROOT;
+const config = require('./../../config.json');
 const webpack = require('webpack');
 
 module.exports = {

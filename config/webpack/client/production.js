@@ -1,8 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const ROOT = require('config/path-helper').ROOT;
-const config = require('config/config.json');
+const config = require('./../../config.json');
 const cssnext = require('cssnext');
 const cssnano = require('cssnano');
 const webpack = require('webpack');
@@ -10,9 +9,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
-  require('config/webpack/webpack-isomorphic-tools')
+  require('./../../webpack/webpack-isomorphic-tools')
 );
-let productionConfig = require('./default');
+const productionConfig = require('./default');
 
 _.merge(productionConfig, {
   devtool: false,
