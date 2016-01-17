@@ -1,12 +1,10 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
     "babel-plugin-react-transform": "^2.0.0-beta1",
     "chai": "^3.4.1",
-    "co-mocha": "^1.1.2",
-    "co-supertest": "0.0.10",
     "enzyme": "^1.2.0",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^3.1.0",
@@ -72,7 +70,7 @@
     "koa-middlewares": "^4.1.0",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
-    "lodash": "^3.10.1",
+    "lodash": "^4.0.0",
     "log4js": "^0.6.29",
     "nconf": "^0.8.2",
     "node-noop": "*",
@@ -108,10 +106,10 @@
   "scripts": {
     "start": "sh scripts/start",
     "dev": "NODE_ENV=development nodemon prod-server.js",
-    "test": "NODE_ENV=test PORT=3001 mocha --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
-    "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter nyan --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
+    "test": "NODE_ENV=test PORT=3001 mocha --compilers js:compiler.js 'app/**/*-test.js' 'tests/**/*.js'",
+    "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter nyan --compilers js:compiler.js 'app/**/*-test.js' 'tests/**/*.js'",
     "test:lint": "esw -w 'app/**/*-test.js' 'tests/**/*.js'",
-    "coverage": "NODE_ENV=test PORT=3001 istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js --require co-mocha 'app/**/*-test.js' 'tests/**/*.js'",
+    "coverage": "NODE_ENV=test PORT=3001 istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js' 'tests/**/*.js'",
     "postinstall": "sh scripts/build",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "watch": "gulp clean && npm run frontend:watch & gulp backend:watch"

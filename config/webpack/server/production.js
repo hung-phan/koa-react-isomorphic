@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const defaultConfig = require('./default');
 const productionConfig = require('./default');
 
-_.merge(defaultConfig, {
+_.mergeWith(defaultConfig, {
   devtool: false
 });
 

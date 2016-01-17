@@ -1,12 +1,12 @@
 import { assert } from 'chai';
-import corequest from 'co-supertest';
+import supertest from 'supertest';
 import app from 'app/server-init';
 
 describe('Controller: application', () => {
-  const request = corequest(app.listen());
+  const request = supertest(app.listen());
 
-  it('should render Todos page', function *() {
-    const result = yield request
+  it('should render Todos page', async () => {
+    const result = await request
                           .get('/')
                           .set('Accept', 'text/html')
                           .expect(200);

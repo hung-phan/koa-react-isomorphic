@@ -13,7 +13,7 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
 );
 const productionConfig = require('./default');
 
-_.merge(productionConfig, {
+_.mergeWith(productionConfig, {
   devtool: false,
   output: {
     publicPath: config.path.assets,

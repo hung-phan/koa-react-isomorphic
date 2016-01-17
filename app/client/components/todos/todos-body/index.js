@@ -28,7 +28,7 @@ class TodosBody extends React.Component {
       const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
 
       return (
-        <tr key={index}>
+        <tr key={todo.id}>
           <td><span>{index + 1}</span></td>
           <td>{text}</td>
           <td>
