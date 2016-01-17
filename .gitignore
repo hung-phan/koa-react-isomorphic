@@ -5,3 +5,4 @@ public/assets/
 tmp/
 .DS_Store
 .tern-port
+coverage
