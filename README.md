@@ -1,7 +1,6 @@
 # React and Koa boilerplate
 
 [![build status](https://secure.travis-ci.org/hung-phan/koa-react-isomorphic.svg)](http://travis-ci.org/hung-phan/koa-react-isomorphic/)
-[![Coverage Status](https://coveralls.io/repos/hung-phan/koa-react-isomorphic/badge.svg?branch=master&service=github)](https://coveralls.io/github/hung-phan/koa-react-isomorphic?branch=master)
 [![Dependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic)
 [![devDependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic/dev-status.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic#info=devDependencies)
 
