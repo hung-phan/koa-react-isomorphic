@@ -8,9 +8,9 @@ import schema from './database/schema';
 const app = koa();
 
 // setup middlewares
+config.graphQLLayer(app, schema);
 config.initialLayer(app);
 config.errorLayer(app);
-config.graphQLLayer(app, schema);
 config.apiLayer(app, apis);
 config.securityLayer(app);
 config.renderLayer(app, controllers);
