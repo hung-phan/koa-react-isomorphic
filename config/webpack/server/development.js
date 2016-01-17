@@ -8,7 +8,7 @@ const crypto = require('crypto');
 const webpack = require('webpack');
 const developmentConfig = require('./default');
 
-_.merge(developmentConfig, {
+_.mergeWith(developmentConfig, {
   entry: {
     server: [
       'webpack/hot/poll?1000'
