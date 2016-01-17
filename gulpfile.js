@@ -17,6 +17,14 @@ function cleanTask(files) {
   };
 }
 
+gulp.task('set-production-env', () => {
+  env({
+    vars: {
+      NODE_ENV: 'production'
+    }
+  });
+});
+
 gulp.task('frontend:watch', (done) => {
   shell.exec('npm run frontend:watch', () => {
     done();
@@ -63,14 +71,6 @@ gulp.task('backend:build', ['set-production-env'], (done) => {
   };
 
   bundler.run(handler);
-});
-
-gulp.task('set-production-env', () => {
-  env({
-    consts: {
-      NODE_ENV: 'production'
-    }
-  });
 });
 
 gulp.task('clean', cleanTask([`.${config.path.build}`, `.${config.path.publicAssets}`]));
