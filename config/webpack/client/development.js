@@ -11,7 +11,7 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
 );
 const developmentConfig = require('./default');
 
-_.merge(developmentConfig, {
+_.mergeWith(developmentConfig, {
   output: {
     publicPath: 'http://localhost:8080' + config.path.build,
     filename: '[name].js',
