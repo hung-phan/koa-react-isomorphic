@@ -6,3 +6,5 @@ tmp/
 .DS_Store
 .tern-port
 coverage
+app/database/schema.graphql
+app/database/schema.json

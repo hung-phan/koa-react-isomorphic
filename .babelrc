@@ -5,6 +5,7 @@
       "transform-decorators-legacy",
       "transform-runtime",
     ],
+    ["babel-relay-plugin-loader"],
     ["babel-plugin-module-alias", [
       { "src": "./app", "expose": "app" },
       { "src": "./config", "expose": "config" }

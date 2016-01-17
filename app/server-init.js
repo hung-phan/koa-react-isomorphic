@@ -3,7 +3,7 @@ import debug from 'debug';
 import * as config from 'config/middlewares';
 import apis from './server/apis/base';
 import controllers from './server/controllers/base';
-import schema from './server/schema';
+import schema from './database/schema';
 
 const app = koa();
 
