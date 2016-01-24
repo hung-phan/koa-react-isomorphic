@@ -71,7 +71,7 @@ describe('Store', () => {
     });
 
     beforeEach(() => {
-      store = configureStore({ todos: [{ text: 'do chore', complete: true }]});
+      store = configureStore({ todos: [{ text: 'do chore', complete: true }] });
       state = store.getState().toJS();
     });
 
@@ -99,7 +99,7 @@ describe('Store', () => {
     });
 
     beforeEach(() => {
-      store = configureStore({ todos: [{ text: 'do chore', complete: true }]});
+      store = configureStore({ todos: [{ text: 'do chore', complete: true }] });
       state = store.getState().toJS();
     });
 
