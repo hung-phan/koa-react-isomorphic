@@ -16,7 +16,7 @@ config.securityLayer(app);
 config.renderLayer(app, controllers);
 
 // error logs
-app.on('error', function (error) {
+app.on('error', (error) => {
   debug('error')(error);
 });
 

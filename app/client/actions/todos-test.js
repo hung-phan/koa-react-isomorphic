@@ -72,7 +72,7 @@ describe('Action: Todos', () => {
     let RUNTIME_ENV;
     let port;
 
-    before(function () {
+    before(() => {
       RUNTIME_ENV = process.env.RUNTIME_ENV;
       port = process.env.PORT;
 
@@ -87,7 +87,7 @@ describe('Action: Todos', () => {
       setTodos = require('./todos').setTodos;
     });
 
-    after(function () {
+    after(() => {
       process.env.RUNTIME_ENV = RUNTIME_ENV;
       process.env.PORT = port;
     });

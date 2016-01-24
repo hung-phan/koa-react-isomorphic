@@ -35,9 +35,8 @@ export function setTodos(todos) {
 
 export const FETCH_TODOS = 'FETCH_TODOS';
 export function fetchTodos() {
-  return dispatch => {
-    return fetch(getUrl('/api/v1/todos'))
-             .then(res => res.json())
-             .then(res => dispatch(setTodos(res)));
-  };
+  return dispatch =>
+    fetch(getUrl('/api/v1/todos'))
+      .then(res => res.json())
+      .then(res => dispatch(setTodos(res)));
 }

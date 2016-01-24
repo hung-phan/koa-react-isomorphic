@@ -8,6 +8,7 @@
     "node": true
   },
   "rules": {
+    "max-len": [0],
     "func-names": [0],
     "comma-dangle": [0],
     "react/jsx-indent-props": [0],
