@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const ROOT = require('./../../path-helper').ROOT;
 const config = require('./../../config.json');
-const cssnext = require('cssnext');
+const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
@@ -13,7 +13,7 @@ const developmentConfig = require('./default');
 
 _.mergeWith(developmentConfig, {
   output: {
-    publicPath: 'http://localhost:8080' + config.path.build,
+    publicPath: `http://localhost:8080${config.path.build}`,
     filename: '[name].js',
     chunkFilename: '[id].js'
   },
@@ -30,9 +30,9 @@ _.mergeWith(developmentConfig, {
   postcss() {
     return [cssnext()];
   }
-}, (obj1, obj2) => {
-  return _.isArray(obj2) ? obj2.concat(obj1) : undefined;
-});
+}, (obj1, obj2) =>
+  _.isArray(obj2) ? obj2.concat(obj1) : undefined
+);
 
 developmentConfig.module.loaders.push(
   {
