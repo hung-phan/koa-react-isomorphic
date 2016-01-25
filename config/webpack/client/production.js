@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 const config = require('./../../config.json');
-const cssnext = require('cssnext');
+const cssnext = require('postcss-cssnext');
 const cssnano = require('cssnano');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -23,9 +23,9 @@ _.mergeWith(productionConfig, {
   postcss() {
     return [cssnext(), cssnano];
   }
-}, (obj1, obj2) => {
-  return _.isArray(obj2) ? obj2.concat(obj1) : undefined;
-});
+}, (obj1, obj2) =>
+  _.isArray(obj2) ? obj2.concat(obj1) : undefined
+);
 
 productionConfig.module.loaders.push(
   {

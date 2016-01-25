@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
     "babel-plugin-react-transform": "^2.0.0-beta1",
@@ -48,7 +48,6 @@
     "chunk-manifest-webpack-plugin": "0.0.1",
     "css-loader": "^0.23.1",
     "cssnano": "^3.4.0",
-    "cssnext": "^1.8.4",
     "debug": "^2.2.0",
     "del": "^2.2.0",
     "exports-loader": "*",
@@ -84,6 +83,7 @@
     "nodemon": "^1.8.1",
     "nunjucks": "^2.3.0",
     "pm2": "^1.0.0",
+    "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
