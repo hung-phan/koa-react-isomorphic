@@ -1,16 +1,15 @@
-type Author {
-  _id: String!
-  name: String
-}
-
 type BlogSchema {
-  posts: [Post]
-  echo(message: String): String
+  todos: [Todo]
 }
 
-type Post {
-  _id: String!
-  title: String!
-  content: String
-  author: Author
+type Todo {
+  id: String!
+  user: User
+  text: String
+  complete: Boolean
+}
+
+type User {
+  id: String!
+  name: String
 }

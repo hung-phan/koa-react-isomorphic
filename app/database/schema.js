@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
-// This is the Dataset in our blog
-import { PostsList, AuthorsList } from './database';
+import { UsersList, TodosList } from './database';
 
 import {
   GraphQLString,
@@ -9,31 +8,36 @@ import {
   GraphQLObjectType,
   GraphQLNonNull,
   GraphQLSchema,
+  GraphQLBoolean,
 } from 'graphql';
 
-const Author = new GraphQLObjectType({
-  name: 'Author',
-  description: 'This represent an author',
-  fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLString) },
-    name: { type: GraphQLString }
-  })
+const User = new GraphQLObjectType({
+  name: 'User',
+  description: 'This represents user in todos list',
+  fields() {
+    return {
+      id: { type: new GraphQLNonNull(GraphQLString) },
+      name: { type: GraphQLString }
+    };
+  }
 });
 
-const Post = new GraphQLObjectType({
-  name: 'Post',
-  description: 'This represent a Post',
-  fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLString) },
-    title: { type: new GraphQLNonNull(GraphQLString) },
-    content: { type: GraphQLString },
-    author: {
-      type: Author,
-      resolve(post) {
-        return _.find(AuthorsList, a => a._id === post.author);
-      }
-    }
-  })
+const Todo = new GraphQLObjectType({
+  name: 'Todo',
+  description: 'This represents todo list',
+  fields() {
+    return {
+      id: { type: new GraphQLNonNull(GraphQLString) },
+      user: {
+        type: User,
+        resolve(todo) {
+          return _.find(UsersList, (user) => user.id === todo.user);
+        }
+      },
+      text: { type: GraphQLString },
+      complete: { type: GraphQLBoolean }
+    };
+  }
 });
 
 // This is the Root Query
@@ -41,10 +45,10 @@ const Query = new GraphQLObjectType({
   name: 'BlogSchema',
   description: 'Root of the Blog Schema',
   fields: () => ({
-    posts: {
-      type: new GraphQLList(Post),
+    todos: {
+      type: new GraphQLList(Todo),
       resolve() {
-        return PostsList;
+        return TodosList;
       }
     }
   })

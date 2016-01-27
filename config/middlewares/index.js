@@ -9,6 +9,10 @@ import render from './custom/render';
 import prerender from './custom/prerender';
 import error from './custom/error';
 
+export function loggerLayer(app) {
+  app.use(middlewares.logger()); // https://github.com/koajs/logger
+}
+
 export function graphQLLayer(app, schema) {
   app.use(
     mount('/graphql', graphqlHTTP({
@@ -20,7 +24,6 @@ export function graphQLLayer(app, schema) {
 }
 
 export function initialLayer(app) {
-  app.use(middlewares.logger()); // https://github.com/koajs/logger
   app.use(middlewares.bodyParser()); // https://github.com/koajs/bodyparser
 
   // remove this config if you have nginx already serves the public folder
