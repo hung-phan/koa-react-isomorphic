@@ -7,6 +7,7 @@ import controllers from './server/controllers/base';
 const app = koa();
 
 // setup middlewares
+config.loggingLayer(app);
 config.initialLayer(app);
 config.errorLayer(app);
 config.apiLayer(app, apis);
