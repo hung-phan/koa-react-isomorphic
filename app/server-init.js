@@ -8,7 +8,7 @@ import schema from './database/schema';
 const app = koa();
 
 // setup middlewares
-config.loggerLayer(app);
+config.loggingLayer(app);
 config.graphQLLayer(app, schema);
 config.initialLayer(app);
 config.errorLayer(app);

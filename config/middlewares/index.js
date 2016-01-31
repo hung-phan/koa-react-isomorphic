@@ -9,7 +9,7 @@ import render from './custom/render';
 import prerender from './custom/prerender';
 import error from './custom/error';
 
-export function loggerLayer(app) {
+export function loggingLayer(app) {
   app.use(middlewares.logger()); // https://github.com/koajs/logger
 }
 
