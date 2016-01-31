@@ -19,7 +19,7 @@
 
     {% if env.NODE_ENV == 'production' %}
       {{ applicationHelper.javascriptIncludeTag('https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') }}
-      {% endif %}
+    {% endif %}
 
     {{ applicationHelper.prerenderData(prerenderData) }}
     {{ applicationHelper.webpackManifestScript(env.NODE_ENV, commonManifest) }}
