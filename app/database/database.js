@@ -1,20 +1,36 @@
 import _ from 'lodash';
 import faker from 'faker';
 
+class User {
+  constructor() {
+    this.id = faker.random.uuid();
+    this.name = faker.internet.userName();
+  }
+}
+
 export const UsersList = _(10)
                           .range()
-                          .map(() => ({
-                            id: faker.random.uuid(),
-                            name: faker.internet.userName()
-                          }))
+                          .map(() => new User())
                           .value();
+
+class Todo {
+  constructor() {
+    this.id = faker.random.uuid();
+    this.user = _.sample(UsersList).id;
+    this.text = faker.lorem.sentence();
+    this.complete = _.sample([true, false]);
+  }
+}
 
 export const TodosList = _(100)
                           .range()
-                          .map(() => ({
-                            id: faker.random.uuid(),
-                            user: _.sample(UsersList).id,
-                            text: faker.lorem.sentence(),
-                            complete: _.sample([true, false])
-                          }))
+                          .map(() => new Todo())
                           .value();
+
+export function getUser(id) {
+  return _.find(UsersList, { id });
+}
+
+export function getTodo(id) {
+  return _.find(TodosList, { id });
+}
