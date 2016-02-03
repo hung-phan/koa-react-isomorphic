@@ -1,15 +1,20 @@
 type BlogSchema {
+  node(id: ID!): Node
   todos: [Todo]
 }
 
-type Todo {
-  id: String!
+interface Node {
+  id: ID!
+}
+
+type Todo implements Node {
+  id: ID!
   user: User
   text: String
   complete: Boolean
 }
 
-type User {
-  id: String!
+type User implements Node {
+  id: ID!
   name: String
 }

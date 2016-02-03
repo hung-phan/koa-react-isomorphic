@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import faker from 'faker';
 
-class User {
+export class User {
   constructor() {
     this.id = faker.random.uuid();
     this.name = faker.internet.userName();
@@ -13,7 +13,7 @@ export const UsersList = _(10)
                           .map(() => new User())
                           .value();
 
-class Todo {
+export class Todo {
   constructor() {
     this.id = faker.random.uuid();
     this.user = _.sample(UsersList).id;
