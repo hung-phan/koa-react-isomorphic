@@ -43,6 +43,7 @@ productionConfig.module.loaders.push(
 );
 
 productionConfig.plugins.push(
+  // new webpack.optimize.CommonsChunkPlugin('common', 'common-[chunkhash].bundle.js'), // Code splitting
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'production'",
     'process.env.SERVER_RENDERING': true
