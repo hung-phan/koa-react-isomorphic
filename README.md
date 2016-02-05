@@ -179,7 +179,6 @@ Upcoming
  |  routes.js
  |  server-init.js
  |  server.js
-+ bower_components/
 + build/
 - config/
  |- initializers/
@@ -200,7 +199,6 @@ Upcoming
 - scripts/
  |  build
  |  start
-  bower.json
   compiler.js
   gulpfile.js
   LICENSE
