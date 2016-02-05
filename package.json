@@ -14,6 +14,7 @@
     "eslint-watch": "^2.1.4",
     "istanbul": "^0.4.1",
     "jsdom": "^7.2.1",
+    "jsdom-global": "^1.6.1",
     "mocha": "^2.3.4",
     "monkey-hot-loader": "0.0.3",
     "nock": "^5.2.1",
