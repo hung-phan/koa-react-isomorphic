@@ -8,7 +8,7 @@ export class User {
   }
 }
 
-export const UsersList = _(10)
+export const UsersList = _(100)
                           .range()
                           .map(() => new User())
                           .value();
@@ -33,4 +33,8 @@ export function getUser(id) {
 
 export function getTodo(id) {
   return _.find(TodosList, { id });
+}
+
+export function getTodosByUser(user) {
+  return _.filter(TodosList, { user });
 }

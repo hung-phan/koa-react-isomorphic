@@ -1,20 +1,54 @@
-type BlogSchema {
-  node(id: ID!): Node
-  todos: [Todo]
+input AddTodoMutationInput {
+  text: String!
+  user: String!
+  clientMutationId: String!
+}
+
+type AddTodoMutationPayload {
+  user: User
+  todo: Todo
+  clientMutationId: String!
+}
+
+type Mutation {
+  addTodoMutation(input: AddTodoMutationInput!): AddTodoMutationPayload
 }
 
 interface Node {
   id: ID!
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  node(id: ID!): Node
+  todos: [Todo]
+  users: [User]
+}
+
 type Todo implements Node {
   id: ID!
-  user: User
   text: String
   complete: Boolean
+}
+
+type TodoConnection {
+  pageInfo: PageInfo!
+  edges: [TodoEdge]
+}
+
+type TodoEdge {
+  node: Todo
+  cursor: String!
 }
 
 type User implements Node {
   id: ID!
   name: String
+  todos(after: String, first: Int, before: String, last: Int): TodoConnection
 }
