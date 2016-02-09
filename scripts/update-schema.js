@@ -1,5 +1,6 @@
 #!/usr/bin/env babel-node --optional es7.asyncFunctions
 
+/* eslint-disable */
 import fs from 'fs';
 import path from 'path';
 import schema from 'app/database/schema';

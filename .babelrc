@@ -5,7 +5,6 @@
       "transform-decorators-legacy",
       "transform-runtime",
     ],
-    ["babel-relay-plugin-loader"],
     ["babel-plugin-module-alias", [
       { "src": "./app", "expose": "app" },
       { "src": "./config", "expose": "config" }
@@ -19,6 +18,7 @@
   "env": {
     "development": {
       "plugins": [
+        ["babel-relay-plugin-loader"],
         ["react-transform", {
           "transforms": [{
             "transform": "react-transform-hmr",
@@ -29,6 +29,11 @@
             "imports": ["react", "redbox-react"]
           }]
         }]
+      ]
+    },
+    "test": {
+      "plugins": [
+        ["babel-relay-plugin-loader"]
       ]
     }
   }
