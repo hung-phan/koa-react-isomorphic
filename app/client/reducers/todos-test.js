@@ -4,7 +4,7 @@ import {
   addTodo,
   removeTodo,
   completeTodo,
-  setTodos
+  setTodos,
 } from './../actions/todos';
 
 describe('Reducer: Todos', () => {

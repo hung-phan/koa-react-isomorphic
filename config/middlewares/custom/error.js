@@ -31,11 +31,11 @@ export default function error() {
           this.type = 'application/json';
           if (process.env.NODE_ENV === 'development' || err.expose) {
             this.body = {
-              error: err.message
+              error: err.message,
             };
           } else {
             this.body = {
-              error: http.STATUS_CODES[this.status]
+              error: http.STATUS_CODES[this.status],
             };
           }
           break;
@@ -45,7 +45,7 @@ export default function error() {
           if (process.env.NODE_ENV === 'development' || process.env.DEBUG) {
             this.body = nunjucks.render('application/error.html', {
               ...settings, ctx: this, request: this.request, response: this.response,
-              status: this.status, error: err.message, stack: err.stack, code: err.code
+              status: this.status, error: err.message, stack: err.stack, code: err.code,
             });
           } else {
             if ([404, 422].includes(this.status)) {

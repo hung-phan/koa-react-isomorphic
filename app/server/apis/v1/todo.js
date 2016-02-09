@@ -3,16 +3,16 @@ export default function (router) {
     this.body = [
       {
         text: 'Todo 1',
-        complete: false
+        complete: false,
       },
       {
         text: 'Todo 2',
-        complete: false
+        complete: false,
       },
       {
         text: 'Todo 3',
-        complete: false
-      }
+        complete: false,
+      },
     ];
   });
 }

@@ -63,7 +63,7 @@ export function renderLayer(app, templateRoutes) {
       removeComments: true,
       preserveLineBreaks: false,
       removeEmptyAttributes: false,
-      removeIgnored: true
+      removeIgnored: true,
     }), // https://github.com/kangax/html-minifier
     middlewares.compress() // https://github.com/koajs/compress
   );

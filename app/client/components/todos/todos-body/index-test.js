@@ -10,7 +10,7 @@ describe('Component: TodosBody', () => {
     { text: 'Todo 1', complete: false },
     { text: 'Todo 2', complete: false },
     { text: 'Todo 3', complete: false },
-    { text: 'Todo 4', complete: false }
+    { text: 'Todo 4', complete: false },
   ];
 
   it('should display a list of todos', () => {
@@ -34,8 +34,8 @@ describe('Component: TodosBody', () => {
       removeButton.simulate('click');
 
       assert.ok(removeButton);
-      assert(removeTodo.called);
-      assert(removeTodo.calledWith(index));
+      sinon.assert.called(removeTodo);
+      sinon.assert.calledWith(removeTodo, index);
     });
     assert.equal(removeTodo.callCount, todos.length);
   });
@@ -52,8 +52,8 @@ describe('Component: TodosBody', () => {
       completeButton.simulate('click');
 
       assert.ok(completeButton);
-      assert(completeTodo.called);
-      assert(completeTodo.calledWith(index));
+      sinon.assert.called(completeTodo);
+      sinon.assert.calledWith(completeTodo, index);
     });
     assert.equal(completeTodo.callCount, todos.length);
   });

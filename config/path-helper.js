@@ -4,5 +4,5 @@ const PUBLIC = path.join(ROOT, 'public');
 
 module.exports = {
   ROOT,
-  PUBLIC
+  PUBLIC,
 };

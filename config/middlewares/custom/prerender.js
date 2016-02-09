@@ -2,8 +2,8 @@ if (process.env.SERVER_RENDERING) {
   const nunjucks = require('nunjucks');
   const React = require('react');
   const { renderToString } = require('react-dom/server');
-  const { match, RoutingContext } = require('react-router');
-  const fetchData = require('app/client/helpers/fetch-data').default;
+  const { match, RouterContext } = require('react-router');
+  const { loadOnServer } = require('redux-async-connect');
   const routes = require('app/routes').default;
   const App = require('app/client/components/main/app').default;
   const settings = require('config/initializers/settings').default;
@@ -21,12 +21,12 @@ if (process.env.SERVER_RENDERING) {
             } else if (redirectLocation) {
               this.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
-              fetchData(store, store.getState().router)
+              loadOnServer(renderProps, store)
                 .then(() => {
                   const prerenderData = store.getState();
-                  const currentRoutes = <RoutingContext { ...renderProps } />;
+                  const currentRoutes = <RouterContext { ...renderProps } />;
                   const prerenderComponent = renderToString(
-                    <App store={store} routes={currentRoutes} />
+                    <App store={ store } routes={ currentRoutes } />
                   );
 
                   resolve(
@@ -35,7 +35,7 @@ if (process.env.SERVER_RENDERING) {
                       ...parameters,
                       prerenderComponent,
                       prerenderData,
-                      csrf: this.csrf
+                      csrf: this.csrf,
                     })
                   );
                 });
