@@ -14,7 +14,7 @@ let middlewares = [
 ];
 let enhancers = [];
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const logger = require('redux-logger')({ level: 'info' });
   const { persistState } = require('redux-devtools');
 
