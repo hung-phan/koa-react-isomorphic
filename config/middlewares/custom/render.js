@@ -9,7 +9,7 @@ export default function* (next) {
           nunjucks.render(template, {
             ...settings,
             ...parameters,
-            csrf: this.csrf
+            csrf: this.csrf,
           })
         );
       });

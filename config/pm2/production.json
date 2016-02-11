@@ -3,12 +3,12 @@
     {
       "name": "All hail the R",
       "node_args": ["--harmony"],
-      "script": "build/server.js",
+      "script": "prod-server.js",
       "env": {
         "DEBUG": "error",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "PORT": 3000
       },
-      "instances": 4,
       "max_restarts": 10
     }
   ]

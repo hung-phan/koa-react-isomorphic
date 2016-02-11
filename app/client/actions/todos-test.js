@@ -30,7 +30,7 @@ describe('Action: Todos', () => {
     it("should return action when calls 'addTodo' with 'do chore'", () => {
       assert.deepEqual(addTodo('do chore'), {
         type: 'ADD_TODO',
-        text: 'do chore'
+        text: 'do chore',
       });
     });
 
@@ -38,7 +38,7 @@ describe('Action: Todos', () => {
       const index = 1;
       assert.deepEqual(removeTodo(index), {
         type: 'REMOVE_TODO',
-        index
+        index,
       });
     });
 
@@ -46,7 +46,7 @@ describe('Action: Todos', () => {
       const index = 1;
       assert.deepEqual(completeTodo(index), {
         type: 'COMPLETE_TODO',
-        index
+        index,
       });
     });
 
@@ -55,7 +55,7 @@ describe('Action: Todos', () => {
 
       assert.deepEqual(setTodos(todos), {
         type: 'SET_TODOS',
-        todos
+        todos,
       });
     });
   });
@@ -65,7 +65,7 @@ describe('Action: Todos', () => {
       { text: 'Todo 1', complete: false },
       { text: 'Todo 2', complete: false },
       { text: 'Todo 3', complete: false },
-      { text: 'Todo 4', complete: false }
+      { text: 'Todo 4', complete: false },
     ];
     let setTodos;
     let fetchTodos;
@@ -103,14 +103,12 @@ describe('Action: Todos', () => {
 
       yield action(callback);
 
-      assert(callback.called);
-      assert(callback.calledWith(
-        sinon.match((value) => {
-          assert.deepEqual(value, setTodos(todos));
+      sinon.assert.called(callback);
+      sinon.assert.calledWith(callback, sinon.match((value) => {
+        assert.deepEqual(value, setTodos(todos));
 
-          return true;
-        })
-      ));
+        return true;
+      }));
     });
   });
 });

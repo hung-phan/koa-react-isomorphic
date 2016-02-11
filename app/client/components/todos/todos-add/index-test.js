@@ -22,8 +22,8 @@ describe('Component: TodosAdd', () => {
     assert.equal(component.state().todo, 'do chore');
 
     button.simulate('click');
-    assert(callback.called);
-    assert(callback.calledWith('do chore'));
+    sinon.assert.called(callback);
+    sinon.assert.calledWith(callback, 'do chore');
     assert.equal(component.state().todo, '');
   });
 });

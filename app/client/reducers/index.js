@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import { routerStateReducer } from 'redux-router';
+import { routeReducer as routing } from 'react-router-redux';
+import { reducer as reduxAsyncConnect } from 'redux-async-connect';
 
 import todos from './todos';
 
 export default combineReducers({
   todos,
-  router: routerStateReducer
+  routing,
+  reduxAsyncConnect,
 });
