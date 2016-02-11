@@ -7,8 +7,17 @@ const history = process.env.RUNTIME_ENV === 'client'
                   ? require('react-router').browserHistory
                   : require('history/lib/createLocation')();
 
+function selectReduxAsyncConnectState(store) {
+  return store.getState().toJS().reduxAsyncConnect.loaded;
+}
+
 function render(props) {
-  return <ReduxAsyncConnect { ...props } />;
+  return (
+    <ReduxAsyncConnect
+      selectReduxAsyncConnectState={ selectReduxAsyncConnectState }
+      { ...props }
+    />
+  );
 }
 
 export default (
