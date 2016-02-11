@@ -32,16 +32,16 @@ class TodosBody extends React.Component {
           <td><span>{index + 1}</span></td>
           <td>{text}</td>
           <td>
-          <button type='button' className='btn btn-xs btn-success'
-            onClick={this._completeTodo(index)}
-          >
+            <button type='button' className='btn btn-xs btn-success'
+              onClick={this._completeTodo(index)}
+            >
               <i className='fa fa-check'></i>
             </button>
           </td>
           <td>
-          <button type='button' className='btn btn-xs btn-danger'
-            onClick={this._removeTodo(index)}
-          >
+            <button type='button' className='btn btn-xs btn-danger'
+              onClick={this._removeTodo(index)}
+            >
               <i className='fa fa-remove'></i>
             </button>
           </td>

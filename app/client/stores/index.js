@@ -14,12 +14,16 @@ let middlewares = [
 ];
 let enhancers = [];
 
-if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
+if (process.env.NODE_ENV === 'development') {
   const logger = require('redux-logger')({ level: 'info' });
   const { persistState } = require('redux-devtools');
 
-  middlewares = [...middlewares, logger];
+  middlewares = [
+    ...middlewares,
+    logger,
+  ];
   enhancers = [
+    ...enhancers,
     require('./../components/main/debug').default.instrument(),
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
   ];
