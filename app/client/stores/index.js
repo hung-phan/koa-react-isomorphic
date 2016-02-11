@@ -42,7 +42,9 @@ export default function configureStore(initialState = {}) {
   const store = finalCreateStore(reducers, fromJS(initialState));
 
   // Required for replaying actions from devtools to work
-  reduxRouterMiddleware.listenForReplays(store, (state) => state.get('routing'));
+  reduxRouterMiddleware.listenForReplays(store, (state) =>
+    state.getIn(['routing', 'location']).toJS()
+  );
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
