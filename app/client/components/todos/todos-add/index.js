@@ -3,7 +3,7 @@ import autobind from 'autobind-decorator';
 
 class AddTodo extends React.Component {
   static propTypes = {
-    addTodo: React.PropTypes.func
+    addTodo: React.PropTypes.func,
   };
 
   constructor() {
@@ -29,7 +29,8 @@ class AddTodo extends React.Component {
         <div className='form-inline'>
           <div className='form-group'>
             <input type='text' className='form-control' placeholder='Todo'
-                   value={this.state.todo} onChange={this.updateTodo} />
+              value={this.state.todo} onChange={this.updateTodo}
+            />
           </div>
           <button type='button' className='btn btn-success' onClick={this.addTodo}>Add Todo</button>
         </div>

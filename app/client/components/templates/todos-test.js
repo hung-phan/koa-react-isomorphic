@@ -9,7 +9,12 @@ import TodosAdd from './../todos/todos-add';
 import TodosBody from './../todos/todos-body';
 
 describe('Component: Todos', () => {
-  const todos = [{ text: 'Todo 1', complete: false }];
+  const todos = [
+    { text: 'Todo 1', complete: false },
+    { text: 'Todo 2', complete: false },
+    { text: 'Todo 3', complete: false },
+    { text: 'Todo 4', complete: false },
+  ];
   const store = configureStore({ todos });
   let component;
 
@@ -19,11 +24,6 @@ describe('Component: Todos', () => {
         <Todos />
       </ProviderMock>
     );
-  });
-
-  it(`should have static 'fetchData' method`, () => {
-    assert.ok(Todos.fetchData);
-    assert.isFunction(Todos.fetchData);
   });
 
   context('# Todos', () => {

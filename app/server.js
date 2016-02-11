@@ -6,9 +6,9 @@ import log4js from 'log4js';
 
 log4js.configure({
   appenders: [
-    { type: 'console' }
+    { type: 'console' },
   ],
-  replaceConsole: true
+  replaceConsole: true,
 });
 
 const PORT = process.env.PORT || 3000;

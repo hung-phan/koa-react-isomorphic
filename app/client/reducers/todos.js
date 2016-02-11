@@ -3,7 +3,7 @@ import {
   ADD_TODO,
   REMOVE_TODO,
   COMPLETE_TODO,
-  SET_TODOS
+  SET_TODOS,
 } from './../actions/todos';
 import { List, fromJS } from 'immutable';
 import { createReducer } from 'redux-immutablejs';
@@ -18,5 +18,5 @@ export default createReducer(initialState, {
   [COMPLETE_TODO]: (state, { index }) => state.updateIn(
     [index, 'complete'], () => !state.getIn([index, 'complete'])
   ),
-  [SET_TODOS]: (state, { todos }) => fromJS(todos)
+  [SET_TODOS]: (state, { todos }) => fromJS(todos),
 });

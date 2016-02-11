@@ -5,7 +5,7 @@ export const ADD_TODO = 'ADD_TODO';
 export function addTodo(text) {
   return {
     type: ADD_TODO,
-    text
+    text,
   };
 }
 
@@ -13,7 +13,7 @@ export const REMOVE_TODO = 'REMOVE_TODO';
 export function removeTodo(index) {
   return {
     type: REMOVE_TODO,
-    index
+    index,
   };
 }
 
@@ -21,7 +21,7 @@ export const COMPLETE_TODO = 'COMPLETE_TODO';
 export function completeTodo(index) {
   return {
     type: COMPLETE_TODO,
-    index
+    index,
   };
 }
 
@@ -29,7 +29,7 @@ export const SET_TODOS = 'SET_TODOS';
 export function setTodos(todos) {
   return {
     type: SET_TODOS,
-    todos
+    todos,
   };
 }
 
