@@ -9,7 +9,7 @@ import {
 } from './../actions/todos';
 
 describe('Reducer: Todos', () => {
-  it('should be a fucntion', () => {
+  it('should be a function', () => {
     assert.ok(reducer);
     assert.isFunction(reducer);
   });
