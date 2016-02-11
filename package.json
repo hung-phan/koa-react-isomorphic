@@ -85,7 +85,7 @@
     "react-dom": "^0.14.6",
     "react-immutable-render-mixin": "^0.8.1",
     "react-redux": "^4.0.6",
-    "react-router": "^2.0.0",
+    "react-router": "^2.0.0-rc5",
     "react-router-redux": "^3.0.0",
     "recompose": "^0.14.2",
     "redux": "^3.0.5",
