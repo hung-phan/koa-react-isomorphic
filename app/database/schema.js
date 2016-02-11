@@ -5,7 +5,7 @@ import {
   TodosList,
   getUser,
   getTodo,
-  getTodosByUser
+  getTodosByUser,
 } from './database';
 import {
   GraphQLString,
@@ -13,7 +13,7 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLBoolean,
-  GraphQLNonNull
+  GraphQLNonNull,
 } from 'graphql';
 import {
   connectionArgs,
@@ -22,7 +22,7 @@ import {
   connectionDefinitions,
   globalIdField,
   fromGlobalId,
-  mutationWithClientMutationId
+  mutationWithClientMutationId,
 } from 'graphql-relay';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
@@ -45,10 +45,10 @@ const TodoType = new GraphQLObjectType({
     return {
       id: globalIdField('Todo'),
       text: { type: GraphQLString },
-      complete: { type: GraphQLBoolean }
+      complete: { type: GraphQLBoolean },
     };
   },
-  interfaces: [nodeInterface]
+  interfaces: [nodeInterface],
 });
 
 const UserType = new GraphQLObjectType({
@@ -64,45 +64,46 @@ const UserType = new GraphQLObjectType({
         args: connectionArgs,
         resolve({ id }, args) {
           return connectionFromArray(getTodosByUser(id), args);
-        }
-      }
+        },
+      },
     };
   },
-  interfaces: [nodeInterface]
+  interfaces: [nodeInterface],
 });
 
 const addTodoMutation = mutationWithClientMutationId({
   name: 'AddTodoMutation',
   inputFields: {
     text: { type: new GraphQLNonNull(GraphQLString) },
-    user: { type: new GraphQLNonNull(GraphQLString) }
+    user: { type: new GraphQLNonNull(GraphQLString) },
   },
   outputFields: {
     user: {
       type: UserType,
       resolve({ userId }) {
         return getUser(userId);
-      }
+      },
     },
     todo: {
       type: TodoType,
       resolve({ todoId }) {
         return getTodo(todoId);
-      }
-    }
+      },
+    },
   },
   mutateAndGetPayload({ text, user }) {
     const todo = Object.assign(new Todo, {
-      text, user
+      text,
+      user,
     });
 
     TodosList.push(todo);
 
     return {
       todoId: todo.id,
-      userId: user
+      userId: user,
     };
-  }
+  },
 });
 
 const query = new GraphQLObjectType({
@@ -114,29 +115,29 @@ const query = new GraphQLObjectType({
       type: new GraphQLList(TodoType),
       resolve() {
         return TodosList;
-      }
+      },
     },
     users: {
       type: new GraphQLList(UserType),
       resolve() {
         return UsersList;
-      }
-    }
-  })
+      },
+    },
+  }),
 });
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields() {
     return {
-      addTodoMutation
+      addTodoMutation,
     };
-  }
+  },
 });
 
 const Schema = new GraphQLSchema({
   query,
-  mutation
+  mutation,
 });
 
 export default Schema;

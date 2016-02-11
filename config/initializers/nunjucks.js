@@ -1,7 +1,7 @@
 import nunjucks from 'nunjucks';
 
 const options = {
-  autoescape: true
+  autoescape: true,
 };
 
 export default function () {

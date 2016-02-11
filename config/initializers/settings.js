@@ -8,16 +8,16 @@ nunjucks();
 // default settings
 let settings = {
   env: {
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
   },
   assetManifest: global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets() || {
     javascript: {
-      app: 'localhost:3000/app.bundle.js'
+      app: 'localhost:3000/app.bundle.js',
     },
     styles: {
-      app: 'localhost:3000/app.css'
-    }
-  }
+      app: 'localhost:3000/app.css',
+    },
+  },
 };
 
 // manage public assets in production mode

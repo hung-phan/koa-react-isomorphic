@@ -9,7 +9,7 @@ describe('API: v1/todos', () => {
     const expected = [
       { text: 'Todo 1', complete: false },
       { text: 'Todo 2', complete: false },
-      { text: 'Todo 3', complete: false }
+      { text: 'Todo 3', complete: false },
     ];
     const result = await request
                           .get('/api/v1/todos')

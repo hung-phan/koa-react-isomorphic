@@ -8,28 +8,10 @@ import TodosHeader from './../todos/todos-header';
 import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
-@compose(
-  connect(
-    ({ todos }) => ({
-      todos
-    }),
-    dispatch => ({
-      actions: bindActionCreators({
-        addTodo,
-        removeTodo,
-        completeTodo,
-        fetchTodos
-      }, dispatch)
-    })
-  ),
-  fetchDataEnhancer(
-    store => store.dispatch(fetchTodos())
-  )
-)
-class Todos extends React.Component {
+export class Todos extends React.Component {
   static propTypes = {
     todos: React.PropTypes.array,
-    actions: React.PropTypes.object
+    actions: React.PropTypes.object,
   };
 
   render() {
@@ -37,14 +19,34 @@ class Todos extends React.Component {
       <div className='container'>
         <div className='row'>
           <TodosHeader />
-          <TodosAdd addTodo={this.props.actions.addTodo} />
-          <TodosBody todos={this.props.todos}
-                     removeTodo={this.props.actions.removeTodo}
-                     completeTodo={this.props.actions.completeTodo} />
+          <TodosAdd addTodo={ this.props.actions.addTodo } />
+          <TodosBody todos={ this.props.todos }
+            removeTodo={ this.props.actions.removeTodo }
+            completeTodo={ this.props.actions.completeTodo }
+          />
         </div>
       </div>
     );
   }
 }
 
-export default Todos;
+export const decorators = compose(
+  connect(
+    ({ todos }) => ({
+      todos,
+    }),
+    dispatch => ({
+      actions: bindActionCreators({
+        addTodo,
+        removeTodo,
+        completeTodo,
+        fetchTodos,
+      }, dispatch),
+    })
+  ),
+  fetchDataEnhancer(
+    (params, store) => store.dispatch(fetchTodos())
+  )
+);
+
+export default decorators(Todos);

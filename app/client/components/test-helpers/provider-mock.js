@@ -1,6 +1,14 @@
 import React from 'react';
 
 class ProviderMock extends React.Component {
+  static propTypes = {
+    store: React.PropTypes.object,
+    children: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ])
+  };
+
   static childContextTypes = {
     store: React.PropTypes.object.isRequired
   };
@@ -10,7 +18,7 @@ class ProviderMock extends React.Component {
   }
 
   render() {
-    return (<div>{this.props.children}</div>);
+    return (<div>{ this.props.children }</div>);
   }
 }
 
