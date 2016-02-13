@@ -36,9 +36,22 @@ describe('Helper: fetchDataEnhancer', () => {
       );
     });
 
-    it(`should define static 'reduxAsyncConnect'`, () => {
-      assert.ok(Component.reduxAsyncConnect);
-      assert.isFunction(Component.reduxAsyncConnect);
+    it(`should define static '__redial_handlers__.fetchData'`, () => {
+      assert.ok(Component.__redial_handlers__.fetchData);
+      assert.isFunction(Component.__redial_handlers__.fetchData);
+    });
+
+    it(`should call the 'callback' function with arguments`, () => {
+      const args = [
+        faker.random.uuid(),
+        faker.random.uuid(),
+        faker.random.uuid(),
+        faker.random.uuid(),
+      ];
+
+      Component.__redial_handlers__.fetchData(...args);
+
+      sinon.assert.calledWith(callback, ...args);
     });
 
     it('should render message', () => {

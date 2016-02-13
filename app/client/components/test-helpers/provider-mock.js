@@ -5,12 +5,12 @@ class ProviderMock extends React.Component {
     store: React.PropTypes.object,
     children: React.PropTypes.oneOfType([
       React.PropTypes.array,
-      React.PropTypes.object
-    ])
+      React.PropTypes.object,
+    ]),
   };
 
   static childContextTypes = {
-    store: React.PropTypes.object.isRequired
+    store: React.PropTypes.object.isRequired,
   };
 
   getChildContext() {

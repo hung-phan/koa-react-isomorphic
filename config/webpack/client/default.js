@@ -17,7 +17,7 @@ module.exports = {
   },
   externals: [],
   resolve: {
-    modulesDirectories: ['node_modules', 'bower_components'],
+    modulesDirectories: ['node_modules'],
     extensions: ['', '.js']
   },
   module: {
@@ -41,13 +41,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.ResolverPlugin([
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
-    ]),
-    new webpack.NormalModuleReplacementPlugin(/external!/, (result) => {
-      result.request = result.request.replace(/external!/, '');
-    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'client'"
     })

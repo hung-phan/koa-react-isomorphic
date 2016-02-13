@@ -1,6 +1,5 @@
 build/
 node_modules/
-bower_components/
 public/assets/
 tmp/
 .DS_Store
