@@ -45,7 +45,7 @@ export const decorators = compose(
     })
   ),
   fetchDataEnhancer(
-    (params, store) => store.dispatch(fetchTodos())
+    ({ store }) => store.dispatch(fetchTodos())
   )
 );
 

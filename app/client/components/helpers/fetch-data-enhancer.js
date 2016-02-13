@@ -1,17 +1,20 @@
 import React from 'react';
+import { provideHooks } from 'redial';
 
 export default function (callback) {
-  return ComposedComponent => class extends ComposedComponent {
-    static reduxAsyncConnect(params, store, helpers) {
-      if (!store.getState().reduxAsyncConnect.loaded) {
-        return callback(params, store, helpers);
+  return ComposedComponent => {
+    class FetchDataEnhancer extends ComposedComponent {
+      render() {
+        return (
+          <ComposedComponent { ...this.props } />
+        );
       }
     }
 
-    render() {
-      return (
-        <ComposedComponent { ...this.props } />
-      );
-    }
+    return provideHooks({
+      fetchData() {
+        return callback(...arguments);
+      },
+    })(FetchDataEnhancer);
   };
 }
