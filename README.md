@@ -60,9 +60,20 @@ Then performs server-side process.
 
 We ask react-router for a list of all the routes that match the current request and we check to see if any of the matched routes has a static `fetchData()` function.
 If it does, we pass the redux dispatcher to it and collect the promises returned. Those promises will be resolved when each matching route has loaded its
-necessary data from the API server.
+necessary data from the API server. The current implementation is based on [redial](https://github.com/markdalgleish/redial).
 
-Takes a look at `templates/todos`, we will have sth like `@fetchDataEnhancer(store => store.dispatch(fetchTodos()))` to let the server calls `fetchData()` function
+```javascript
+export function fetchData(renderProps, store) {
+  const locals = {
+    store,
+    params: renderProps.params,
+  };
+
+  return trigger('fetchData', getComponents(renderProps), locals);
+}
+```
+
+Takes a look at `templates/todos`, we will have sth like `@fetchDataEnhancer(({ store }) => store.dispatch(fetchTodos()))` to let the server calls `fetchData()` function
 on a component from the server.
 
 ## Features
