@@ -33,7 +33,8 @@
     },
     "test": {
       "plugins": [
-        ["babel-relay-plugin-loader"]
+        "babel-relay-plugin-loader",
+        "babel-plugin-rewire"
       ]
     }
   }

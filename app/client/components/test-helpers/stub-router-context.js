@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* istanbul ignore next */
-export default (ComposedComponent, props = {}, stubs = {}) => {
+export default function (ComposedComponent, props = {}, stubs = {}) {
   function RouterStub() { }
 
   Object.assign(RouterStub, {
@@ -17,19 +17,19 @@ export default (ComposedComponent, props = {}, stubs = {}) => {
     getCurrentQuery() {},
     isActive() {},
     getRouteAtDepth() {},
-    setRouteComponentAtDepth() {}
+    setRouteComponentAtDepth() {},
   }, stubs);
 
   return class extends React.Component {
     static childContextTypes = {
       router: React.PropTypes.func,
-      routeDepth: React.PropTypes.number
+      routeDepth: React.PropTypes.number,
     };
 
     getChildContext() {
       return {
         router: RouterStub,
-        routeDepth: 0
+        routeDepth: 0,
       };
     }
 
