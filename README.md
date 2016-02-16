@@ -24,7 +24,7 @@ So far, I manage to put together these following technologies:
 ## Explanation
 
 What initially gets run is `build/server.js`, which is complied by Webpack to utilise the power of ES6 and ES7 in server-side code.
-In `server.js`, I initialse all middlewares from `config/middleware/config`, then start server at `localhost:3000`. API calls
+In `server.js`, I initialse all middlewares from `config/middleware/index`, then start server at `localhost:3000`. API calls
 from client side eventually will request to `/api/*`, which are created by `app/server/apis`. Rendering tasks will be delegated to
 [React-Router](https://github.com/rackt/react-router) to do server rendering for React.
 
