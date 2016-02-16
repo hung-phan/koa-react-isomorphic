@@ -102,8 +102,8 @@
     "shelljs": "^0.6.0",
     "style-loader": "*",
     "url-loader": "^0.5.7",
-    "webpack": "^2.0.6-beta",
-    "webpack-dev-server": "^1.14.1",
+    "webpack": "^2.0.7-beta",
+    "webpack-dev-server": "^2.0.0-beta",
     "webpack-isomorphic-tools": "^2.2.28"
   },
   "scripts": {
