@@ -42,33 +42,13 @@
               "deprecationReason": null
             },
             {
-              "name": "todos",
+              "name": "viewer",
               "description": null,
               "args": [],
               "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Todo",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "users",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "User",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "Viewer",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -122,7 +102,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "User",
+              "name": "Viewer",
               "ofType": null
             }
           ]
@@ -206,8 +186,8 @@
         },
         {
           "kind": "OBJECT",
-          "name": "User",
-          "description": "This represents user in todos list",
+          "name": "Viewer",
+          "description": "This represents the root query of app",
           "fields": [
             {
               "name": "id",
@@ -221,18 +201,6 @@
                   "name": "ID",
                   "ofType": null
                 }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "name",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -520,20 +488,6 @@
               "defaultValue": null
             },
             {
-              "name": "user",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
               "name": "clientMutationId",
               "description": null,
               "type": {
@@ -557,18 +511,6 @@
           "name": "AddTodoMutationPayload",
           "description": null,
           "fields": [
-            {
-              "name": "user",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
             {
               "name": "todo",
               "description": null,

@@ -1,15 +1,12 @@
 import {
-  User,
   Todo,
-  UsersList,
+  Viewer,
   TodosList,
-  getUser,
+  viewer,
   getTodo,
-  getTodosByUser,
 } from './database';
 import {
   GraphQLString,
-  GraphQLList,
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLBoolean,
@@ -29,10 +26,11 @@ const { nodeInterface, nodeField } = nodeDefinitions(
   (globalId) => {
     const { type, id } = fromGlobalId(globalId);
 
-    if (type === 'User') {
-      return getUser(id);
-    } else if (type === 'Todo') {
-      return getTodo(id);
+    switch (type) {
+      case 'Todo':
+        return getTodo(id);
+      default:
+        // do nothing
     }
   }
 );
@@ -51,19 +49,24 @@ const TodoType = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
-const UserType = new GraphQLObjectType({
-  name: 'User',
-  description: 'This represents user in todos list',
-  isTypeOf: (obj) => obj instanceof User,
+const { connectionType: TodoConnection } = connectionDefinitions({
+  name: 'Todo',
+  nodeType: TodoType,
+});
+
+// https://github.com/facebook/relay/issues/112
+const ViewerType = new GraphQLObjectType({
+  name: 'Viewer',
+  description: 'This represents the root query of app',
+  isTypeOf: (obj) => obj instanceof Viewer,
   fields() {
     return {
-      id: globalIdField('User'),
-      name: { type: GraphQLString },
+      id: globalIdField('Viewer'),
       todos: {
-        type: connectionDefinitions({ name: 'Todo', nodeType: TodoType }).connectionType,
+        type: TodoConnection,
         args: connectionArgs,
-        resolve({ id }, args) {
-          return connectionFromArray(getTodosByUser(id), args);
+        resolve({ todos }, args) {
+          return connectionFromArray(todos, args);
         },
       },
     };
@@ -71,19 +74,26 @@ const UserType = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
+const query = new GraphQLObjectType({
+  name: 'Query',
+  description: 'Root of the Blog Schema',
+  fields: () => ({
+    node: nodeField,
+    viewer: {
+      type: ViewerType,
+      resolve() {
+        return viewer;
+      },
+    },
+  }),
+});
+
 const addTodoMutation = mutationWithClientMutationId({
   name: 'AddTodoMutation',
   inputFields: {
     text: { type: new GraphQLNonNull(GraphQLString) },
-    user: { type: new GraphQLNonNull(GraphQLString) },
   },
   outputFields: {
-    user: {
-      type: UserType,
-      resolve({ userId }) {
-        return getUser(userId);
-      },
-    },
     todo: {
       type: TodoType,
       resolve({ todoId }) {
@@ -91,39 +101,15 @@ const addTodoMutation = mutationWithClientMutationId({
       },
     },
   },
-  mutateAndGetPayload({ text, user }) {
-    const todo = Object.assign(new Todo, {
-      text,
-      user,
-    });
+  mutateAndGetPayload({ text }) {
+    const todo = new Todo({ text, complete: false });
 
     TodosList.push(todo);
 
     return {
       todoId: todo.id,
-      userId: user,
     };
   },
-});
-
-const query = new GraphQLObjectType({
-  name: 'Query',
-  description: 'Root of the Blog Schema',
-  fields: () => ({
-    node: nodeField,
-    todos: {
-      type: new GraphQLList(TodoType),
-      resolve() {
-        return TodosList;
-      },
-    },
-    users: {
-      type: new GraphQLList(UserType),
-      resolve() {
-        return UsersList;
-      },
-    },
-  }),
 });
 
 const mutation = new GraphQLObjectType({

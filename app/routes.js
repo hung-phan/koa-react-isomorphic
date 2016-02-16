@@ -1,5 +1,7 @@
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { Route } from 'react-router';
+import { RelayRouter } from 'react-router-relay';
+import ViewerQuery from './client/queries/viewer';
 import Todos from './client/components/templates/todos';
 
 const history = process.env.RUNTIME_ENV === 'client'
@@ -7,7 +9,7 @@ const history = process.env.RUNTIME_ENV === 'client'
                   : require('history/lib/createLocation')();
 
 export default (
-  <Router history={ history }>
-    <Route path='/' component={ Todos } />
-  </Router>
+  <RelayRouter history={history}>
+    <Route path='/' component={Todos} queries={ViewerQuery} />
+  </RelayRouter>
 );

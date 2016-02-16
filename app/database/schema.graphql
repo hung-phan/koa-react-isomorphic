@@ -1,11 +1,9 @@
 input AddTodoMutationInput {
   text: String!
-  user: String!
   clientMutationId: String!
 }
 
 type AddTodoMutationPayload {
-  user: User
   todo: Todo
   clientMutationId: String!
 }
@@ -27,8 +25,7 @@ type PageInfo {
 
 type Query {
   node(id: ID!): Node
-  todos: [Todo]
-  users: [User]
+  viewer: Viewer
 }
 
 type Todo implements Node {
@@ -47,8 +44,7 @@ type TodoEdge {
   cursor: String!
 }
 
-type User implements Node {
+type Viewer implements Node {
   id: ID!
-  name: String
   todos(after: String, first: Int, before: String, last: Int): TodoConnection
 }

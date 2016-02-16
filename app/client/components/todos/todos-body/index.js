@@ -5,8 +5,8 @@ import React from 'react';
 class TodosBody extends React.Component {
   static propTypes = {
     todos: React.PropTypes.array.isRequired,
-    removeTodo: React.PropTypes.func.isRequired,
-    completeTodo: React.PropTypes.func.isRequired,
+    removeTodo: React.PropTypes.func,
+    completeTodo: React.PropTypes.func,
   };
 
   @autobind
