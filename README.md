@@ -3,6 +3,7 @@
 [![build status](https://secure.travis-ci.org/hung-phan/koa-react-isomorphic.svg)](http://travis-ci.org/hung-phan/koa-react-isomorphic/)
 [![Dependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic)
 [![devDependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic/dev-status.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic#info=devDependencies)
+[![NPM](https://nodei.co/npm/koa-react-isomorphic.png?downloads=true)](https://nodei.co/npm/koa-react-isomorphic/)
 
 The idea of this repository are to try out all new concepts and libraries which work great for React.js.
 Additionally, this will be the boilerplate for koa isomorphic (or universal) application.
