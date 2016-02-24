@@ -1,60 +1,99 @@
+import _ from 'lodash';
 import { assert } from 'chai';
 import sinon from 'sinon';
+import faker from 'faker';
 import React from 'react';
 import { mount } from 'enzyme';
-import { noop } from 'node-noop';
 import TodosBody from './index';
 
 describe('Component: TodosBody', () => {
-  const todos = [
-    { text: 'Todo 1', complete: false },
-    { text: 'Todo 2', complete: false },
-    { text: 'Todo 3', complete: false },
-    { text: 'Todo 4', complete: false },
-  ];
+  const viewer = {
+    todos: {
+      edges: _(4).range().map((value) => ({
+        node: {
+          text: `Todo ${ value + 1}`,
+          complete: false,
+        },
+      })).value(),
+    },
+  };
+  let Relay;
+  let component;
+  let randomUUID;
+
+  beforeEach(() => {
+    randomUUID = faker.random.uuid();
+    component = mount(
+      <TodosBody viewer={viewer} />
+    );
+    Relay = {
+      Store: {
+        commitUpdate: sinon.spy(),
+      },
+    };
+    TodosBody.__Rewire__('Relay', Relay);
+  });
+
+  afterEach(() => {
+    TodosBody.__ResetDependency__('Relay');
+  });
 
   it('should display a list of todos', () => {
-    const component = mount(
-      <TodosBody todos={todos} removeTodo={noop} completeTodo={noop} />
-    );
     const trComponents = component.find('tr');
-
-    assert.lengthOf(trComponents, todos.length);
+    assert.lengthOf(trComponents, viewer.todos.edges.length);
   });
 
-  it(`should call 'removeTodo' when click on the delete button`, () => {
-    const removeTodo = sinon.spy();
-    const component = mount(
-      <TodosBody todos={todos} removeTodo={removeTodo} completeTodo={noop} />
-    );
-    const trComponents = component.find('tr');
+  context('# when click on delete button', () => {
+    let RemoveTodoMutation;
 
-    trComponents.forEach((tr, index) => {
-      const removeButton = tr.find('.btn-danger');
-      removeButton.simulate('click');
-
-      assert.ok(removeButton);
-      sinon.assert.called(removeTodo);
-      sinon.assert.calledWith(removeTodo, index);
+    beforeEach(() => {
+      RemoveTodoMutation = sinon.stub();
+      RemoveTodoMutation.returns({ randomUUID });
+      TodosBody.__Rewire__('RemoveTodoMutation', RemoveTodoMutation);
     });
-    assert.equal(removeTodo.callCount, todos.length);
+
+    afterEach(() => {
+      TodosBody.__ResetDependency__('RemoveTodoMutation');
+    });
+
+    it(`should call 'removeTodo'`, () => {
+      const trComponents = component.find('tr');
+
+      trComponents.forEach((tr) => {
+        const removeButton = tr.find('.btn-danger');
+        removeButton.simulate('click');
+
+        assert.ok(removeButton);
+        sinon.assert.calledWith(Relay.Store.commitUpdate, { randomUUID });
+      });
+      assert.equal(Relay.Store.commitUpdate.callCount, viewer.todos.edges.length);
+    });
   });
 
-  it(`should call 'completeTodo' when click on the complete button`, () => {
-    const completeTodo = sinon.spy();
-    const component = mount(
-      <TodosBody todos={todos} removeTodo={noop} completeTodo={completeTodo} />
-    );
-    const trComponents = component.find('tr');
+  context('# when click on complete button', () => {
+    let CompleteTodoMutation;
 
-    trComponents.forEach((tr, index) => {
-      const completeButton = tr.find('.btn-success');
-      completeButton.simulate('click');
-
-      assert.ok(completeButton);
-      sinon.assert.called(completeTodo);
-      sinon.assert.calledWith(completeTodo, index);
+    beforeEach(() => {
+      CompleteTodoMutation = sinon.stub();
+      CompleteTodoMutation.returns({ randomUUID });
+      TodosBody.__Rewire__('CompleteTodoMutation', CompleteTodoMutation);
     });
-    assert.equal(completeTodo.callCount, todos.length);
+
+    afterEach(() => {
+      TodosBody.__ResetDependency__('CompleteTodoMutation');
+    });
+
+    it(`should call 'completeTodo'`, () => {
+      const trComponents = component.find('tr');
+
+      trComponents.forEach((tr) => {
+        const completeButton = tr.find('.btn-success');
+        completeButton.simulate('click');
+
+        assert.ok(completeButton);
+        sinon.assert.calledWith(Relay.Store.commitUpdate, { randomUUID });
+      });
+      assert.equal(Relay.Store.commitUpdate.callCount, viewer.todos.edges.length);
+    });
   });
 });

@@ -1,46 +1,48 @@
 import autobind from 'autobind-decorator';
 import style from './style.css';
 import React from 'react';
+import Relay from 'react-relay';
+import CompleteTodoMutation from 'app/client/mutations/complete-todo';
+import RemoveTodoMutation from 'app/client/mutations/remove-todo';
 
 class TodosBody extends React.Component {
   static propTypes = {
-    todos: React.PropTypes.array.isRequired,
-    removeTodo: React.PropTypes.func,
-    completeTodo: React.PropTypes.func,
+    viewer: React.PropTypes.object.isRequired,
   };
 
   @autobind
-  _completeTodo(index) {
+  _completeTodo(todo) {
     return () => {
-      this.props.completeTodo(index);
+      Relay.Store.commitUpdate(new CompleteTodoMutation({ viewer: this.props.viewer, todo }));
     };
   }
 
   @autobind
-  _removeTodo(index) {
+  _removeTodo(todo) {
     return () => {
-      this.props.removeTodo(index);
+      Relay.Store.commitUpdate(new RemoveTodoMutation({ viewer: this.props.viewer, todo }));
     };
   }
 
   _renderTodos() {
-    return this.props.todos.map((todo, index) => {
+    return this.props.viewer.todos.edges.map((edge, index) => {
+      const todo = edge.node;
       const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
 
       return (
-        <tr key={index}>
+        <tr key={todo.id}>
           <td><span>{index + 1}</span></td>
           <td>{text}</td>
           <td>
             <button type='button' className='btn btn-xs btn-success'
-              onClick={this._completeTodo(index)}
+              onClick={this._completeTodo(todo)}
             >
               <i className='fa fa-check'></i>
             </button>
           </td>
           <td>
             <button type='button' className='btn btn-xs btn-danger'
-              onClick={this._removeTodo(index)}
+              onClick={this._removeTodo(todo)}
             >
               <i className='fa fa-remove'></i>
             </button>

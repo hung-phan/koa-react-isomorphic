@@ -1,15 +1,18 @@
 import React from 'react';
+import Relay from 'react-relay';
 import autobind from 'autobind-decorator';
+import AddTodoMutation from 'app/client/mutations/add-todo';
 
 class AddTodo extends React.Component {
   static propTypes = {
-    addTodo: React.PropTypes.func,
+    relay: React.PropTypes.object.isRequired,
+    viewer: React.PropTypes.object.isRequired,
   };
 
   constructor() {
     super(...arguments);
 
-    this.state = { todo: '' };
+    this.state = { todo: '', numberOfTodos: 20 };
   }
 
   @autobind
@@ -19,8 +22,15 @@ class AddTodo extends React.Component {
 
   @autobind
   addTodo() {
-    this.props.addTodo(this.state.todo);
+    Relay.Store.commitUpdate(new AddTodoMutation({ text: this.state.todo, viewer: this.props.viewer }));
     this.setState({ todo: '' });
+  }
+
+  @autobind
+  changeNumberOfTodoList(e) {
+    this.setState({ numberOfTodos: parseInt(e.target.value, 10) }, () => {
+      this.props.relay.setVariables({ numberOfTodos: this.state.numberOfTodos });
+    });
   }
 
   render() {
@@ -33,6 +43,14 @@ class AddTodo extends React.Component {
             />
           </div>
           <button type='button' className='btn btn-success' onClick={this.addTodo}>Add Todo</button>
+        </div>
+
+        <div className='form-inline'>
+          <div className='form-group'>
+            <input type='range' min='1' max={this.props.viewer.numberOfTodos}
+              value={this.state.numberOfTodos} onChange={this.changeNumberOfTodoList}
+            />
+          </div>
         </div>
       </div>
     );

@@ -4,12 +4,26 @@ input AddTodoMutationInput {
 }
 
 type AddTodoMutationPayload {
+  todoEdge: TodoEdge
+  viewer: Viewer
+  clientMutationId: String!
+}
+
+input CompleteTodoMutationInput {
+  id: String!
+  clientMutationId: String!
+}
+
+type CompleteTodoMutationPayload {
   todo: Todo
+  viewer: Viewer
   clientMutationId: String!
 }
 
 type Mutation {
-  addTodoMutation(input: AddTodoMutationInput!): AddTodoMutationPayload
+  addTodo(input: AddTodoMutationInput!): AddTodoMutationPayload
+  removeTodo(input: RemoveTodoMutationInput!): RemoveTodoMutationPayload
+  completeTodo(input: CompleteTodoMutationInput!): CompleteTodoMutationPayload
 }
 
 interface Node {
@@ -26,6 +40,17 @@ type PageInfo {
 type Query {
   node(id: ID!): Node
   viewer: Viewer
+}
+
+input RemoveTodoMutationInput {
+  id: String!
+  clientMutationId: String!
+}
+
+type RemoveTodoMutationPayload {
+  id: ID
+  viewer: Viewer
+  clientMutationId: String!
 }
 
 type Todo implements Node {
@@ -47,4 +72,5 @@ type TodoEdge {
 type Viewer implements Node {
   id: ID!
   todos(after: String, first: Int, before: String, last: Int): TodoConnection
+  numberOfTodos: Int
 }

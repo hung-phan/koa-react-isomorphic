@@ -2,28 +2,66 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
 import { mount } from 'enzyme';
+import faker from 'faker';
 import TodosAdd from './index';
 
 describe('Component: TodosAdd', () => {
-  it('should define state.todo', () => {
-    const component = mount(<TodosAdd />);
+  let viewer;
+  let component;
+  let Relay;
+  let relay;
+  let AddTodoMutation;
+  let randomUUID;
 
+  beforeEach(() => {
+    randomUUID = faker.random.uuid();
+    Relay = {
+      Store: {
+        commitUpdate: sinon.spy(),
+      },
+    };
+    relay = { setVariables: sinon.spy() };
+    AddTodoMutation = sinon.stub();
+    AddTodoMutation.returns({ randomUUID });
+    viewer = { numberOfTodos: 100 };
+
+    TodosAdd.__Rewire__('Relay', Relay);
+    component = mount(<TodosAdd viewer={viewer} relay={relay}/>);
+  });
+
+  afterEach(() => {
+    TodosAdd.__ResetDependency__('Relay');
+  });
+
+  it(`should define default value for 'state.todo'`, () => {
     assert.equal(component.state().todo, '');
   });
 
-  it(`should call the addTodo action when click on the 'Add Todo' button`, () => {
-    const callback = sinon.spy();
-    const component = mount(<TodosAdd addTodo={callback} />);
-    const input = component.find('input');
-    const button = component.find('button');
+  context(`# click on 'Add Todo' button`, () => {
+    let button;
 
-    input.node.value = 'do chore';
-    input.simulate('change');
-    assert.equal(component.state().todo, 'do chore');
+    beforeEach(() => {
+      TodosAdd.__Rewire__('AddTodoMutation', AddTodoMutation);
+      component.setState({ todo: randomUUID });
 
-    button.simulate('click');
-    sinon.assert.called(callback);
-    sinon.assert.calledWith(callback, 'do chore');
-    assert.equal(component.state().todo, '');
+      button = component.find('button');
+      button.simulate('click');
+    });
+
+    afterEach(() => {
+      TodosAdd.__ResetDependency__('AddTodoMutation');
+    });
+
+    it(`should call 'AddTodoMutation' with 'viewer', and 'text'`, () => {
+      sinon.assert.calledWith(AddTodoMutation, { viewer, text: randomUUID });
+    });
+
+    it(`should call 'Relay.Store.commitUpdate' with 'AddTodoMutation'`, () => {
+      sinon.assert.calledWith(Relay.Store.commitUpdate, { randomUUID });
+    });
+
+    it(`should reset 'state.todo'`, () => {
+      assert.equal(component.state().todo, '');
+    });
   });
 });

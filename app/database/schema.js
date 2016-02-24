@@ -1,20 +1,23 @@
+import _ from 'lodash';
 import {
   Todo,
   Viewer,
-  TodosList,
   viewer,
   getTodo,
 } from './database';
 import {
   GraphQLString,
   GraphQLObjectType,
-  GraphQLSchema,
+  GraphQLInt,
   GraphQLBoolean,
   GraphQLNonNull,
+  GraphQLID,
+  GraphQLSchema,
 } from 'graphql';
 import {
   connectionArgs,
   connectionFromArray,
+  cursorForObjectInConnection,
   nodeDefinitions,
   connectionDefinitions,
   globalIdField,
@@ -27,10 +30,12 @@ const { nodeInterface, nodeField } = nodeDefinitions(
     const { type, id } = fromGlobalId(globalId);
 
     switch (type) {
+      case 'Viewer':
+        return viewer;
       case 'Todo':
         return getTodo(id);
       default:
-        // do nothing
+        console.log(type, id);
     }
   }
 );
@@ -49,7 +54,7 @@ const TodoType = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
-const { connectionType: TodoConnection } = connectionDefinitions({
+const { connectionType: TodoConnection, edgeType: GraphQLTodoEdge } = connectionDefinitions({
   name: 'Todo',
   nodeType: TodoType,
 });
@@ -67,6 +72,12 @@ const ViewerType = new GraphQLObjectType({
         args: connectionArgs,
         resolve({ todos }, args) {
           return connectionFromArray(todos, args);
+        },
+      },
+      numberOfTodos: {
+        type: GraphQLInt,
+        resolve() {
+          return viewer.todos.length;
         },
       },
     };
@@ -94,17 +105,27 @@ const addTodoMutation = mutationWithClientMutationId({
     text: { type: new GraphQLNonNull(GraphQLString) },
   },
   outputFields: {
-    todo: {
-      type: TodoType,
+    todoEdge: {
+      type: GraphQLTodoEdge,
       resolve({ todoId }) {
-        return getTodo(todoId);
+        const todo = getTodo(todoId);
+        return {
+          cursor: cursorForObjectInConnection(viewer.todos, todo),
+          node: todo,
+        };
+      },
+    },
+    viewer: {
+      type: ViewerType,
+      resolve() {
+        return viewer;
       },
     },
   },
   mutateAndGetPayload({ text }) {
     const todo = new Todo({ text, complete: false });
 
-    TodosList.push(todo);
+    viewer.todos.push(todo);
 
     return {
       todoId: todo.id,
@@ -112,11 +133,69 @@ const addTodoMutation = mutationWithClientMutationId({
   },
 });
 
+const removeTodoMutation = mutationWithClientMutationId({
+  name: 'RemoveTodoMutation',
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  outputFields: {
+    id: {
+      type: GraphQLID,
+      resolve({ id }) {
+        return id;
+      },
+    },
+    viewer: {
+      type: ViewerType,
+      resolve() {
+        return viewer;
+      },
+    },
+  },
+  mutateAndGetPayload({ id }) {
+    const { id: todoId } = fromGlobalId(id);
+    _.remove(viewer.todos, { id: todoId });
+
+    return { id };
+  },
+});
+
+const completeTodoMutation = mutationWithClientMutationId({
+  name: 'CompleteTodoMutation',
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLString) },
+  },
+  outputFields: {
+    todo: {
+      type: TodoType,
+      resolve({ todoId }) {
+        return getTodo(todoId);
+      },
+    },
+    viewer: {
+      type: ViewerType,
+      resolve() {
+        return viewer;
+      },
+    },
+  },
+  mutateAndGetPayload({ id }) {
+    const { id: todoId } = fromGlobalId(id);
+    const todo = _.find(viewer.todos, { id: todoId });
+
+    todo.complete = !todo.complete;
+
+    return { todoId };
+  },
+});
+
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields() {
     return {
-      addTodoMutation,
+      addTodo: addTodoMutation,
+      removeTodo: removeTodoMutation,
+      completeTodo: completeTodoMutation,
     };
   },
 });

@@ -1,19 +1,25 @@
 import React from 'react';
 import Relay from 'react-relay';
-import TodosHeader from './../todos/todos-header';
+import TodosHeader from 'app/client/components/todos/todos-header';
+import TodosAdd from 'app/client/components/todos/todos-add';
+import TodosBody from 'app/client/components/todos/todos-body';
+import AddTodoMutation from 'app/client/mutations/add-todo';
+import CompleteTodoMutation from 'app/client/mutations/complete-todo';
+import RemoveTodoMutation from 'app/client/mutations/remove-todo';
 
 export class Todos extends React.Component {
   static propTypes = {
     viewer: React.PropTypes.object,
+    relay: React.PropTypes.object,
   };
 
   render() {
-    console.log(this.props.viewer);
-
     return (
       <div className='container'>
         <div className='row'>
           <TodosHeader />
+          <TodosAdd relay={this.props.relay} viewer={this.props.viewer} />
+          <TodosBody viewer={this.props.viewer} />
         </div>
       </div>
     );
@@ -22,13 +28,12 @@ export class Todos extends React.Component {
 
 export default Relay.createContainer(Todos, {
   initialVariables: {
-    first: 5,
+    numberOfTodos: 10,
   },
   fragments: {
     viewer: () => Relay.QL`
       fragment on Viewer {
-        id
-        todos(first: $first) {
+        todos(last: $numberOfTodos) {
           edges {
             node {
               id
@@ -37,6 +42,10 @@ export default Relay.createContainer(Todos, {
             }
           }
         }
+        numberOfTodos
+        ${ AddTodoMutation.getFragment('viewer') }
+        ${ CompleteTodoMutation.getFragment('viewer') }
+        ${ RemoveTodoMutation.getFragment('viewer') }
       }
     `,
   },

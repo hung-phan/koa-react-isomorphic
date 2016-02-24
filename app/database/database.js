@@ -9,19 +9,17 @@ export class Todo {
   }
 }
 
-export const TodosList = _(100)
-                          .range()
-                          .map(() => new Todo())
-                          .value();
-
 export class Viewer {
   constructor() {
-    this.todos = TodosList;
+    this.todos = _(100)
+                  .range()
+                  .map(() => new Todo)
+                  .value();
   }
 }
 
 export const viewer = new Viewer();
 
 export function getTodo(id) {
-  return _.find(TodosList, { id });
+  return _.find(viewer.todos, { id });
 }
