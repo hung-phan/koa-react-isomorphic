@@ -1,5 +1,5 @@
 import { fromJS, is } from 'immutable';
-import { UPDATE_LOCATION } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { assert } from 'chai';
 import reducer from './routing';
 
@@ -16,10 +16,10 @@ describe('Reducer: Routing', () => {
     ));
   });
 
-  it("should update location when calls 'update_location' action", () => {
+  it("should update location when calls 'LOCATION_CHANGE' action", () => {
     assert(is(
-      reducer(fromJS({ location: undefined }), { type: UPDATE_LOCATION, payload: { data: 1 } }),
-      fromJS({ location: { data: 1 } })
+      reducer(fromJS({ locationBeforeTransitions: undefined }), { type: LOCATION_CHANGE, payload: { data: 1 } }),
+      fromJS({ locationBeforeTransitions: { data: 1 } })
     ));
   });
 });
