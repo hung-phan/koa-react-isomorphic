@@ -6,8 +6,8 @@ class AddTodo extends React.Component {
     addTodo: React.PropTypes.func,
   };
 
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
 
     this.state = { todo: '' };
   }

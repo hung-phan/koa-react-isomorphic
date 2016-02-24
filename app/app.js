@@ -5,24 +5,26 @@ import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'app/client/components/main/app';
-import routes from './routes';
-import configureStore from './client/stores/index';
+import getRoutes from 'app/routes';
+import configureStore from 'app/client/stores/index';
 
-function render(store, appDOM) {
+function render(store, routes, appDOM) {
   ReactDOM.render(<App store={store} routes={routes} />, appDOM);
 }
 
 $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.__data);
+  const routes = getRoutes(store);
 
   if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
     const { clientFetchData } = require('./client/helpers/fetch-data');
+    const location = store.getState().routing.locationBeforeTransitions;
 
-    clientFetchData(routes, store.getState().routing.location, store).then(() => {
-      render(store, appDOM);
+    clientFetchData(routes, location, store).then(() => {
+      render(store, routes, appDOM);
     });
   } else {
-    render(store, appDOM);
+    render(store, routes, appDOM);
   }
 });

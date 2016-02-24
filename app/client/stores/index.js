@@ -1,16 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { syncHistory } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 import reducers from './../reducers';
 
-const history = process.env.RUNTIME_ENV === 'client'
-                  ? require('react-router').browserHistory
-                  : require('history/lib/createMemoryHistory')();
-const reduxRouterMiddleware = syncHistory(history);
-
 let middlewares = [
   thunkMiddleware,
-  reduxRouterMiddleware,
 ];
 let enhancers = [];
 
@@ -36,9 +29,6 @@ const finalCreateStore = compose(
 
 export default function configureStore(initialState = {}) {
   const store = finalCreateStore(reducers, initialState);
-
-  // Required for replaying actions from devtools to work
-  reduxRouterMiddleware.listenForReplays(store);
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>

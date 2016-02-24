@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Debug from './debug';
 
-export default ({ store, routes }) => (
+const App = ({ store, routes }) => (
   <Provider key='provider' store={ store }>
     <div>
       { routes }
@@ -10,3 +10,10 @@ export default ({ store, routes }) => (
     </div>
   </Provider>
 );
+
+App.propTypes = {
+  store: React.PropTypes.object,
+  routes: React.PropTypes.object,
+};
+
+export default App;
