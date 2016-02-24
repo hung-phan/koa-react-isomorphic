@@ -9,8 +9,8 @@ class AddTodo extends React.Component {
     viewer: React.PropTypes.object.isRequired,
   };
 
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
 
     this.state = { todo: '', numberOfTodos: 20 };
   }

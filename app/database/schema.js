@@ -26,7 +26,7 @@ import {
 } from 'graphql-relay';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
-  (globalId) => {
+  (globalId) => { // eslint-disable-line consistent-return
     const { type, id } = fromGlobalId(globalId);
 
     switch (type) {

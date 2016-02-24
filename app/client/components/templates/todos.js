@@ -43,9 +43,9 @@ export default Relay.createContainer(Todos, {
           }
         }
         numberOfTodos
-        ${ AddTodoMutation.getFragment('viewer') }
-        ${ CompleteTodoMutation.getFragment('viewer') }
-        ${ RemoveTodoMutation.getFragment('viewer') }
+        ${AddTodoMutation.getFragment('viewer')}
+        ${CompleteTodoMutation.getFragment('viewer')}
+        ${RemoveTodoMutation.getFragment('viewer')}
       }
     `,
   },

@@ -4,7 +4,7 @@ if (process.env.SERVER_RENDERING) {
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
   const { fetchData } = require('app/client/helpers/fetch-data');
-  const routes = require('app/routes').default;
+  const getRoutes = require('app/routes').default;
   const App = require('app/client/components/main/app').default;
   const settings = require('config/initializers/settings').default;
   const configureStore = require('app/client/stores/index').default;
@@ -13,6 +13,7 @@ if (process.env.SERVER_RENDERING) {
     this.prerender = this.prerender ||
       function (template: string, initialState: Object = {}, parameters: Object = {}) {
         const store = configureStore(initialState);
+        const routes = getRoutes(store);
 
         return new Promise((resolve) => {
           match({ routes, location: this.req.url }, (error, redirectLocation, renderProps) => {

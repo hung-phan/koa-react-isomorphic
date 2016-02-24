@@ -12,8 +12,8 @@ export default function (callback) {
     }
 
     return provideHooks({
-      fetchData() {
-        return callback(...arguments);
+      fetchData(...args) {
+        return callback(...args);
       },
     })(FetchDataEnhancer);
   };
