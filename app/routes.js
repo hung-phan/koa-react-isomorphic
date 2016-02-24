@@ -1,13 +1,28 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
-import Todos from './client/components/templates/todos';
+import { syncHistoryWithStore } from 'react-router-redux';
+import Todos from 'app/client/components/templates/todos';
 
-const history = process.env.RUNTIME_ENV === 'client'
-                  ? require('react-router').browserHistory
-                  : require('history/lib/createLocation')();
+export default function getRoutes(store) {
+  const history = do {
+    let _history;
 
-export default (
-  <Router history={ history }>
-    <Route path='/' component={ Todos } />
-  </Router>
-);
+    if (process.env.RUNTIME_ENV === 'client') {
+      _history = require('react-router').browserHistory;
+    } else {
+      _history = require('react-router').createMemoryHistory();
+    }
+
+    syncHistoryWithStore(_history, store, {
+      selectLocationState(state) {
+        return state.get('routing').toJS();
+      },
+    });
+  };
+
+  return (
+    <Router history={ history }>
+      <Route path='/' component={ Todos } />
+    </Router>
+  );
+}

@@ -3,6 +3,7 @@
   "plugins": [
     [
       "transform-decorators-legacy",
+      "transform-do-expressions",
       "transform-runtime",
     ],
     ["babel-plugin-module-alias", [
