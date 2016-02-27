@@ -164,8 +164,6 @@ Upcoming
     |+ todos-body/
     |+ todos-header/
   |- helpers/
-   |  fetch-data-test.js
-   |  fetch-data.js
    |  get-url-test.js
    |  get-url.js
   |- lib/

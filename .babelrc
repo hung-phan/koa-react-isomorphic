@@ -6,6 +6,7 @@
       "transform-do-expressions",
       "transform-runtime",
     ],
+    ["babel-relay-plugin-loader"],
     ["babel-plugin-module-alias", [
       { "src": "./app", "expose": "app" },
       { "src": "./config", "expose": "config" }
@@ -19,7 +20,6 @@
   "env": {
     "development": {
       "plugins": [
-        ["babel-relay-plugin-loader"],
         ["react-transform", {
           "transforms": [{
             "transform": "react-transform-hmr",
@@ -33,10 +33,7 @@
       ]
     },
     "test": {
-      "plugins": [
-        "babel-relay-plugin-loader",
-        "babel-plugin-rewire"
-      ]
+      "plugins": ["babel-plugin-rewire"]
     }
   }
 }

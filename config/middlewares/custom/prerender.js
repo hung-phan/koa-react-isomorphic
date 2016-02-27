@@ -1,20 +1,22 @@
 if (process.env.SERVER_RENDERING) {
+  const PORT = process.env.PORT || 3000;
   const nunjucks = require('nunjucks');
   const React = require('react');
+  const Relay = require('react-relay');
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
-  const { fetchData } = require('app/client/helpers/fetch-data');
-  const getRoutes = require('app/routes').default;
-  const App = require('app/client/components/main/app').default;
+  const IsomorphicRouter = require('isomorphic-relay-router').default;
+  const routes = require('app/routes').default;
   const settings = require('config/initializers/settings').default;
-  const configureStore = require('app/client/stores/index').default;
+
+  // inject Relay network request
+  Relay.injectNetworkLayer(
+    new Relay.DefaultNetworkLayer(`http://localhost:${PORT}/graphql`)
+  );
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
       function (template: string, initialState: Object = {}, parameters: Object = {}) {
-        const store = configureStore(initialState);
-        const routes = getRoutes(store);
-
         return new Promise((resolve) => {
           match({ routes, location: this.req.url }, (error, redirectLocation, renderProps) => {
             if (error) {
@@ -22,12 +24,10 @@ if (process.env.SERVER_RENDERING) {
             } else if (redirectLocation) {
               this.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
-              fetchData(renderProps, store)
-                .then(() => {
-                  const prerenderData = store.getState();
-                  const currentRoutes = <RouterContext { ...renderProps } />;
+              IsomorphicRouter.prepareData(renderProps)
+                .then(({ data: prerenderData, props }) => {
                   const prerenderComponent = renderToString(
-                    <App store={ store } routes={ currentRoutes } />
+                    <IsomorphicRouter.RouterContext {...props} />
                   );
 
                   resolve(

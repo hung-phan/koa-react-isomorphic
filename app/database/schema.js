@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import debug from 'debug';
 import {
   Todo,
   Viewer,
@@ -26,7 +27,7 @@ import {
 } from 'graphql-relay';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
-  (globalId) => { // eslint-disable-line consistent-return
+  (globalId) => {
     const { type, id } = fromGlobalId(globalId);
 
     switch (type) {
@@ -35,7 +36,8 @@ const { nodeInterface, nodeField } = nodeDefinitions(
       case 'Todo':
         return getTodo(id);
       default:
-        console.log(type, id);
+        debug('schema')(type, id);
+        return undefined;
     }
   }
 );

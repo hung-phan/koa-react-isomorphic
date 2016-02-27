@@ -1,14 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { RelayRouter } from 'react-router-relay';
+import IsomorphicRouter from 'isomorphic-relay-router';
 import ViewerQuery from './client/queries/viewer';
 import Todos from './client/components/templates/todos';
 
 const history = process.env.RUNTIME_ENV === 'client'
                   ? require('react-router').browserHistory
-                  : require('history/lib/createLocation')();
+                  : require('history/lib/createMemoryHistory')();
+
 export default (
-  <RelayRouter history={history}>
+  <IsomorphicRouter.Router history={history}>
     <Route path='/' component={Todos} queries={ViewerQuery} />
-  </RelayRouter>
+  </IsomorphicRouter.Router>
 );
