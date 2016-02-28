@@ -9,7 +9,7 @@ if (process.env.SERVER_RENDERING) {
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
-      function (template: string, initialState: Object = {}, parameters: Object = {}) {
+      function (template: string, parameters: Object = {}) {
         return new Promise((resolve) => {
           match({ routes, location: this.req.url }, (error, redirectLocation, renderProps) => {
             if (error) {
