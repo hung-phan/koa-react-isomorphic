@@ -6,6 +6,7 @@ const cssnext = require('postcss-cssnext');
 const cssnano = require('cssnano');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const PurifyCssPlugin = require('purifycss-webpack-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
@@ -49,6 +50,16 @@ productionConfig.plugins.push(
     'process.env.SERVER_RENDERING': true,
   }),
   new ExtractTextPlugin('[name]-[contenthash].css'),
+  new PurifyCssPlugin({
+    basePath: __dirname,
+    paths: [
+      'app/server/templates/**/*.html',
+      'app/client/**/*.js',
+    ],
+    purifyOptions: {
+      minify: true,
+    },
+  }),
   new ChunkManifestPlugin({
     filename: 'webpack-common-manifest.json',
     manfiestVariable: 'webpackManifest',

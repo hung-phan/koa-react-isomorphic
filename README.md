@@ -19,6 +19,7 @@ So far, I manage to put together these following technologies:
 * [Bootstrap](http://getbootstrap.com/css/) and [FontAwesome](https://fortawesome.github.io/Font-Awesome/)
 * [Redux](https://github.com/rackt/redux)
 * [PostCSS](https://github.com/postcss/postcss)
+* [PurifyCSS](https://github.com/purifycss/purifycss)
 * [CSSNext](http://cssnext.io/)
 * [CSSNano](http://cssnano.co/)
 * [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
@@ -37,9 +38,9 @@ the support of external webpack.
 
 ```javascript
     function(context, request, callback) {
-      const style = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
+      const asset = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
 
-      return (new RegExp(`${style}$`)).test(request)
+      return (new RegExp(`${asset}$`)).test(request)
         ? callback(null, `commonjs ${path.resolve(context, request)}`)
         : callback();
     },
@@ -116,7 +117,7 @@ It will pass this object to template.
 this.prerender:
 
 ```javascript
-this.prerender = this.prerender || function (template: string, parameters: Object = {}, initialState: Object = {}) {}
+this.prerender = this.prerender || function (template: string, parameters: Object = {}, initialState: Object = {}) {...}
 ```
 
 Will receive additional parameter `initialState` which is the state of redux store (This will not apply for relay branch).
