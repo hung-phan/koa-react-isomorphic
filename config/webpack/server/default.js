@@ -18,18 +18,18 @@ module.exports = {
   target: 'node',
   node: {
     __dirname: true,
-    __filename: true
+    __filename: true,
   },
   entry: {
     server: [
-      path.join(ROOT, config.path.app, 'server')
-    ]
+      path.join(ROOT, config.path.app, 'server'),
+    ],
   },
   output: {
     path: path.join(ROOT, config.path.build),
     publicPath: config.path.assets,
     filename: '[name].js',
-    chunkFilename: '[id].js'
+    chunkFilename: '[id].js',
   },
   externals: [
     nodeModules,
@@ -41,34 +41,34 @@ module.exports = {
         : callback();
     },
     function (context, request, callback) {
-      const style = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
+      const asset = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
 
-      return (new RegExp(`${style}$`)).test(request)
+      return (new RegExp(`${asset}$`)).test(request)
         ? callback(null, `commonjs ${path.resolve(context, request)}`)
         : callback();
     },
   ],
   resolve: {
     modulesDirectories: ['node_modules'],
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
   },
   module: {
     loaders: [
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
-      }
-    ]
+        loader: 'eslint-loader',
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.RUNTIME_ENV': "'server'"
-    })
-  ]
+      'process.env.RUNTIME_ENV': "'server'",
+    }),
+  ],
 };

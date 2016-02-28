@@ -45,7 +45,7 @@ the support of external webpack.
     },
 ```
 
-### app/route.js
+### app/routes.js
 
 Contains all components and routing.
 
@@ -60,7 +60,9 @@ Then performs server-side process.
 
 ### Server-side data fetching
 
-We ask react-router for a list of all the routes that match the current request and we check to see if any of the matched routes has a static `fetchData()` function.
+#### Redux
+
+We ask react-router for a list of all the routes that match the current request and then check to see if any of the matched routes has a static `fetchData()` function.
 If it does, we pass the redux dispatcher to it and collect the promises returned. Those promises will be resolved when each matching route has loaded its
 necessary data from the API server. The current implementation is based on [redial](https://github.com/markdalgleish/redial).
 
@@ -78,14 +80,56 @@ export function fetchData(renderProps, store) {
 Takes a look at `templates/todos`, we will have sth like `@fetchDataEnhancer(({ store }) => store.dispatch(fetchTodos()))` to let the server calls `fetchData()` function
 on a component from the server.
 
+#### Relay
+We rely [isomorphic-relay-router](https://github.com/denvned/isomorphic-relay-router) to do the server-rendering path.
+
+```javascript
+IsomorphicRouter.prepareData(renderProps)
+  .then(({ data: prerenderData, props }) => {
+    const prerenderComponent = renderToString(
+      <IsomorphicRouter.RouterContext {...props} />
+    );
+
+    resolve(
+      nunjucks.render(template, {
+        ...settings,
+        ...parameters,
+        prerenderComponent,
+        prerenderData,
+        csrf: this.csrf,
+      })
+    );
+  });
+```
+
+## Render methods
+
+this.render:
+
+```javascript
+this.render = this.render || function (template: string, parameters: Object = {}) {...}
+```
+
+Will receive a template and its additional parameters. See [settings.js](https://github.com/hung-phan/koa-react-isomorphic/blob/master/config%2Finitializers%2Fsettings.js) for more info.
+It will pass this object to template.
+
+this.prerender:
+
+```javascript
+this.prerender = this.prerender || function (template: string, parameters: Object = {}, initialState: Object = {}) {}
+```
+
+Will receive additional parameter `initialState` which is the state of redux store (This will not apply for relay branch).
+
 ## Features
 
 * Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
+* Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
 ## Upcoming
 
 * Rxjs
-* Relay
+* Phusion Passenger server with Nginx
 
 ## Development
 
@@ -135,13 +179,10 @@ $ SECRET_KEY=your_env_key gulp pro-server
 ## Testing
 
 ```bash
-$ npm test
+$ npm test # normal run
+$ npm run test:watch # watch the test
 $ npm run coverage
 ```
-
-### Phusion Passenger server with Nginx
-
-Upcoming
 
 ## Application structure
 

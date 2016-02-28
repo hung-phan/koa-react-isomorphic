@@ -6,18 +6,18 @@ const defaultConfig = require('./default');
 const productionConfig = require('./default');
 
 _.mergeWith(defaultConfig, {
-  devtool: false
+  devtool: false,
 });
 
 productionConfig.plugins.push(
   new webpack.optimize.UglifyJsPlugin({
     mangle: {
-      except: ['GeneratorFunction', 'GeneratorFunctionPrototype']
-    }
+      except: ['GeneratorFunction', 'GeneratorFunctionPrototype'],
+    },
   }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'production'",
-    'process.env.SERVER_RENDERING': true
+    'process.env.SERVER_RENDERING': true,
   })
 );
 

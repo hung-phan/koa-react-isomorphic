@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta8",
     "babel-plugin-react-transform": "^2.0.0",
@@ -90,14 +90,6 @@
     "react-router-redux": "^4.0.0",
     "recompose": "^0.15.0",
     "redial": "^0.4.1",
-    "redux": "^3.3.1",
-    "redux-batched-updates": "*",
-    "redux-devtools": "^3.1.1",
-    "redux-devtools-dock-monitor": "^1.0.1",
-    "redux-devtools-log-monitor": "^1.0.4",
-    "redux-immutablejs": "0.0.8",
-    "redux-logger": "^2.5.2",
-    "redux-thunk": "^1.0.3",
     "rx": "^4.0.7",
     "sass-loader": "^3.1.2",
     "script-loader": "^0.6.1",
@@ -110,11 +102,12 @@
   },
   "scripts": {
     "start": "sh scripts/start",
+    "debug": "sh scripts/debug",
     "dev": "NODE_ENV=development nodemon prod-server.js",
     "test": "NODE_ENV=test PORT=3001 mocha --compilers js:compiler.js 'app/**/*-test.js' 'tests/**/*.js'",
     "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter nyan --compilers js:compiler.js 'app/**/*-test.js' 'tests/**/*.js'",
     "test:lint": "esw -w 'app/**/*-test.js' 'tests/**/*.js'",
-    "coverage": "NODE_ENV=test PORT=3001 istanbul cover node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js' 'tests/**/*.js'",
+    "coverage": "NODE_ENV=test PORT=3001 istanbul cover ./node_modules/.bin/_mocha -- --compilers js:compiler.js 'app/**/*-test.js' 'tests/**/*.js'",
     "postinstall": "sh scripts/build",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "watch": "gulp clean && npm run frontend:watch & gulp backend:watch"

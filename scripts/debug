@@ -1,0 +1,13 @@
+if [ -z "${NODE_ENV}" ]; then
+  export NODE_ENV=${1:-production}
+fi
+
+if [ -z "${PORT}" ]; then
+  export PORT=${2:-3000}
+fi
+
+if [ -z "${DEBUG}" ]; then
+  export DEBUG=${3:-*}
+fi
+
+node-debug prod-server.js
