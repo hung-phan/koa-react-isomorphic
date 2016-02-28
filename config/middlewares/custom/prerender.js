@@ -1,18 +1,11 @@
 if (process.env.SERVER_RENDERING) {
-  const PORT = process.env.PORT || 3000;
   const nunjucks = require('nunjucks');
   const React = require('react');
-  const Relay = require('react-relay');
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
   const IsomorphicRouter = require('isomorphic-relay-router').default;
   const routes = require('app/routes').default;
   const settings = require('config/initializers/settings').default;
-
-  // inject Relay network request
-  Relay.injectNetworkLayer(
-    new Relay.DefaultNetworkLayer(`http://localhost:${PORT}/graphql`)
-  );
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
