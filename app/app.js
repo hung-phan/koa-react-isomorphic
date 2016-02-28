@@ -17,7 +17,7 @@ $(document).ready(() => {
   const store = configureStore(window.__data);
   const routes = getRoutes(store);
 
-  if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
+  if (!process.env.SERVER_RENDERING) {
     const { clientFetchData } = require('./client/helpers/fetch-data');
     const location = store.getState().routing.locationBeforeTransitions;
 

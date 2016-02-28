@@ -11,7 +11,7 @@ if (process.env.SERVER_RENDERING) {
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
-      function (template: string, initialState: Object = {}, parameters: Object = {}) {
+      function (template: string, parameters: Object = {}, initialState: Object = {}) {
         const store = configureStore(initialState);
         const routes = getRoutes(store);
 
