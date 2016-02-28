@@ -82,6 +82,7 @@
     "pm2": "^1.0.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.0",
+    "purifycss-webpack-plugin": "^2.0.3",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
