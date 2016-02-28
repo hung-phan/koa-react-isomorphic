@@ -81,7 +81,7 @@ Takes a look at `templates/todos`, we will have sth like `@fetchDataEnhancer(({ 
 on a component from the server.
 
 #### Relay
-We rely [isomorphic-relay-router](https://github.com/denvned/isomorphic-relay-router) to do the server-rendering path.
+We rely on [isomorphic-relay-router](https://github.com/denvned/isomorphic-relay-router) to do the server-rendering path.
 
 ```javascript
 IsomorphicRouter.prepareData(renderProps)
