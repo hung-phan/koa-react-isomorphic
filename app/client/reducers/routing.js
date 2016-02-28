@@ -3,7 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { fromJS } from 'immutable';
 import { createReducer } from 'redux-immutablejs';
 
-const initialState = fromJS({ location: undefined });
+const initialState = fromJS({ locationBeforeTransitions: undefined });
 
 export default createReducer(initialState, {
   [LOCATION_CHANGE]: (state, { payload }) => state.set('locationBeforeTransitions', fromJS(payload)),
