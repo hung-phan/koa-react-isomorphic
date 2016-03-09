@@ -64,6 +64,10 @@ productionConfig.plugins.push(
     filename: 'webpack-common-manifest.json',
     manfiestVariable: 'webpackManifest',
   }),
+  new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false,
+  }),
   new webpack.optimize.UglifyJsPlugin(),
   webpackIsomorphicToolsPlugin
 );

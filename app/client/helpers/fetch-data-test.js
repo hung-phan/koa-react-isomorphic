@@ -1,18 +1,18 @@
 import sinon from 'sinon';
 import faker from 'faker';
 import { assert } from 'chai';
-import * as fetchDataDeps from './fetch-data';
+import * as fetchData from './fetch-data';
 
 describe('Helper: fetchData', () => {
   it('should be an object', () => {
-    assert.isObject(fetchDataDeps);
+    assert.isObject(fetchData);
   });
 
   context('# getComponents', () => {
     it('should return components from routes', () => {
       assert.deepEqual(
         [1, 2, 3, 4],
-        fetchDataDeps.getComponents({
+        fetchData.getComponents({
           routes: [
             { component: 1 },
             { component: 2 },
@@ -41,15 +41,15 @@ describe('Helper: fetchData', () => {
       store = faker.random.uuid();
       renderProps = { params: faker.random.uuid() };
 
-      fetchDataDeps.__Rewire__('getComponents', getComponents);
-      fetchDataDeps.__Rewire__('trigger', trigger);
+      fetchData.__Rewire__('getComponents', getComponents);
+      fetchData.__Rewire__('trigger', trigger);
 
-      fetchDataDeps.fetchData(renderProps, store);
+      fetchData.fetchData(renderProps, store);
     });
 
     after(() => {
-      fetchDataDeps.__ResetDependency__('getComponents');
-      fetchDataDeps.__ResetDependency__('trigger');
+      fetchData.__ResetDependency__('getComponents');
+      fetchData.__ResetDependency__('trigger');
     });
 
     it(`should call 'getComponents' with 'renderProps'`, () => {

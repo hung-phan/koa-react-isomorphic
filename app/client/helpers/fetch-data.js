@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import map from 'lodash/fp/map';
 import { trigger } from 'redial';
 import { match } from 'react-router';
 
 export function getComponents(renderProps) {
-  return _.map(renderProps.routes, 'component');
+  return map('component', renderProps.routes);
 }
 
 export function fetchData(renderProps, store) {
