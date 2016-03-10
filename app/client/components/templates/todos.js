@@ -10,6 +10,7 @@ import TodosHeader from './../todos/todos-header';
 import TodosBody from './../todos/todos-body';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
 
+/* eslint-disable react/prefer-stateless-function */
 export class Todos extends React.Component {
   static propTypes = {
     todos: React.PropTypes.instanceOf(List).isRequired,
@@ -35,6 +36,7 @@ export class Todos extends React.Component {
     );
   }
 }
+/* eslint-enable react/prefer-stateless-function */
 
 export const decorators = compose(
   connect(
