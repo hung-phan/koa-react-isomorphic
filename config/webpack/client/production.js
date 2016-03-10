@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const config = require('./../../config.json');
+const ROOT = require('./../../path-helper').ROOT;
 const cssnext = require('postcss-cssnext');
 const cssnano = require('cssnano');
 const webpack = require('webpack');
@@ -51,7 +52,7 @@ productionConfig.plugins.push(
   }),
   new ExtractTextPlugin('[name]-[contenthash].css'),
   new PurifyCssPlugin({
-    basePath: __dirname,
+    basePath: ROOT,
     paths: [
       'app/server/templates/**/*.html',
       'app/client/**/*.js',
