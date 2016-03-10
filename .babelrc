@@ -33,7 +33,7 @@
       ]
     },
     "test": {
-      "plugins": ["babel-plugin-rewire"]
+      "plugins": ["rewire"]
     }
   }
 }

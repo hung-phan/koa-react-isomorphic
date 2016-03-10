@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Todos } from './todos';
 import TodosHeader from 'app/client/components/todos/todos-header';
 import TodosAdd from 'app/client/components/todos/todos-add';
@@ -25,23 +25,7 @@ describe('Component: Todos', () => {
   let component;
 
   beforeEach(() => {
-    component = mount(<Todos viewer={viewer} relay={relay} />);
-  });
-
-  context('# Todos', () => {
-    let todosComponent;
-
-    beforeEach(() => {
-      todosComponent = component.find(Todos);
-    });
-
-    it(`should have props 'viewer'`, () => {
-      assert.property(todosComponent.props(), 'viewer');
-    });
-
-    it(`should have props 'relay'`, () => {
-      assert.property(todosComponent.props(), 'relay');
-    });
+    component = shallow(<Todos viewer={viewer} relay={relay} />);
   });
 
   it(`should have 'TodosHeader' component`, () => {

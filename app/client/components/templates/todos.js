@@ -7,6 +7,7 @@ import AddTodoMutation from 'app/client/mutations/add-todo';
 import CompleteTodoMutation from 'app/client/mutations/complete-todo';
 import RemoveTodoMutation from 'app/client/mutations/remove-todo';
 
+/* eslint-disable react/prefer-stateless-function */
 export class Todos extends React.Component {
   static propTypes = {
     viewer: React.PropTypes.object,
@@ -25,6 +26,7 @@ export class Todos extends React.Component {
     );
   }
 }
+/* eslint-enable react/prefer-stateless-function */
 
 export default Relay.createContainer(Todos, {
   initialVariables: {
