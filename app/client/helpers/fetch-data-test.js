@@ -1,7 +1,9 @@
 import sinon from 'sinon';
 import faker from 'faker';
 import { assert } from 'chai';
-import * as fetchData from './fetch-data';
+import rewire from 'rewire';
+
+const fetchData = rewire('./fetch-data');
 
 describe('Helper: fetchData', () => {
   it('should be an object', () => {

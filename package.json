@@ -24,6 +24,7 @@
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.2",
     "redbox-react": "^1.2.2",
+    "rewire": "^2.5.1",
     "sinon": "^1.17.3",
     "supertest": "^1.2.0"
   },
