@@ -4,7 +4,6 @@ const _ = require('lodash');
 const config = require('./../../config.json');
 const ROOT = require('./../../path-helper').ROOT;
 const cssnext = require('postcss-cssnext');
-const cssnano = require('cssnano');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCssPlugin = require('purifycss-webpack-plugin');
@@ -23,7 +22,7 @@ _.mergeWith(productionConfig, {
     chunkFilename: '[id]-[chunkhash].bundle.js',
   },
   postcss() {
-    return [cssnext(), cssnano];
+    return [cssnext()];
   },
 }, (obj1, obj2) =>
   _.isArray(obj2) ? obj2.concat(obj1) : undefined
