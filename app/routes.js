@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Todos from 'app/client/components/templates/todos';
+import Todos from 'app/client/components/todos';
 
 export default function getRoutes(store) {
   const history = do {
@@ -13,6 +13,7 @@ export default function getRoutes(store) {
       _history = require('react-router').createMemoryHistory();
     }
 
+    // The do syntax will return the result of syncHistoryWithStore
     syncHistoryWithStore(_history, store);
   };
 

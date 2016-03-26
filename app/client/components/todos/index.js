@@ -2,11 +2,11 @@ import React from 'react';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import fetchDataEnhancer from './../helpers/fetch-data-enhancer';
-import TodosAdd from './../todos/todos-add';
-import TodosHeader from './../todos/todos-header';
-import TodosBody from './../todos/todos-body';
-import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/actions/todos';
+import TodosAdd from './todos-add';
+import TodosHeader from './todos-header';
+import TodosBody from './todos-body';
+import fetchDataEnhancer from 'app/client/components/helpers/fetch-data-enhancer';
+import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/modules/todos';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Todos extends React.Component {

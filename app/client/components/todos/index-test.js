@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Todos } from './todos';
+import { Todos } from './index';
 import TodosHeader from './../todos/todos-header';
 import TodosAdd from './../todos/todos-add';
 import TodosBody from './../todos/todos-body';
