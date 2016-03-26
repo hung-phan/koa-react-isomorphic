@@ -1,9 +1,7 @@
-/* eslint no-console: [0] */
 import 'babel-polyfill';
-
-import app from './server-init';
 import log4js from 'log4js';
 import Relay from 'react-relay';
+import app from './server-app';
 
 log4js.configure({
   appenders: [
@@ -12,14 +10,13 @@ log4js.configure({
   replaceConsole: true,
 });
 
-const PORT = process.env.PORT || 3000;
 
 if (process.env.SERVER_RENDERING) {
   // inject Relay network request
   Relay.injectNetworkLayer(
-    new Relay.DefaultNetworkLayer(`http://localhost:${PORT}/graphql`)
+    new Relay.DefaultNetworkLayer(`http://localhost:${process.env.PORT}/graphql`)
   );
 }
 
-app.listen(PORT);
-console.log(`Server listening on port ${PORT}`);
+app.listen(process.env.PORT);
+console.log(`Server listening on port ${process.env.PORT}`); // eslint-disable-line no-console

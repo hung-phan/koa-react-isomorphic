@@ -17,11 +17,10 @@ describe('Helper: getUrl', () => {
     assert.equal(getUrl(url), url);
   });
 
-  it("should return url 'http://localhost:3000/api/v1/todos' in server environment", () => {
-    process.env.PORT = 3000;
+  it(`should return url 'http://localhost:${process.env.PORT}/api/v1/todos' in server environment`, () => {
     process.env.RUNTIME_ENV = 'server';
 
     const url = '/api/v1/todos';
-    assert.equal(getUrl(url), `http://localhost:3000${url}`);
+    assert.equal(getUrl(url), `http://localhost:${process.env.PORT}${url}`);
   });
 });

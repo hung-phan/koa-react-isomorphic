@@ -1,11 +1,11 @@
 import React from 'react';
 import Relay from 'react-relay';
-import TodosHeader from 'app/client/components/todos/todos-header';
-import TodosAdd from 'app/client/components/todos/todos-add';
-import TodosBody from 'app/client/components/todos/todos-body';
-import AddTodoMutation from 'app/client/mutations/add-todo';
-import CompleteTodoMutation from 'app/client/mutations/complete-todo';
-import RemoveTodoMutation from 'app/client/mutations/remove-todo';
+import TodosHeader from './todos-header';
+import TodosAdd from './todos-add';
+import TodosBody from './todos-body';
+import AddTodoMutation from 'client/mutations/add-todo';
+import CompleteTodoMutation from 'client/mutations/complete-todo';
+import RemoveTodoMutation from 'client/mutations/remove-todo';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Todos extends React.Component {

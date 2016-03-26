@@ -5,7 +5,7 @@ if (process.env.SERVER_RENDERING) {
   const { match, RouterContext } = require('react-router');
   const IsomorphicRouter = require('isomorphic-relay-router').default;
   const routes = require('app/routes').default;
-  const settings = require('config/initializers/settings').default;
+  const settings = require('server/initializers/settings').default;
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||

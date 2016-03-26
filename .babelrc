@@ -3,13 +3,15 @@
   "plugins": [
     [
       "transform-decorators-legacy",
-      "transform-do-expressions",
       "transform-runtime",
     ],
     ["babel-relay-plugin-loader"],
     ["babel-plugin-module-alias", [
       { "src": "./app", "expose": "app" },
-      { "src": "./config", "expose": "config" }
+      { "src": "./config", "expose": "app-config" },
+      { "src": "./app/client", "expose": "client" },
+      { "src": "./app/server", "expose": "server" },
+      { "src": "./app/database", "expose": "database" }
     ]],
     ["typecheck", {
       "disable": {

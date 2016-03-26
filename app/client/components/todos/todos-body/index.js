@@ -1,8 +1,8 @@
 import style from './style.css';
 import React from 'react';
 import Relay from 'react-relay';
-import CompleteTodoMutation from 'app/client/mutations/complete-todo';
-import RemoveTodoMutation from 'app/client/mutations/remove-todo';
+import CompleteTodoMutation from 'client/mutations/complete-todo';
+import RemoveTodoMutation from 'client/mutations/remove-todo';
 
 const TodosBody = ({ viewer }) => (
   <div className={`col-md-12 ${style.container}`}>
@@ -40,11 +40,11 @@ const TodosBody = ({ viewer }) => (
               </tr>
             );
           })
-  }
-          </tbody>
-        </table>
-      </div>
-    );
+        }
+      </tbody>
+    </table>
+  </div>
+);
 
 TodosBody.propTypes = {
   viewer: React.PropTypes.object.isRequired,

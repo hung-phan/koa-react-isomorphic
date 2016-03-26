@@ -1,7 +1,7 @@
 import React from 'react';
 import Relay from 'react-relay';
 import autobind from 'autobind-decorator';
-import AddTodoMutation from 'app/client/mutations/add-todo';
+import AddTodoMutation from 'client/mutations/add-todo';
 
 class AddTodo extends React.Component {
   static propTypes = {
