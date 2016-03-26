@@ -1,27 +1,27 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Todos from 'app/client/components/templates/todos';
+import Todos from 'client/components/todos';
 
-export default function getRoutes(store) {
-  const history = do {
-    let _history;
+function getHistory(store) {
+  let history;
 
-    if (process.env.RUNTIME_ENV === 'client') {
-      _history = require('react-router').browserHistory;
-    } else {
-      _history = require('react-router').createMemoryHistory();
-    }
+  if (process.env.RUNTIME_ENV === 'client') {
+    history = require('react-router').browserHistory;
+  } else {
+    history = require('react-router').createMemoryHistory();
+  }
 
-    syncHistoryWithStore(_history, store, {
-      selectLocationState(state) {
-        return state.get('routing').toJS();
-      },
-    });
-  };
+  return syncHistoryWithStore(history, store, {
+    selectLocationState(state) {
+      return state.get('routing').toJS();
+    },
+  });
+}
 
+export default function (store) {
   return (
-    <Router history={ history }>
+    <Router history={ getHistory(store) }>
       <Route path='/' component={ Todos } />
     </Router>
   );

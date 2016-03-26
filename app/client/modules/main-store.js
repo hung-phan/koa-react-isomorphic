@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import reducers from './../reducers';
+import reducers from './main-reducer';
 
 let middlewares = [
   thunkMiddleware,
@@ -31,12 +31,12 @@ const finalCreateStore = compose(
   ...enhancers
 )(createStore);
 
-export default function configureStore(initialState = {}) {
+export default function (initialState = {}) {
   const store = finalCreateStore(reducers, fromJS(initialState));
 
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers').default)
+    module.hot.accept('./main-reducer', () =>
+      store.replaceReducer(require('./main-reducer').default)
     );
   }
 

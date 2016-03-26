@@ -1,5 +1,5 @@
 import nunjucks from 'nunjucks';
-import settings from 'config/initializers/settings';
+import settings from 'server/initializers/settings';
 
 export default function* (next) {
   this.render = this.render ||

@@ -1,4 +1,4 @@
-import { PUBLIC } from 'config/path-helper';
+import { PUBLIC } from 'app-config/path-helper';
 import cors from 'koa-cors';
 import middlewares from 'koa-middlewares';
 import htmlMinifier from 'koa-html-minifier';
@@ -14,7 +14,7 @@ export function loggingLayer(app) {
 export function initialLayer(app) {
   app.use(middlewares.bodyParser()); // https://github.com/koajs/bodyparser
 
-  // remove this config if you have nginx already serves the public folder
+  // remove this appConfig if you have nginx already serves the public folder
   // in production mode
   app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
 }

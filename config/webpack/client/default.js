@@ -2,7 +2,7 @@
 
 const path = require('path');
 const ROOT = require('./../../path-helper').ROOT;
-const config = require('./../../config.json');
+const config = require('./../../index');
 const webpack = require('webpack');
 
 module.exports = {

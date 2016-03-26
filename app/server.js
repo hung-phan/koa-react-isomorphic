@@ -1,8 +1,6 @@
-/* eslint no-console: [0] */
 import 'babel-polyfill';
-
-import app from './server-init';
 import log4js from 'log4js';
+import app from './server-app';
 
 log4js.configure({
   appenders: [
@@ -11,7 +9,6 @@ log4js.configure({
   replaceConsole: true,
 });
 
-const PORT = process.env.PORT || 3000;
 
-app.listen(PORT);
-console.log(`Server listening on port ${PORT}`);
+app.listen(process.env.PORT);
+console.log(`Server listening on port ${process.env.PORT}`); // eslint-disable-line no-console

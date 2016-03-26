@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import supertest from 'supertest';
-import app from 'app/server-init';
+import app from 'app/server-app';
 
 describe('Controller: application', () => {
   const request = supertest(app.listen());

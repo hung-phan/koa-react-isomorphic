@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import supertest from 'supertest';
-import app from 'app/server-init';
+import app from 'app/server-app';
 
 describe('API: v1/todos', () => {
   const request = supertest(app.listen());

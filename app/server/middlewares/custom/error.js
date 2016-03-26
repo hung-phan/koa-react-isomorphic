@@ -1,6 +1,6 @@
 import http from 'http';
 import nunjucks from 'nunjucks';
-import settings from 'config/initializers/settings';
+import settings from 'server/initializers/settings';
 
 export default function error() {
   return function* (next) {

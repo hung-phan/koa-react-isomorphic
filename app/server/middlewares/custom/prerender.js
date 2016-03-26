@@ -3,11 +3,11 @@ if (process.env.SERVER_RENDERING) {
   const React = require('react');
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
-  const { fetchData } = require('app/client/helpers/fetch-data');
   const getRoutes = require('app/routes').default;
-  const App = require('app/client/components/main/app').default;
-  const settings = require('config/initializers/settings').default;
-  const configureStore = require('app/client/stores/index').default;
+  const settings = require('server/initializers/settings').default;
+  const App = require('client/components/main/app').default;
+  const { fetchData } = require('client/helpers/fetch-data');
+  const configureStore = require('client/modules/main-store').default;
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
