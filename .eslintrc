@@ -10,6 +10,7 @@
   "rules": {
     "max-len": [0],
     "func-names": [0],
+    "quotes": [0],
     "jsx-quotes": [1, "prefer-single"],
     "mocha/no-exclusive-tests": 2
   }
