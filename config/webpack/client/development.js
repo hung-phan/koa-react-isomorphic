@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 const ROOT = require('./../../path-helper').ROOT;
-const config = require('./../../config.json');
+const config = require('./../../index');
 const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');

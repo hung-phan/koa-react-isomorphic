@@ -3,8 +3,8 @@ import faker from 'faker';
 import React from 'react';
 import { assert } from 'chai';
 import { mount } from 'enzyme';
-import mockingComponent from 'app/client/components/test-helpers/mocking-component';
-import Provider from 'app/client/components/test-helpers/provider-mock';
+import mockingComponent from 'client/components/test-helpers/mocking-component';
+import Provider from 'client/components/test-helpers/provider-mock';
 import fetchDataEnhancer from './fetch-data-enhancer';
 
 describe('Helper: fetchDataEnhancer', () => {

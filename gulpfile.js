@@ -6,7 +6,7 @@ const gutil = require('gulp-util');
 const env = require('gulp-env');
 const webpack = require('webpack');
 const shell = require('shelljs');
-const config = require('./config/config.json');
+const config = require('./config');
 
 // clean task
 function cleanTask(files) {

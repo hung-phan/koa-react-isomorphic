@@ -4,9 +4,9 @@ import './client/lib/index';
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'app/client/components/main/app';
 import getRoutes from 'app/routes';
-import configureStore from 'app/client/stores/index';
+import App from 'client/components/main/app';
+import configureStore from 'client/modules/main-store';
 
 function render(store, routes, appDOM) {
   ReactDOM.render(<App store={store} routes={routes} />, appDOM);
@@ -18,7 +18,7 @@ $(document).ready(() => {
   const routes = getRoutes(store);
 
   if (!process.env.SERVER_RENDERING) {
-    const { clientFetchData } = require('./client/helpers/fetch-data');
+    const { clientFetchData } = require('client/helpers/fetch-data');
     const location = store.getState().routing.locationBeforeTransitions;
 
     clientFetchData(routes, location, store).then(() => {

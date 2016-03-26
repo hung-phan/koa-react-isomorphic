@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const config = require('./../../config.json');
+const config = require('./../../index');
 const ROOT = require('./../../path-helper').ROOT;
 const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');

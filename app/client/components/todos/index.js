@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import TodosAdd from './todos-add';
 import TodosHeader from './todos-header';
 import TodosBody from './todos-body';
-import fetchDataEnhancer from 'app/client/components/helpers/fetch-data-enhancer';
-import { addTodo, removeTodo, completeTodo, fetchTodos } from 'app/client/modules/todos';
+import fetchDataEnhancer from 'client/components/helpers/fetch-data-enhancer';
+import { addTodo, removeTodo, completeTodo, fetchTodos } from 'client/modules/todos';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Todos extends React.Component {

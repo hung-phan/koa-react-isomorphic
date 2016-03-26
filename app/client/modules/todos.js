@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { createAction, handleActions } from 'redux-actions';
-import getUrl from 'app/client/helpers/get-url';
+import getUrl from 'client/helpers/get-url';
 
 export const ADD_TODO = 'todos/ADD_TODO';
 export const REMOVE_TODO = 'todos/REMOVE_TODO';

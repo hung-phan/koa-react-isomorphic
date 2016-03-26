@@ -4,7 +4,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const ROOT = require('./../../path-helper').ROOT;
-const config = require('./../../config.json');
+const config = require('./../../index');
 const webpack = require('webpack');
 const nodeModules = _.reduce(
                       // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js

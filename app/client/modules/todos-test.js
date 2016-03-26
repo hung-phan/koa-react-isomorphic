@@ -11,7 +11,7 @@ import reducer, {
 
 describe('Module: Todos', () => {
   describe('Actions', () => {
-    context('async', () => {
+    context('fetchTodos', () => {
       const todos = [
         { text: 'Todo 1', complete: false },
         { text: 'Todo 2', complete: false },
@@ -19,23 +19,19 @@ describe('Module: Todos', () => {
         { text: 'Todo 4', complete: false },
       ];
       let RUNTIME_ENV;
-      let port;
 
       before(() => {
         RUNTIME_ENV = process.env.RUNTIME_ENV;
-        port = process.env.PORT;
 
-        process.env.PORT = 3000;
         process.env.RUNTIME_ENV = 'server';
 
-        nock('http://localhost:3000')
+        nock(`http://localhost:${process.env.PORT}`)
           .get('/api/v1/todos')
           .reply(200, todos);
       });
 
       after(() => {
         process.env.RUNTIME_ENV = RUNTIME_ENV;
-        process.env.PORT = port;
       });
 
       it("should define 'fetchTodos' function", () => {
