@@ -9,6 +9,5 @@ log4js.configure({
   replaceConsole: true,
 });
 
-
 app.listen(process.env.PORT);
 console.log(`Server listening on port ${process.env.PORT}`); // eslint-disable-line no-console
