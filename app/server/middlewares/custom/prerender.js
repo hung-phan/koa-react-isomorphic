@@ -7,7 +7,7 @@ if (process.env.SERVER_RENDERING) {
   const settings = require('server/initializers/settings').default;
   const App = require('client/components/main/app').default;
   const { fetchData } = require('client/helpers/fetch-data');
-  const configureStore = require('client/modules/main-store').default;
+  const configureStore = require('client/main-store').default;
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||

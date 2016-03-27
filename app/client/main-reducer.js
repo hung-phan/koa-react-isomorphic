@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutablejs';
-import routing from './routing';
-import todos from './todos';
+import routing from './components/routing/logic-bundle';
+import todos from './components/todos/logic-bundle';
 
 export default combineReducers({
   todos,

@@ -6,7 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import getRoutes from 'app/routes';
 import App from 'client/components/main/app';
-import configureStore from 'client/modules/main-store';
+import configureStore from 'client/main-store';
 
 function render(store, routes, appDOM) {
   ReactDOM.render(<App store={store} routes={routes} />, appDOM);

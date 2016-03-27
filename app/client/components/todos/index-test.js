@@ -1,4 +1,5 @@
 import { assert } from 'chai';
+import { List } from 'immutable';
 import sinon from 'sinon';
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -8,12 +9,12 @@ import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
 
 describe('Component: Todos', () => {
-  const todos = [
+  const todos = List([ // eslint-disable-line new-cap
     { text: 'Todo 1', complete: false },
     { text: 'Todo 2', complete: false },
     { text: 'Todo 3', complete: false },
     { text: 'Todo 4', complete: false },
-  ];
+  ]);
   let actions;
   let component;
 

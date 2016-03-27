@@ -1,7 +1,7 @@
 import { fromJS, is } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { assert } from 'chai';
-import reducer from './routing';
+import reducer from './logic-bundle';
 
 describe('Reducer: Routing', () => {
   it('should be a function', () => {
