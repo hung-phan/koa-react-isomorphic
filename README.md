@@ -127,6 +127,14 @@ Will receive additional parameter `initialState` which is the state of redux sto
 * Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
 * Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
+## Idea to structure redux application
+For now, the best way is to place all logic in the same place with components to make it less painful when scaling the application.
+Current structure is the combination of ideas from [organizing-redux](http://jaysoo.ca/2016/02/28/organizing-redux-application/) and
+[ducks-modular-redux](https://github.com/erikras/ducks-modular-redux). Briefly, we will have our reducer, action-types, and actions
+in the same place with featured components.
+
+![alt text](https://raw.githubusercontent.com/hung-phan/koa-react-isomorphic/master/redux-structure.png "redux structure")
+
 ## Upcoming
 
 * Rxjs

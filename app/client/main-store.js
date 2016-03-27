@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   ];
   enhancers = [
     ...enhancers,
-    require('./../components/main/debug').default.instrument(),
+    require('./components/main/debug').default.instrument(),
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
   ];
 }

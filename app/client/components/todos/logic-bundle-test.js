@@ -7,7 +7,7 @@ import reducer, {
   completeTodo,
   setTodos,
   fetchTodos,
-} from './todos';
+} from './logic-bundle';
 
 describe('Module: Todos', () => {
   describe('Actions', () => {
