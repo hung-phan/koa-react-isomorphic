@@ -49,8 +49,11 @@ module.exports = {
     },
   ],
   resolve: {
-    modulesDirectories: ['node_modules'],
     extensions: ['', '.js'],
+    modules: [
+      path.resolve('./app'),
+      'node_modules',
+    ],
   },
   module: {
     loaders: [
