@@ -9,5 +9,10 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(
 global.webpackIsomorphicTools
   .development(process.env.NODE_ENV === 'development')
   .server(ROOT, () => {
-    require('./build/server');
+    if (process.env.NODE_DEBUGGER) {
+      require('babel-core/register');
+      require('./app/server');
+    } else {
+      require('./build/server');
+    }
   });

@@ -210,6 +210,15 @@ $ npm run test:watch
 $ npm run test:lint
 ```
 
+## Debug
+```bash
+$ npm run watch
+$ npm run debug
+```
+
+If you use tool like Webstorm or any JetBrains product to debug, you need add another option to `scripts/debug` to prevent
+using default browser to debug. Example: `node-debug -p 9999 -b -c prod-server.js`
+
 ## Production
 
 ### Normal run
