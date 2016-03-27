@@ -10,7 +10,6 @@ log4js.configure({
   replaceConsole: true,
 });
 
-
 if (process.env.SERVER_RENDERING) {
   // inject Relay network request
   Relay.injectNetworkLayer(

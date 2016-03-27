@@ -6,8 +6,20 @@ if [ -z "${PORT}" ]; then
   export PORT=${2:-3000}
 fi
 
-if [ -z "${DEBUG}" ]; then
-  export DEBUG=${3:-*}
+if [ -z "${NODE_DEBUGGER}" ]; then
+  export NODE_DEBUGGER=${3:-node-inspector}
 fi
 
-node-debug prod-server.js
+if [ -z "${RUNTIME_ENV}" ]; then
+  export RUNTIME_ENV=${4:-server}
+fi
+
+if [ -z "${SECRET_KEY}" ]; then
+  export SECRET_KEY=${5:-secret}
+fi
+
+if [ -z "${SERVER_RENDERING}" ]; then
+  export SERVER_RENDERING=${6:-0}
+fi
+
+node-debug -p 9999 -b -c prod-server.js
