@@ -4,7 +4,7 @@
   "devDependencies": {
     "babel-eslint": "^6.0.0",
     "babel-plugin-react-transform": "^2.0.0",
-    "babel-plugin-rewire": "^1.0.0-rc-1",
+    "babel-plugin-rewire": "^1.0.0-rc-2",
     "babel-relay-plugin-loader": "^0.7.1",
     "chai": "^3.5.0",
     "enzyme": "^2.0.0",
