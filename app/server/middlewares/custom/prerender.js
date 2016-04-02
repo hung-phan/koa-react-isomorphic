@@ -6,7 +6,7 @@ if (process.env.SERVER_RENDERING) {
   const { getRoutes, getServerHistory } = require('app/routes');
   const settings = require('server/initializers/settings').default;
   const App = require('client/components/main/app').default;
-  const { fetchData } = require('client/helpers/fetch-data');
+  const { serverFetchData } = require('client/helpers/fetch-data');
   const configureStore = require('client/main-store').default;
 
   module.exports = function* (next) {
@@ -22,7 +22,7 @@ if (process.env.SERVER_RENDERING) {
             } else if (redirectLocation) {
               this.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
-              fetchData(renderProps, store)
+              serverFetchData(renderProps, store)
                 .then(() => {
                   const currentRoutes = <RouterContext { ...renderProps } />;
                   const prerenderComponent = renderToString(
