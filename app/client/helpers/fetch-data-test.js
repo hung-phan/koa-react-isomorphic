@@ -1,67 +1,86 @@
+import _ from 'lodash';
 import sinon from 'sinon';
 import faker from 'faker';
 import { assert } from 'chai';
 import rewire from 'rewire';
 
-const fetchData = rewire('./fetch-data');
+const Module = rewire('./fetch-data');
 
 describe('Helper: fetchData', () => {
   it('should be an object', () => {
-    assert.isObject(fetchData);
+    assert.isObject(Module);
   });
 
-  context('# getComponents', () => {
-    it('should return components from routes', () => {
-      assert.deepEqual(
-        [1, 2, 3, 4],
-        fetchData.getComponents({
-          routes: [
-            { component: 1 },
-            { component: 2 },
-            { component: 3 },
-            { component: 4 },
-          ],
-        })
-      );
-    });
-  });
-
-  context('# fetchData', () => {
-    let getComponents;
-    let components;
+  context('# serverFetchData', () => {
+    let routes;
     let trigger;
     let renderProps;
     let store;
 
     before(() => {
-      components = [1, 2, 3, 4];
-      getComponents = sinon.stub();
-      getComponents.returns(components);
-
+      routes = _.range(4);
       trigger = sinon.spy();
-
       store = faker.random.uuid();
-      renderProps = { params: faker.random.uuid() };
+      renderProps = {
+        routes: _.map(routes, (component) => ({ component })),
+        params: faker.random.uuid(),
+        location: faker.random.uuid(),
+      };
 
-      fetchData.__Rewire__('getComponents', getComponents);
-      fetchData.__Rewire__('trigger', trigger);
+      Module.__Rewire__('trigger', trigger);
 
-      fetchData.fetchData(renderProps, store);
+      Module.serverFetchData(renderProps, store);
     });
 
     after(() => {
-      fetchData.__ResetDependency__('getComponents');
-      fetchData.__ResetDependency__('trigger');
-    });
-
-    it(`should call 'getComponents' with 'renderProps'`, () => {
-      sinon.assert.calledWith(getComponents, renderProps);
+      Module.__ResetDependency__('trigger');
     });
 
     it(`should call 'trigger' with 'components' and 'locals'`, () => {
-      sinon.assert.calledWith(trigger, 'fetchData', components, {
+      sinon.assert.calledWith(trigger, 'fetchData', routes, {
         store,
         params: renderProps.params,
+        location: renderProps.location,
+      });
+    });
+  });
+
+  context('# clientFetchData', () => {
+    let store;
+    let routes;
+    let browserHistoryListen;
+
+    before(() => {
+      routes = _.range(4);
+      store = faker.random.uuid();
+      browserHistoryListen = (callback) => callback(faker.random.uuid());
+      Module.__Rewire__('browserHistory', {
+        listen: browserHistoryListen,
+      });
+    });
+
+    after(() => {
+      Module.__ResetDependency__('browserHistory');
+    });
+
+    describe('# error', () => {
+      let windowLocation;
+      let match;
+
+      before(() => {
+        windowLocation = { href: '/' };
+        match = (route, callback) => {
+          callback(true, undefined, undefined);
+        };
+        Module.__Rewire__('match', match);
+        Module.__Rewire__('window.location', windowLocation);
+
+        Module.clientFetchData(routes, store);
+      });
+
+      after(() => {
+        Module.__ResetDependency__('match');
+        Module.__ResetDependency__('window.location');
       });
     });
   });
