@@ -3,7 +3,7 @@ if (process.env.SERVER_RENDERING) {
   const React = require('react');
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
-  const getRoutes = require('app/routes').default;
+  const { getRoutes, getServerHistory } = require('app/routes');
   const settings = require('server/initializers/settings').default;
   const App = require('client/components/main/app').default;
   const { fetchData } = require('client/helpers/fetch-data');
@@ -13,7 +13,7 @@ if (process.env.SERVER_RENDERING) {
     this.prerender = this.prerender ||
       function (template: string, parameters: Object = {}, initialState: Object = {}) {
         const store = configureStore(initialState);
-        const routes = getRoutes(store);
+        const routes = getRoutes(getServerHistory(store, this.req.url));
 
         return new Promise((resolve) => {
           match({ routes, location: this.req.url }, (error, redirectLocation, renderProps) => {
@@ -24,11 +24,11 @@ if (process.env.SERVER_RENDERING) {
             } else if (renderProps) {
               fetchData(renderProps, store)
                 .then(() => {
-                  const prerenderData = store.getState();
                   const currentRoutes = <RouterContext { ...renderProps } />;
                   const prerenderComponent = renderToString(
                     <App store={ store } routes={ currentRoutes } />
                   );
+                  const prerenderData = store.getState();
 
                   resolve(
                     nunjucks.render(template, {
