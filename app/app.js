@@ -3,7 +3,7 @@ import './client/lib/index';
 
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
-import routes from './routes';
+import { getRoutes, getClientHistory } from 'app/routes';
 
 $(document).ready(() => {
   if (process.env.SERVER_RENDERING) {
@@ -12,5 +12,5 @@ $(document).ready(() => {
     IsomorphicRelay.injectPreparedData(window.__data);
   }
 
-  ReactDOM.render(routes, document.getElementById('app'));
+  ReactDOM.render(getRoutes(getClientHistory()), document.getElementById('app'));
 });

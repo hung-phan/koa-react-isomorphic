@@ -4,12 +4,18 @@ import IsomorphicRouter from 'isomorphic-relay-router';
 import ViewerQuery from './client/queries/viewer';
 import Todos from 'client/components/todos';
 
-const history = process.env.RUNTIME_ENV === 'client'
-                  ? require('react-router').browserHistory
-                  : require('history/lib/createMemoryHistory')();
+export function getClientHistory() {
+  return require('react-router').browserHistory;
+}
 
-export default (
-  <IsomorphicRouter.Router history={history}>
-    <Route path='/' component={Todos} queries={ViewerQuery} />
-  </IsomorphicRouter.Router>
-);
+export function getServerHistory(url) {
+  return require('react-router').createMemoryHistory(url);
+}
+
+export function getRoutes(history) {
+  return (
+    <IsomorphicRouter.Router history={history}>
+      <Route path='/' component={Todos} queries={ViewerQuery} />
+    </IsomorphicRouter.Router>
+  );
+}

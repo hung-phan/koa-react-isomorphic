@@ -4,14 +4,17 @@ if (process.env.SERVER_RENDERING) {
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
   const IsomorphicRouter = require('isomorphic-relay-router').default;
-  const routes = require('app/routes').default;
+  const { getRoutes, getServerHistory } = require('app/routes');
   const settings = require('server/initializers/settings').default;
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
       function (template: string, parameters: Object = {}) {
         return new Promise((resolve) => {
-          match({ routes, location: this.req.url }, (error, redirectLocation, renderProps) => {
+          match({
+            routes: getRoutes(getServerHistory(this.req.url)),
+            location: this.req.url,
+          }, (error, redirectLocation, renderProps) => {
             if (error) {
               this.throw(500, error.message);
             } else if (redirectLocation) {
