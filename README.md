@@ -63,18 +63,49 @@ Then performs server-side process.
 
 #### Redux
 
-We ask react-router for a list of all the routes that match the current request and then check to see if any of the matched routes has a static `fetchData()` function.
+We ask react-router for route which matches the current request and then check to see if has a static `fetchData()` function.
 If it does, we pass the redux dispatcher to it and collect the promises returned. Those promises will be resolved when each matching route has loaded its
 necessary data from the API server. The current implementation is based on [redial](https://github.com/markdalgleish/redial).
 
 ```javascript
-export function fetchData(renderProps, store) {
-  const locals = {
-    store,
-    params: renderProps.params,
-  };
+export default (callback) => (ComposedComponent) => {
+  class FetchDataEnhancer extends ComposedComponent {
+    render() {
+      return (
+        <ComposedComponent { ...this.props } />
+      );
+    }
+  }
 
-  return trigger('fetchData', getComponents(renderProps), locals);
+  return provideHooks({
+    fetchData(...args) {
+      return callback(...args);
+    },
+  })(FetchDataEnhancer);
+};
+```
+
+and
+
+```javascript
+export function serverFetchData(renderProps, store) {
+  return trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
+}
+
+export function clientFetchData(routes, store) {
+  browserHistory.listen(location => {
+    match({ routes, location }, (error, redirectLocation, renderProps) => {
+      if (error) {
+        window.location.href = '/500.html';
+      } else if (redirectLocation) {
+        window.location.href = redirectLocation.pathname + redirectLocation.search;
+      } else if (renderProps) {
+        trigger('fetchData', renderProps.components, getLocals(store, renderProps));
+      } else {
+        window.location.href = '/404.html';
+      }
+    });
+  });
 }
 ```
 
