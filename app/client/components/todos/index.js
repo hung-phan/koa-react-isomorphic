@@ -48,7 +48,6 @@ export const decorators = compose(
         addTodo,
         removeTodo,
         completeTodo,
-        fetchTodos,
       }, dispatch),
     })
   ),
