@@ -63,24 +63,81 @@ describe('Helper: fetchData', () => {
       Module.__ResetDependency__('browserHistory');
     });
 
-    describe('# error', () => {
-      let windowLocation;
-      let match;
+    describe('# match route', () => {
+      let navigateToSpy;
+      let triggerSpy;
 
-      before(() => {
-        windowLocation = { href: '/' };
-        match = (route, callback) => {
-          callback(true, undefined, undefined);
-        };
-        Module.__Rewire__('match', match);
-        Module.__Rewire__('window.location', windowLocation);
-
-        Module.clientFetchData(routes, store);
+      beforeEach(() => {
+        navigateToSpy = sinon.spy();
+        triggerSpy = sinon.spy();
+        Module.__Rewire__('navigateTo', navigateToSpy);
+        Module.__Rewire__('trigger', triggerSpy);
       });
 
-      after(() => {
+      afterEach(() => {
+        Module.__ResetDependency__('navigateTo');
+        Module.__ResetDependency__('trigger');
+      });
+
+      it('should navigate to error page', () => {
+        const match = (route, callback) => {
+          callback(true, undefined, undefined);
+        };
+
+        Module.__Rewire__('match', match);
+
+        Module.clientFetchData(routes, store);
+        sinon.assert.calledWith(navigateToSpy, '/500.html');
+
         Module.__ResetDependency__('match');
-        Module.__ResetDependency__('window.location');
+      });
+
+      it('should redirect to /hello-world.html page', () => {
+        const match = (route, callback) => {
+          callback(undefined, { pathname: '/hello-world.html', search: '' }, undefined);
+        };
+
+        Module.__Rewire__('match', match);
+
+        Module.clientFetchData(routes, store);
+        sinon.assert.calledWith(navigateToSpy, '/hello-world.html');
+
+        Module.__ResetDependency__('match');
+      });
+
+      it('should trigger fetchData', () => {
+        const renderProps = {
+          components: _.range(4),
+          location: '/',
+          params: {
+            test: faker.random.uuid(),
+          },
+        };
+        const match = (route, callback) => {
+          callback(undefined, undefined, renderProps);
+        };
+
+        Module.__Rewire__('match', match);
+
+        Module.clientFetchData(routes, store);
+        sinon.assert.calledWith(
+          triggerSpy, 'fetchData', renderProps.components, Module.getLocals(store, renderProps)
+        );
+
+        Module.__ResetDependency__('match');
+      });
+
+      it('should navigate to /404.html page', () => {
+        const match = (route, callback) => {
+          callback(undefined, undefined, undefined);
+        };
+
+        Module.__Rewire__('match', match);
+
+        Module.clientFetchData(routes, store);
+        sinon.assert.calledWith(navigateToSpy, '/404.html');
+
+        Module.__ResetDependency__('match');
       });
     });
   });
