@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCssPlugin = require('purifycss-webpack-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require('./../../webpack/webpack-isomorphic-tools')
@@ -69,6 +70,7 @@ productionConfig.plugins.push(
     debug: false,
   }),
   new webpack.optimize.UglifyJsPlugin(),
+  new CompressionPlugin(),
   webpackIsomorphicToolsPlugin
 );
 
