@@ -1,7 +1,7 @@
 import React from 'react';
 import { List } from 'immutable';
 import { compose } from 'recompose';
-import shallowEqualImmutable from 'react-immutable-render-mixin/shallowEqualImmutable';
+import shallowEqualImmutable from 'react-immutable-render-mixin/lib/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodosAdd from './todos-add';
