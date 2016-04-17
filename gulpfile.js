@@ -1,5 +1,3 @@
-'use strict';
-
 const del = require('del');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
@@ -20,8 +18,8 @@ function cleanTask(files) {
 gulp.task('set-production-env', () => {
   env({
     vars: {
-      NODE_ENV: 'production'
-    }
+      NODE_ENV: 'production',
+    },
   });
 });
 
