@@ -20,8 +20,8 @@ function cleanTask(files) {
 gulp.task('set-production-env', () => {
   env({
     vars: {
-      NODE_ENV: 'production'
-    }
+      NODE_ENV: 'production',
+    },
   });
 });
 
