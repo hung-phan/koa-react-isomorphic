@@ -60,12 +60,7 @@ module.exports = {
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
+        loaders: ['babel-loader', 'eslint-loader'],
       },
     ],
   },
