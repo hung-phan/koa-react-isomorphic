@@ -1,21 +1,15 @@
 {
   "presets": ["es2015", "react", "stage-0"],
   "plugins": [
-    [
-      "transform-decorators-legacy",
-      "transform-runtime",
-    ],
+    "transform-runtime",
+    "transform-decorators-legacy",
+    "typecheck",
     ["babel-plugin-module-alias", [
       { "src": "./app", "expose": "app" },
       { "src": "./config", "expose": "app-config" },
       { "src": "./app/client", "expose": "client" },
       { "src": "./app/server", "expose": "server" }
-    ]],
-    ["typecheck", {
-      "disable": {
-        "production": true
-      }
-    }]
+    ]]
   ],
   "env": {
     "development": {
@@ -39,7 +33,9 @@
       ]
     },
     "test": {
-      "plugins": ["rewire"]
+      "plugins": [
+        "rewire"
+      ]
     }
   }
 }

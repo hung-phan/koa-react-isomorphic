@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import log4js from 'log4js';
 import app from './server-app';
 
