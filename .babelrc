@@ -32,6 +32,12 @@
         }]
       ]
     },
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements"
+      ]
+    },
     "test": {
       "plugins": ["rewire"]
     }
