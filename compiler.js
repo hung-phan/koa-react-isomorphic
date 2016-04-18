@@ -1,5 +1,4 @@
 require('babel-core/register');
-require('babel-polyfill');
 require('jsdom-global')();
 
 const noop = (module, file) => {

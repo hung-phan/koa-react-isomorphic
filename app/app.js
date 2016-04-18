@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import './client/lib/index';
 
 import $ from 'jquery';

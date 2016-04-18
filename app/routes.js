@@ -4,6 +4,8 @@ import IsomorphicRouter from 'isomorphic-relay-router';
 import ViewerQuery from './client/queries/viewer';
 import Todos from 'client/components/todos';
 
+const Router = IsomorphicRouter.Router;
+
 export function getClientHistory() {
   return require('react-router').browserHistory;
 }
@@ -14,8 +16,8 @@ export function getServerHistory(url) {
 
 export function getRoutes(history) {
   return (
-    <IsomorphicRouter.Router history={history}>
+    <Router history={history}>
       <Route path='/' component={Todos} queries={ViewerQuery} />
-    </IsomorphicRouter.Router>
+    </Router>
   );
 }

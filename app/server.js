@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import log4js from 'log4js';
 import Relay from 'react-relay';
 import app from './server-app';
