@@ -8,10 +8,13 @@
     "node": true
   },
   "rules": {
-    "max-len": [0],
-    "func-names": [0],
-    "quotes": [0],
+    "max-len": 0,
+    "func-names": 0,
+    "quotes": 0,
     "jsx-quotes": [1, "prefer-single"],
-    "mocha/no-exclusive-tests": 2
+    "mocha/no-exclusive-tests": 2,
+    "jsx-a11y/img-uses-alt": 0,
+    "jsx-a11y/redundant-alt": 0,
+    "jsx-a11y/valid-aria-role": 0
   }
 }
