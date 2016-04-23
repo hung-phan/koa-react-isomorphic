@@ -12,7 +12,7 @@ describe('Component: TodosBody', () => {
       edges: _(4).range().map((value) => ({
         node: {
           id: value,
-          text: `Todo ${ value + 1}`,
+          text: `Todo ${value + 1}`,
           complete: false,
         },
       })).value(),

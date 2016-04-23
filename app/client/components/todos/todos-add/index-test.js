@@ -26,7 +26,7 @@ describe('Component: TodosAdd', () => {
     viewer = { numberOfTodos: 100 };
 
     TodosAdd.__Rewire__('Relay', Relay);
-    component = mount(<TodosAdd viewer={viewer} relay={relay}/>);
+    component = mount(<TodosAdd viewer={viewer} relay={relay} />);
   });
 
   afterEach(() => {

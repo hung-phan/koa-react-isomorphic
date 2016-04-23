@@ -38,7 +38,10 @@ class AddTodo extends React.Component {
       <div className='col-md-12'>
         <div className='form-inline'>
           <div className='form-group'>
-            <input type='text' className='form-control' placeholder='Todo'
+            <input
+              type='text'
+              className='form-control'
+              placeholder='Todo'
               value={this.state.todo} onChange={this.updateTodo}
             />
           </div>
@@ -47,7 +50,10 @@ class AddTodo extends React.Component {
 
         <div className='form-inline'>
           <div className='form-group'>
-            <input type='range' min='1' max={this.props.viewer.numberOfTodos}
+            <input
+              type='range'
+              min='1'
+              max={this.props.viewer.numberOfTodos}
               value={this.state.numberOfTodos} onChange={this.changeNumberOfTodoList}
             />
           </div>
