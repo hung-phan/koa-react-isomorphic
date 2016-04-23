@@ -20,10 +20,11 @@ export class Todos extends React.Component {
       <div className='container'>
         <div className='row'>
           <TodosHeader />
-          <TodosAdd addTodo={ this.props.actions.addTodo } />
-          <TodosBody todos={ this.props.todos }
-            removeTodo={ this.props.actions.removeTodo }
-            completeTodo={ this.props.actions.completeTodo }
+          <TodosAdd addTodo={this.props.actions.addTodo} />
+          <TodosBody
+            todos={this.props.todos}
+            removeTodo={this.props.actions.removeTodo}
+            completeTodo={this.props.actions.completeTodo}
           />
         </div>
       </div>

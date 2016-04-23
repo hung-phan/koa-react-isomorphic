@@ -26,7 +26,7 @@ if (process.env.SERVER_RENDERING) {
                 .then(() => {
                   const currentRoutes = <RouterContext { ...renderProps } />;
                   const prerenderComponent = renderToString(
-                    <App store={ store } routes={ currentRoutes } />
+                    <App store={store} routes={currentRoutes} />
                   );
                   const prerenderData = store.getState();
 

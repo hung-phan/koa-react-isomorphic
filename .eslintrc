@@ -13,8 +13,8 @@
     "quotes": 0,
     "jsx-quotes": [1, "prefer-single"],
     "mocha/no-exclusive-tests": 2,
-    "jsx-a11y/img-uses-alt": 0,
-    "jsx-a11y/redundant-alt": 0,
-    "jsx-a11y/valid-aria-role": 0
+    "import/no-unresolved": 0,
+    "global-require": 0,
+    "no-underscore-dangle": 0
   }
 }

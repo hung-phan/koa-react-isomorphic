@@ -30,7 +30,7 @@ describe('Helper: fetchDataEnhancer', () => {
       Component = fetchDataEnhancer(callback)(Handler);
       store = { data: faker.random.uuid() };
       component = mount(
-        <Provider store={ store }>
+        <Provider store={store}>
           <Component message='Hello world' />
         </Provider>
       );
