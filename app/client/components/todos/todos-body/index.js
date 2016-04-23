@@ -17,14 +17,18 @@ const TodosBody = ({ todos, completeTodo, removeTodo }) => (
                 <td><span>{index + 1}</span></td>
                 <td>{text}</td>
                 <td>
-                  <button type='button' className='btn btn-xs btn-success'
+                  <button
+                    type='button'
+                    className='btn btn-xs btn-success'
                     onClick={_completeTodo}
                   >
                     <i className='fa fa-check'></i>
                   </button>
                 </td>
                 <td>
-                  <button type='button' className='btn btn-xs btn-danger'
+                  <button
+                    type='button'
+                    className='btn btn-xs btn-danger'
                     onClick={_removeTodo}
                   >
                     <i className='fa fa-remove'></i>
