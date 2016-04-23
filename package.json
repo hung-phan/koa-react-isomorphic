@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "devDependencies": {
     "babel-eslint": "^6.0.2",
     "babel-plugin-react-transform": "^2.0.2",
@@ -104,7 +104,7 @@
     "redial": "^0.4.1",
     "rx": "^4.1.0",
     "sass-loader": "^3.2.0",
-    "script-loader": "^0.6.1",
+    "script-loader": "^0.7.0",
     "shelljs": "^0.6.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
