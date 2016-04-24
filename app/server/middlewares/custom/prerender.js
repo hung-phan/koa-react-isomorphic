@@ -1,16 +1,14 @@
 if (process.env.SERVER_RENDERING) {
-  const nunjucks = require('nunjucks');
   const React = require('react');
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
   const IsomorphicRouter = require('isomorphic-relay-router').default;
   const { getRoutes, getServerHistory } = require('app/routes');
-  const settings = require('server/initializers/settings').default;
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
       function (template: string, parameters: Object = {}) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
           match({
             routes: getRoutes(getServerHistory(this.req.url)),
             location: this.req.url,
@@ -26,15 +24,13 @@ if (process.env.SERVER_RENDERING) {
                     <IsomorphicRouter.RouterContext {...props} />
                   );
 
-                  resolve(
-                    nunjucks.render(template, {
-                      ...settings,
-                      ...parameters,
-                      prerenderComponent,
-                      prerenderData,
-                      csrf: this.csrf,
-                    })
-                  );
+                  this.render(template, {
+                    ...parameters,
+                    prerenderComponent,
+                    prerenderData,
+                  })
+                  .then(resolve)
+                  .catch(reject);
                 });
             } else {
               this.throw(404);

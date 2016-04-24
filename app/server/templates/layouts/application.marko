@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <csrf-meta-tag csrf=data.layoutData.csrf />
+
+        <title>Application</title>
+
+        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <webpack-css-bundle-tag env=data.layoutData.env.NODE_ENV asset-manifest=data.layoutData.assetManifest.styles name="app" />
+    </head>
+
+    <body>
+        <layout-placeholder name="mainContent" />
+
+        <if(data.layoutData.env.NODE_ENV === 'production')>
+            <javascript-include-tag href="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" />
+        </if>
+
+        <prerender-data data=data.layoutData.prerenderData />
+        <webpack-manifest-script env=data.layoutData.env.NODE_ENV common-manifest=data.layoutData.commonManifest />
+
+        <!-- <webpackBundleTag name='common' asset-manifest=data.layoutData.assetManifest.javascript /> -->
+        <webpack-bundle-tag name='app' asset-manifest=data.layoutData.assetManifest.javascript />
+    </body>
+</html>

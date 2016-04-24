@@ -1,10 +1,10 @@
-import { PUBLIC } from 'app-config/path-helper';
 import cors from 'koa-cors';
 import middlewares from 'koa-middlewares';
 import htmlMinifier from 'koa-html-minifier';
 import helmet from 'koa-helmet';
 import mount from 'koa-mount';
 import graphqlHTTP from 'koa-graphql';
+import settings from 'server/initializers/settings';
 import render from './custom/render';
 import prerender from './custom/prerender';
 import error from './custom/error';
@@ -28,7 +28,7 @@ export function initialLayer(app) {
 
   // remove this appConfig if you have nginx already serves the public folder
   // in production mode
-  app.use(middlewares.staticCache(PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
+  app.use(middlewares.staticCache(settings.path.PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
 }
 
 export function apiLayer(app, apiRoutes) {

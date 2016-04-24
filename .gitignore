@@ -6,5 +6,6 @@ node_modules/
 public/assets/
 tmp/
 coverage
+*.marko.js
 app/database/schema.graphql
 app/database/schema.json

@@ -15,7 +15,7 @@ So far, I manage to put together these following technologies:
 * [Webpack](https://github.com/webpack/webpack)
 * [Babel](https://babeljs.io/)
 * [Flowtype](http://flowtype.org/)
-* [Nunjucks](https://mozilla.github.io/nunjucks/)
+* [Marko](http://markojs.com/)
 * [Bootstrap](http://getbootstrap.com/css/) and [FontAwesome](https://fortawesome.github.io/Font-Awesome/)
 * [Redux](https://github.com/rackt/redux)
 * [PostCSS](https://github.com/postcss/postcss)
@@ -56,7 +56,7 @@ Binds root component to `<div id='app'></div>`, and prepopulate redux store with
 
 ### app/server.js
 
-Handles routing for server, and generates page which will be returned by react-router and nunjucks. I make a facade `getUrl` for data fetching in both client and server.
+Handles routing for server, and generates page which will be returned by react-router and marko. I make a facade `getUrl` for data fetching in both client and server.
 Then performs server-side process.
 
 ### Server-side data fetching
@@ -123,12 +123,10 @@ IsomorphicRouter.prepareData(renderProps)
     );
 
     resolve(
-      nunjucks.render(template, {
-        ...settings,
+      this.render(template, {
         ...parameters,
         prerenderComponent,
         prerenderData,
-        csrf: this.csrf,
       })
     );
   });

@@ -1,27 +1,26 @@
-/* eslint prefer-const: [0] */
 import fs from 'fs';
-import nunjucks from 'nunjucks';
-
-nunjucks
-  .configure('app/server/templates', { autoescape: true })
-  .addFilter('json', JSON.stringify);
+import path from 'path';
+const { ROOT, PUBLIC } = global.nodeRequire('./config/path-helper');
 
 // default settings
 const settings = {
+  path: {
+    ROOT,
+    PUBLIC,
+    TEMPLATES_DIR: 'app/server/templates',
+  },
   env: {
     NODE_ENV: process.env.NODE_ENV,
   },
-  assetManifest: global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets(),
+  assetManifest: global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets() || {},
 };
 
 // manage public assets in production mode
 if (process.env.NODE_ENV === 'production') {
-  settings.commonManifest = fs.existsSync('./public/assets/webpack-common-manifest.json')
-                              ? require('external!./public/assets/webpack-common-manifest.json')
+  settings.commonManifest = fs.existsSync(path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json'))
+                              ? global.nodeRequire(`${path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json')}`)
                               : {};
-}
-
-if (process.env.NODE_ENV === 'test') {
+} else if (process.env.NODE_ENV === 'test') {
   settings.assetManifest = {
     javascript: {
       app: `localhost:${process.env.PORT}/app.bundle.js`,

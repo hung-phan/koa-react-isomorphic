@@ -34,13 +34,6 @@ module.exports = {
   externals: [
     nodeModules,
     function (context, request, callback) {
-      const external = 'external!';
-
-      return (new RegExp(`^${external}`)).test(request)
-        ? callback(null, `commonjs ${path.resolve(context, request.substr(external.length))}`)
-        : callback();
-    },
-    function (context, request, callback) {
       const asset = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
 
       return (new RegExp(`${asset}$`)).test(request)
