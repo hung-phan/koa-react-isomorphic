@@ -15,6 +15,9 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(
   require('./config/webpack/webpack-isomorphic-tools')
 );
 
+// to get the node require instead of dynamic require by webpack
+global.nodeRequire = require;
+
 global.webpackIsomorphicTools
   .development(process.env.NODE_ENV === 'development')
   .server(ROOT, () => {

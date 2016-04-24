@@ -85,7 +85,6 @@
     "node-noop": "^1.0.0",
     "node-sass": "^3.4.2",
     "nodemon": "^1.9.1",
-    "nunjucks": "^2.4.1",
     "pm2": "^1.1.1",
     "postcss-cssnext": "^2.5.2",
     "postcss-loader": "^0.8.2",

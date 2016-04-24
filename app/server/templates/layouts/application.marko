@@ -1,30 +1,28 @@
-{% import 'helpers/application.html' as applicationHelper %}
-
 <!doctype html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      {{ applicationHelper.csrfMetaTags(csrf) }}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <csrf-meta-tag csrf=data.layoutData.csrf />
 
-      <title>Application</title>
+        <title>Application</title>
 
-      <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-      {{ applicationHelper.webpackCssBundleTag(env.NODE_ENV, 'app', assetManifest.styles) }}
-  </head>
+        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <webpack-css-bundle-tag env=data.layoutData.env.NODE_ENV asset-manifest=data.layoutData.assetManifest.styles name="app" />
+    </head>
 
-  <body>
-    {% block mainContent %}{% endblock %}
+    <body>
+        <layout-placeholder name="mainContent" />
 
-    {% if env.NODE_ENV == 'production' %}
-      {{ applicationHelper.javascriptIncludeTag('https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js') }}
-    {% endif %}
+        <if(data.layoutData.env.NODE_ENV === 'production')>
+            <javascript-include-tag href="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" />
+        </if>
 
-    {{ applicationHelper.prerenderData(prerenderData) }}
-    {{ applicationHelper.webpackManifestScript(env.NODE_ENV, commonManifest) }}
+        <prerender-data data=data.layoutData.prerenderData />
+        <webpack-manifest-script env=data.layoutData.env.NODE_ENV common-manifest=data.layoutData.commonManifest />
 
-    <!-- {{ applicationHelper.webpackBundleTag('common', assetManifest.javascript) }} -->
-    {{ applicationHelper.webpackBundleTag('app', assetManifest.javascript) }}
-  </body>
+        <!-- <webpackBundleTag name='common' asset-manifest=data.layoutData.assetManifest.javascript /> -->
+        <webpack-bundle-tag name='app' asset-manifest=data.layoutData.assetManifest.javascript />
+    </body>
 </html>

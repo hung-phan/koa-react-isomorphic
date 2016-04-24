@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { ROOT, PUBLIC } from 'external!./../../../config/path-helper';
+const { ROOT, PUBLIC } = global.nodeRequire('./config/path-helper');
 
 // default settings
 const settings = {
@@ -18,7 +18,7 @@ const settings = {
 // manage public assets in production mode
 if (process.env.NODE_ENV === 'production') {
   settings.commonManifest = fs.existsSync(path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json'))
-                              ? require(`external!${path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json')}`)
+                              ? global.nodeRequire(`${path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json')}`)
                               : {};
 } else if (process.env.NODE_ENV === 'test') {
   settings.assetManifest = {

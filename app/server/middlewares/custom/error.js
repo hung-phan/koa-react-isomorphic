@@ -42,7 +42,7 @@ export default function error() {
         case 'html':
           this.type = 'text/html';
           if (process.env.NODE_ENV === 'development' || process.env.DEBUG) {
-            this.body = yield this.render('application/error.html', {
+            this.body = yield this.render('layouts/error.marko', {
               ...settings, ctx: this, request: this.request, response: this.response,
               status: this.status, error: err.message, stack: err.stack, code: err.code,
             });
