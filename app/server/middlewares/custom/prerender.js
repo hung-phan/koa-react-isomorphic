@@ -1,5 +1,4 @@
 if (process.env.SERVER_RENDERING) {
-  const nunjucks = require('nunjucks');
   const React = require('react');
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
@@ -15,7 +14,7 @@ if (process.env.SERVER_RENDERING) {
         const store = configureStore(initialState);
         const routes = getRoutes(getServerHistory(store, this.req.url));
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
           match({ routes, location: this.req.url }, (error, redirectLocation, renderProps) => {
             if (error) {
               this.throw(500, error.message);
@@ -30,15 +29,15 @@ if (process.env.SERVER_RENDERING) {
                   );
                   const prerenderData = store.getState();
 
-                  resolve(
-                    nunjucks.render(template, {
-                      ...settings,
-                      ...parameters,
-                      prerenderComponent,
-                      prerenderData,
-                      csrf: this.csrf,
-                    })
-                  );
+                  this.render(template, {
+                    ...settings,
+                    ...parameters,
+                    prerenderComponent,
+                    prerenderData,
+                    csrf: this.csrf,
+                  })
+                  .then(resolve)
+                  .catch(reject);
                 });
             } else {
               this.throw(404);

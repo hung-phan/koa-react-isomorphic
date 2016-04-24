@@ -1,16 +1,20 @@
-import nunjucks from 'nunjucks';
+import marko from 'marko';
 import settings from 'server/initializers/settings';
 
 export default function* (next) {
   this.render = this.render ||
     function (template: string, parameters: Object = {}) {
+      this.type = 'text/html';
+
       return new Promise(resolve => {
         resolve(
-          nunjucks.render(template, {
-            ...settings,
-            ...parameters,
-            csrf: this.csrf,
-          })
+          marko
+            .load(`${settings.templatesDir}/${template}`)
+            .stream({
+              ...settings,
+              ...parameters,
+              csrf: this.csrf,
+            })
         );
       });
     };
