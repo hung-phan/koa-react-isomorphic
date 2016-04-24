@@ -49,6 +49,7 @@
     "bootstrap": "^3.3.6",
     "bundle-loader": "^0.5.4",
     "chalk": "^1.1.3",
+    "chokidar": "^1.4.3",
     "chunk-manifest-webpack-plugin": "0.0.1",
     "compression-webpack-plugin": "^0.3.1",
     "css-loader": "^0.23.1",
@@ -84,7 +85,6 @@
     "node-noop": "^1.0.0",
     "node-sass": "^3.4.2",
     "nodemon": "^1.9.1",
-    "nunjucks": "^2.4.1",
     "pm2": "^1.1.1",
     "postcss-cssnext": "^2.5.2",
     "postcss-loader": "^0.8.2",
@@ -126,6 +126,7 @@
     "coverage": "NODE_ENV=test PORT=3001 istanbul cover ./node_modules/.bin/_mocha -- --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
     "postinstall": "sh scripts/build",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
+    "compile-templates": "markoc ./app/server/templates",
     "watch": "gulp clean && npm run frontend:watch & gulp backend:watch"
   },
   "keywords": [

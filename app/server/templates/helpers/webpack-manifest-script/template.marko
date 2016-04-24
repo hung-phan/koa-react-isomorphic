@@ -1,0 +1,5 @@
+<if(data.env === 'production')>
+    <script type="text/javascript">
+        window.webpackManifest = $!{JSON.stringify(data.commonManifest)};
+    </script>
+</if>

@@ -25,6 +25,12 @@ gulp.task('set-production-env', () => {
   });
 });
 
+gulp.task('compile-templates', (done) => {
+  shell.exec('npm run compile-templates', () => {
+    done();
+  });
+});
+
 gulp.task('frontend:watch', (done) => {
   shell.exec('npm run frontend:watch', () => {
     done();
@@ -75,7 +81,7 @@ gulp.task('backend:build', ['set-production-env'], (done) => {
 
 gulp.task('clean', cleanTask([`.${config.path.build}`, `.${config.path.publicAssets}`]));
 gulp.task('watch', ['clean', 'frontend:watch', 'backend:watch']);
-gulp.task('build', ['clean', 'frontend:build', 'backend:build']);
+gulp.task('build', ['clean', 'compile-templates', 'frontend:build', 'backend:build']);
 
 gulp.task('pro-server', (done) => {
   shell.exec('pm2 start config/pm2/production.json', () => {

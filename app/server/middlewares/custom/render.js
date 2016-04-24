@@ -1,12 +1,20 @@
-import nunjucks from 'nunjucks';
+import path from 'path';
+import marko from 'marko';
 import settings from 'server/initializers/settings';
 
 export default function* (next) {
   this.render = this.render ||
     function (template: string, parameters: Object = {}) {
+      this.type = 'text/html';
+
       return new Promise(resolve => {
+        const templatePath = path.join(settings.path.ROOT, `${settings.path.TEMPLATES_DIR}/${template}`);
+        const currentTemplate = process.env.NODE_ENV === 'production'
+                                  ? global.nodeRequire(`${templatePath}.js`)
+                                  : marko.load(templatePath);
+
         resolve(
-          nunjucks.render(template, {
+          currentTemplate.stream({
             ...settings,
             ...parameters,
             csrf: this.csrf,

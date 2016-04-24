@@ -1,6 +1,8 @@
 require('babel-core/register');
 require('jsdom-global')();
 
+global.nodeRequire = require;
+
 const noop = (module, file) => {
   module._compile('', file);
 };
