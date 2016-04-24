@@ -1,3 +1,4 @@
+import path from 'path';
 import marko from 'marko';
 import settings from 'server/initializers/settings';
 
@@ -7,14 +8,21 @@ export default function* (next) {
       this.type = 'text/html';
 
       return new Promise(resolve => {
+        const templatePath = path.join(settings.path.ROOT, `${settings.path.TEMPLATES_DIR}/${template}`);
+        let currentTemplate;
+
+        if (process.env.NODE_ENV === 'production') {
+          currentTemplate = require(templatePath);
+        } else {
+          currentTemplate = marko.load(templatePath);
+        }
+
         resolve(
-          marko
-            .load(`${settings.templatesDir}/${template}`)
-            .stream({
-              ...settings,
-              ...parameters,
-              csrf: this.csrf,
-            })
+          currentTemplate.stream({
+            ...settings,
+            ...parameters,
+            csrf: this.csrf,
+          })
         );
       });
     };

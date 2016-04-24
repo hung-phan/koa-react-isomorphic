@@ -1,18 +1,24 @@
 import fs from 'fs';
+import path from 'path';
+import { ROOT, PUBLIC } from 'external!./../../../config/path-helper';
 
 // default settings
 const settings = {
+  path: {
+    ROOT,
+    PUBLIC,
+    TEMPLATES_DIR: 'app/server/templates',
+  },
   env: {
     NODE_ENV: process.env.NODE_ENV,
   },
   assetManifest: global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets() || {},
-  templatesDir: './app/server/templates',
 };
 
 // manage public assets in production mode
 if (process.env.NODE_ENV === 'production') {
-  settings.commonManifest = fs.existsSync('./public/assets/webpack-common-manifest.json')
-                              ? require('external!./public/assets/webpack-common-manifest.json')
+  settings.commonManifest = fs.existsSync(path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json'))
+                              ? require(`external!${path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json')}`)
                               : {};
 } else if (process.env.NODE_ENV === 'test') {
   settings.assetManifest = {

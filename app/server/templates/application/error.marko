@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Error - {{ status }}</title>
+        <title>Error - ${data.status}</title>
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
         <style>
@@ -36,15 +36,11 @@
             <p>Looks like something broke!</p>
             <h2>Message:</h2>
             <pre>
-                <code>
-                    {{ error }}
-                </code>
+                <code>${data.error}</code>
             </pre>
             <h2>Stack:</h2>
             <pre>
-                <code>
-                    {{ stack }}
-                </code>
+                <code>${data.stack}</code>
             </pre>
         </div>
     </body>

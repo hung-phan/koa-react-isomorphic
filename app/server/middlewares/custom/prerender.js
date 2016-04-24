@@ -3,7 +3,6 @@ if (process.env.SERVER_RENDERING) {
   const { renderToString } = require('react-dom/server');
   const { match, RouterContext } = require('react-router');
   const { getRoutes, getServerHistory } = require('app/routes');
-  const settings = require('server/initializers/settings').default;
   const App = require('client/components/main/app').default;
   const { serverFetchData } = require('client/helpers/fetch-data');
   const configureStore = require('client/main-store').default;
@@ -30,11 +29,9 @@ if (process.env.SERVER_RENDERING) {
                   const prerenderData = store.getState();
 
                   this.render(template, {
-                    ...settings,
                     ...parameters,
                     prerenderComponent,
                     prerenderData,
-                    csrf: this.csrf,
                   })
                   .then(resolve)
                   .catch(reject);
