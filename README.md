@@ -59,6 +59,28 @@ Binds root component to `<div id='app'></div>`, and prepopulate redux store with
 Handles routing for server, and generates page which will be returned by react-router and marko. I make a facade `getUrl` for data fetching in both client and server.
 Then performs server-side process.
 
+### Marko template
+[Custom taglibs](http://markojs.com/docs/marko/custom-taglibs/) are defined under `app/server/templates/helpers`. To see it usage, look
+for `app/server/templates/layout/application.marko`. For example:
+
+```html
+    <prerender-data data=data.layoutData.prerenderData />
+```
+
+#### Partial template data
+For now, the way to pass data to template is done via `layout-data=data`. This makes the current data
+accesible at the `layouts/application.marko`.
+
+### Node require in server
+To be able to use the default node `require` instead of webpack dynamic `require`, use `global.nodeRequire`. This is defined
+in `prod-server.js` to fix the problem that server wants to require somethings that are not bundled into current build. For example,
+
+```javascript
+const { ROOT, PUBLIC } = global.nodeRequire('./config/path-helper');
+```
+
+Note: `nodeRequire` will resolve the path from project root directory.
+
 ### Server-side data fetching
 
 #### Redux
