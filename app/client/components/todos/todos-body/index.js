@@ -2,7 +2,7 @@ import style from './style.css';
 import React from 'react';
 import { List } from 'immutable';
 
-const TodosBody = ({ todos, completeTodo, removeTodo }) => (
+const TodosBody = ({ todos, completeTodo, removeTodo }) =>
   <div className={`col-md-12 ${style.container}`}>
     <table className='table'>
       <tbody>
@@ -40,8 +40,7 @@ const TodosBody = ({ todos, completeTodo, removeTodo }) => (
         }
       </tbody>
     </table>
-  </div>
-);
+  </div>;
 
 TodosBody.propTypes = {
   todos: React.PropTypes.instanceOf(List).isRequired,

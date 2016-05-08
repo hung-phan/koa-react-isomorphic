@@ -2,14 +2,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Debug from './debug';
 
-const App = ({ store, routes }) => (
+const App = ({ store, routes }) =>
   <Provider key='provider' store={store}>
     <div>
       {routes}
       <Debug />
     </div>
-  </Provider>
-);
+  </Provider>;
 
 App.propTypes = {
   store: React.PropTypes.object,
