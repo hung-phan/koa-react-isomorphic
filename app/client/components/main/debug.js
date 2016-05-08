@@ -1,6 +1,6 @@
 import React from 'react';
 
-let Debug;
+let Debug; // eslint-disable-line import/no-mutable-exports
 
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const { createDevTools } = require('redux-devtools');
