@@ -4,7 +4,7 @@ import Relay from 'react-relay';
 import CompleteTodoMutation from 'client/mutations/complete-todo';
 import RemoveTodoMutation from 'client/mutations/remove-todo';
 
-const TodosBody = ({ viewer }) => (
+const TodosBody = ({ viewer }) =>
   <div className={`col-md-12 ${style.container}`}>
     <table className='table'>
       <tbody>
@@ -47,8 +47,7 @@ const TodosBody = ({ viewer }) => (
         }
       </tbody>
     </table>
-  </div>
-);
+  </div>;
 
 TodosBody.propTypes = {
   viewer: React.PropTypes.object.isRequired,
