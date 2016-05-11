@@ -1,9 +1,13 @@
 if (process.env.SERVER_RENDERING) {
-  const React = require('react');
   const { renderToString } = require('react-dom/server');
-  const { match, RouterContext } = require('react-router');
+  const { match } = require('react-router');
+  const DefaultNetworkLayer = require('react-relay').DefaultNetworkLayer;
   const IsomorphicRouter = require('isomorphic-relay-router').default;
   const { getRoutes, getServerHistory } = require('app/routes');
+
+  const networkLayer = new DefaultNetworkLayer(
+    `http://localhost:${process.env.PORT}/graphql`
+  );
 
   module.exports = function* (next) {
     this.prerender = this.prerender ||
@@ -18,11 +22,9 @@ if (process.env.SERVER_RENDERING) {
             } else if (redirectLocation) {
               this.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
-              IsomorphicRouter.prepareData(renderProps)
+              IsomorphicRouter.prepareData(renderProps, networkLayer)
                 .then(({ data: prerenderData, props }) => {
-                  const prerenderComponent = renderToString(
-                    <IsomorphicRouter.RouterContext {...props} />
-                  );
+                  const prerenderComponent = renderToString(IsomorphicRouter.render(props));
 
                   this.render(template, {
                     ...parameters,
