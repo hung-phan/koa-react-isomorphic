@@ -101,7 +101,7 @@
     "react-dom": "^15.0.2",
     "react-relay": "^0.8.1",
     "react-router": "^2.0.1",
-    "recompose": "^0.17.0",
+    "recompose": "^0.18.0",
     "redial": "^0.4.1",
     "rx": "^4.1.0",
     "sass-loader": "^3.2.0",
