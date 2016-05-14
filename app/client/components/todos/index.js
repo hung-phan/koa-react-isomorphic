@@ -33,7 +33,7 @@ export class Todos extends React.Component {
 }
 /* eslint-enable react/prefer-stateless-function */
 
-export const decorators = compose(
+export const decorator = compose(
   connect(
     ({ todos }) => ({
       todos,
@@ -51,4 +51,4 @@ export const decorators = compose(
   )
 );
 
-export default decorators(Todos);
+export default decorator(Todos);
