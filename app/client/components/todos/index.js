@@ -34,6 +34,9 @@ export class Todos extends React.Component {
 /* eslint-enable react/prefer-stateless-function */
 
 export const decorator = compose(
+  fetchDataEnhancer(
+    ({ store }) => store.dispatch(fetchTodos())
+  ),
   connect(
     ({ todos }) => ({
       todos,
@@ -45,9 +48,6 @@ export const decorator = compose(
         completeTodo,
       }, dispatch),
     })
-  ),
-  fetchDataEnhancer(
-    ({ store }) => store.dispatch(fetchTodos())
   ),
   onlyUpdateForKeys(['todos'])
 );
