@@ -39,7 +39,10 @@ export class Todos extends React.Component {
 }
 /* eslint-enable react/prefer-stateless-function */
 
-export const decorators = compose(
+export const decorator = compose(
+  fetchDataEnhancer(
+    ({ store }) => store.dispatch(fetchTodos())
+  ),
   connect(
     state => ({
       todos: state.get('todos'),
@@ -51,10 +54,7 @@ export const decorators = compose(
         completeTodo,
       }, dispatch),
     })
-  ),
-  fetchDataEnhancer(
-    ({ store }) => store.dispatch(fetchTodos())
   )
 );
 
-export default decorators(Todos);
+export default decorator(Todos);
