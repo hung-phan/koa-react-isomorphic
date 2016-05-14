@@ -1,5 +1,5 @@
 import React from 'react';
-import { compose } from 'recompose';
+import { compose, onlyUpdateForKeys } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodosAdd from './todos-add';
@@ -48,7 +48,8 @@ export const decorator = compose(
   ),
   fetchDataEnhancer(
     ({ store }) => store.dispatch(fetchTodos())
-  )
+  ),
+  onlyUpdateForKeys(['todos'])
 );
 
 export default decorator(Todos);
