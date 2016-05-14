@@ -1,9 +1,9 @@
 import React from 'react';
 import Relay from 'react-relay';
-import autobind from 'autobind-decorator';
+import { pure } from 'recompose';
 import AddTodoMutation from 'client/mutations/add-todo';
 
-class AddTodo extends React.Component {
+export class TodosAdd extends React.Component {
   static propTypes = {
     relay: React.PropTypes.object.isRequired,
     viewer: React.PropTypes.object.isRequired,
@@ -15,19 +15,16 @@ class AddTodo extends React.Component {
     this.state = { todo: '', numberOfTodos: 20 };
   }
 
-  @autobind
-  updateTodo(e) {
+  updateTodo = (e) => {
     this.setState({ todo: e.target.value });
   }
 
-  @autobind
-  addTodo() {
+  addTodo = () => {
     Relay.Store.commitUpdate(new AddTodoMutation({ text: this.state.todo, viewer: this.props.viewer }));
     this.setState({ todo: '' });
   }
 
-  @autobind
-  changeNumberOfTodoList(e) {
+  changeNumberOfTodoList = (e) => {
     this.setState({ numberOfTodos: parseInt(e.target.value, 10) }, () => {
       this.props.relay.setVariables({ numberOfTodos: this.state.numberOfTodos });
     });
@@ -63,4 +60,4 @@ class AddTodo extends React.Component {
   }
 }
 
-export default AddTodo;
+export default pure(TodosAdd);

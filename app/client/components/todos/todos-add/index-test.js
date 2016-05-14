@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import React from 'react';
 import { mount } from 'enzyme';
 import faker from 'faker';
-import TodosAdd from './index';
+import { TodosAdd } from './index';
 
 describe('Component: TodosAdd', () => {
   let viewer;
