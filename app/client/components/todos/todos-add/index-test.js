@@ -2,8 +2,10 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
 import { mount } from 'enzyme';
+import rewire from 'rewire';
 import faker from 'faker';
-import { TodosAdd } from './index';
+
+const Module = rewire('./index');
 
 describe('Component: TodosAdd', () => {
   let viewer;
@@ -25,12 +27,12 @@ describe('Component: TodosAdd', () => {
     AddTodoMutation.returns({ randomUUID });
     viewer = { numberOfTodos: 100 };
 
-    TodosAdd.__Rewire__('Relay', Relay);
-    component = mount(<TodosAdd viewer={viewer} relay={relay} />);
+    Module.__Rewire__('Relay', Relay);
+    component = mount(<Module.TodosAdd viewer={viewer} relay={relay} />);
   });
 
   afterEach(() => {
-    TodosAdd.__ResetDependency__('Relay');
+    Module.__ResetDependency__('Relay');
   });
 
   it(`should define default value for 'state.todo'`, () => {
@@ -41,7 +43,7 @@ describe('Component: TodosAdd', () => {
     let button;
 
     beforeEach(() => {
-      TodosAdd.__Rewire__('AddTodoMutation', AddTodoMutation);
+      Module.__Rewire__('AddTodoMutation', AddTodoMutation);
       component.setState({ todo: randomUUID });
 
       button = component.find('button');
@@ -49,7 +51,7 @@ describe('Component: TodosAdd', () => {
     });
 
     afterEach(() => {
-      TodosAdd.__ResetDependency__('AddTodoMutation');
+      Module.__ResetDependency__('AddTodoMutation');
     });
 
     it(`should call 'AddTodoMutation' with 'viewer', and 'text'`, () => {
