@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
 import { mount } from 'enzyme';
-import TodosAdd from './index';
+import { TodosAdd } from './index';
 
 describe('Component: TodosAdd', () => {
   it('should define state.todo', () => {

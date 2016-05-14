@@ -1,7 +1,7 @@
 import React from 'react';
-import autobind from 'autobind-decorator';
+import { pure } from 'recompose';
 
-class AddTodo extends React.Component {
+export class TodosAdd extends React.Component {
   static propTypes = {
     addTodo: React.PropTypes.func,
   };
@@ -12,13 +12,11 @@ class AddTodo extends React.Component {
     this.state = { todo: '' };
   }
 
-  @autobind
-  updateTodo(e) {
+  updateTodo = (e) => {
     this.setState({ todo: e.target.value });
   }
 
-  @autobind
-  addTodo() {
+  addTodo = () => {
     this.props.addTodo(this.state.todo);
     this.setState({ todo: '' });
   }
@@ -42,4 +40,4 @@ class AddTodo extends React.Component {
   }
 }
 
-export default AddTodo;
+export default pure(TodosAdd);
