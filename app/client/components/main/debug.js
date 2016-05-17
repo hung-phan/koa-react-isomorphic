@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const LogMonitor = require('redux-devtools-log-monitor').default;
 
   Debug = createDevTools(
-    <DockMonitor toggleVisibilityKey='ctrl-h' changePositionKey='ctrl-q'>
+    <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
       <LogMonitor />
     </DockMonitor>
   );

@@ -55,8 +55,8 @@ developmentConfig.plugins.push(
     'process.env.NODE_ENV': "'development'",
     'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false,
   }),
-  new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin(), // Hot Module Replacement
-  webpackIsomorphicToolsPlugin.development()
+  webpackIsomorphicToolsPlugin.development(),
+  new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin() // Hot Module Replacement
 );
 
 module.exports = developmentConfig;

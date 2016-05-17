@@ -3,7 +3,7 @@ import React from 'react';
 
 const TodosBody = ({ todos, completeTodo, removeTodo }) =>
   <div className={`col-md-12 ${style.container}`}>
-    <table className='table'>
+    <table className="table">
       <tbody>
         {
           todos.map((todo, index) => {
@@ -17,20 +17,20 @@ const TodosBody = ({ todos, completeTodo, removeTodo }) =>
                 <td>{text}</td>
                 <td>
                   <button
-                    type='button'
-                    className='btn btn-xs btn-success'
+                    type="button"
+                    className="btn btn-xs btn-success"
                     onClick={_completeTodo}
                   >
-                    <i className='fa fa-check'></i>
+                    <i className="fa fa-check"></i>
                   </button>
                 </td>
                 <td>
                   <button
-                    type='button'
-                    className='btn btn-xs btn-danger'
+                    type="button"
+                    className="btn btn-xs btn-danger"
                     onClick={_removeTodo}
                   >
-                    <i className='fa fa-remove'></i>
+                    <i className="fa fa-remove"></i>
                   </button>
                 </td>
               </tr>

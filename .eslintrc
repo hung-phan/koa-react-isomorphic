@@ -10,11 +10,14 @@
   "rules": {
     "max-len": 0,
     "func-names": 0,
-    "quotes": 0,
-    "jsx-quotes": [1, "prefer-single"],
     "mocha/no-exclusive-tests": 2,
-    "import/no-unresolved": 0,
     "global-require": 0,
     "no-underscore-dangle": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module-alias": {},
+      "webpack": {}
+    }
   }
 }

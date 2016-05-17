@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import Debug from './debug';
 
 const App = ({ store, routes }) =>
-  <Provider key='provider' store={store}>
+  <Provider key="provider" store={store}>
     <div>
       {routes}
       <Debug />
