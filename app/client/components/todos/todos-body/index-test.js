@@ -9,13 +9,16 @@ import TodosBody from './index';
 describe('Component: TodosBody', () => {
   const viewer = {
     todos: {
-      edges: _(4).range().map((value) => ({
-        node: {
-          id: value,
-          text: `Todo ${value + 1}`,
-          complete: false,
-        },
-      })).value(),
+      edges: _(4)
+        .range()
+        .map((value) => ({
+          node: {
+            id: value,
+            text: `Todo ${value + 1}`,
+            complete: false,
+          },
+        }))
+        .value(),
     },
   };
   let Relay;
@@ -57,7 +60,7 @@ describe('Component: TodosBody', () => {
       TodosBody.__ResetDependency__('RemoveTodoMutation');
     });
 
-    it(`should call 'removeTodo'`, () => {
+    it('should call "removeTodo"', () => {
       const trComponents = component.find('tr');
 
       trComponents.forEach((tr) => {
@@ -84,7 +87,7 @@ describe('Component: TodosBody', () => {
       TodosBody.__ResetDependency__('CompleteTodoMutation');
     });
 
-    it(`should call 'completeTodo'`, () => {
+    it('should call "completeTodo"', () => {
       const trComponents = component.find('tr');
 
       trComponents.forEach((tr) => {

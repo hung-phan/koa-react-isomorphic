@@ -20,7 +20,7 @@ export function getRoutes(history) {
       render={applyRouterMiddleware(useRelay)}
       environment={Store}
     >
-      <Route path='/' component={Todos} queries={ViewerQuery} />
+      <Route path="/" component={Todos} queries={ViewerQuery} />
     </Router>
   );
 }

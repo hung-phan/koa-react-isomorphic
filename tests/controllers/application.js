@@ -12,6 +12,6 @@ describe('Controller: application', () => {
                           .expect(200);
 
     assert.ok(result.text);
-    assert.include(result.text, `id="app"`);
+    assert.include(result.text, 'id="app"');
   });
 });

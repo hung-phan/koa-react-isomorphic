@@ -1,5 +1,6 @@
 import React from 'react';
 import Relay from 'react-relay';
+import { compose, onlyUpdateForKeys } from 'recompose';
 import TodosHeader from './todos-header';
 import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
@@ -16,8 +17,8 @@ export class Todos extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-        <div className='row'>
+      <div className="container">
+        <div className="row">
           <TodosHeader />
           <TodosAdd relay={this.props.relay} viewer={this.props.viewer} />
           <TodosBody viewer={this.props.viewer} />
@@ -28,27 +29,33 @@ export class Todos extends React.Component {
 }
 /* eslint-enable react/prefer-stateless-function */
 
-export default Relay.createContainer(Todos, {
-  initialVariables: {
-    numberOfTodos: 10,
-  },
-  fragments: {
-    viewer: () => Relay.QL`
-      fragment on Viewer {
-        todos(last: $numberOfTodos) {
-          edges {
-            node {
-              id
-              text
-              complete
+export const enhance = compose(
+  (Component) =>
+    Relay.createContainer(Component, {
+      initialVariables: {
+        numberOfTodos: 10,
+      },
+      fragments: {
+        viewer: () => Relay.QL`
+          fragment on Viewer {
+            todos(last: $numberOfTodos) {
+              edges {
+                node {
+                  id
+                  text
+                  complete
+                }
+              }
             }
+            numberOfTodos
+            ${AddTodoMutation.getFragment('viewer')}
+            ${CompleteTodoMutation.getFragment('viewer')}
+            ${RemoveTodoMutation.getFragment('viewer')}
           }
-        }
-        numberOfTodos
-        ${AddTodoMutation.getFragment('viewer')}
-        ${CompleteTodoMutation.getFragment('viewer')}
-        ${RemoveTodoMutation.getFragment('viewer')}
-      }
-    `,
-  },
-});
+        `,
+      },
+    }),
+  onlyUpdateForKeys(['viewer', 'relay'])
+);
+
+export default enhance(Todos);

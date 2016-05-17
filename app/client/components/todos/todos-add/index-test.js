@@ -35,11 +35,11 @@ describe('Component: TodosAdd', () => {
     Module.__ResetDependency__('Relay');
   });
 
-  it(`should define default value for 'state.todo'`, () => {
+  it('should define default value for "state.todo"', () => {
     assert.equal(component.state().todo, '');
   });
 
-  context(`# click on 'Add Todo' button`, () => {
+  context('# click on "Add Todo" button', () => {
     let button;
 
     beforeEach(() => {
@@ -54,15 +54,15 @@ describe('Component: TodosAdd', () => {
       Module.__ResetDependency__('AddTodoMutation');
     });
 
-    it(`should call 'AddTodoMutation' with 'viewer', and 'text'`, () => {
+    it('should call "AddTodoMutation" with "viewer", and "text"', () => {
       sinon.assert.calledWith(AddTodoMutation, { viewer, text: randomUUID });
     });
 
-    it(`should call 'Relay.Store.commitUpdate' with 'AddTodoMutation'`, () => {
+    it('should call "Relay.Store.commitUpdate" with "AddTodoMutation"', () => {
       sinon.assert.calledWith(Relay.Store.commitUpdate, { randomUUID });
     });
 
-    it(`should reset 'state.todo'`, () => {
+    it('should reset "state.todo"', () => {
       assert.equal(component.state().todo, '');
     });
   });
