@@ -31,17 +31,17 @@ describe('Helper: fetchDataEnhancer', () => {
       store = { data: faker.random.uuid() };
       component = mount(
         <Provider store={store}>
-          <Component message='Hello world' />
+          <Component message="Hello world" />
         </Provider>
       );
     });
 
-    it(`should define static '__redial_handlers__.fetchData'`, () => {
+    it('should define static "__redial_handlers__.fetchData"', () => {
       assert.ok(Component.__redial_handlers__.fetchData);
       assert.isFunction(Component.__redial_handlers__.fetchData);
     });
 
-    it(`should call the 'callback' function with arguments`, () => {
+    it('should call the "callback" function with arguments', () => {
       const args = [
         faker.random.uuid(),
         faker.random.uuid(),

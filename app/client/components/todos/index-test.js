@@ -27,15 +27,15 @@ describe('Component: Todos', () => {
     component = shallow(<Todos todos={todos} actions={actions} />);
   });
 
-  it(`should have 'TodosHeader' component`, () => {
+  it('should have "TodosHeader" component', () => {
     assert.ok(component.find(TodosHeader).node);
   });
 
-  it(`should have 'TodosAdd' component`, () => {
+  it('should have "TodosAdd" component', () => {
     assert.ok(component.find(TodosAdd).node);
   });
 
-  it(`should have 'TodosBody' component`, () => {
+  it('should have "TodosBody" component', () => {
     assert.ok(component.find(TodosBody).node);
   });
 });

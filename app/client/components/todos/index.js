@@ -1,6 +1,6 @@
 import React from 'react';
 import { List } from 'immutable';
-import { compose } from 'recompose';
+import { compose, shouldUpdate } from 'recompose';
 import shallowEqualImmutable from 'react-immutable-render-mixin/lib/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -17,14 +17,10 @@ export class Todos extends React.Component {
     actions: React.PropTypes.object,
   };
 
-  shouldComponentUpdate(nextProps) {
-    return !shallowEqualImmutable(nextProps.todos, this.props.todos);
-  }
-
   render() {
     return (
-      <div className='container'>
-        <div className='row'>
+      <div className="container">
+        <div className="row">
           <TodosHeader />
           <TodosAdd addTodo={this.props.actions.addTodo} />
           <TodosBody
@@ -54,7 +50,8 @@ export const decorator = compose(
         completeTodo,
       }, dispatch),
     })
-  )
+  ),
+  shouldUpdate((props, nextProps) => !shallowEqualImmutable(props.todos, nextProps.todos))
 );
 
 export default decorator(Todos);

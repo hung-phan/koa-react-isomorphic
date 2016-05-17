@@ -23,7 +23,7 @@ describe('Component: TodosBody', () => {
     assert.lengthOf(trComponents, todos.length);
   });
 
-  it(`should call 'removeTodo' when click on the delete button`, () => {
+  it('should call "removeTodo" when click on the delete button', () => {
     const removeTodo = sinon.spy();
     const component = mount(
       <TodosBody todos={fromJS(todos)} removeTodo={removeTodo} completeTodo={noop} />
@@ -41,7 +41,7 @@ describe('Component: TodosBody', () => {
     assert.equal(removeTodo.callCount, todos.length);
   });
 
-  it(`should call 'completeTodo' when click on the complete button`, () => {
+  it('should call "completeTodo" when click on the complete button', () => {
     const completeTodo = sinon.spy();
     const component = mount(
       <TodosBody todos={fromJS(todos)} removeTodo={noop} completeTodo={completeTodo} />

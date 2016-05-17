@@ -4,11 +4,11 @@ import { shallow } from 'enzyme';
 import TodosHeader from './index';
 
 describe('Component: TodosHeader', () => {
-  it(`should render 'TodosHeader' component`, () => {
+  it('should render "TodosHeader" component', () => {
     assert.ok(shallow(<TodosHeader />));
   });
 
-  it(`should have title 'Todos List'`, () => {
+  it('should have title "Todos List"', () => {
     const component = shallow(<TodosHeader />);
     assert.include(component.text(), 'Todos List');
   });

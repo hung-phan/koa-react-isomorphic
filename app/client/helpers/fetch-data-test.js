@@ -36,7 +36,7 @@ describe('Helper: fetchData', () => {
       Module.__ResetDependency__('trigger');
     });
 
-    it(`should call 'trigger' with 'components' and 'locals'`, () => {
+    it('should call "trigger" with "components" and "locals"', () => {
       sinon.assert.calledWith(trigger, 'fetchData', routes, {
         store,
         params: renderProps.params,

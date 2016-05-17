@@ -24,7 +24,7 @@ export function getServerHistory(store, url) {
 export function getRoutes(history) {
   return (
     <Router history={history}>
-      <Route path='/' component={Todos} />
+      <Route path="/" component={Todos} />
     </Router>
   );
 }
