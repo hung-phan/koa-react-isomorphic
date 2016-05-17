@@ -1,3 +1,8 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
 input AddTodoMutationInput {
   text: String!
   clientMutationId: String!
