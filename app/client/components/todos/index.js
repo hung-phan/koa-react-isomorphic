@@ -8,26 +8,20 @@ import AddTodoMutation from 'client/mutations/add-todo';
 import CompleteTodoMutation from 'client/mutations/complete-todo';
 import RemoveTodoMutation from 'client/mutations/remove-todo';
 
-/* eslint-disable react/prefer-stateless-function */
-export class Todos extends React.Component {
-  static propTypes = {
-    viewer: React.PropTypes.object,
-    relay: React.PropTypes.object,
-  };
+export const Todos = ({ viewer, relay }) => (
+  <div className="container">
+    <div className="row">
+      <TodosHeader />
+      <TodosAdd relay={relay} viewer={viewer} />
+      <TodosBody viewer={viewer} />
+    </div>
+  </div>
+);
 
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <TodosHeader />
-          <TodosAdd relay={this.props.relay} viewer={this.props.viewer} />
-          <TodosBody viewer={this.props.viewer} />
-        </div>
-      </div>
-    );
-  }
-}
-/* eslint-enable react/prefer-stateless-function */
+Todos.propTypes = {
+  viewer: React.PropTypes.object,
+  relay: React.PropTypes.object,
+};
 
 export const enhance = compose(
   (Component) =>
