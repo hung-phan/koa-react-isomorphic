@@ -10,32 +10,26 @@ import TodosBody from './todos-body';
 import fetchDataEnhancer from 'client/helpers/fetch-data-enhancer';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
 
-/* eslint-disable react/prefer-stateless-function */
-export class Todos extends React.Component {
-  static propTypes = {
-    todos: React.PropTypes.instanceOf(List).isRequired,
-    actions: React.PropTypes.object,
-  };
+export const Todos = ({ todos, actions }) => (
+  <div className="container">
+    <div className="row">
+      <TodosHeader />
+      <TodosAdd addTodo={actions.addTodo} />
+      <TodosBody
+        todos={todos}
+        removeTodo={actions.removeTodo}
+        completeTodo={actions.completeTodo}
+      />
+    </div>
+  </div>
+);
 
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <TodosHeader />
-          <TodosAdd addTodo={this.props.actions.addTodo} />
-          <TodosBody
-            todos={this.props.todos}
-            removeTodo={this.props.actions.removeTodo}
-            completeTodo={this.props.actions.completeTodo}
-          />
-        </div>
-      </div>
-    );
-  }
-}
-/* eslint-enable react/prefer-stateless-function */
+Todos.propTypes = {
+  todos: React.PropTypes.instanceOf(List).isRequired,
+  actions: React.PropTypes.object,
+};
 
-export const decorator = compose(
+export const enhance = compose(
   fetchDataEnhancer(
     ({ store }) => store.dispatch(fetchTodos())
   ),
@@ -54,4 +48,4 @@ export const decorator = compose(
   shouldUpdate((props, nextProps) => !shallowEqualImmutable(props.todos, nextProps.todos))
 );
 
-export default decorator(Todos);
+export default enhance(Todos);

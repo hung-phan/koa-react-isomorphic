@@ -122,7 +122,7 @@
     "debug": "sh scripts/debug",
     "dev": "sh scripts/dev",
     "test": "NODE_ENV=test PORT=3001 mocha --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
-    "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter nyan --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
+    "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter progress --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
     "test:lint": "esw -w 'app/**/*-test.js' 'tests/**/*.js'",
     "coverage": "NODE_ENV=test PORT=3001 istanbul cover ./node_modules/.bin/_mocha -- --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
     "postinstall": "sh scripts/build",
