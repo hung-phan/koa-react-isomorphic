@@ -8,6 +8,7 @@ const Module = rewire('./inject-data-utils');
 
 describe('Helper: fetchData', () => {
   context('# prepareInitialRender', () => {
+    let browserHistoryListen;
     let domNode;
     let routes;
     let props;
@@ -16,6 +17,14 @@ describe('Helper: fetchData', () => {
       routes = _.range(4);
       domNode = faker.random.uuid();
       props = faker.random.uuid();
+      browserHistoryListen = (callback) => callback(faker.random.uuid());
+      Module.__Rewire__('browserHistory', {
+        listen: browserHistoryListen,
+      });
+    });
+
+    after(() => {
+      Module.__ResetDependency__('browserHistory');
     });
 
     describe('# match route', () => {
