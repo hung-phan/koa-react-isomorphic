@@ -15,6 +15,13 @@ productionConfig.plugins.push(
     debug: false,
   }),
   new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false,
+    },
+    output: {
+      comments: false,
+    },
+    sourceMap: false,
     mangle: {
       except: ['GeneratorFunction', 'GeneratorFunctionPrototype'],
     },
