@@ -2,7 +2,11 @@
   "presets": ["es2015", "react", "stage-0"],
   "plugins": [
     "transform-runtime",
-    "typecheck",
+    ["typecheck", {
+      "disable": {
+        "production": true
+      }
+    }],
     "babel-relay-plugin-loader",
     ["module-alias", [
       { "src": "./app", "expose": "app" },
