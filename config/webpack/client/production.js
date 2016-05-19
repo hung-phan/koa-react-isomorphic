@@ -69,7 +69,15 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false,
   }),
-  new webpack.optimize.UglifyJsPlugin(),
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false,
+    },
+    output: {
+      comments: false,
+    },
+    sourceMap: false,
+  }),
   new CompressionPlugin(),
   webpackIsomorphicToolsPlugin
 );

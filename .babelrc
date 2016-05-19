@@ -28,7 +28,8 @@
     "production": {
       "plugins": [
         "transform-react-constant-elements",
-        "transform-react-inline-elements"
+        "transform-react-inline-elements",
+        "transform-react-remove-prop-types"
       ]
     },
     "test": {
