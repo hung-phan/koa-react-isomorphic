@@ -62,4 +62,7 @@ module.exports = {
       'process.env.RUNTIME_ENV': "'server'",
     }),
   ],
+  eslint: {
+    emitWarning: true,
+  },
 };
