@@ -1,7 +1,6 @@
 const path = require('path');
 const ROOT = require('./config/path-helper').ROOT;
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-const regeneratorRuntime = require('regenerator-runtime');
 
 function hotReloadTemplate(templatesDir) {
   require('marko/hot-reload').enable();
@@ -18,7 +17,7 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(
 
 // to get the node require instead of dynamic require by webpack
 global.nodeRequire = require;
-global.regeneratorRuntime = regeneratorRuntime;
+global.regeneratorRuntime = require('regenerator-runtime');
 
 global.webpackIsomorphicTools
   .development(process.env.NODE_ENV === 'development')
