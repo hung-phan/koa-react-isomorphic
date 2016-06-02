@@ -227,6 +227,15 @@ export default handleActions({
 }, initialState);
 ```
 
+## Hacky stub
+You can use the global.nodeRequire in `app` to get back the original `require` of
+node. It will be usefull in the case you want to require sth at runtime instead of
+compile time
+
+```javascript
+const module = global.nodeRequire('path');
+```
+
 ## Upcoming
 
 * Rxjs
