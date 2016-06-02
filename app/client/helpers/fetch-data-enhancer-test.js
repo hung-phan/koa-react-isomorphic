@@ -3,6 +3,7 @@ import faker from 'faker';
 import React from 'react';
 import { assert } from 'chai';
 import { mount } from 'enzyme';
+import propName from 'redial/lib/propName';
 import mockingComponent from 'client/test-helpers/mocking-component';
 import Provider from 'client/test-helpers/provider-mock';
 import fetchDataEnhancer from './fetch-data-enhancer';
@@ -36,9 +37,9 @@ describe('Helper: fetchDataEnhancer', () => {
       );
     });
 
-    it('should define static "__redial_handlers__.fetchData"', () => {
-      assert.ok(Component.__redial_handlers__.fetchData);
-      assert.isFunction(Component.__redial_handlers__.fetchData);
+    it(`should define static "${propName}.fetchData"`, () => {
+      assert.ok(Component[propName].fetchData);
+      assert.isFunction(Component[propName].fetchData);
     });
 
     it('should call the "callback" function with arguments', () => {
@@ -49,7 +50,7 @@ describe('Helper: fetchDataEnhancer', () => {
         faker.random.uuid(),
       ];
 
-      Component.__redial_handlers__.fetchData(...args);
+      Component[propName].fetchData(...args);
 
       sinon.assert.calledWith(callback, ...args);
     });
