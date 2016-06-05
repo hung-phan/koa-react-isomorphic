@@ -24,7 +24,7 @@ Todos.propTypes = {
 };
 
 export const enhance = compose(
-  (Component) =>
+  Component =>
     Relay.createContainer(Component, {
       initialVariables: {
         numberOfTodos: 10,
