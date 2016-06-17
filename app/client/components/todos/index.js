@@ -4,6 +4,7 @@ import { compose, onlyUpdateForKeys } from 'recompose';
 import TodosHeader from './todos-header';
 import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
+import TodosFooter from './todos-footer';
 import AddTodoMutation from 'client/mutations/add-todo';
 import CompleteTodoMutation from 'client/mutations/complete-todo';
 import RemoveTodoMutation from 'client/mutations/remove-todo';
@@ -14,6 +15,7 @@ export const Todos = ({ viewer, relay }) => (
       <TodosHeader />
       <TodosAdd relay={relay} viewer={viewer} />
       <TodosBody viewer={viewer} />
+      <TodosFooter />
     </div>
   </div>
 );

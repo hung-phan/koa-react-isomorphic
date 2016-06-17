@@ -1,5 +1,6 @@
 import React from 'react';
 import Relay from 'react-relay';
+import { pure } from 'recompose';
 import AddTodoMutation from 'client/mutations/add-todo';
 
 export class TodosAdd extends React.Component {
@@ -58,4 +59,4 @@ export class TodosAdd extends React.Component {
   }
 }
 
-export default TodosAdd;
+export default pure(TodosAdd);

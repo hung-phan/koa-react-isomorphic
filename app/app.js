@@ -8,7 +8,9 @@ import { init } from 'client/helpers/inject-data-utils';
 if (process.env.NODE_ENV !== 'production') {
   const { whyDidYouUpdate } = require('why-did-you-update');
 
-  whyDidYouUpdate(React, { exclude: /^(StaticContainer)/ });
+  whyDidYouUpdate(React, {
+    exclude: /^(StaticContainer|Relay|IsomorphicRelayRouterContext)/,
+  });
 }
 
 $(document).ready(() => {

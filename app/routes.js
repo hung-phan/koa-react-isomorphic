@@ -1,9 +1,10 @@
 import React from 'react';
-import { Store } from 'react-relay';
+import Relay from 'react-relay';
 import useRelay from 'react-router-relay';
 import { Router, Route, applyRouterMiddleware } from 'react-router';
 import ViewerQuery from './client/queries/viewer';
 import Todos from 'client/components/todos';
+import StaticPage from 'client/components/static-page';
 
 export function getClientHistory() {
   return require('react-router').browserHistory;
@@ -18,9 +19,10 @@ export function getRoutes(history) {
     <Router
       history={history}
       render={applyRouterMiddleware(useRelay)}
-      environment={Store}
+      environment={Relay.Store}
     >
       <Route path="/" component={Todos} queries={ViewerQuery} />
+      <Route path="/static-page" component={StaticPage} />
     </Router>
   );
 }

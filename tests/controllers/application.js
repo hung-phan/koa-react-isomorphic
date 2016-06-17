@@ -12,6 +12,16 @@ describe('Controller: application', () => {
                           .expect(200);
 
     assert.ok(result.text);
-    assert.include(result.text, 'id="app"');
+    assert.include(result.text, 'Todos List');
+  });
+
+  it('should render Static page', async () => {
+    const result = await request
+                          .get('/static-page')
+                          .set('Accept', 'text/html')
+                          .expect(200);
+
+    assert.ok(result.text);
+    assert.include(result.text, 'Static Page');
   });
 });
