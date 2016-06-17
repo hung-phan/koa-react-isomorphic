@@ -1,6 +1,5 @@
 import React from 'react';
 import Relay from 'react-relay';
-import { pure } from 'recompose';
 import AddTodoMutation from 'client/mutations/add-todo';
 
 export class TodosAdd extends React.Component {
@@ -9,11 +8,10 @@ export class TodosAdd extends React.Component {
     viewer: React.PropTypes.object.isRequired,
   };
 
-  constructor(...args) {
-    super(...args);
-
-    this.state = { todo: '', numberOfTodos: 20 };
-  }
+  state = {
+    todo: '',
+    numberOfTodos: 20,
+  };
 
   updateTodo = (e) => {
     this.setState({ todo: e.target.value });
@@ -60,4 +58,4 @@ export class TodosAdd extends React.Component {
   }
 }
 
-export default pure(TodosAdd);
+export default TodosAdd;
