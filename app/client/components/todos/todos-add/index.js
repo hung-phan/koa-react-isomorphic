@@ -1,4 +1,5 @@
 import React from 'react';
+import { pure } from 'recompose';
 
 export class TodosAdd extends React.Component {
   static propTypes = {
@@ -37,4 +38,4 @@ export class TodosAdd extends React.Component {
   }
 }
 
-export default TodosAdd;
+export default pure(TodosAdd);

@@ -15,7 +15,9 @@ function render(store, routes, appDOM) {
 if (process.env.NODE_ENV !== 'production') {
   const { whyDidYouUpdate } = require('why-did-you-update');
 
-  whyDidYouUpdate(React, { exclude: /^(Connect|DockMonitor)/ });
+  whyDidYouUpdate(React, {
+    exclude: /^(Connect|DockMonitor|onlyUpdateForKeys)/,
+  });
 }
 
 $(document).ready(() => {
