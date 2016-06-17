@@ -1,16 +1,13 @@
 import React from 'react';
-import { pure } from 'recompose';
 
 export class TodosAdd extends React.Component {
   static propTypes = {
     addTodo: React.PropTypes.func,
   };
 
-  constructor(...args) {
-    super(...args);
-
-    this.state = { todo: '' };
-  }
+  state = {
+    todo: '',
+  };
 
   updateTodo = (e) => {
     this.setState({ todo: e.target.value });
@@ -40,4 +37,4 @@ export class TodosAdd extends React.Component {
   }
 }
 
-export default pure(TodosAdd);
+export default TodosAdd;
