@@ -7,5 +7,5 @@ export default (callback) => (ComposedComponent) =>
       return callback(...args);
     },
   })(
-    props => <ComposedComponent { ...props } />
+    props => <ComposedComponent {...props} />
   );

@@ -4,9 +4,10 @@ import { compose, shouldUpdate } from 'recompose';
 import shallowEqualImmutable from 'react-immutable-render-mixin/lib/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import TodosAdd from './todos-add';
 import TodosHeader from './todos-header';
+import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
+import TodosFooter from './todos-footer';
 import fetchDataEnhancer from 'client/helpers/fetch-data-enhancer';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
 
@@ -20,6 +21,7 @@ export const Todos = ({ todos, actions }) => (
         removeTodo={actions.removeTodo}
         completeTodo={actions.completeTodo}
       />
+      <TodosFooter />
     </div>
   </div>
 );
