@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "1.7.8",
+  "version": "1.7.9",
   "devDependencies": {
     "babel-eslint": "^6.0.4",
     "babel-plugin-react-transform": "^2.0.2",
@@ -130,10 +130,10 @@
     "start": "sh scripts/start",
     "debug": "sh scripts/debug",
     "dev": "sh scripts/dev",
-    "test": "NODE_ENV=test PORT=3001 SERVER_RENDERING=true mocha --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
-    "test:watch": "NODE_ENV=test PORT=3001 SERVER_RENDERING=true mocha --watch --reporter progress --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
+    "test": "NODE_ENV=test PORT=3001 mocha --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
+    "test:watch": "NODE_ENV=test PORT=3001 mocha --watch --reporter progress --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
     "test:lint": "esw -w 'app/**/*-test.js' 'tests/**/*.js'",
-    "coverage": "NODE_ENV=test PORT=3001 SERVER_RENDERING=true istanbul cover ./node_modules/.bin/_mocha -- --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
+    "coverage": "NODE_ENV=test PORT=3001 istanbul cover ./node_modules/.bin/_mocha -- --compilers js:./compiler './app/**/*-test.js' './tests/**/*.js'",
     "postinstall": "sh scripts/build",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "update-schema": "babel-node ./scripts/update-schema.js",
