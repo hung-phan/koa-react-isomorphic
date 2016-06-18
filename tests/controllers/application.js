@@ -5,7 +5,7 @@ import app from 'app/server-app';
 describe('Controller: application', () => {
   const request = supertest(app.listen());
 
-  it('should render Todos page', async () => {
+  it('should render Todos page', async (done) => {
     const result = await request
                           .get('/')
                           .set('Accept', 'text/html')
@@ -13,9 +13,11 @@ describe('Controller: application', () => {
 
     assert.ok(result.text);
     assert.include(result.text, 'Todos List');
+
+    done();
   });
 
-  it('should render Static page', async () => {
+  it('should render Static page', async (done) => {
     const result = await request
                           .get('/static-page')
                           .set('Accept', 'text/html')
@@ -23,5 +25,7 @@ describe('Controller: application', () => {
 
     assert.ok(result.text);
     assert.include(result.text, 'Static Page');
+
+    done();
   });
 });
