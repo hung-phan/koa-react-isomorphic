@@ -1,6 +1,7 @@
 import React from 'react';
 import Relay from 'react-relay';
 import { compose, onlyUpdateForKeys } from 'recompose';
+import { createContainer } from 'recompose-relay';
 import TodosHeader from './todos-header';
 import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
@@ -26,31 +27,30 @@ Todos.propTypes = {
 };
 
 export const enhance = compose(
-  Component =>
-    Relay.createContainer(Component, {
-      initialVariables: {
-        numberOfTodos: 10,
-      },
-      fragments: {
-        viewer: () => Relay.QL`
-          fragment on Viewer {
-            todos(last: $numberOfTodos) {
-              edges {
-                node {
-                  id
-                  text
-                  complete
-                }
+  createContainer({
+    initialVariables: {
+      numberOfTodos: 10,
+    },
+    fragments: {
+      viewer: () => Relay.QL`
+        fragment on Viewer {
+          todos(last: $numberOfTodos) {
+            edges {
+              node {
+                id
+                text
+                complete
               }
             }
-            numberOfTodos
-            ${AddTodoMutation.getFragment('viewer')}
-            ${CompleteTodoMutation.getFragment('viewer')}
-            ${RemoveTodoMutation.getFragment('viewer')}
           }
-        `,
-      },
-    }),
+          numberOfTodos
+          ${AddTodoMutation.getFragment('viewer')}
+          ${CompleteTodoMutation.getFragment('viewer')}
+          ${RemoveTodoMutation.getFragment('viewer')}
+        }
+      `,
+    },
+  }),
   onlyUpdateForKeys(['viewer', 'relay'])
 );
 

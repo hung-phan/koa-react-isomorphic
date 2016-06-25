@@ -112,6 +112,7 @@
     "react-router": "^2.4.1",
     "react-router-relay": "^0.13.2",
     "recompose": "^0.20.0",
+    "recompose-relay": "^0.3.0",
     "redial": "^0.4.2",
     "rx": "^4.1.0",
     "sass-loader": "^3.2.0",
