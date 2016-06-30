@@ -6,7 +6,7 @@
 
 [![NPM](https://nodei.co/npm/koa-react-isomorphic.png?downloads=true)](https://nodei.co/npm/koa-react-isomorphic/)
 
-The idea of this repository are to try out all new concepts and libraries which work great for React.js.
+The idea of this repository is to try out all new concepts and libraries which work great for React.js.
 Additionally, this will be the boilerplate for koa isomorphic (or universal) application.
 
 So far, I manage to put together these following technologies:
