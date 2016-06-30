@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
 import { mount } from 'enzyme';
-import { noop } from 'node-noop';
+import { noop } from 'lodash';
 import TodosBody from './index';
 
 describe('Component: TodosBody', () => {
