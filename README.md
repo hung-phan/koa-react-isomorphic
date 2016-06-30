@@ -266,8 +266,10 @@ $ npm run dev
 ## Test
 
 ```bash
+$ npm test
 $ npm run test:watch
 $ npm run test:lint
+$ npm run test:coverage
 ```
 
 ## Debug
@@ -279,26 +281,27 @@ $ npm run debug
 If you use tool like Webstorm or any JetBrains product to debug, you need add another option to `scripts/debug` to prevent
 using default browser to debug. Example: `node-debug -p 9999 -b -c prod-server.js`
 
+## Enable flowtype in development
+```bash
+$ npm run flow:watch
+$ npm run flow:stop # to terminate the server
+```
+
+You need to add annotation to the file to enable flowtype (`// @flow`)
+
 ## Production
 
 ### Normal run
 
 ```bash
-$ gulp build
+$ npm run build
 $ SECRET_KEY=your_env_key npm start
 ```
 
 ### With pm2
 
 ```bash
-$ gulp build
-$ SECRET_KEY=your_env_key gulp pro-server
-```
-
-## Testing
-
-```bash
-$ npm test # normal run
-$ npm run test:watch # watch the test
-$ npm run coverage
+$ npm run build
+$ SECRET_KEY=your_env_key npm run pm2:start
+$ npm run pm2:stop # to terminate the server
 ```
