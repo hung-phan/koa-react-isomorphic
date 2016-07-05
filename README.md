@@ -305,3 +305,9 @@ $ npm run build
 $ SECRET_KEY=your_env_key npm run pm2:start
 $ npm run pm2:stop # to terminate the server
 ```
+
+### Deploy heroku
+```bash
+$ heroku create
+$ git push heroku master
+```

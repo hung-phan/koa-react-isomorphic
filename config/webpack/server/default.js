@@ -12,6 +12,7 @@ const nodeModules = _.reduce(
                       (modules, mod) => Object.assign(modules, { [mod]: `commonjs ${mod}` }),
                       {}
                     );
+const assets = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
 
 module.exports = {
   context: ROOT,
@@ -30,14 +31,15 @@ module.exports = {
     publicPath: config.path.assets,
     filename: '[name].js',
     chunkFilename: '[id].js',
+    libraryTarget: 'commonjs2',
   },
   externals: [
     nodeModules,
-    function (context, request, callback) {
-      const asset = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
+    (context, request, callback) => {
+      const regexp = new RegExp(`${assets}$`);
 
-      return (new RegExp(`${asset}$`)).test(request)
-        ? callback(null, `commonjs ${path.resolve(context, request)}`)
+      return regexp.test(request)
+        ? callback(null, `commonjs ${path.join(context.replace(ROOT, './../'), request)}`)
         : callback();
     },
   ],
