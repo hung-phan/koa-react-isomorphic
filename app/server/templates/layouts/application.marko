@@ -16,7 +16,7 @@
         <layout-placeholder name="mainContent" />
 
         <if(data.layoutData.env.NODE_ENV === 'production')>
-            <javascript-include-tag href="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" />
+            <javascript-include-tag src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" />
         </if>
 
         <prerender-data data=data.layoutData.prerenderData />
