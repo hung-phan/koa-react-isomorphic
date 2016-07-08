@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "devDependencies": {
     "babel-plugin-rewire": "^1.0.0-rc-4",
     "chai": "^3.5.0",
@@ -12,7 +12,6 @@
     "jsdom": "^9.4.1",
     "jsdom-global": "^2.0.0",
     "mocha": "^2.5.3",
-    "monkey-hot-loader": "0.0.3",
     "nock": "^8.0.0",
     "node-inspector": "^0.12.8",
     "react-addons-test-utils": "^15.2.0",
