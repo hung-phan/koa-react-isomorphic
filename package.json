@@ -4,6 +4,7 @@
   "devDependencies": {
     "babel-plugin-rewire": "^1.0.0-rc-4",
     "chai": "^3.5.0",
+    "chokidar": "^1.6.0",
     "chokidar-cli": "^1.2.0",
     "enzyme": "^2.4.0",
     "eslint-watch": "^2.1.13",
@@ -18,6 +19,7 @@
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.10",
+    "regenerator-runtime": "^0.9.5",
     "rewire": "^2.5.2",
     "sinon": "^1.17.4",
     "supertest": "^1.2.0"
@@ -118,8 +120,8 @@
     "shelljs": "^0.7.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.1.0-beta.7",
-    "webpack-dev-server": "^2.0.0-beta",
+    "webpack": "^2.1.0-beta.17",
+    "webpack-dev-server": "^2.1.0-beta.0",
     "webpack-isomorphic-tools": "^2.3.2",
     "why-did-you-update": "0.0.8"
   },
