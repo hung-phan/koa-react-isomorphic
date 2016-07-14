@@ -5,5 +5,5 @@ module.exports = {
     publicAssets: '/public/assets/',
     build: '/build/',
   },
-  cssModules: '?localIdentName=[hash:base64:5]__[local]',
+  cssModules: '?localIdentName=[local]__[hash]',
 };
