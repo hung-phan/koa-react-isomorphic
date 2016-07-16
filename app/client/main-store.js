@@ -7,6 +7,7 @@ let middlewares = [
 ];
 let enhancers = [];
 
+// support for development
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const logger = require('redux-logger')({ level: 'info' });
   const { persistState } = require('redux-devtools');
@@ -15,20 +16,26 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
     ...middlewares,
     logger,
   ];
+
   enhancers = [
     ...enhancers,
-    require('./components/main/debug').default.instrument(),
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
   ];
 }
 
-const finalCreateStore = compose(
-  applyMiddleware(...middlewares),
-  ...enhancers
-)(createStore);
+// support redux-devtools
+if (process.env.RUNTIME_ENV === 'client' && window.devToolsExtension) {
+  enhancers = [
+    ...enhancers,
+    window.devToolsExtension(),
+  ];
+}
 
 export default function (initialState = {}) {
-  const store = finalCreateStore(reducers, initialState);
+  const store = createStore(reducers, initialState, compose(
+    applyMiddleware(...middlewares),
+    ...enhancers
+  ));
 
   if (module.hot) {
     module.hot.accept('./main-reducer', () =>

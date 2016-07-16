@@ -23,7 +23,13 @@ export function clientFetchData(routes, store) {
       } else if (redirectLocation) {
         navigateTo(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        trigger('fetchData', renderProps.components, getLocals(store, renderProps));
+        if (window.__data) {
+          // Delete initial data so that subsequent data fetches can occur:
+          delete window.__data;
+        } else {
+          // Fetch mandatory data dependencies for 2nd route change onwards:
+          trigger('fetchData', renderProps.components, getLocals(store, renderProps));
+        }
       } else {
         navigateTo('/404.html');
       }

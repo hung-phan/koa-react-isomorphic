@@ -32,15 +32,24 @@ _.mergeWith(productionConfig, {
 productionConfig.module.loaders.push(
   {
     test: /\.css$/,
-    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss`),
+    loader: ExtractTextPlugin.extract({
+      notExtractLoader: 'style',
+      loader: `css${config.cssModules}!postcss`,
+    }),
   },
   {
     test: /\.less$/,
-    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss!less`),
+    loader: ExtractTextPlugin.extract({
+      notExtractLoader: 'style',
+      loader: `css${config.cssModules}!postcss!less`,
+    }),
   },
   {
     test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', `css${config.cssModules}!postcss!sass`),
+    loader: ExtractTextPlugin.extract({
+      notExtractLoader: 'style',
+      loader: `css${config.cssModules}!postcss!sass`,
+    }),
   }
 );
 

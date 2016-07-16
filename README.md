@@ -29,6 +29,10 @@ In `server.js`, I initialse all middlewares from `config/middleware/index`, then
 from client side eventually will request to `/api/*`, which are created by `app/server/apis`. Rendering tasks will be delegated to
 [React-Router](https://github.com/rackt/react-router) to do server rendering for React.
 
+## Requirement
+
+Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.
+
 ### Require assets in server
 
 Leverage the power of [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to hack `require` module with

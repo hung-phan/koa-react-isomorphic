@@ -12,7 +12,7 @@ function render(store, routes, appDOM) {
   ReactDOM.render(<App store={store} routes={routes} />, appDOM);
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   const { whyDidYouUpdate } = require('why-did-you-update');
 
   whyDidYouUpdate(React, {
