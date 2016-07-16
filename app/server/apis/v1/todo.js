@@ -1,6 +1,6 @@
 export default function (router) {
-  router.get('/api/v1/todos', function *() {
-    this.body = [
+  router.get('/api/v1/todos', (ctx) => {
+    ctx.body = [
       {
         text: 'Todo 1',
         complete: false,

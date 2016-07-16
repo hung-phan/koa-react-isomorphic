@@ -1,5 +1,5 @@
 export default function (router) {
-  router.get('*', function* () {
-    this.body = yield this.prerender('application/index.marko');
+  router.get('*', async (ctx) => {
+    ctx.body = await ctx.prerender('application/index.marko');
   });
 }

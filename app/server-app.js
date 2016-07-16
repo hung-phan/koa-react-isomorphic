@@ -1,11 +1,11 @@
-import koa from 'koa';
+import Koa from 'koa';
 import debug from 'debug';
 import * as config from 'server/middlewares';
 import apis from 'server/apis/base';
 import schema from 'database/schema';
 import controllers from 'server/controllers/base';
 
-const app = koa();
+const app = new Koa();
 
 // setup middlewares
 config.loggingLayer(app);

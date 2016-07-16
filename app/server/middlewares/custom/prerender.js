@@ -1,16 +1,16 @@
-if (process.env.SERVER_RENDERING) {
-  const { renderToString } = require('react-dom/server');
-  const { match } = require('react-router');
-  const DefaultNetworkLayer = require('react-relay').DefaultNetworkLayer;
-  const IsomorphicRouter = require('isomorphic-relay-router').default;
-  const { getRoutes, getServerHistory } = require('app/routes');
+export default async (ctx, next) => {
+  if (process.env.SERVER_RENDERING) {
+    const { renderToString } = require('react-dom/server');
+    const { match } = require('react-router');
+    const DefaultNetworkLayer = require('react-relay').DefaultNetworkLayer;
+    const IsomorphicRouter = require('isomorphic-relay-router').default;
+    const { getRoutes, getServerHistory } = require('app/routes');
 
-  const networkLayer = new DefaultNetworkLayer(
-    `http://localhost:${process.env.PORT}/graphql`
-  );
+    const networkLayer = new DefaultNetworkLayer(
+      `http://localhost:${process.env.PORT}/graphql`
+    );
 
-  module.exports = function* (next) {
-    this.prerender = this.prerender ||
+    ctx.prerender = ctx.prerender ||
       function (template: string, parameters: Object = {}) {
         return new Promise((resolve, reject) => {
           match({
@@ -18,15 +18,15 @@ if (process.env.SERVER_RENDERING) {
             location: this.req.url,
           }, (error, redirectLocation, renderProps) => {
             if (error) {
-              this.throw(500, error.message);
+              ctx.throw(500, error.message);
             } else if (redirectLocation) {
-              this.redirect(redirectLocation.pathname + redirectLocation.search);
+              ctx.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
               IsomorphicRouter.prepareData(renderProps, networkLayer)
                 .then(({ data: prerenderData, props }) => {
                   const prerenderComponent = renderToString(IsomorphicRouter.render(props));
 
-                  this.render(template, {
+                  ctx.render(template, {
                     ...parameters,
                     prerenderComponent,
                     prerenderData,
@@ -35,16 +35,14 @@ if (process.env.SERVER_RENDERING) {
                   .catch(reject);
                 });
             } else {
-              this.throw(404);
+              ctx.throw(404);
             }
           });
         });
       };
-    yield next;
-  };
-} else {
-  module.exports = function* (next) {
-    this.prerender = this.render;
-    yield next;
-  };
-}
+    await next();
+  } else {
+    ctx.prerender = ctx.render;
+    await next();
+  }
+};

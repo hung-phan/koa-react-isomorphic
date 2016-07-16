@@ -5,7 +5,7 @@ import React from 'react';
 import { getRoutes, getClientHistory } from 'app/routes';
 import { init } from 'client/helpers/inject-data-utils';
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   const { whyDidYouUpdate } = require('why-did-you-update');
 
   whyDidYouUpdate(React, {
