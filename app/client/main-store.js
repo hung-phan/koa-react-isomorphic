@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
 }
 
 // support redux-devtools
-if (window.devToolsExtension) {
+if (process.env.RUNTIME_ENV === 'client' && window.devToolsExtension) {
   enhancers = [
     ...enhancers,
     window.devToolsExtension(),
