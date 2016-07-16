@@ -7,6 +7,7 @@ let middlewares = [
 ];
 let enhancers = [];
 
+// support for development
 if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
   const logger = require('redux-logger')({ level: 'info' });
   const { persistState } = require('redux-devtools');
@@ -15,11 +16,18 @@ if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
     ...middlewares,
     logger,
   ];
+
   enhancers = [
     ...enhancers,
-    require('./components/main/debug').default.instrument(),
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-    window.devToolsExtension ? window.devToolsExtension() : f => f,
+  ];
+}
+
+// support redux-devtools
+if (window.devToolsExtension) {
+  enhancers = [
+    ...enhancers,
+    window.devToolsExtension(),
   ];
 }
 
