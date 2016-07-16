@@ -7,6 +7,7 @@ import router from 'koa-router';
 import conditionalGet from 'koa-conditional-get';
 import etag from 'koa-etag';
 import csrf from 'koa-csrf';
+import convert from 'koa-convert';
 import cookieSession from 'koa-session';
 import compress from 'koa-compress';
 import helmet from 'koa-helmet';
@@ -15,72 +16,75 @@ import render from './custom/render';
 import prerender from './custom/prerender';
 import error from './custom/error';
 
-export function loggingLayer(app) {
-  app.use(logger()); // https://github.com/koajs/logger
-}
+export const loggingLayer = app =>
+  app
+    .use(convert(logger())); // https://github.com/koajs/logger
 
-export function initialLayer(app) {
-  app.use(bodyParser()); // https://github.com/koajs/bodyparser
+export const initialLayer = app =>
+  // remove staticCache if you have nginx already serves the public folder in production mode
+  app
+    .use(convert(bodyParser())) // https://github.com/koajs/bodyparser
+    .use(convert(staticCache(settings.path.PUBLIC, { gzip: true }))); // https://github.com/koajs/static-cache
 
-  // remove this appConfig if you have nginx already serves the public folder
-  // in production mode
-  app.use(staticCache(settings.path.PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
-}
-
-export function apiLayer(app, apiRoutes) {
+export const apiLayer = (app, apiRoutes) => {
   const newRouter = router();
 
-  newRouter.use(
-    conditionalGet(), // https://github.com/koajs/conditional-get
-    etag(), // https://github.com/koajs/etag
-    cors() // https://github.com/koajs/cors
-  );
+  newRouter
+    .use(convert(conditionalGet())) // https://github.com/koajs/conditional-get
+    .use(convert(etag())) // https://github.com/koajs/etag
+    .use(convert(cors())); // https://github.com/koajs/cors
 
   apiRoutes(newRouter);
-  app.use(newRouter.routes());
+
+  app
+    .use(newRouter.routes())
+    .use(newRouter.allowedMethods());
 
   return newRouter;
-}
+};
 
-export function securityLayer(app) {
-  /* eslint no-param-reassign: [0] */
+export const securityLayer = app => {
   const newRouter = router();
 
   app.keys = [process.env.SECRET_KEY];
   csrf(app);
 
-  newRouter.use(
-    cookieSession(app), // https://github.com/koajs/session
-    csrf.middleware // https://github.com/koajs/csrf
-  );
+  newRouter
+    .use(convert(cookieSession(app))) // https://github.com/koajs/session
+    .use(convert(csrf.middleware)); // https://github.com/koajs/csrf
 
-  app.use(newRouter.routes());
-  app.use(helmet()); // https://github.com/venables/koa-helmet
+  app
+    .use(newRouter.routes())
+    .use(newRouter.allowedMethods())
+    .use(helmet()); // https://github.com/venables/koa-helmet
 
   return newRouter;
-}
+};
 
-export function renderLayer(app, templateRoutes) {
+export const renderLayer = (app, templateRoutes) => {
   const newRouter = router();
 
-  newRouter.use(
-    render,
-    prerender,
-    htmlMinifier({
+  newRouter
+    .use(render)
+    .use(prerender)
+    .use(convert(htmlMinifier({
       collapseWhitespace: true,
       removeComments: true,
       preserveLineBreaks: false,
       removeEmptyAttributes: false,
       removeIgnored: true,
-    }), // https://github.com/kangax/html-minifier
-    compress() // https://github.com/koajs/compress
-  );
+    }))) // https://github.com/kangax/html-minifier
+    .use(convert(compress())); // https://github.com/koajs/compress
+
   templateRoutes(newRouter);
-  app.use(newRouter.routes());
+
+  app
+    .use(newRouter.routes())
+    .use(newRouter.allowedMethods());
 
   return newRouter;
-}
+};
 
-export function errorLayer(app) {
-  app.use(error());
-}
+export const errorLayer = app =>
+  app
+    .use(error);
