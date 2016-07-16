@@ -15,19 +15,19 @@ import render from './custom/render';
 import prerender from './custom/prerender';
 import error from './custom/error';
 
-export function loggingLayer(app) {
+export const loggingLayer = app => {
   app.use(logger()); // https://github.com/koajs/logger
-}
+};
 
-export function initialLayer(app) {
+export const initialLayer = app => {
   app.use(bodyParser()); // https://github.com/koajs/bodyparser
 
   // remove this appConfig if you have nginx already serves the public folder
   // in production mode
   app.use(staticCache(settings.path.PUBLIC, { gzip: true })); // https://github.com/koajs/static-cache
-}
+};
 
-export function apiLayer(app, apiRoutes) {
+export const apiLayer = (app, apiRoutes) => {
   const newRouter = router();
 
   newRouter.use(
@@ -40,10 +40,9 @@ export function apiLayer(app, apiRoutes) {
   app.use(newRouter.routes());
 
   return newRouter;
-}
+};
 
-export function securityLayer(app) {
-  /* eslint no-param-reassign: [0] */
+export const securityLayer = app => {
   const newRouter = router();
 
   app.keys = [process.env.SECRET_KEY];
@@ -58,9 +57,9 @@ export function securityLayer(app) {
   app.use(helmet()); // https://github.com/venables/koa-helmet
 
   return newRouter;
-}
+};
 
-export function renderLayer(app, templateRoutes) {
+export const renderLayer = (app, templateRoutes) => {
   const newRouter = router();
 
   newRouter.use(
@@ -79,8 +78,8 @@ export function renderLayer(app, templateRoutes) {
   app.use(newRouter.routes());
 
   return newRouter;
-}
+};
 
-export function errorLayer(app) {
-  app.use(error());
-}
+export const errorLayer = app => {
+  app.use(error);
+};
