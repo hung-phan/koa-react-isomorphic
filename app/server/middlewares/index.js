@@ -56,7 +56,7 @@ export const securityLayer = app => {
   app
     .use(newRouter.routes())
     .use(newRouter.allowedMethods())
-    .use(convert(helmet())); // https://github.com/venables/koa-helmet
+    .use(helmet()); // https://github.com/venables/koa-helmet
 
   return newRouter;
 };
