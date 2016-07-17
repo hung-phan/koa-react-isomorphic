@@ -2,9 +2,7 @@ import _ from 'lodash';
 import sinon from 'sinon';
 import faker from 'faker';
 import { assert } from 'chai';
-import rewire from 'rewire';
-
-const Module = rewire('./fetch-data');
+import { serverFetchData, clientFetchData, getLocals, __RewireAPI__ as Module } from './fetch-data';
 
 describe('Helper: fetchData', () => {
   it('should be an object', () => {
@@ -29,7 +27,7 @@ describe('Helper: fetchData', () => {
 
       Module.__Rewire__('trigger', trigger);
 
-      Module.serverFetchData(renderProps, store);
+      serverFetchData(renderProps, store);
     });
 
     after(() => {
@@ -86,7 +84,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        Module.clientFetchData(routes, store);
+        clientFetchData(routes, store);
         sinon.assert.calledWith(navigateToSpy, '/500.html');
 
         Module.__ResetDependency__('match');
@@ -99,7 +97,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        Module.clientFetchData(routes, store);
+        clientFetchData(routes, store);
         sinon.assert.calledWith(navigateToSpy, '/hello-world.html');
 
         Module.__ResetDependency__('match');
@@ -119,9 +117,9 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        Module.clientFetchData(routes, store);
+        clientFetchData(routes, store);
         sinon.assert.calledWith(
-          triggerSpy, 'fetchData', renderProps.components, Module.getLocals(store, renderProps)
+          triggerSpy, 'fetchData', renderProps.components, getLocals(store, renderProps)
         );
 
         Module.__ResetDependency__('match');
@@ -134,7 +132,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        Module.clientFetchData(routes, store);
+        clientFetchData(routes, store);
         sinon.assert.calledWith(navigateToSpy, '/404.html');
 
         Module.__ResetDependency__('match');
