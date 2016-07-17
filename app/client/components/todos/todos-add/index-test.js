@@ -2,10 +2,8 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 import React from 'react';
 import { mount } from 'enzyme';
-import rewire from 'rewire';
 import faker from 'faker';
-
-const Module = rewire('./index');
+import { TodosAdd, __RewireAPI__ as Module } from './index';
 
 describe('Component: TodosAdd', () => {
   let viewer;
@@ -28,7 +26,7 @@ describe('Component: TodosAdd', () => {
     viewer = { numberOfTodos: 100 };
 
     Module.__Rewire__('Relay', Relay);
-    component = mount(<Module.TodosAdd viewer={viewer} relay={relay} />);
+    component = mount(<TodosAdd viewer={viewer} relay={relay} />);
   });
 
   afterEach(() => {
