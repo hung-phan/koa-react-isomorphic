@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/bin/bash
 esw -w 'app/**/*-test.js' 'tests/**/*.js'
