@@ -1,4 +1,5 @@
-export default async (ctx, next) => {
+// @flow
+export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
     const React = require('react');
     const { renderToString } = require('react-dom/server');

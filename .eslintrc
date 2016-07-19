@@ -1,7 +1,7 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
-  "plugins": ["mocha"],
+  "plugins": ["mocha", "flow-vars"],
   "env": {
     "mocha": true,
     "browser": true,
@@ -13,7 +13,9 @@
     "no-param-reassign": 0,
     "mocha/no-exclusive-tests": 2,
     "global-require": 0,
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "flow-vars/define-flow-type": 1,
+    "flow-vars/use-flow-type": 1
   },
   "settings": {
     "import/resolver": {

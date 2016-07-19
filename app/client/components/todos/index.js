@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { List } from 'immutable';
 import { compose, shouldUpdate } from 'recompose';
@@ -10,8 +11,9 @@ import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
 import fetchDataEnhancer from 'client/helpers/fetch-data-enhancer';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
+import type { Todo } from './types';
 
-export const Todos = ({ todos, actions }) => (
+export const Todos = ({ todos, actions }: { todos: List<Todo>, actions: Object }) => (
   <div className="container">
     <div className="row">
       <TodosHeader />

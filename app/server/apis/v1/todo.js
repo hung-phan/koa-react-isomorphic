@@ -1,4 +1,5 @@
-export default function (router) {
+// @flow
+export default function (router: Object) {
   router.get('/api/v1/todos', (ctx) => {
     ctx.body = [
       {

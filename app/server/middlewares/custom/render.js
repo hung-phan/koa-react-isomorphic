@@ -1,8 +1,9 @@
+// @flow
 import path from 'path';
 import marko from 'marko';
 import settings from 'server/initializers/settings';
 
-export default async (ctx, next) => {
+export default async (ctx: Object, next: Function) => {
   ctx.render = ctx.render ||
     function (template: string, parameters: Object = {}, initialState: Object = {}) {
       ctx.type = 'text/html';

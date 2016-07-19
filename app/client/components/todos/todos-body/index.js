@@ -1,13 +1,18 @@
-import style from './style.css';
+// @flow
 import React from 'react';
 import { List } from 'immutable';
+import type { CompleteTodoAction, RemoveTodoAction } from './../logic-bundle';
+import type { Todo } from './../types';
+import style from './style.css';
 
-const TodosBody = ({ todos, completeTodo, removeTodo }) =>
+const TodosBody = ({ todos, completeTodo, removeTodo }: {
+  todos: List<Todo>, completeTodo: CompleteTodoAction, removeTodo: RemoveTodoAction
+}) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
       <tbody>
         {
-          todos.toJS().map((todo, index) => {
+          todos.toJS().map((todo: Todo, index: number) => {
             const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
             const _completeTodo = () => completeTodo(index);
             const _removeTodo = () => removeTodo(index);
@@ -40,7 +45,8 @@ const TodosBody = ({ todos, completeTodo, removeTodo }) =>
         }
       </tbody>
     </table>
-  </div>;
+  </div>
+);
 
 TodosBody.propTypes = {
   todos: React.PropTypes.instanceOf(List).isRequired,
