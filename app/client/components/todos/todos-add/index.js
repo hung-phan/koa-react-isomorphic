@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Relay from 'react-relay';
 import { pure } from 'recompose';
@@ -9,12 +10,12 @@ export class TodosAdd extends React.Component {
     viewer: React.PropTypes.object.isRequired,
   };
 
-  state = {
+  state: { todo: string, numberOfTodos: number } = {
     todo: '',
     numberOfTodos: 20,
   };
 
-  updateTodo = (e) => {
+  updateTodo = (e: Object) => {
     this.setState({ todo: e.target.value });
   }
 
@@ -23,7 +24,7 @@ export class TodosAdd extends React.Component {
     this.setState({ todo: '' });
   }
 
-  changeNumberOfTodoList = (e) => {
+  changeNumberOfTodoList = (e: Object) => {
     this.setState({ numberOfTodos: parseInt(e.target.value, 10) }, () => {
       this.props.relay.setVariables({ numberOfTodos: this.state.numberOfTodos });
     });

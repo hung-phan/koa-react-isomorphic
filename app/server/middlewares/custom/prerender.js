@@ -1,4 +1,5 @@
-export default async (ctx, next) => {
+// @flow
+export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
     const { renderToString } = require('react-dom/server');
     const { match } = require('react-router');
@@ -7,6 +8,7 @@ export default async (ctx, next) => {
     const { getRoutes, getServerHistory } = require('app/routes');
 
     const networkLayer = new DefaultNetworkLayer(
+      // $FlowFixMe
       `http://localhost:${process.env.PORT}/graphql`
     );
 

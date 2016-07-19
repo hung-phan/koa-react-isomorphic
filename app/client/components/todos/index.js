@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Relay from 'react-relay';
 import { compose, onlyUpdateForKeys } from 'recompose';
@@ -10,7 +11,7 @@ import AddTodoMutation from 'client/mutations/add-todo';
 import CompleteTodoMutation from 'client/mutations/complete-todo';
 import RemoveTodoMutation from 'client/mutations/remove-todo';
 
-export const Todos = ({ viewer, relay }) => (
+export const Todos = ({ viewer, relay }: { viewer: Object, relay: Object }) => (
   <div className="container">
     <div className="row">
       <TodosHeader />
