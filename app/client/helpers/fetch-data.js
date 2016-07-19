@@ -1,4 +1,5 @@
 import map from 'lodash/fp/map';
+import isEmpty from 'lodash/isEmpty';
 import { trigger } from 'redial';
 import { browserHistory, match } from 'react-router';
 import { navigateTo } from './navigation';
@@ -23,7 +24,7 @@ export function clientFetchData(routes, store) {
       } else if (redirectLocation) {
         navigateTo(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        if (window.__data) {
+        if (!isEmpty(window.__data)) {
           // Delete initial data so that subsequent data fetches can occur
           delete window.__data;
         } else {
