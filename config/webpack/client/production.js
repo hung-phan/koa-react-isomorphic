@@ -2,11 +2,9 @@
 
 const _ = require('lodash');
 const config = require('./../../index');
-const ROOT = require('./../../path-helper').ROOT;
 const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const PurifyCssPlugin = require('purifycss-webpack-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -60,16 +58,6 @@ productionConfig.plugins.push(
     'process.env.SERVER_RENDERING': true,
   }),
   new ExtractTextPlugin('[name]-[contenthash].css'),
-  new PurifyCssPlugin({
-    basePath: ROOT,
-    paths: [
-      'app/server/templates/**/*.html',
-      'app/client/**/*.js',
-    ],
-    purifyOptions: {
-      minify: true,
-    },
-  }),
   new ChunkManifestPlugin({
     filename: 'webpack-common-manifest.json',
     manfiestVariable: 'webpackManifest',

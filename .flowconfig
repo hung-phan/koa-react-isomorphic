@@ -7,7 +7,7 @@
 [include]
 
 [libs]
-.*/app/.*
+app/interfaces
 
 [options]
 

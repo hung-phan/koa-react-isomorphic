@@ -17,7 +17,6 @@ So far, I manage to put together these following technologies:
 * [Bootstrap](http://getbootstrap.com/css/) and [FontAwesome](https://fortawesome.github.io/Font-Awesome/)
 * [Redux](https://github.com/rackt/redux)
 * [PostCSS](https://github.com/postcss/postcss)
-* [PurifyCSS](https://github.com/purifycss/purifycss)
 * [CSSNext](http://cssnext.io/)
 * [CSSNano](http://cssnano.co/)
 * [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
