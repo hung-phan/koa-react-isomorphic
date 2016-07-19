@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 import { bindActionCreators } from 'redux';
@@ -8,8 +9,9 @@ import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
 import fetchDataEnhancer from 'client/helpers/fetch-data-enhancer';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
+import type { Todo } from './types';
 
-export const Todos = ({ todos, actions }) => (
+export const Todos = ({ todos, actions }: { todos: Todo[], actions: Object }) => (
   <div className="container">
     <div className="row">
       <TodosHeader />

@@ -1,12 +1,17 @@
-import style from './style.css';
+// @flow
 import React from 'react';
+import style from './style.css';
+import type { CompleteTodoAction, RemoveTodoAction } from './../logic-bundle';
+import type { Todo } from './../types';
 
-const TodosBody = ({ todos, completeTodo, removeTodo }) =>
+const TodosBody = ({ todos, completeTodo, removeTodo }: {
+  todos: Todo[], completeTodo: CompleteTodoAction, removeTodo: RemoveTodoAction
+}) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
       <tbody>
         {
-          todos.map((todo, index) => {
+          todos.map((todo: Todo, index: number) => {
             const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
             const _completeTodo = () => completeTodo(index);
             const _removeTodo = () => removeTodo(index);
@@ -39,7 +44,8 @@ const TodosBody = ({ todos, completeTodo, removeTodo }) =>
         }
       </tbody>
     </table>
-  </div>;
+  </div>
+);
 
 TodosBody.propTypes = {
   todos: React.PropTypes.array.isRequired,

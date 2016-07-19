@@ -1,16 +1,22 @@
+// @flow
 import React from 'react';
 import { pure } from 'recompose';
+import type { AddTodoAction } from './../logic-bundle';
 
 export class TodosAdd extends React.Component {
   static propTypes = {
     addTodo: React.PropTypes.func,
   };
 
-  state = {
+  state: { todo: string } = {
     todo: '',
   };
 
-  updateTodo = (e) => {
+  props: {
+    addTodo: AddTodoAction;
+  };
+
+  updateTodo = (e: Object) => {
     this.setState({ todo: e.target.value });
   }
 

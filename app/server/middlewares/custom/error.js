@@ -1,7 +1,7 @@
-import http from 'http';
+// @flow
 import settings from 'server/initializers/settings';
 
-export default async (ctx, next) => {
+export default async (ctx: Object, next: Function) => {
   try {
     await next();
 
@@ -33,7 +33,7 @@ export default async (ctx, next) => {
           };
         } else {
           ctx.body = {
-            error: http.STATUS_CODES[ctx.status],
+            error: ctx.status,
           };
         }
         break;
