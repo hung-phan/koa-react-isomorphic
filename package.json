@@ -19,6 +19,7 @@
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.10",
+    "redux-mock-store": "^1.1.2",
     "regenerator-runtime": "^0.9.5",
     "sinon": "^1.17.4",
     "supertest": "^1.2.0"
