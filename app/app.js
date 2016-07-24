@@ -1,4 +1,4 @@
-import './client/lib/index';
+import './client/libs';
 
 import $ from 'jquery';
 import React from 'react';
