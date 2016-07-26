@@ -31,21 +31,21 @@ productionConfig.module.loaders.push(
   {
     test: /\.css$/,
     loader: ExtractTextPlugin.extract({
-      notExtractLoader: 'style',
+      fallbackLoader: 'style',
       loader: `css${config.cssModules}!postcss`,
     }),
   },
   {
     test: /\.less$/,
     loader: ExtractTextPlugin.extract({
-      notExtractLoader: 'style',
+      fallbackLoader: 'style',
       loader: `css${config.cssModules}!postcss!less`,
     }),
   },
   {
     test: /\.scss$/,
     loader: ExtractTextPlugin.extract({
-      notExtractLoader: 'style',
+      fallbackLoader: 'style',
       loader: `css${config.cssModules}!postcss!sass`,
     }),
   }
@@ -57,7 +57,10 @@ productionConfig.plugins.push(
     'process.env.NODE_ENV': "'production'",
     'process.env.SERVER_RENDERING': true,
   }),
-  new ExtractTextPlugin('[name]-[contenthash].css'),
+  new ExtractTextPlugin({
+    filename: '[name]-[contenthash].css',
+    allChunks: true,
+  }),
   new ChunkManifestPlugin({
     filename: 'webpack-common-manifest.json',
     manfiestVariable: 'webpackManifest',
