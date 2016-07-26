@@ -26,6 +26,10 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.async\.js$/,
+        loader: 'react-proxy-loader!exports-loader?exports.default',
+      },
+      {
         test: /.js$/,
         exclude: /node_modules/,
         loaders: ['babel-loader', 'eslint-loader'],
