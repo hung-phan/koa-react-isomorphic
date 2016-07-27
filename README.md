@@ -185,7 +185,20 @@ Will receive additional parameter `initialState` which is the state of redux sto
 * Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
 * Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
+## Async react components
+
+Add `.async` to current file will give it the ability to load async (for example, `big-component.async.js`)
+using [react-proxy-loader](https://github.com/webpack/react-proxy-loader).
+
+```
+  {
+    test: /\.async\.js$/,
+    loader: 'react-proxy-loader!exports-loader?exports.default',
+  },
+```
+
 ## Idea to structure redux application
+
 For now, the best way is to place all logic in the same place with components to make it less painful when scaling the application.
 Current structure is the combination of ideas from [organizing-redux](http://jaysoo.ca/2016/02/28/organizing-redux-application/) and
 [ducks-modular-redux](https://github.com/erikras/ducks-modular-redux). Briefly, we will have our reducer, action-types, and actions
@@ -235,6 +248,7 @@ export default handleActions({
 ```
 
 ## Hacky stub
+
 You can use the global.nodeRequire in `app` to get back the original `require` of
 node. It will be usefull in the case you want to require sth at runtime instead of
 compile time
