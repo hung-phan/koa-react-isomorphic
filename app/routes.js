@@ -4,25 +4,21 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Todos from 'client/components/todos';
 import StaticPage from 'client/components/static-page';
 
-export function getClientHistory(store) {
-  return syncHistoryWithStore(
+export const getClientHistory = (store) =>
+  syncHistoryWithStore(
     require('react-router').browserHistory,
     store
   );
-}
 
-export function getServerHistory(store, url) {
-  return syncHistoryWithStore(
+export const getServerHistory = (store, url) =>
+  syncHistoryWithStore(
     require('react-router').createMemoryHistory(url),
     store
   );
-}
 
-export function getRoutes(history) {
-  return (
-    <Router history={history}>
-      <Route path="/" component={Todos} />
-      <Route path="/static-page" component={StaticPage} />
-    </Router>
-  );
-}
+export const getRoutes = (history) => (
+  <Router history={history}>
+    <Route path="/" component={Todos} />
+    <Route path="/static-page" component={StaticPage} />
+  </Router>
+);

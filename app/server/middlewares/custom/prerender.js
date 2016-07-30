@@ -12,10 +12,11 @@ export default async (ctx: Object, next: Function) => {
     ctx.prerender = ctx.prerender ||
       function (template: string, parameters: Object = {}, initialState: Object = {}) {
         const store = configureStore(initialState);
-        const routes = getRoutes(getServerHistory(store, ctx.req.url));
+        const history = getServerHistory(store, ctx.req.url);
+        const routes = getRoutes(history);
 
         return new Promise((resolve, reject) => {
-          match({ routes, location: ctx.req.url }, (error, redirectLocation, renderProps) => {
+          match({ routes, history }, (error, redirectLocation, renderProps) => {
             if (error) {
               ctx.throw(500, error.message);
             } else if (redirectLocation) {
@@ -33,9 +34,7 @@ export default async (ctx: Object, next: Function) => {
                     ...parameters,
                     prerenderComponent,
                     prerenderData,
-                  })
-                  .then(resolve)
-                  .catch(reject);
+                  }).then(resolve).catch(reject);
                 });
             } else {
               ctx.throw(404);

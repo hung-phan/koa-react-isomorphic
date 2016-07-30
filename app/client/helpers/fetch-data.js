@@ -1,23 +1,20 @@
 import map from 'lodash/fp/map';
 import isEmpty from 'lodash/isEmpty';
 import { trigger } from 'redial';
-import { browserHistory, match } from 'react-router';
+import { match } from 'react-router';
 import { navigateTo } from './navigation';
 
-export function getLocals(store, renderProps) {
-  return {
-    store,
-    location: renderProps.location,
-    params: renderProps.params,
-  };
-}
+export const getLocals = (store, renderProps) => ({
+  store,
+  location: renderProps.location,
+  params: renderProps.params,
+});
 
-export function serverFetchData(renderProps, store) {
-  return trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
-}
+export const serverFetchData = (renderProps, store) =>
+  trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
 
-export function clientFetchData(routes, store) {
-  browserHistory.listen(location => {
+export const clientFetchData = (history, routes, store) =>
+  history.listen(location => {
     match({ routes, location }, (error, redirectLocation, renderProps) => {
       if (error) {
         navigateTo('/500.html');
@@ -36,4 +33,3 @@ export function clientFetchData(routes, store) {
       }
     });
   });
-}
