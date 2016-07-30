@@ -1,9 +1,7 @@
-import { fromJS } from 'immutable';
+import { Map } from 'immutable';
 import { handleActions } from 'redux-actions';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
-const initialState = fromJS({ locationBeforeTransitions: undefined });
-
 export default handleActions({
-  [LOCATION_CHANGE]: (state, { payload }) => state.set('locationBeforeTransitions', fromJS(payload)),
-}, initialState);
+  [LOCATION_CHANGE]: (state, { payload }) => state.set('locationBeforeTransitions', payload),
+}, new Map({ locationBeforeTransitions: null }));

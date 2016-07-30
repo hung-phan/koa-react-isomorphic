@@ -23,8 +23,9 @@ if (process.env.NODE_ENV === 'development') {
 $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.__data);
-  const routes = getRoutes(getClientHistory(store));
+  const history = getClientHistory(store);
+  const routes = getRoutes(history);
 
-  clientFetchData(routes, store);
+  clientFetchData(history, routes, store);
   render(store, routes, appDOM);
 });

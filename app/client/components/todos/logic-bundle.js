@@ -22,7 +22,7 @@ export const setTodos: SetTodosAction = createAction(SET_TODOS);
 export const fetchTodos = () => (dispatch: Function): Promise<Todo[]> =>
   fetch(getUrl('/api/v1/todos'))
     .then(res => res.json())
-  .then((res: Todo[]) => dispatch(setTodos(res)));
+    .then((res: Todo[]) => dispatch(setTodos(res)));
 
 export default handleActions({
   [ADD_TODO]: (state, { payload: text }) => state.push(

@@ -44,17 +44,14 @@ describe('Helper: fetchData', () => {
   });
 
   context('# clientFetchData', () => {
+    let history;
     let store;
     let routes;
-    let browserHistoryListen;
 
     before(() => {
+      history = { listen: callback => callback(faker.random.uuid()) };
       routes = _.range(4);
       store = faker.random.uuid();
-      browserHistoryListen = (callback) => callback(faker.random.uuid());
-      Module.__Rewire__('browserHistory', {
-        listen: browserHistoryListen,
-      });
     });
 
     after(() => {
@@ -84,7 +81,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(routes, store);
+        clientFetchData(history, routes, store);
         sinon.assert.calledWith(navigateToSpy, '/500.html');
 
         Module.__ResetDependency__('match');
@@ -97,7 +94,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(routes, store);
+        clientFetchData(history, routes, store);
         sinon.assert.calledWith(navigateToSpy, '/hello-world.html');
 
         Module.__ResetDependency__('match');
@@ -117,7 +114,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(routes, store);
+        clientFetchData(history, routes, store);
         sinon.assert.calledWith(
           triggerSpy, 'fetchData', renderProps.components, getLocals(store, renderProps)
         );
@@ -132,7 +129,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(routes, store);
+        clientFetchData(history, routes, store);
         sinon.assert.calledWith(navigateToSpy, '/404.html');
 
         Module.__ResetDependency__('match');

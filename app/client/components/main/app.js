@@ -3,9 +3,7 @@ import { Provider } from 'react-redux';
 
 const App = ({ store, routes }) =>
   <Provider key="provider" store={store}>
-    <div>
-      {routes}
-    </div>
+    {routes}
   </Provider>;
 
 App.propTypes = {
