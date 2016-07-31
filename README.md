@@ -291,7 +291,7 @@ using default browser to debug. Example: `node-debug -p 9999 -b -c prod-server.j
 
 ## Production
 
-### Without m2
+### Without pm2
 
 ```bash
 $ npm run build
