@@ -4,7 +4,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Todos from 'client/components/todos';
 import StaticPage from 'client/components/static-page';
 
-const selectLocationState = (state) => state.get('routing').toJS();
+const selectLocationState = (state) => state.getIn(['routing', 'object']);
 
 export const getClientHistory = (store) =>
   syncHistoryWithStore(

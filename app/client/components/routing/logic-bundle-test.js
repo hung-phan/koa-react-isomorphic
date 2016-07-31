@@ -1,4 +1,4 @@
-import { fromJS, is } from 'immutable';
+import { Map } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { assert } from 'chai';
 import reducer from './logic-bundle';
@@ -10,16 +10,22 @@ describe('Reducer: Routing', () => {
   });
 
   it('should return the default state', () => {
-    assert(is(
-      reducer(fromJS({ location: undefined }), { type: 'ANOTHER_ACTION', random: 'random value' }),
-      fromJS({ location: undefined })
-    ));
+    assert.deepEqual(
+      reducer(
+        new Map({ object: { locationBeforeTransitions: null } }),
+        { type: 'ANOTHER_ACTION', random: 'random value' }
+      ).toJS(),
+      (new Map({ object: { locationBeforeTransitions: null } })).toJS(),
+    );
   });
 
   it("should update location when calls 'LOCATION_CHANGE' action", () => {
-    assert(is(
-      reducer(fromJS({ locationBeforeTransitions: undefined }), { type: LOCATION_CHANGE, payload: { data: 1 } }),
-      fromJS({ locationBeforeTransitions: { data: 1 } })
-    ));
+    assert.deepEqual(
+      reducer(
+        new Map({ object: { locationBeforeTransitions: null } }),
+        { type: LOCATION_CHANGE, payload: { data: 1 } }
+      ).toJS(),
+      (new Map({ object: { locationBeforeTransitions: { data: 1 } } })).toJS(),
+    );
   });
 });
