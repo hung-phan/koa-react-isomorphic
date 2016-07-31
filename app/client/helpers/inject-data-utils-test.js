@@ -13,6 +13,7 @@ describe('Helper: inject-data-utils', () => {
     let defaultProps;
 
     before(() => {
+      history = { listen: callback => callback(faker.random.uuid()) };
       routes = _.range(4);
       domNode = faker.random.uuid();
       defaultProps = faker.random.uuid();

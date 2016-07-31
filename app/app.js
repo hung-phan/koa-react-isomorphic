@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
   const { whyDidYouUpdate } = require('why-did-you-update');
 
   whyDidYouUpdate(React, {
-    exclude: /^(StaticContainer|Relay|IsomorphicRelayRouterContext)/,
+    exclude: /^(StaticContainer|Relay|IsomorphicRelayRouterContext|onlyUpdateForKeys|pure)/,
   });
 }
 

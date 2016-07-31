@@ -32,9 +32,7 @@ export default async (ctx: Object, next: Function) => {
                     ...parameters,
                     prerenderComponent,
                     prerenderData,
-                  })
-                  .then(resolve)
-                  .catch(reject);
+                  }).then(resolve).catch(reject);
                 });
             } else {
               ctx.throw(404);

@@ -11,10 +11,11 @@ export class Todo {
 
 export class Viewer {
   constructor() {
-    this.todos = _(100)
-                  .range()
-                  .map(() => new Todo)
-                  .value();
+    this.todos =
+      _(100)
+        .range()
+        .map(() => new Todo)
+        .value();
   }
 }
 
