@@ -259,7 +259,6 @@ const module = global.nodeRequire('path');
 
 ## Upcoming
 
-* Rxjs
 * Phusion Passenger server with Nginx
 
 ## Development
@@ -332,3 +331,7 @@ $ npm run pm2:stop # to terminate the server
 $ heroku create
 $ git push heroku master
 ```
+
+## QA
+
+Feel free to open an issue on the repo.
