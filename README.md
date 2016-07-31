@@ -1,5 +1,4 @@
 # React and Koa boilerplate
-
 [![build status](https://secure.travis-ci.org/hung-phan/koa-react-isomorphic.svg)](http://travis-ci.org/hung-phan/koa-react-isomorphic/)
 [![Dependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic)
 [![devDependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic/dev-status.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic#info=devDependencies)
@@ -21,19 +20,16 @@ So far, I manage to put together these following technologies:
 * [CSSNano](http://cssnano.co/)
 * [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
 
-## Explanation
+## Requirement
+Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.
 
+## Explanation
 What initially gets run is `build/server.js`, which is complied by Webpack to utilise the power of ES6 and ES7 in server-side code.
 In `server.js`, I initialse all middlewares from `config/middleware/index`, then start server at `localhost:3000`. API calls
 from client side eventually will request to `/api/*`, which are created by `app/server/apis`. Rendering tasks will be delegated to
 [React-Router](https://github.com/rackt/react-router) to do server rendering for React.
 
-## Requirement
-
-Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.
-
 ### Require assets in server
-
 Leverage the power of [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to hack `require` module with
 the support of external webpack.
 
@@ -48,7 +44,6 @@ the support of external webpack.
 ```
 
 ### app/routes.js
-
 Contains all components and routing.
 
 ### app/app.js
@@ -85,7 +80,6 @@ Note: `nodeRequire` will resolve the path from project root directory.
 ### Server-side data fetching
 
 #### Redux
-
 We ask react-router for route which matches the current request and then check to see if has a static `fetchData()` function.
 If it does, we pass the redux dispatcher to it and collect the promises returned. Those promises will be resolved when each matching route has loaded its
 necessary data from the API server. The current implementation is based on [redial](https://github.com/markdalgleish/redial).
@@ -161,8 +155,7 @@ IsomorphicRouter.prepareData(renderProps)
   });
 ```
 
-## Render methods
-
+### Render methods
 this.render:
 
 ```javascript
@@ -181,12 +174,10 @@ this.prerender = this.prerender || function (template: string, parameters: Objec
 Will receive additional parameter `initialState` which is the state of redux store (This will not apply for relay branch).
 
 ## Features
-
 * Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
 * Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
-## Async react components
-
+### Async react components
 Add `.async` to current file will give it the ability to load async (for example, `big-component.async.js`)
 using [react-proxy-loader](https://github.com/webpack/react-proxy-loader).
 
@@ -197,8 +188,7 @@ using [react-proxy-loader](https://github.com/webpack/react-proxy-loader).
   },
 ```
 
-## Idea to structure redux application
-
+### Idea to structure redux application
 For now, the best way is to place all logic in the same place with components to make it less painful when scaling the application.
 Current structure is the combination of ideas from [organizing-redux](http://jaysoo.ca/2016/02/28/organizing-redux-application/) and
 [ducks-modular-redux](https://github.com/erikras/ducks-modular-redux). Briefly, we will have our reducer, action-types, and actions
@@ -247,18 +237,7 @@ export default handleActions({
 }, initialState);
 ```
 
-## Hacky stub
-
-You can use the global.nodeRequire in `app` to get back the original `require` of
-node. It will be usefull in the case you want to require sth at runtime instead of
-compile time
-
-```javascript
-const module = global.nodeRequire('path');
-```
-
 ## Upcoming
-
 * Phusion Passenger server with Nginx
 
 ## Development
@@ -283,6 +262,15 @@ $ SERVER_RENDERING=true npm run watch
 $ npm run dev
 ```
 
+### Enable flowtype in development
+```bash
+$ npm run flow:watch
+$ npm run flow:stop # to terminate the server
+```
+
+You need to add annotation to the file to enable flowtype (`// @flow`)
+
+
 ## Test
 
 ```bash
@@ -301,17 +289,9 @@ $ npm run debug
 If you use tool like Webstorm or any JetBrains product to debug, you need add `-c` option to `scripts/debug.sh` to prevent
 using default browser to debug. Example: `node-debug -p 9999 -b -c prod-server.js`.
 
-## Enable flowtype in development
-```bash
-$ npm run flow:watch
-$ npm run flow:stop # to terminate the server
-```
-
-You need to add annotation to the file to enable flowtype (`// @flow`)
-
 ## Production
 
-### Normal run
+### Without m2
 
 ```bash
 $ npm run build
