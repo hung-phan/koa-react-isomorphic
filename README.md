@@ -48,7 +48,7 @@ Contains all components and routing.
 
 ### app/app.js
 
-Binds root component to `<div id='app'></div>`, and prepopulate redux store with server-rendering data from `window.__data`
+Binds root component to `<div id='app'></div>`, and prepopulate redux store with server-rendering data from `window.prerenderData`
 
 ### app/server.js
 
@@ -117,9 +117,9 @@ export function clientFetchData(routes, store) {
       } else if (redirectLocation) {
         window.location.href = redirectLocation.pathname + redirectLocation.search;
       } else if (renderProps) {
-        if (window.__data) {
+        if (window.prerenderData) {
           // Delete initial data so that subsequent data fetches can occur
-          delete window.__data;
+          delete window.prerenderData;
         } else {
           // Fetch mandatory data dependencies for 2nd route change onwards
           trigger('fetchData', renderProps.components, getLocals(store, renderProps));

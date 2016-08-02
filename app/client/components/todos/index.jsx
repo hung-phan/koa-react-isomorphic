@@ -3,11 +3,11 @@ import React from 'react';
 import { compose, onlyUpdateForKeys } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import fetchDataEnhancer from 'client/helpers/fetch-data-enhancer.jsx';
 import TodosHeader from './todos-header';
 import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
-import fetchDataEnhancer from 'client/helpers/fetch-data-enhancer';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
 import type { Todo } from './types';
 

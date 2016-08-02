@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import partial from 'lodash/partial';
 import style from './style.css';
 import type { CompleteTodoAction, RemoveTodoAction } from './../logic-bundle';
 import type { Todo } from './../types';
@@ -13,8 +14,6 @@ const TodosBody = ({ todos, completeTodo, removeTodo }: {
         {
           todos.map((todo: Todo, index: number) => {
             const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
-            const _completeTodo = () => completeTodo(index);
-            const _removeTodo = () => removeTodo(index);
 
             return (
               <tr key={index}>
@@ -24,18 +23,18 @@ const TodosBody = ({ todos, completeTodo, removeTodo }: {
                   <button
                     type="button"
                     className="btn btn-xs btn-success"
-                    onClick={_completeTodo}
+                    onClick={partial(completeTodo, index)}
                   >
-                    <i className="fa fa-check"></i>
+                    <i className="fa fa-check" />
                   </button>
                 </td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-xs btn-danger"
-                    onClick={_removeTodo}
+                    onClick={partial(removeTodo, index)}
                   >
-                    <i className="fa fa-remove"></i>
+                    <i className="fa fa-remove" />
                   </button>
                 </td>
               </tr>

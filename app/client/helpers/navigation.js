@@ -1,3 +1,3 @@
-export function navigateTo(url) {
+export default (url) => {
   window.location.href = url;
-}
+};
