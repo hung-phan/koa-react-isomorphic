@@ -13,10 +13,10 @@ const TodosBody = ({ viewer }: { viewer: Object }) => (
           viewer.todos.edges.map((edge, index) => {
             const todo = edge.node;
             const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
-            const _completeTodo = () => Relay.Store.commitUpdate(
+            const completeTodo = () => Relay.Store.commitUpdate(
               new CompleteTodoMutation({ viewer, todo })
             );
-            const _removeTodo = () => Relay.Store.commitUpdate(
+            const removeTodo = () => Relay.Store.commitUpdate(
               new RemoveTodoMutation({ viewer, todo })
             );
 
@@ -28,18 +28,18 @@ const TodosBody = ({ viewer }: { viewer: Object }) => (
                   <button
                     type="button"
                     className="btn btn-xs btn-success"
-                    onClick={_completeTodo}
+                    onClick={completeTodo}
                   >
-                    <i className="fa fa-check"></i>
+                    <i className="fa fa-check" />
                   </button>
                 </td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-xs btn-danger"
-                    onClick={_removeTodo}
+                    onClick={removeTodo}
                   >
-                    <i className="fa fa-remove"></i>
+                    <i className="fa fa-remove" />
                   </button>
                 </td>
               </tr>

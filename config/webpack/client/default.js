@@ -17,7 +17,7 @@ module.exports = {
   },
   externals: [],
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
     modules: [
       path.resolve('./app'),
       'node_modules',
@@ -26,11 +26,11 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.async\.js$/,
+        test: /\.async\.jsx$/,
         loader: 'react-proxy-loader!exports-loader?exports.default',
       },
       {
-        test: /.js$/,
+        test: /.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel-loader', 'eslint-loader'],
       },

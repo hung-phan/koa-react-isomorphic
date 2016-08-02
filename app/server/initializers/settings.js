@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+
 const { ROOT, PUBLIC } = global.nodeRequire('./config/path-helper');
 
 // default settings
@@ -12,7 +13,7 @@ const settings = {
   env: {
     NODE_ENV: process.env.NODE_ENV,
   },
-  assetManifest: global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets() || {},
+  assetManifest: (global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets()) || {},
 };
 
 // manage public assets in production mode

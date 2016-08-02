@@ -1,9 +1,9 @@
-import './client/libs';
+import 'client/libs';
 
 import $ from 'jquery';
 import React from 'react';
-import { getRoutes, getClientHistory } from 'app/routes';
-import { init } from 'client/helpers/inject-data-utils';
+import { getRoutes, getClientHistory } from 'app/routes.jsx';
+import { init } from 'client/helpers/inject-data-utils.jsx';
 
 if (process.env.NODE_ENV === 'development') {
   const { whyDidYouUpdate } = require('why-did-you-update');

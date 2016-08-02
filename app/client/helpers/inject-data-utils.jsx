@@ -7,7 +7,7 @@ import IsomorphicRouter from 'isomorphic-relay-router';
 import { navigateTo } from './navigation';
 
 export function injectPreparedData() {
-  IsomorphicRelay.injectPreparedData(Relay.Store, window.__data);
+  IsomorphicRelay.injectPreparedData(Relay.Store, window.prerenderData);
 }
 
 export function prepareInitialRender(routes, domNode) {

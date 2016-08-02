@@ -1,12 +1,6 @@
 import _ from 'lodash';
 import debug from 'debug';
 import {
-  Todo,
-  Viewer,
-  viewer,
-  getTodo,
-} from './database';
-import {
   GraphQLString,
   GraphQLObjectType,
   GraphQLInt,
@@ -25,6 +19,12 @@ import {
   fromGlobalId,
   mutationWithClientMutationId,
 } from 'graphql-relay';
+import {
+  Todo,
+  Viewer,
+  viewer,
+  getTodo,
+} from './database';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
   (globalId) => {

@@ -2,9 +2,9 @@ import React from 'react';
 import Relay from 'react-relay';
 import useRelay from 'react-router-relay';
 import { Router, Route, applyRouterMiddleware } from 'react-router';
-import ViewerQuery from './client/queries/viewer';
-import Todos from 'client/components/todos';
-import StaticPage from 'client/components/static-page';
+import ViewerQuery from 'client/queries/viewer';
+import Todos from 'client/components/todos/index.jsx';
+import StaticPage from 'client/components/static-page/index.jsx';
 
 export const getClientHistory = () =>
   require('react-router').browserHistory;

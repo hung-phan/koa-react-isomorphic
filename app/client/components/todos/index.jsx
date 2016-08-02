@@ -3,13 +3,13 @@ import React from 'react';
 import Relay from 'react-relay';
 import { compose, onlyUpdateForKeys } from 'recompose';
 import { createContainer } from 'recompose-relay';
+import AddTodoMutation from 'client/mutations/add-todo';
+import CompleteTodoMutation from 'client/mutations/complete-todo';
+import RemoveTodoMutation from 'client/mutations/remove-todo';
 import TodosHeader from './todos-header';
 import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
-import AddTodoMutation from 'client/mutations/add-todo';
-import CompleteTodoMutation from 'client/mutations/complete-todo';
-import RemoveTodoMutation from 'client/mutations/remove-todo';
 
 export const Todos = ({ viewer, relay }: { viewer: Object, relay: Object }) => (
   <div className="container">

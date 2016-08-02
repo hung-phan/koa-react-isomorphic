@@ -14,7 +14,7 @@ export class Viewer {
     this.todos =
       _(100)
         .range()
-        .map(() => new Todo)
+        .map(() => new Todo())
         .value();
   }
 }
