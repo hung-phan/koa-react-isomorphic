@@ -2,7 +2,8 @@ import { assert } from 'chai';
 import supertest from 'supertest';
 import app from 'app/server-app';
 
-describe('Controller: application', () => {
+describe('Controller: application', function() {
+  this.timeout(5000);
   const request = supertest(app.listen());
 
   it('should render single page', async () => {
