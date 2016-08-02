@@ -2,7 +2,7 @@ import map from 'lodash/fp/map';
 import isEmpty from 'lodash/isEmpty';
 import { trigger } from 'redial';
 import { match } from 'react-router';
-import { navigateTo } from './navigation';
+import navigateTo from './navigation';
 
 export const getLocals = (store, renderProps) => ({
   store,
@@ -21,9 +21,9 @@ export const clientFetchData = (history, routes, store) =>
       } else if (redirectLocation) {
         navigateTo(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        if (!isEmpty(window.__data)) {
+        if (!isEmpty(window.prerenderData)) {
           // Delete initial data so that subsequent data fetches can occur
-          delete window.__data;
+          delete window.prerenderData;
         } else {
           // Fetch mandatory data dependencies for 2nd route change onwards
           trigger('fetchData', renderProps.components, getLocals(store, renderProps));

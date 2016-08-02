@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Todos from 'client/components/todos';
-import StaticPage from 'client/components/static-page';
+import Todos from 'client/components/todos/index.jsx';
+import StaticPage from 'client/components/static-page/index.jsx';
 
 const selectLocationState = (state) => state.getIn(['routing', 'object']);
 

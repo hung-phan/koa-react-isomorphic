@@ -13,7 +13,7 @@ import compress from 'koa-compress';
 import helmet from 'koa-helmet';
 import settings from 'server/initializers/settings';
 import render from './custom/render';
-import prerender from './custom/prerender';
+import prerender from './custom/prerender.jsx';
 import error from './custom/error';
 
 export const loggingLayer = app =>

@@ -40,11 +40,11 @@ describe('Module: Todos', () => {
         assert.isFunction(fetchTodos);
       });
 
-      it('should return a function when calls "fetchTodos" then return "setTodos" action', function *() {
+      it('should return a function when calls "fetchTodos" then return "setTodos" action', async () => {
         const callback = sinon.spy();
         const action = fetchTodos();
 
-        yield action(callback);
+        await action(callback);
 
         sinon.assert.called(callback);
         sinon.assert.calledWith(callback, sinon.match((value) => {

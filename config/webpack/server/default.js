@@ -44,7 +44,7 @@ module.exports = {
     },
   ],
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
     modules: [
       path.resolve('./app'),
       'node_modules',
@@ -53,7 +53,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.js$/,
+        test: /.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel-loader', 'eslint-loader'],
       },

@@ -1,2 +1,2 @@
 #!/bin/bash
-esw -w 'app/**/*-test.js' 'tests/**/*.js'
+esw -w './app/**/*-test.js' './app/**/*-test.jsx' './tests/**/*.js'

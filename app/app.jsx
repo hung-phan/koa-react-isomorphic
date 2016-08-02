@@ -1,10 +1,10 @@
-import './client/libs';
+import 'client/libs';
 
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { getRoutes, getClientHistory } from 'app/routes';
-import App from 'client/components/main/app';
+import { getRoutes, getClientHistory } from 'app/routes.jsx';
+import App from 'client/components/main/app.jsx';
 import configureStore from 'client/main-store';
 import { clientFetchData } from 'client/helpers/fetch-data';
 
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 
 $(document).ready(() => {
   const appDOM = document.getElementById('app');
-  const store = configureStore(window.__data);
+  const store = configureStore(window.prerenderData);
   const history = getClientHistory(store);
   const routes = getRoutes(history);
 

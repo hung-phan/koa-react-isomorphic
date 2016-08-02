@@ -33,4 +33,4 @@ export default handleActions({
     [index, 'complete'], () => !state.getIn([index, 'complete'])
   ),
   [SET_TODOS]: (state, { payload: todos }) => fromJS(todos),
-}, new List);
+}, new List());
