@@ -2,11 +2,11 @@
 import React from 'react';
 import partial from 'lodash/partial';
 import style from './style.css';
-import type { CompleteTodoAction, RemoveTodoAction } from './../logic-bundle';
+import type { CompleteTodoActionType, RemoveTodoActionType } from './../logic-bundle';
 import type { Todo } from './../types';
 
 const TodosBody = ({ todos, completeTodo, removeTodo }: {
-  todos: Todo[], completeTodo: CompleteTodoAction, removeTodo: RemoveTodoAction
+  todos: Todo[], completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType
 }) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
