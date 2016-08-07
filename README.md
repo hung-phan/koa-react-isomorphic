@@ -306,6 +306,13 @@ $ SECRET_KEY=your_env_key npm run pm2:start
 $ npm run pm2:stop # to terminate the server
 ```
 
+### Docker container
+
+```bash
+$ docker-compose build
+$ docker-compose up
+```
+
 ### Deploy heroku
 ```bash
 $ heroku create
