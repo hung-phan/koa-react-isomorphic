@@ -4,7 +4,7 @@ import Relay from 'react-relay';
 import { browserHistory, match, Router } from 'react-router';
 import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
-import { navigateTo } from './navigation';
+import navigateTo from './navigation';
 
 export function injectPreparedData() {
   IsomorphicRelay.injectPreparedData(Relay.Store, window.prerenderData);

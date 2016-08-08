@@ -139,7 +139,7 @@
     "flow:watch": "npm run flow:status && chokidar './app/**/*.js' './app/**/*.jsx' './tests/**/*.js' -c 'npm run flow:status'",
     "flow:stop": "flow stop",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
-    "update-schema": "babel-node ./scripts/update-schema.js",
+    "update-schema": "babel-node --presets es2015,react,stage-0 -- ./scripts/update-schema.js",
     "compile-templates": "markoc ./app/server/templates",
     "watch": "gulp clean && gulp frontend:watch & gulp backend:watch",
     "pm2:start": "pm2 start config/pm2/production.json",
