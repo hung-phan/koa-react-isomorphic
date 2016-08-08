@@ -3,9 +3,10 @@ import React from 'react';
 import Relay from 'react-relay';
 import CompleteTodoMutation from 'client/mutations/complete-todo';
 import RemoveTodoMutation from 'client/mutations/remove-todo';
+import type { ViewerType } from './../types';
 import style from './style.css';
 
-const TodosBody = ({ viewer }: { viewer: Object }) => (
+const TodosBody = ({ viewer }: { viewer: ViewerType }) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
       <tbody>

@@ -10,8 +10,9 @@ import TodosHeader from './todos-header';
 import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
+import type { ViewerType } from './types';
 
-export const Todos = ({ viewer, relay }: { viewer: Object, relay: Object }) => (
+export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) => (
   <div className="container">
     <div className="row">
       <TodosHeader />
