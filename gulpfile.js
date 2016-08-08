@@ -23,7 +23,16 @@ gulp.task('clean', cleanTask([
 gulp.task('set-production-env', () => {
   env({
     vars: {
+      RUN_MODE: 'es',
       NODE_ENV: 'production',
+    },
+  });
+});
+
+gulp.task('set-development-env', () => {
+  env({
+    vars: {
+      RUN_MODE: 'es',
     },
   });
 });
@@ -32,7 +41,7 @@ gulp.task('compile-templates', (done) =>
   shell.exec('npm run compile-templates', () => done())
 );
 
-gulp.task('frontend:watch', (done) =>
+gulp.task('frontend:watch', ['set-development-env'], (done) =>
   shell.exec('npm run frontend:watch', () => done())
 );
 
@@ -48,7 +57,7 @@ gulp.task('frontend:build', ['set-production-env'], (done) => {
     });
 });
 
-gulp.task('backend:watch', (done) => {
+gulp.task('backend:watch', ['set-development-env'], (done) => {
   let started = false;
 
   webpack(require('./config/webpack/server/development'))
