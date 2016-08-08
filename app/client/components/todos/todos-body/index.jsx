@@ -2,17 +2,16 @@
 import React from 'react';
 import partial from 'lodash/partial';
 import style from './style.css';
-import type { CompleteTodoActionType, RemoveTodoActionType } from './../logic-bundle';
-import type { Todo } from './../types';
+import type { TodoType, CompleteTodoActionType, RemoveTodoActionType } from './../types';
 
 const TodosBody = ({ todos, completeTodo, removeTodo }: {
-  todos: Todo[], completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType
+  todos: TodoType[], completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType
 }) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
       <tbody>
         {
-          todos.map((todo: Todo, index: number) => {
+          todos.map((todo: TodoType, index: number) => {
             const text = todo.complete ? <s>{todo.text}</s> : <span>{todo.text}</span>;
 
             return (
