@@ -11,9 +11,9 @@ import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
-import type { Todo } from './types';
+import type { TodoType } from './types';
 
-export const Todos = ({ todos, actions }: { todos: List<Todo>, actions: Object }) => (
+export const Todos = ({ todos, actions }: { todos: List<TodoType>, actions: Object }) => (
   <div className="container">
     <div className="row">
       <TodosHeader />
