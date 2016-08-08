@@ -20,12 +20,19 @@
     "flowtype/space-after-type-colon": [1, "always"],
     "flowtype/space-before-type-colon": [1, "never"],
     "flowtype/type-id-match": [1, "^([A-Z][a-z0-9]+)+Type$"],
-    "flowtype/use-flow-type": 1
+    "flowtype/use-flow-type": 1,
+    "import/no-unresolved": 0,
+    "import/no-duplicates": 0,
+    "import/no-named-as-default-member": 0
   },
   "settings": {
+    "import/extensions": [".js", ".jsx"],
     "import/resolver": {
-      "babel-module-alias": {},
-      "webpack": {}
+      "node": {
+        "extensions": [".js", ".jsx", ".json"]
+      },
+      "webpack": {},
+      "babel-module-alias": {}
     }
   }
 }
