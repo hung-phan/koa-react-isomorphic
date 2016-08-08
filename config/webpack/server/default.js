@@ -53,7 +53,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.(js|jsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel-loader', 'eslint-loader'],
       },
