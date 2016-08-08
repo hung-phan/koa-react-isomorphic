@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { pure } from 'recompose';
-import type { AddTodoAction } from './../logic-bundle';
+import type { AddTodoActionType } from './../logic-bundle';
 
 export class TodosAdd extends React.Component {
   static propTypes = {
@@ -13,7 +13,7 @@ export class TodosAdd extends React.Component {
   };
 
   props: {
-    addTodo: AddTodoAction;
+    addTodo: AddTodoActionType;
   };
 
   updateTodo = (e: Object) => {

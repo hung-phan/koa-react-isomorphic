@@ -2,12 +2,12 @@
 import React from 'react';
 import { List } from 'immutable';
 import partial from 'lodash/partial';
-import type { CompleteTodoAction, RemoveTodoAction } from './../logic-bundle';
-import type { Todo } from './../types';
+import type { CompleteTodoActionType, RemoveTodoActionType } from './../logic-bundle';
 import style from './style.css';
+import type { Todo } from './../types';
 
 const TodosBody = ({ todos, completeTodo, removeTodo }: {
-  todos: List<Todo>, completeTodo: CompleteTodoAction, removeTodo: RemoveTodoAction
+  todos: List<Todo>, completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType
 }) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
