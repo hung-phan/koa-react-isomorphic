@@ -12,10 +12,18 @@ export const getClientHistory = () =>
 export const getServerHistory = (url) =>
   require('react-router').createMemoryHistory(url);
 
+// workaround problem with webpack 2
+export const getRenderer = () =>
+  applyRouterMiddleware(
+    process.env.RUNTIME_ENV === 'client' && process.env.NODE_ENV === 'development'
+      ? useRelay.default
+      : useRelay
+  );
+
 export const getRoutes = (history) => (
   <Router
     history={history}
-    render={applyRouterMiddleware(useRelay)}
+    render={getRenderer()}
     environment={Relay.Store}
   >
     <Route path="/" component={Todos} queries={ViewerQuery} />
