@@ -30,7 +30,7 @@ module.exports = {
         loader: 'react-proxy-loader!exports-loader?exports.default',
       },
       {
-        test: /.(js|jsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ['babel-loader', 'eslint-loader'],
       },
