@@ -138,7 +138,7 @@
     "test:coverage": "./scripts/test-coverage",
     "test:lint": "./scripts/test-lint",
     "flow:status": "flow status; test $? -eq 0 -o $? -eq 2",
-    "flow:watch": "npm run flow:status && chokidar './app/**/*.js' './tests/**/*.js' -c 'npm run flow:status'",
+    "flow:watch": "npm run flow:status && chokidar './app/**/*.js' './app/**/*.jsx' './tests/**/*.js' -c 'npm run flow:status'",
     "flow:stop": "flow stop",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "compile-templates": "markoc ./app/server/templates",
