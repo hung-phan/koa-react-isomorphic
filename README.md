@@ -1,7 +1,7 @@
 # React and Koa boilerplate
 [![build status](https://secure.travis-ci.org/hung-phan/koa-react-isomorphic.svg)](http://travis-ci.org/hung-phan/koa-react-isomorphic/)
-[[![codecov](https://codecov.io/gh/hung-phan/koa-react-isomorphic/branch/master/graph/badge.svg)](https://codecov.io/gh/hung-phan/koa-react-isomorphic)
-![Dependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic)
+[![codecov](https://codecov.io/gh/hung-phan/koa-react-isomorphic/branch/master/graph/badge.svg)](https://codecov.io/gh/hung-phan/koa-react-isomorphic)
+[![Dependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic)
 [![devDependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic/dev-status.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic#info=devDependencies)
 
 The idea of this repository is to try out all new concepts and libraries which work great for React.js.
