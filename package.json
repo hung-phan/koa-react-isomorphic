@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "devDependencies": {
     "babel-plugin-rewire": "^1.0.0-rc-5",
     "chai": "^3.5.0",
@@ -51,7 +51,7 @@
     "eslint": "^3.2.2",
     "eslint-config-airbnb": "^10.0.0",
     "eslint-import-resolver-babel-module-alias": "^1.5.1",
-    "eslint-import-resolver-webpack": "^0.4.0",
+    "eslint-import-resolver-webpack": "^0.5.1",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-flowtype": "^2.4.0",
     "eslint-plugin-import": "^1.12.0",
