@@ -17,8 +17,8 @@ _.mergeWith(productionConfig, {
   devtool: false,
   output: {
     publicPath: config.path.assets,
-    filename: '[name]-[chunkhash].bundle.js',
-    chunkFilename: '[id]-[chunkhash].bundle.js',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[id].[chunkhash].js',
   },
   postcss() {
     return [cssnext()];
@@ -52,7 +52,7 @@ productionConfig.module.loaders.push(
 );
 
 productionConfig.plugins.push(
-  // new webpack.optimize.CommonsChunkPlugin('common', 'common-[chunkhash].bundle.js'), // Code splitting
+  // new webpack.optimize.CommonsChunkPlugin('common', 'common.[chunkhash].js'), // Code splitting
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'production'",
     'process.env.SERVER_RENDERING': true,
