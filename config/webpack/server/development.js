@@ -25,6 +25,7 @@ developmentConfig.plugins.push(
     'process.env.SECRET_KEY': `"${crypto.randomBytes(8).toString('hex')}"`,
     'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false,
   }),
+  new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin() // Hot Module Replacement
 );
 

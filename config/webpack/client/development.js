@@ -50,10 +50,14 @@ developmentConfig.module.loaders.push(
 );
 
 developmentConfig.plugins.push(
-  // new webpack.optimize.CommonsChunkPlugin('common', 'common.js'), // Code splitting
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'development'",
     'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false,
+  }),
+  new webpack.NamedModulesPlugin(),
+  new webpack.optimize.CommonsChunkPlugin({
+    names: ['app', 'manifest'],
+    minChunks: Infinity,
   }),
   webpackIsomorphicToolsPlugin.development(),
   new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin() // Hot Module Replacement

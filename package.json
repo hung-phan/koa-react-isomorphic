@@ -43,7 +43,6 @@
     "bootstrap": "^3.3.7",
     "bundle-loader": "^0.5.4",
     "chalk": "^1.1.3",
-    "chunk-manifest-webpack-plugin": "https://github.com/brandondoran/chunk-manifest-webpack-plugin/tarball/f60e59a95fccdedbb617c6437cc9dd0a3773dd46",
     "compression-webpack-plugin": "^0.3.1",
     "css-loader": "^0.23.1",
     "debug": "^2.2.0",
