@@ -46,7 +46,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'client'",
     }),
-    new webpack.NamedModulesPlugin(),
   ],
   eslint: {
     emitWarning: true,
