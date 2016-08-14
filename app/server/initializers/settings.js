@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 const { ROOT, PUBLIC } = global.nodeRequire('./config/path-helper');
 
 // default settings
@@ -16,12 +13,8 @@ const settings = {
   assetManifest: (global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets()) || {},
 };
 
-// manage public assets in production mode
-if (process.env.NODE_ENV === 'production') {
-  settings.commonManifest = fs.existsSync(path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json'))
-                              ? global.nodeRequire(`${path.join(settings.path.PUBLIC, 'assets/webpack-common-manifest.json')}`)
-                              : {};
-} else if (process.env.NODE_ENV === 'test') {
+// ignore assets build for test
+if (process.env.NODE_ENV === 'test') {
   settings.assetManifest = {
     javascript: {
       app: `localhost:${process.env.PORT}/app.bundle.js`,

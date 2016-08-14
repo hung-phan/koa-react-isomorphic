@@ -5,7 +5,6 @@ const config = require('./../../index');
 const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
@@ -52,18 +51,17 @@ productionConfig.module.loaders.push(
 );
 
 productionConfig.plugins.push(
-  // new webpack.optimize.CommonsChunkPlugin('common', 'common.[chunkhash].js'), // Code splitting
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'production'",
     'process.env.SERVER_RENDERING': true,
   }),
+  new webpack.optimize.CommonsChunkPlugin({
+    names: ['app', 'manifest'],
+    minChunks: Infinity,
+  }),
   new ExtractTextPlugin({
     filename: '[name]-[contenthash].css',
     allChunks: true,
-  }),
-  new ChunkManifestPlugin({
-    filename: 'webpack-common-manifest.json',
-    manfiestVariable: 'webpackManifest',
   }),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
