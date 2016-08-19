@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "devDependencies": {
     "babel-plugin-rewire": "^1.0.0-rc-5",
     "chai": "^3.5.0",
@@ -110,8 +110,6 @@
     "redux-actions": "^0.10.1",
     "redux-batched-updates": "^0.1.0",
     "redux-devtools": "^3.3.1",
-    "redux-devtools-dock-monitor": "^1.1.1",
-    "redux-devtools-log-monitor": "^1.0.11",
     "redux-immutable": "^3.0.6",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
