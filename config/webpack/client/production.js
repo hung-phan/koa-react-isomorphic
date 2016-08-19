@@ -56,8 +56,8 @@ productionConfig.plugins.push(
     'process.env.SERVER_RENDERING': true,
   }),
   new webpack.optimize.CommonsChunkPlugin({
-    names: ['app', 'manifest'],
-    minChunks: Infinity,
+    names: ['common'],
+    minChunks: module => /node_modules/.test(module.resource),
   }),
   new ExtractTextPlugin({
     filename: '[name]-[contenthash].css',

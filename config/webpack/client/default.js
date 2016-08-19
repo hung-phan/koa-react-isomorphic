@@ -11,6 +11,19 @@ module.exports = {
     app: [
       path.join(ROOT, config.path.app, 'app'),
     ],
+    common: [
+      path.join(ROOT, config.path.app, 'client/libs/index'),
+      'isomorphic-fetch',
+      'lodash',
+      'react',
+      'react-dom',
+      'react-router',
+      'react-router-redux',
+      'recompose',
+      'redial',
+      'redux',
+      'redux-thunk',
+    ],
   },
   output: {
     path: path.join(ROOT, config.path.publicAssets),

@@ -109,8 +109,6 @@
     "redux-actions": "^0.10.1",
     "redux-batched-updates": "^0.1.0",
     "redux-devtools": "^3.3.1",
-    "redux-devtools-dock-monitor": "^1.1.1",
-    "redux-devtools-log-monitor": "^1.0.11",
     "redux-immutablejs": "0.0.8",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
