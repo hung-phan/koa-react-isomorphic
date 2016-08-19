@@ -56,8 +56,8 @@ developmentConfig.plugins.push(
   }),
   new webpack.NamedModulesPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
-    names: ['app', 'manifest'],
-    minChunks: Infinity,
+    names: ['common'],
+    minChunks: module => /node_modules/.test(module.resource),
   }),
   webpackIsomorphicToolsPlugin.development(),
   new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin() // Hot Module Replacement

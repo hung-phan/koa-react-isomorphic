@@ -11,6 +11,18 @@ module.exports = {
     app: [
       path.join(ROOT, config.path.app, 'app'),
     ],
+    common: [
+      path.join(ROOT, config.path.app, 'client/libs/index'),
+      'isomorphic-fetch',
+      'lodash',
+      'react',
+      'react-dom',
+      'react-relay',
+      'react-router',
+      'react-router-relay',
+      'recompose',
+      'recompose-relay',
+    ],
   },
   output: {
     path: path.join(ROOT, config.path.publicAssets),
