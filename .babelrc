@@ -3,13 +3,16 @@
   "plugins": [
     "transform-runtime",
     "babel-relay-plugin-loader",
-    ["module-alias", [
-      { "src": "./app", "expose": "app" },
-      { "src": "./config", "expose": "config" },
-      { "src": "./app/client", "expose": "client" },
-      { "src": "./app/server", "expose": "server" },
-      { "src": "./app/database", "expose": "database" }
-    ]]
+    ["module-resolver", {
+      "root": ["."],
+      "alias": {
+        "app": "./app",
+        "config": "./config",
+        "client": "./app/client",
+        "server": "./app/server",
+        "database": "./app/database"
+      }
+    }]
   ],
   "env": {
     "development": {
