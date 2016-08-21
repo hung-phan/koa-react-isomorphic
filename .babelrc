@@ -2,12 +2,14 @@
   "presets": ["./scripts/preset-es2015", "react", "stage-0"],
   "plugins": [
     "transform-runtime",
-    ["module-alias", [
-      { "src": "./app", "expose": "app" },
-      { "src": "./config", "expose": "config" },
-      { "src": "./app/client", "expose": "client" },
-      { "src": "./app/server", "expose": "server" }
-    ]]
+    ["module-resolver", {
+      "root": ["."],
+      "alias": {
+        "config": "./config",
+        "client": "./app/client",
+        "server": "./app/server",
+      }
+    }]
   ],
   "env": {
     "development": {
