@@ -167,7 +167,6 @@
     "pm2:delete": "pm2 delete config/pm2/production.json",
     "pm2:start": "pm2 start config/pm2/production.json",
     "postinstall": "./scripts/postinstall",
-    "prepublish": "npm run build",
     "start": "./scripts/start",
     "test": "./scripts/test",
     "test:coverage": "./scripts/test-coverage",
