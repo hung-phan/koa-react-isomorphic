@@ -315,6 +315,11 @@ $ docker-compose up
 ```
 
 ### Deploy heroku
+
+```base
+$heroku config:set BUILD_ASSETS=1 # run once
+```
+
 ```bash
 $ heroku create
 $ git push heroku master
