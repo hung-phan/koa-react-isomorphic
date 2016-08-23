@@ -1,4 +1,4 @@
 #!/bin/bash
-if [[ $NODE_ENV == "production" ]]; then
+if [ $BUILD_ASSETS ]; then
   gulp build
 fi
