@@ -3,16 +3,17 @@ import React from 'react';
 import Relay from 'react-relay';
 import { pure } from 'recompose';
 import AddTodoMutation from 'client/mutations/add-todo';
+import type { ViewerType } from './../types';
 
 export class TodosAdd extends React.Component {
-  static propTypes = {
-    relay: React.PropTypes.object.isRequired,
-    viewer: React.PropTypes.object.isRequired,
-  };
-
   state: { todo: string, numberOfTodos: number } = {
     todo: '',
     numberOfTodos: 20,
+  };
+
+  props: {
+    viewer: ViewerType,
+    relay: Object,
   };
 
   updateTodo = (e: Object) => {

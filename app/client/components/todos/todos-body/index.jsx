@@ -52,9 +52,4 @@ const TodosBody = ({ viewer }: { viewer: ViewerType }) => (
   </div>
 );
 
-TodosBody.propTypes = {
-  viewer: React.PropTypes.object.isRequired,
-};
-
-
 export default TodosBody;

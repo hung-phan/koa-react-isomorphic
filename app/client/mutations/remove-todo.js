@@ -5,7 +5,7 @@ class RemoveTodoMutation extends Relay.Mutation {
     viewer: () => Relay.QL`fragment on Viewer { id }`,
   };
 
-  getMutation() {
+  getMutation() { // eslint-disable-line
     return Relay.QL`mutation { removeTodo }`;
   }
 
@@ -13,7 +13,7 @@ class RemoveTodoMutation extends Relay.Mutation {
     return { id: this.props.todo.id };
   }
 
-  getFatQuery() {
+  getFatQuery() { // eslint-disable-line
     return Relay.QL`
       fragment on RemoveTodoMutationPayload {
         id

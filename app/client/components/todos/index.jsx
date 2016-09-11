@@ -23,11 +23,6 @@ export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) 
   </div>
 );
 
-Todos.propTypes = {
-  viewer: React.PropTypes.object,
-  relay: React.PropTypes.object,
-};
-
 export const enhance = compose(
   createContainer({
     initialVariables: {
