@@ -26,11 +26,6 @@ export const Todos = ({ todos, actions }: { todos: TodoType[], actions: Object }
   </div>
 );
 
-Todos.propTypes = {
-  todos: React.PropTypes.array,
-  actions: React.PropTypes.object,
-};
-
 export const enhance = compose(
   fetchDataEnhancer(
     ({ store }) => store.dispatch(fetchTodos())

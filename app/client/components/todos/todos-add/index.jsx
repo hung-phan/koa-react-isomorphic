@@ -4,10 +4,6 @@ import { pure } from 'recompose';
 import type { AddTodoActionType } from './../types';
 
 export class TodosAdd extends React.Component {
-  static propTypes = {
-    addTodo: React.PropTypes.func,
-  };
-
   state: { todo: string } = {
     todo: '',
   };
