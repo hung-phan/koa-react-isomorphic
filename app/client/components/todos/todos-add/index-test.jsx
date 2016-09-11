@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import sinon from 'sinon';
+import td from 'testdouble';
 import React from 'react';
 import { mount } from 'enzyme';
 import faker from 'faker';
@@ -10,20 +10,20 @@ describe('Component: TodosAdd', () => {
   let component;
   let Relay;
   let relay;
-  let AddTodoMutation;
+  let addTodoMutation;
   let randomUUID;
 
   beforeEach(() => {
     randomUUID = faker.random.uuid();
     Relay = {
       Store: {
-        commitUpdate: sinon.spy(),
+        commitUpdate: td.function(),
       },
     };
-    relay = { setVariables: sinon.spy() };
-    AddTodoMutation = sinon.stub();
-    AddTodoMutation.returns({ randomUUID });
+    relay = { setVariables: td.function() };
+    addTodoMutation = td.function();
     viewer = { numberOfTodos: 100 };
+    td.when(addTodoMutation(td.matchers.anything())).thenReturn({ randomUUID });
 
     Module.__Rewire__('Relay', Relay);
     component = mount(<TodosAdd viewer={viewer} relay={relay} />);
@@ -41,7 +41,7 @@ describe('Component: TodosAdd', () => {
     let button;
 
     beforeEach(() => {
-      Module.__Rewire__('AddTodoMutation', AddTodoMutation);
+      Module.__Rewire__('AddTodoMutation', addTodoMutation);
       component.setState({ todo: randomUUID });
 
       button = component.find('button');
@@ -53,11 +53,11 @@ describe('Component: TodosAdd', () => {
     });
 
     it('should call "AddTodoMutation" with "viewer", and "text"', () => {
-      sinon.assert.calledWith(AddTodoMutation, { viewer, text: randomUUID });
+      td.verify(addTodoMutation({ viewer, text: randomUUID }));
     });
 
     it('should call "Relay.Store.commitUpdate" with "AddTodoMutation"', () => {
-      sinon.assert.calledWith(Relay.Store.commitUpdate, { randomUUID });
+      td.verify(Relay.Store.commitUpdate({ randomUUID }));
     });
 
     it('should reset "state.todo"', () => {

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { assert } from 'chai';
-import sinon from 'sinon';
 import faker from 'faker';
+import td from 'testdouble';
 import React from 'react';
 import { mount } from 'enzyme';
 import TodosBody from './index';
@@ -32,7 +32,7 @@ describe('Component: TodosBody', () => {
     );
     Relay = {
       Store: {
-        commitUpdate: sinon.spy(),
+        commitUpdate: td.function(),
       },
     };
     TodosBody.__Rewire__('Relay', Relay);
@@ -48,12 +48,12 @@ describe('Component: TodosBody', () => {
   });
 
   context('# when click on delete button', () => {
-    let RemoveTodoMutation;
+    let removeTodoMutation;
 
     beforeEach(() => {
-      RemoveTodoMutation = sinon.stub();
-      RemoveTodoMutation.returns({ randomUUID });
-      TodosBody.__Rewire__('RemoveTodoMutation', RemoveTodoMutation);
+      removeTodoMutation = td.function();
+      td.when(removeTodoMutation(td.matchers.anything())).thenReturn({ randomUUID });
+      TodosBody.__Rewire__('RemoveTodoMutation', removeTodoMutation);
     });
 
     afterEach(() => {
@@ -68,19 +68,19 @@ describe('Component: TodosBody', () => {
         removeButton.simulate('click');
 
         assert.ok(removeButton);
-        sinon.assert.calledWith(Relay.Store.commitUpdate, { randomUUID });
+        td.verify(Relay.Store.commitUpdate({ randomUUID }));
       });
-      assert.equal(Relay.Store.commitUpdate.callCount, viewer.todos.edges.length);
+      assert.equal(td.explain(Relay.Store.commitUpdate).callCount, viewer.todos.edges.length);
     });
   });
 
   context('# when click on complete button', () => {
-    let CompleteTodoMutation;
+    let completeTodoMutation;
 
     beforeEach(() => {
-      CompleteTodoMutation = sinon.stub();
-      CompleteTodoMutation.returns({ randomUUID });
-      TodosBody.__Rewire__('CompleteTodoMutation', CompleteTodoMutation);
+      completeTodoMutation = td.function();
+      td.when(completeTodoMutation(td.matchers.anything())).thenReturn({ randomUUID });
+      TodosBody.__Rewire__('CompleteTodoMutation', completeTodoMutation);
     });
 
     afterEach(() => {
@@ -95,9 +95,9 @@ describe('Component: TodosBody', () => {
         completeButton.simulate('click');
 
         assert.ok(completeButton);
-        sinon.assert.calledWith(Relay.Store.commitUpdate, { randomUUID });
+        td.verify(Relay.Store.commitUpdate({ randomUUID }));
       });
-      assert.equal(Relay.Store.commitUpdate.callCount, viewer.todos.edges.length);
+      assert.equal(td.explain(Relay.Store.commitUpdate).callCount, viewer.todos.edges.length);
     });
   });
 });

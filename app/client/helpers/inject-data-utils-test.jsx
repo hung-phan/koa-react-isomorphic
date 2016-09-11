@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import sinon from 'sinon';
+import td from 'testdouble';
 import faker from 'faker';
 import { Store } from 'react-relay';
 import { prepareInitialRender, __RewireAPI__ as Module } from './inject-data-utils.jsx';
@@ -31,9 +31,9 @@ describe('Helper: inject-data-utils', () => {
       let prepareInitialRenderStub;
 
       beforeEach(() => {
-        navigateToSpy = sinon.spy();
-        prepareInitialRenderStub = sinon.stub();
-        prepareInitialRenderStub.returns({
+        navigateToSpy = td.function();
+        prepareInitialRenderStub = td.function();
+        td.when(prepareInitialRenderStub(td.matchers.anything(), td.matchers.anything())).thenReturn({
           then: callback => callback(defaultProps),
         });
 
@@ -59,7 +59,7 @@ describe('Helper: inject-data-utils', () => {
         Module.__Rewire__('match', match);
 
         prepareInitialRender(routes, domNode);
-        sinon.assert.calledWith(navigateToSpy, '/500.html');
+        td.verify(navigateToSpy('/500.html'));
       });
 
       it('should redirect to /hello-world.html page', () => {
@@ -70,7 +70,7 @@ describe('Helper: inject-data-utils', () => {
         Module.__Rewire__('match', match);
 
         prepareInitialRender(routes, domNode);
-        sinon.assert.calledWith(navigateToSpy, '/hello-world.html');
+        td.verify(navigateToSpy('/hello-world.html'));
       });
 
       it('should trigger fetchData', () => {
@@ -94,9 +94,7 @@ describe('Helper: inject-data-utils', () => {
         });
 
         prepareInitialRender(routes, domNode);
-        sinon.assert.calledWith(
-          prepareInitialRenderStub, Store, renderProps
-        );
+        td.verify(prepareInitialRenderStub(Store, renderProps));
       });
 
       it('should navigate to /404.html page', () => {
@@ -107,7 +105,7 @@ describe('Helper: inject-data-utils', () => {
         Module.__Rewire__('match', match);
 
         prepareInitialRender(routes, domNode);
-        sinon.assert.calledWith(navigateToSpy, '/404.html');
+        td.verify(navigateToSpy('/404.html'));
       });
     });
   });
