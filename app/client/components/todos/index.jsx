@@ -28,11 +28,6 @@ export const Todos = ({ todos, actions }: { todos: List<TodoType>, actions: Obje
   </div>
 );
 
-Todos.propTypes = {
-  todos: React.PropTypes.instanceOf(List).isRequired,
-  actions: React.PropTypes.object,
-};
-
 export const enhance = compose(
   fetchDataEnhancer(
     ({ store }) => store.dispatch(fetchTodos())

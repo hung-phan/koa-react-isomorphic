@@ -46,10 +46,4 @@ const TodosBody = ({ todos, completeTodo, removeTodo }: {
   </div>
 );
 
-TodosBody.propTypes = {
-  todos: React.PropTypes.instanceOf(List).isRequired,
-  removeTodo: React.PropTypes.func.isRequired,
-  completeTodo: React.PropTypes.func.isRequired,
-};
-
 export default TodosBody;
