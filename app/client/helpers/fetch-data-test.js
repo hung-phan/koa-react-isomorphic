@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import sinon from 'sinon';
+import td from 'testdouble';
 import faker from 'faker';
 import { assert } from 'chai';
 import { serverFetchData, clientFetchData, getLocals, __RewireAPI__ as Module } from './fetch-data';
@@ -17,7 +17,7 @@ describe('Helper: fetchData', () => {
 
     before(() => {
       routes = _.range(4);
-      trigger = sinon.spy();
+      trigger = td.function();
       store = faker.random.uuid();
       renderProps = {
         routes: _.map(routes, (component) => ({ component })),
@@ -35,11 +35,11 @@ describe('Helper: fetchData', () => {
     });
 
     it('should call "trigger" with "components" and "locals"', () => {
-      sinon.assert.calledWith(trigger, 'fetchData', routes, {
+      td.verify(trigger('fetchData', routes, {
         store,
         params: renderProps.params,
         location: renderProps.location,
-      });
+      }));
     });
   });
 
@@ -63,8 +63,8 @@ describe('Helper: fetchData', () => {
       let triggerSpy;
 
       beforeEach(() => {
-        navigateToSpy = sinon.spy();
-        triggerSpy = sinon.spy();
+        navigateToSpy = td.function();
+        triggerSpy = td.function();
         Module.__Rewire__('navigateTo', navigateToSpy);
         Module.__Rewire__('trigger', triggerSpy);
       });
@@ -82,7 +82,7 @@ describe('Helper: fetchData', () => {
         Module.__Rewire__('match', match);
 
         clientFetchData(history, routes, store);
-        sinon.assert.calledWith(navigateToSpy, '/500.html');
+        td.verify(navigateToSpy('/500.html'));
 
         Module.__ResetDependency__('match');
       });
@@ -95,7 +95,7 @@ describe('Helper: fetchData', () => {
         Module.__Rewire__('match', match);
 
         clientFetchData(history, routes, store);
-        sinon.assert.calledWith(navigateToSpy, '/hello-world.html');
+        td.verify(navigateToSpy('/hello-world.html'));
 
         Module.__ResetDependency__('match');
       });
@@ -115,8 +115,8 @@ describe('Helper: fetchData', () => {
         Module.__Rewire__('match', match);
 
         clientFetchData(history, routes, store);
-        sinon.assert.calledWith(
-          triggerSpy, 'fetchData', renderProps.components, getLocals(store, renderProps)
+        td.verify(
+          triggerSpy('fetchData', renderProps.components, getLocals(store, renderProps))
         );
 
         Module.__ResetDependency__('match');
@@ -130,7 +130,7 @@ describe('Helper: fetchData', () => {
         Module.__Rewire__('match', match);
 
         clientFetchData(history, routes, store);
-        sinon.assert.calledWith(navigateToSpy, '/404.html');
+        td.verify(navigateToSpy('/404.html'));
 
         Module.__ResetDependency__('match');
       });

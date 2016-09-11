@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import sinon from 'sinon';
+import td from 'testdouble';
 import nock from 'nock';
 import reducer, {
   addTodo,
@@ -40,17 +40,12 @@ describe('Module: Todos', () => {
       });
 
       it('should return a function when calls "fetchTodos" then return "setTodos" action', async () => {
-        const callback = sinon.spy();
+        const callback = td.function();
         const action = fetchTodos();
 
         await action(callback);
 
-        sinon.assert.called(callback);
-        sinon.assert.calledWith(callback, sinon.match((value) => {
-          assert.deepEqual(value, setTodos(todos));
-
-          return true;
-        }));
+        td.verify(callback(setTodos(todos)));
       });
     });
   });
