@@ -90,6 +90,7 @@
     "gulp": "^3.9.1",
     "gulp-env": "^0.4.0",
     "gulp-util": "^3.0.7",
+    "hard-source-webpack-plugin": "0.0.37",
     "imports-loader": "^0.6.5",
     "istanbul": "^1.0.0-alpha.2",
     "jsdom": "^9.4.5",
