@@ -19,7 +19,7 @@ So far, I manage to put together these following technologies:
 * [PostCSS](https://github.com/postcss/postcss)
 * [CSSNext](http://cssnext.io/)
 * [CSSNano](http://cssnano.co/)
-* [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Sinon](http://sinonjs.org/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
+* [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Testdouble](https://github.com/testdouble/testdouble.js/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
 
 ## Requirement
 Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.

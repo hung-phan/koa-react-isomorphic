@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import sinon from 'sinon';
 import { fromJS } from 'immutable';
+import td from 'testdouble';
 import React from 'react';
 import { mount } from 'enzyme';
 import { noop } from 'lodash';
@@ -24,7 +24,7 @@ describe('Component: TodosBody', () => {
   });
 
   it('should call "removeTodo" when click on the delete button', () => {
-    const removeTodo = sinon.spy();
+    const removeTodo = td.function();
     const component = mount(
       <TodosBody todos={fromJS(todos)} removeTodo={removeTodo} completeTodo={noop} />
     );
@@ -35,14 +35,13 @@ describe('Component: TodosBody', () => {
       removeButton.simulate('click');
 
       assert.ok(removeButton);
-      sinon.assert.called(removeTodo);
-      sinon.assert.calledWith(removeTodo, index);
+      td.verify(removeTodo(index, td.matchers.anything(), td.matchers.anything()));
     });
-    assert.equal(removeTodo.callCount, todos.length);
+    assert.equal(td.explain(removeTodo).callCount, todos.length);
   });
 
   it('should call "completeTodo" when click on the complete button', () => {
-    const completeTodo = sinon.spy();
+    const completeTodo = td.function();
     const component = mount(
       <TodosBody todos={fromJS(todos)} removeTodo={noop} completeTodo={completeTodo} />
     );
@@ -53,9 +52,8 @@ describe('Component: TodosBody', () => {
       completeButton.simulate('click');
 
       assert.ok(completeButton);
-      sinon.assert.called(completeTodo);
-      sinon.assert.calledWith(completeTodo, index);
+      td.verify(completeTodo(index, td.matchers.anything(), td.matchers.anything()));
     });
-    assert.equal(completeTodo.callCount, todos.length);
+    assert.equal(td.explain(completeTodo).callCount, todos.length);
   });
 });

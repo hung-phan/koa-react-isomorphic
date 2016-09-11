@@ -1,4 +1,4 @@
-import sinon from 'sinon';
+import td from 'testdouble';
 import faker from 'faker';
 import React from 'react';
 import { assert } from 'chai';
@@ -14,7 +14,7 @@ describe('Helper: fetchDataEnhancer', () => {
 
   beforeEach(() => {
     Handler = mockingComponent('Handler', ['message']);
-    callback = sinon.spy();
+    callback = td.function();
   });
 
   it('should be a function', () => {
@@ -52,7 +52,7 @@ describe('Helper: fetchDataEnhancer', () => {
 
       Component[propName].fetchData(...args);
 
-      sinon.assert.calledWith(callback, ...args);
+      td.verify(callback(...args));
     });
 
     it('should render message', () => {

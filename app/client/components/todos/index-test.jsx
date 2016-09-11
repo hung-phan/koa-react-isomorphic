@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { List } from 'immutable';
-import sinon from 'sinon';
+import td from 'testdouble';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Todos } from './index';
@@ -20,9 +20,9 @@ describe('Component: Todos', () => {
 
   beforeEach(() => {
     actions = {
-      addTodo: sinon.spy(),
-      removeTodo: sinon.spy(),
-      completeTodo: sinon.spy(),
+      addTodo: td.function(),
+      removeTodo: td.function(),
+      completeTodo: td.function(),
     };
     component = shallow(<Todos todos={todos} actions={actions} />);
   });

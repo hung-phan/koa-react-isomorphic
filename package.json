@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "2.10.1",
+  "version": "2.11.0",
   "dependencies": {
     "babel-runtime": "^6.11.6",
     "bootstrap": "^3.3.7",
@@ -118,9 +118,9 @@
     "sass-loader": "^4.0.2",
     "script-loader": "^0.7.0",
     "shelljs": "^0.7.4",
-    "sinon": "^1.17.5",
     "style-loader": "^0.13.1",
     "supertest": "^2.0.0",
+    "testdouble": "^1.6.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.20",
     "webpack-dev-server": "^2.1.0-beta.0",
