@@ -7,4 +7,4 @@ if [ -z "${PORT}" ]; then
   export PORT=${2:-3001}
 fi
 
-istanbul cover ./node_modules/.bin/_mocha -- --compilers js:./compiler --compilers jsx:./compiler './app/**/*-test.js' './app/**/*-test.jsx' './tests/**/*.js'
+istanbul cover ./node_modules/.bin/_mocha -- --opts mocha.opts
