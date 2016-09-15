@@ -3,15 +3,10 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 const ROOT = require('./../../path-helper').ROOT;
 const config = require('./../../index');
-const webpack = require('webpack');
-const nodeModules = _.reduce(
-                      // more info on https://github.com/jlongster/blog/blob/master/gulpfile.js
-                      _.filter(fs.readdirSync('node_modules'), (x) => ['.bin'].indexOf(x) === -1),
-                      (modules, mod) => Object.assign(modules, { [mod]: `commonjs ${mod}` }),
-                      {}
-                    );
 const assets = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
 
 module.exports = {
@@ -34,7 +29,9 @@ module.exports = {
     libraryTarget: 'commonjs2',
   },
   externals: [
-    nodeModules,
+    nodeExternals({
+      whitelist: [/^webpack/],
+    }),
     (context, request, callback) => {
       const regexp = new RegExp(`${assets}$`);
 
