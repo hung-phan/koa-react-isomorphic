@@ -7,4 +7,8 @@ if [ -z "${PORT}" ]; then
   export PORT=${2:-3001}
 fi
 
+if [ -z "${SECRET_KEY}" ]; then
+  export SECRET_KEY=${3:-secret}
+fi
+
 mocha --opts mocha.opts

@@ -11,6 +11,7 @@ describe('Controller: application', function applicationTest() {
       request
         .get('/')
         .set('Accept', 'text/html')
+        .set('X-CSRF-Token', process.env.SECRET_KEY.toString('base64'))
         .expect(200);
 
     assert.ok(result.text);

@@ -46,7 +46,6 @@ export const securityLayer = app => {
   app.keys = [process.env.SECRET_KEY];
 
   csrf(app);
-
   app
     .use(convert(session())) // https://github.com/koajs/session
     .use(convert(csrf.middleware)) // https://github.com/koajs/csrf

@@ -55,7 +55,7 @@ developmentConfig.module.loaders.push(
 developmentConfig.plugins.push(
   new HardSourceWebpackPlugin({
     // Either an absolute path or relative to output.path.
-    cacheDirectory: path.join(ROOT, config.path.tmp, 'cache/client'),
+    cacheDirectory: path.join(ROOT, config.path.tmp, 'cache'),
     // Optional field. This field determines when to throw away the whole
     // cache if for example npm modules were updated.
     environmentPaths: {
