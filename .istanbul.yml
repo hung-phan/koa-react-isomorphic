@@ -1,0 +1,10 @@
+verbose: false
+instrumentation:
+    root: ./app
+    extensions:
+        - .js
+        - .jsx
+    excludes: ['**/*-test.js', '**/*-test.jsx', '**/*.marko.js']
+    compact: true
+    include-all-sources: true
+    es-modules: true

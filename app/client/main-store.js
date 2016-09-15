@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
