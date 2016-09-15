@@ -1,0 +1,7 @@
+--recursive
+--compilers js:./compiler
+--compilers jsx:./compiler
+
+app/**/*-test.js
+app/**/*-test.jsx
+tests/**/*.js

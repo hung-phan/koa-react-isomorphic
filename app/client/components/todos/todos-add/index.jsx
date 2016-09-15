@@ -21,7 +21,9 @@ export class TodosAdd extends React.Component {
   }
 
   addTodo = () => {
-    Relay.Store.commitUpdate(new AddTodoMutation({ text: this.state.todo, viewer: this.props.viewer }));
+    Relay.Store.commitUpdate(
+      new AddTodoMutation({ text: this.state.todo, viewer: this.props.viewer })
+    );
     this.setState({ todo: '' });
   }
 
