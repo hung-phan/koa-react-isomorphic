@@ -1,18 +1,27 @@
 import Koa from 'koa';
 import debug from 'debug';
-import * as config from 'server/middlewares';
+import {
+  loggingLayer,
+  initialLayer,
+  apiLayer,
+  securityLayer,
+  assetsLayer,
+  renderLayer,
+  errorLayer,
+} from 'server/middlewares';
 import apis from 'server/apis/base';
 import controllers from 'server/controllers/base';
 
 const app = new Koa();
 
 // setup middlewares
-config.loggingLayer(app);
-config.initialLayer(app);
-config.errorLayer(app);
-config.apiLayer(app, apis);
-config.securityLayer(app);
-config.renderLayer(app, controllers);
+loggingLayer(app);
+initialLayer(app);
+errorLayer(app);
+apiLayer(app, apis);
+assetsLayer(app);
+securityLayer(app);
+renderLayer(app, controllers);
 
 // istanbul ignore next
 app.on('error', (error) => {
