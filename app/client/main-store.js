@@ -1,4 +1,3 @@
-/* istanbul ignore next */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import reducers from './main-reducer';

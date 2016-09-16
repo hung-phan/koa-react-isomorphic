@@ -1,10 +1,18 @@
-verbose: false
 instrumentation:
     root: ./app
     extensions:
         - .js
         - .jsx
-    excludes: ['**/*-test.js', '**/*-test.jsx', '**/*.marko.js']
-    compact: true
+    excludes: [
+      '**/*-test.js',
+      '**/*-test.jsx',
+      '**/*.marko.js',
+      'app.jsx',
+      'routes.jsx',
+      'server.js',
+      'client/main-reducer.js',
+      'client/main-store.js',
+      'client/libs/**/*.js'
+    ]
     include-all-sources: true
     es-modules: true

@@ -14,7 +14,7 @@ config.apiLayer(app, apis);
 config.securityLayer(app);
 config.renderLayer(app, controllers);
 
-// error logs
+// istanbul ignore next
 app.on('error', (error) => {
   debug('error')(error);
 });
