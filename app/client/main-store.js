@@ -1,5 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import loggerMiddleware from 'redux-logger';
+import { persistState } from 'redux-devtools';
 import reducers from './main-reducer';
 
 let middlewares = [
@@ -8,9 +10,8 @@ let middlewares = [
 let enhancers = [];
 
 // support for development
-if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
-  const logger = require('redux-logger')({ level: 'info' });
-  const { persistState } = require('redux-devtools');
+if (process.env.NODE_ENV === 'development' && process.env.RUNTIME_ENV === 'client') {
+  const logger = loggerMiddleware({ level: 'info' });
 
   middlewares = [
     ...middlewares,
