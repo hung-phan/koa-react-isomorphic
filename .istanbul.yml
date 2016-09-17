@@ -10,7 +10,8 @@ instrumentation:
       'app.jsx',
       'routes.jsx',
       'server.js',
-      'client/main-reducer.js',
+      'client/mutations/**/*.js',
+      'client/queries/**/*.js',
       'client/main-store.js',
       'client/libs/**/*.js'
     ]
