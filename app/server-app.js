@@ -17,11 +17,11 @@ const app = new Koa();
 // setup middlewares
 loggingLayer(app);
 initialLayer(app);
-errorLayer(app);
 apiLayer(app, apis);
 assetsLayer(app);
 securityLayer(app);
 renderLayer(app, controllers);
+errorLayer(app);
 
 // istanbul ignore next
 app.on('error', (error) => {
