@@ -22,6 +22,12 @@ export const loggingLayer = app =>
   app
     .use(convert(logger())); // https://github.com/koajs/logger
 
+export const initialLayer = app =>
+  app
+    .use(bodyParser()) // https://github.com/koajs/bodyparser
+    .use(convert(conditionalGet())) // https://github.com/koajs/conditional-get
+    .use(convert(etag())); // https://github.com/koajs/etag
+
 export const graphQLLayer = (app, schema) =>
   app.use(
     convert(
@@ -33,17 +39,10 @@ export const graphQLLayer = (app, schema) =>
     )
   ));
 
-export const initialLayer = app =>
-  app
-    .use(convert(staticAssets(settings.path.PUBLIC, { gzip: true }))) // https://github.com/koajs/static
-    .use(bodyParser()); // https://github.com/koajs/bodyparser
-
 export const apiLayer = (app, apiRoutes) => {
   const newRouter = router();
 
   newRouter
-    .use(convert(conditionalGet())) // https://github.com/koajs/conditional-get
-    .use(convert(etag())) // https://github.com/koajs/etag
     .use(convert(cors())); // https://github.com/koajs/cors
 
   apiRoutes(newRouter);
@@ -53,6 +52,13 @@ export const apiLayer = (app, apiRoutes) => {
     .use(newRouter.allowedMethods());
 
   return newRouter;
+};
+
+export const assetsLayer = app => {
+  // remove staticAssets middleware if you have nginx already serves
+  // the public folder in production mode
+  app
+    .use(convert(staticAssets(settings.path.PUBLIC, { gzip: true }))); // https://github.com/koajs/static
 };
 
 export const securityLayer = app => {

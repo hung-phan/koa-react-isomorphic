@@ -1,17 +1,18 @@
 // @flow
+
+const { renderToString } = require('react-dom/server');
+const { match } = require('react-router');
+const DefaultNetworkLayer = require('react-relay').DefaultNetworkLayer;
+const IsomorphicRouter = require('isomorphic-relay-router').default;
+const { getRoutes, getServerHistory } = require('app/routes.jsx');
+
+const networkLayer = new DefaultNetworkLayer(
+  // $FlowFixMe
+  `http://localhost:${process.env.PORT}/graphql`
+);
+
 export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
-    const { renderToString } = require('react-dom/server');
-    const { match } = require('react-router');
-    const DefaultNetworkLayer = require('react-relay').DefaultNetworkLayer;
-    const IsomorphicRouter = require('isomorphic-relay-router').default;
-    const { getRoutes, getServerHistory } = require('app/routes.jsx');
-
-    const networkLayer = new DefaultNetworkLayer(
-      // $FlowFixMe
-      `http://localhost:${process.env.PORT}/graphql`
-    );
-
     ctx.prerender = (template: string, parameters: Object = {}) =>
       new Promise((resolve, reject) => {
         match({

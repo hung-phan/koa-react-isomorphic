@@ -4,10 +4,9 @@ import $ from 'jquery';
 import React from 'react';
 import { getRoutes, getClientHistory } from 'app/routes.jsx';
 import { init } from 'client/helpers/inject-data-utils.jsx';
+import { whyDidYouUpdate } from 'why-did-you-update';
 
 if (process.env.NODE_ENV === 'development') {
-  const { whyDidYouUpdate } = require('why-did-you-update');
-
   whyDidYouUpdate(React, {
     exclude: /^(StaticContainer|Relay|IsomorphicRelayRouterContext|onlyUpdateForKeys|pure)/,
   });

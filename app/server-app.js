@@ -1,6 +1,15 @@
 import Koa from 'koa';
 import debug from 'debug';
-import * as config from 'server/middlewares';
+import {
+  loggingLayer,
+  initialLayer,
+  apiLayer,
+  graphQLLayer,
+  securityLayer,
+  assetsLayer,
+  renderLayer,
+  errorLayer,
+} from 'server/middlewares';
 import apis from 'server/apis/base';
 import schema from 'database/schema';
 import controllers from 'server/controllers/base';
@@ -8,15 +17,16 @@ import controllers from 'server/controllers/base';
 const app = new Koa();
 
 // setup middlewares
-config.loggingLayer(app);
-config.graphQLLayer(app, schema);
-config.initialLayer(app);
-config.errorLayer(app);
-config.apiLayer(app, apis);
-config.securityLayer(app);
-config.renderLayer(app, controllers);
+loggingLayer(app);
+initialLayer(app);
+graphQLLayer(app, schema);
+errorLayer(app);
+apiLayer(app, apis);
+assetsLayer(app);
+securityLayer(app);
+renderLayer(app, controllers);
 
-// error logs
+// istanbul ignore next
 app.on('error', (error) => {
   debug('error')(error);
 });
