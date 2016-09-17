@@ -7,14 +7,13 @@ import { getRoutes, getClientHistory } from 'app/routes.jsx';
 import App from 'client/components/main/app.jsx';
 import configureStore from 'client/main-store';
 import { clientFetchData } from 'client/helpers/fetch-data';
+import { whyDidYouUpdate } from 'why-did-you-update';
 
 function render(store, routes, appDOM) {
   ReactDOM.render(<App store={store} routes={routes} />, appDOM);
 }
 
 if (process.env.NODE_ENV === 'development') {
-  const { whyDidYouUpdate } = require('why-did-you-update');
-
   whyDidYouUpdate(React, {
     exclude: /^(Connect|DockMonitor|shouldUpdate)/,
   });

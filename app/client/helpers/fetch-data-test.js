@@ -100,6 +100,28 @@ describe('Helper: fetchData', () => {
         Module.__ResetDependency__('match');
       });
 
+      it('should trigger not fetchData', () => {
+        const renderProps = {
+          components: _.range(4),
+          location: '/',
+          params: {
+            test: faker.random.uuid(),
+          },
+        };
+        const match = (route, callback) => {
+          callback(undefined, undefined, renderProps);
+        };
+
+        window.prerenderData = faker.random.uuid();
+        Module.__Rewire__('match', match);
+
+        clientFetchData(history, routes, store);
+
+        assert.isUndefined(window.prerenderData);
+
+        Module.__ResetDependency__('match');
+      });
+
       it('should trigger fetchData', () => {
         const renderProps = {
           components: _.range(4),

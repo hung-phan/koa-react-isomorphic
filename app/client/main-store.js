@@ -1,7 +1,8 @@
-/* istanbul ignore next */
 import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import loggerMiddleware from 'redux-logger';
+import { persistState } from 'redux-devtools';
 import reducers from './main-reducer';
 
 let middlewares = [
@@ -10,12 +11,11 @@ let middlewares = [
 let enhancers = [];
 
 // support for development
-if (process.env.NODE_ENV === 'development' && !process.env.SERVER_RENDERING) {
-  const logger = require('redux-logger')({
+if (process.env.NODE_ENV === 'development' && process.env.RUNTIME_ENV === 'client') {
+  const logger = loggerMiddleware({
     level: 'info',
     stateTransformer: state => state.toJS(),
   });
-  const { persistState } = require('redux-devtools');
 
   middlewares = [
     ...middlewares,
