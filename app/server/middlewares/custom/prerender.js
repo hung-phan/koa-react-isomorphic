@@ -1,10 +1,9 @@
 // @flow
-
-const { renderToString } = require('react-dom/server');
-const { match } = require('react-router');
-const DefaultNetworkLayer = require('react-relay').DefaultNetworkLayer;
-const IsomorphicRouter = require('isomorphic-relay-router').default;
-const { getRoutes, getServerHistory } = require('app/routes.jsx');
+import { renderToString } from 'react-dom/server';
+import { match } from 'react-router';
+import { DefaultNetworkLayer } from 'react-relay';
+import IsomorphicRouter from 'isomorphic-relay-router';
+import { getRoutes, getServerHistory } from 'app/routes.jsx';
 
 const networkLayer = new DefaultNetworkLayer(
   // $FlowFixMe

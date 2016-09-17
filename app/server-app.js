@@ -20,11 +20,11 @@ const app = new Koa();
 loggingLayer(app);
 initialLayer(app);
 graphQLLayer(app, schema);
-errorLayer(app);
 apiLayer(app, apis);
 assetsLayer(app);
 securityLayer(app);
 renderLayer(app, controllers);
+errorLayer(app);
 
 // istanbul ignore next
 app.on('error', (error) => {

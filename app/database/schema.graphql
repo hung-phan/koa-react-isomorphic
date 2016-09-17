@@ -1,23 +1,23 @@
 input AddTodoMutationInput {
   text: String!
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 type AddTodoMutationPayload {
   todoEdge: TodoEdge
   viewer: Viewer
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 input CompleteTodoMutationInput {
   id: String!
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 type CompleteTodoMutationPayload {
   todo: Todo
   viewer: Viewer
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 type Mutation {
@@ -59,13 +59,13 @@ type Query {
 
 input RemoveTodoMutationInput {
   id: String!
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 type RemoveTodoMutationPayload {
   id: ID
   viewer: Viewer
-  clientMutationId: String!
+  clientMutationId: String
 }
 
 # This represents todo list
