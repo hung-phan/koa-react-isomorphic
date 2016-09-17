@@ -12,7 +12,8 @@ instrumentation:
       'server.js',
       'client/mutations/**/*.js',
       'client/queries/**/*.js',
-      'client/main-store.js',
+      'client/test-helpers/**/*.js',
+      'client/test-helpers/**/*.jsx',
       'client/libs/**/*.js'
     ]
     include-all-sources: true
