@@ -104,6 +104,7 @@
     "node-inspector": "^0.12.8",
     "node-sass": "^3.10.0",
     "nodemon": "^1.10.2",
+    "offline-plugin": "^3.4.2",
     "pm2": "^2.0.12",
     "postcss-cssnext": "^2.8.0",
     "postcss-loader": "^0.13.0",

@@ -12,6 +12,10 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+if (process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install();
+}
+
 $(document).ready(() => {
   init(
     getRoutes(getClientHistory()),
