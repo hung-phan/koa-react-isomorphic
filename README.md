@@ -16,9 +16,10 @@ So far, I manage to put together these following technologies:
 * [Marko](http://markojs.com/)
 * [Bootstrap](http://getbootstrap.com/css/) and [FontAwesome](https://fortawesome.github.io/Font-Awesome/)
 * [Redux](https://github.com/rackt/redux)
-* [PostCSS](https://github.com/postcss/postcss)
-* [CSSNext](http://cssnext.io/)
-* [CSSNano](http://cssnano.co/)
+* [Relay](https://facebook.github.io/relay/)
+* [Immutablejs](https://facebook.github.io/immutable-js/)
+* [ServiceWorker and AppCache](http://www.html5rocks.com/en/tutorials/service-worker/introduction/)
+* [PostCSS](https://github.com/postcss/postcss), [CSSNext](http://cssnext.io/), [CSSNano](http://cssnano.co/)
 * [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Testdouble](https://github.com/testdouble/testdouble.js/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
 
 ## Requirement
