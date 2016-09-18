@@ -19,6 +19,11 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+if (process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install();
+}
+
+
 $(document).ready(() => {
   const appDOM = document.getElementById('app');
   const store = configureStore(window.prerenderData);
