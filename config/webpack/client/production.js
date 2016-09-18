@@ -6,6 +6,7 @@ const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require('./../../webpack/webpack-isomorphic-tools')
@@ -77,7 +78,11 @@ productionConfig.plugins.push(
     sourceMap: false,
   }),
   new CompressionPlugin(),
-  webpackIsomorphicToolsPlugin
+  webpackIsomorphicToolsPlugin,
+  new OfflinePlugin({
+    publicPath: config.path.assets,
+    relativePaths: false,
+  })
 );
 
 module.exports = productionConfig;
