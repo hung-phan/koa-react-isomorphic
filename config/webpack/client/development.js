@@ -4,7 +4,6 @@ const _ = require('lodash');
 const path = require('path');
 const ROOT = require('./../../path-helper').ROOT;
 const config = require('./../../index');
-const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
@@ -20,17 +19,12 @@ _.mergeWith(developmentConfig, {
     chunkFilename: '[id].js',
   },
   cache: true,
-  debug: true,
-  outputPathinfo: true,
   devtool: 'source-map',
   devServer: {
     contentBase: ROOT,
     noInfo: true,
     hot: true,
     inline: true,
-  },
-  postcss() {
-    return [cssnext()];
   },
   recordsPath: path.join(ROOT, config.path.tmp, 'client-records.json'),
 }, (obj1, obj2) =>

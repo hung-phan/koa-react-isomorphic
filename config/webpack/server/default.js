@@ -1,7 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
-const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
@@ -41,7 +39,7 @@ module.exports = {
     },
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
       path.resolve('./app'),
       'node_modules',
@@ -57,11 +55,16 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      test: /\.js$/,
+      options: {
+        eslint: {
+          emitWarning: true,
+        },
+      },
+    }),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'server'",
     }),
   ],
-  eslint: {
-    emitWarning: true,
-  },
 };
