@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const cssnext = require('postcss-cssnext');
 const ROOT = require('./../../path-helper').ROOT;
 const config = require('./../../index');
 const webpack = require('webpack');
@@ -30,7 +31,7 @@ module.exports = {
   },
   externals: [],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
       path.resolve('./app'),
       'node_modules',
@@ -54,13 +55,26 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      test: /\.js$/,
+      options: {
+        eslint: {
+          emitWarning: true,
+        },
+      },
+    }),
+    new webpack.LoaderOptionsPlugin({
+      test: /\.(css|less|scss)$/,
+      options: {
+        postcss() {
+          return [cssnext()];
+        },
+      },
+    }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'client'",
     }),
   ],
-  eslint: {
-    emitWarning: true,
-  },
 };

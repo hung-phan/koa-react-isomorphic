@@ -2,7 +2,6 @@
 
 const _ = require('lodash');
 const config = require('./../../index');
-const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -19,9 +18,6 @@ _.mergeWith(productionConfig, {
     publicPath: config.path.assets,
     filename: '[name].[chunkhash].js',
     chunkFilename: '[id].[chunkhash].js',
-  },
-  postcss() {
-    return [cssnext()];
   },
 }, (obj1, obj2) =>
   _.isArray(obj2) ? obj2.concat(obj1) : undefined
