@@ -15,9 +15,14 @@ module.exports = {
       extensions: [
         'woff',
         'woff2',
+        'otf',
         'ttf',
         'eot',
       ],
+      parser: WebpackIsomorphicToolsPlugin.url_loader_parser,
+    },
+    videos: {
+      extensions: ['webm', 'mp4'],
       parser: WebpackIsomorphicToolsPlugin.url_loader_parser,
     },
     svg: {
