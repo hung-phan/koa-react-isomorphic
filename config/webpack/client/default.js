@@ -59,7 +59,7 @@ module.exports = {
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       options: {
         eslint: {
           emitWarning: true,
