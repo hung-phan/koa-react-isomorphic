@@ -9,7 +9,6 @@ const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require('./../../webpack/webpack-isomorphic-tools')
 );
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const developmentConfig = require('./default');
 
 _.mergeWith(developmentConfig, {
@@ -47,23 +46,6 @@ developmentConfig.module.loaders.push(
 );
 
 developmentConfig.plugins.push(
-  new HardSourceWebpackPlugin({
-    // Either an absolute path or relative to output.path.
-    cacheDirectory: path.join(ROOT, config.path.tmp, 'cache'),
-    // Optional field. This field determines when to throw away the whole
-    // cache if for example npm modules were updated.
-    environmentPaths: {
-      root: process.cwd(),
-      directories: ['node_modules'],
-      // Add your webpack configuration paths here so changes to loader
-      // configuration and other details will cause a fresh build to occur.
-      files: [
-        path.join(ROOT, 'package.json'),
-        path.join(ROOT, 'config/webpack/client/default.js'),
-        path.join(ROOT, 'config/webpack/client/development.js'),
-      ],
-    },
-  }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'development'",
     'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false,
@@ -74,7 +56,8 @@ developmentConfig.plugins.push(
     minChunks: module => /node_modules/.test(module.resource),
   }),
   webpackIsomorphicToolsPlugin.development(),
-  new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin() // Hot Module Replacement
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoErrorsPlugin()
 );
 
 module.exports = developmentConfig;
