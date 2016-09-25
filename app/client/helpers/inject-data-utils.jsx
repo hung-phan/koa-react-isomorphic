@@ -6,10 +6,6 @@ import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import navigateTo from './navigation';
 
-export function injectPreparedData() {
-  IsomorphicRelay.injectPreparedData(Relay.Store, window.prerenderData);
-}
-
 export function prepareInitialRender(routes, domNode) {
   match({ routes, history: browserHistory }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -27,11 +23,10 @@ export function prepareInitialRender(routes, domNode) {
   });
 }
 
-export function init(routes, domNode) {
+export default function (routes, domNode) {
   if (process.env.SERVER_RENDERING) {
-    injectPreparedData();
-    prepareInitialRender(routes, domNode);
-  } else {
-    ReactDOM.render(routes, domNode);
+    IsomorphicRelay.injectPreparedData(Relay.Store, window.prerenderData);
   }
+
+  prepareInitialRender(routes, domNode);
 }

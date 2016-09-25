@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { match } from 'react-router';
 import { DefaultNetworkLayer } from 'react-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
-import { getRoutes, getServerHistory } from 'app/routes.jsx';
+import routes from 'app/routes.jsx';
 
 const networkLayer = new DefaultNetworkLayer(
   // $FlowFixMe
@@ -14,10 +14,7 @@ export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
     ctx.prerender = (template: string, parameters: Object = {}) =>
       new Promise((resolve, reject) => {
-        match({
-          routes: getRoutes(getServerHistory(ctx.req.url)),
-          location: ctx.req.url,
-        }, (error, redirectLocation, renderProps) => {
+        match({ routes, location: ctx.req.url }, (error, redirectLocation, renderProps) => {
           if (error) {
             ctx.throw(500, error.message);
           } else if (redirectLocation) {
