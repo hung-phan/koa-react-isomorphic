@@ -9,7 +9,6 @@
     "font-awesome": "^4.6.3",
     "graphql": "^0.7.0",
     "graphql-relay": "^0.4.3",
-    "history": "^4.2.0",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "isomorphic-relay": "^0.7.3",
