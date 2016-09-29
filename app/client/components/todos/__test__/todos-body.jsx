@@ -3,7 +3,7 @@ import td from 'testdouble';
 import React from 'react';
 import { mount } from 'enzyme';
 import { noop } from 'lodash';
-import TodosBody from './index';
+import TodosBody from './../todos-body';
 
 describe('Component: TodosBody', () => {
   const todos = [

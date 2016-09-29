@@ -13,7 +13,7 @@ module.exports = {
       path.join(ROOT, config.path.app, 'app'),
     ],
     common: [
-      path.join(ROOT, config.path.app, 'client/libs/index'),
+      'bootstrap',
       'isomorphic-fetch',
       'lodash',
       'react',

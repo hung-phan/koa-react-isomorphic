@@ -12,9 +12,9 @@ import session from 'koa-generic-session';
 import compress from 'koa-compress';
 import helmet from 'koa-helmet';
 import settings from 'server/initializers/settings';
-import render from './custom/render';
-import prerender from './custom/prerender.jsx';
-import error from './custom/error';
+import render from './render';
+import prerender from './prerender';
+import error from './error';
 
 export const loggingLayer = app =>
   app

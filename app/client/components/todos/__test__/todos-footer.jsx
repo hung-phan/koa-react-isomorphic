@@ -1,7 +1,7 @@
 import React from 'react';
 import { assert } from 'chai';
 import { shallow } from 'enzyme';
-import TodosFooter from './index.jsx';
+import TodosFooter from './../todos-footer';
 
 describe('Component: TodosFooter', () => {
   let component;

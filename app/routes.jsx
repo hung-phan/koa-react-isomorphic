@@ -1,8 +1,8 @@
 import React from 'react';
 import { browserHistory, createMemoryHistory, Router, Route } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Todos from 'client/components/todos/index.jsx';
-import StaticPage from 'client/components/static-page/index.jsx';
+import Todos from './client/components/todos';
+import StaticPage from './client/components/static-page';
 
 export const getClientHistory = (store) =>
   syncHistoryWithStore(browserHistory, store);

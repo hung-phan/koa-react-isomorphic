@@ -2,10 +2,10 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
-import { getRoutes, getServerHistory } from 'app/routes.jsx';
-import App from 'client/components/main/app.jsx';
 import { serverFetchData } from 'client/helpers/fetch-data';
 import configureStore from 'client/main-store';
+import { getRoutes, getServerHistory } from 'app/routes.jsx';
+import App from 'client/components/main/app.jsx';
 
 export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {

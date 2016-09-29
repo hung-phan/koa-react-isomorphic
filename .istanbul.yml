@@ -4,8 +4,8 @@ instrumentation:
         - .js
         - .jsx
     excludes: [
-      '**/*-test.js',
-      '**/*-test.jsx',
+      '**/__test__/*.js',
+      '**/__test__/*.jsx',
       '**/*.marko.js',
       'app.jsx',
       'routes.jsx',

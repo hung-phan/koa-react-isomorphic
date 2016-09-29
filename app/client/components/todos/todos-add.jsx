@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { pure } from 'recompose';
-import type { AddTodoActionType } from './../types';
+import type { AddTodoActionType } from './types';
 
 export class TodosAdd extends React.Component {
   state: { todo: string } = {

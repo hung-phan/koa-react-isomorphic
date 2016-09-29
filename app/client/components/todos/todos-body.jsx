@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import partial from 'lodash/partial';
-import style from './style.css';
-import type { TodoType, CompleteTodoActionType, RemoveTodoActionType } from './../types';
+import style from './todos-body-style.css';
+import type { TodoType, CompleteTodoActionType, RemoveTodoActionType } from './types';
 
 const TodosBody = ({ todos, completeTodo, removeTodo }: {
   todos: TodoType[], completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType
