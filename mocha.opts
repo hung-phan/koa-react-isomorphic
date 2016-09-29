@@ -2,6 +2,6 @@
 --compilers js:./compiler
 --compilers jsx:./compiler
 
-app/**/*-test.js
-app/**/*-test.jsx
-tests/**/*.js
+app/**/__test__/*.js
+app/**/__test__/*.jsx
+test/**/*.js

@@ -2,8 +2,8 @@
 import React from 'react';
 import { List } from 'immutable';
 import partial from 'lodash/partial';
-import type { TodoType, CompleteTodoActionType, RemoveTodoActionType } from './../types';
-import style from './style.css';
+import type { TodoType, CompleteTodoActionType, RemoveTodoActionType } from './types';
+import style from './todos-body-style.css';
 
 const TodosBody = ({ todos, completeTodo, removeTodo }: {
   todos: List<TodoType>, completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import td from 'testdouble';
 import faker from 'faker';
 import { assert } from 'chai';
-import { serverFetchData, clientFetchData, getLocals, __RewireAPI__ as Module } from './fetch-data';
+import { serverFetchData, clientFetchData, getLocals, __RewireAPI__ as Module } from './../fetch-data';
 
 describe('Helper: fetchData', () => {
   it('should be an object', () => {

@@ -4,9 +4,9 @@ import React from 'react';
 import { assert } from 'chai';
 import { mount } from 'enzyme';
 import propName from 'redial/lib/propName';
-import mockingComponent from 'client/test-helpers/mocking-component.jsx';
-import Provider from 'client/test-helpers/provider-mock.jsx';
-import fetchDataEnhancer from './fetch-data-enhancer';
+import mockingComponent from './../../test-helpers/mocking-component';
+import Provider from './../../test-helpers/provider-mock';
+import fetchDataEnhancer from './../fetch-data-enhancer';
 
 describe('Helper: fetchDataEnhancer', () => {
   let Handler;

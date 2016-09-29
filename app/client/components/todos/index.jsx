@@ -5,11 +5,11 @@ import { compose, shouldUpdate } from 'recompose';
 import shallowEqualImmutable from 'react-immutable-render-mixin/lib/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import fetchDataEnhancer from 'client/helpers/fetch-data-enhancer.jsx';
-import TodosHeader from './todos-header/index.jsx';
-import TodosAdd from './todos-add/index.jsx';
-import TodosBody from './todos-body/index.jsx';
-import TodosFooter from './todos-footer/index.jsx';
+import fetchDataEnhancer from './../../helpers/fetch-data-enhancer';
+import TodosHeader from './todos-header';
+import TodosAdd from './todos-add';
+import TodosBody from './todos-body';
+import TodosFooter from './todos-footer';
 import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
 import type { TodoType } from './types';
 

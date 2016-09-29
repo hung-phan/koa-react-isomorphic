@@ -3,11 +3,11 @@ import 'client/libs';
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { getRoutes, getClientHistory } from 'app/routes.jsx';
-import App from 'client/components/main/app.jsx';
-import configureStore from 'client/main-store';
-import { clientFetchData } from 'client/helpers/fetch-data';
 import { whyDidYouUpdate } from 'why-did-you-update';
+import App from './client/components/main/app';
+import configureStore from './client/main-store';
+import { clientFetchData } from './client/helpers/fetch-data';
+import { getRoutes, getClientHistory } from './routes';
 
 function render(store, routes, appDOM) {
   ReactDOM.render(<App store={store} routes={routes} />, appDOM);
