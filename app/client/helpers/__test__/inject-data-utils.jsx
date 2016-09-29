@@ -3,7 +3,7 @@ import React from 'react';
 import td from 'testdouble';
 import faker from 'faker';
 import { Store } from 'react-relay';
-import { prepareInitialRender, __RewireAPI__ as Module } from './inject-data-utils.jsx';
+import { prepareInitialRender, __RewireAPI__ as Module } from './../inject-data-utils';
 
 describe('Helper: inject-data-utils', () => {
   context('# prepareInitialRender', () => {

@@ -4,7 +4,7 @@ import faker from 'faker';
 import td from 'testdouble';
 import React from 'react';
 import { mount } from 'enzyme';
-import TodosBody from './index';
+import TodosBody from './../todos-body';
 
 describe('Component: TodosBody', () => {
   const viewer = {

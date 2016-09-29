@@ -3,8 +3,8 @@ import React from 'react';
 import Relay from 'react-relay';
 import CompleteTodoMutation from 'client/mutations/complete-todo';
 import RemoveTodoMutation from 'client/mutations/remove-todo';
-import type { ViewerType } from './../types';
-import style from './style.css';
+import type { ViewerType } from './types';
+import style from './todos-body-style.css';
 
 const TodosBody = ({ viewer }: { viewer: ViewerType }) => (
   <div className={`col-md-12 ${style.container}`}>

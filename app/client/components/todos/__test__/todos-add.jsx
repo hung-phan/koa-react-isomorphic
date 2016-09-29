@@ -3,7 +3,7 @@ import td from 'testdouble';
 import React from 'react';
 import { mount } from 'enzyme';
 import faker from 'faker';
-import { TodosAdd, __RewireAPI__ as Module } from './index';
+import { TodosAdd, __RewireAPI__ as Module } from './../todos-add';
 
 describe('Component: TodosAdd', () => {
   let viewer;

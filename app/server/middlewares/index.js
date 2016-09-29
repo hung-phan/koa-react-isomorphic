@@ -14,9 +14,9 @@ import helmet from 'koa-helmet';
 import mount from 'koa-mount';
 import graphqlHTTP from 'koa-graphql';
 import settings from 'server/initializers/settings';
-import render from './custom/render';
-import prerender from './custom/prerender';
-import error from './custom/error';
+import render from './render';
+import prerender from './prerender';
+import error from './error';
 
 export const loggingLayer = app =>
   app

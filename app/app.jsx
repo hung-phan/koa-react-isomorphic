@@ -3,8 +3,8 @@ import 'client/libs';
 import $ from 'jquery';
 import React from 'react';
 import { whyDidYouUpdate } from 'why-did-you-update';
-import routes from 'app/routes.jsx';
-import renderComponents from 'client/helpers/inject-data-utils.jsx';
+import renderComponents from './client/helpers/inject-data-utils';
+import routes from './routes';
 
 if (process.env.NODE_ENV === 'development') {
   whyDidYouUpdate(React, {

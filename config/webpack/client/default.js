@@ -23,7 +23,6 @@ module.exports = {
       'react-relay',
       'react-router',
       'recompose',
-      'recompose-relay',
     ],
   },
   output: {
