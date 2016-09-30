@@ -23,4 +23,4 @@ if [ -z "${SERVER_RENDERING}" ]; then
   export SERVER_RENDERING=${6:-0}
 fi
 
-node-debug -p 9999 -b prod-server.js
+node-debug prod-server.js
