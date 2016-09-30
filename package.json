@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "2.12.0",
+  "version": "2.12.1",
   "dependencies": {
     "babel-runtime": "^6.11.6",
     "bootstrap": "^3.3.7",
