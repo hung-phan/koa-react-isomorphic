@@ -7,11 +7,6 @@
 [include]
 
 [libs]
-app/interfaces/bom.js.flow
-app/interfaces/core.js.flow
-app/interfaces/dom.js.flow
-app/interfaces/node.js.flow
-app/interfaces/react.js.flow
 
 [options]
 module.system=haste
