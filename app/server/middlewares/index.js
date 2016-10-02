@@ -6,7 +6,7 @@ import htmlMinifier from 'koa-html-minifier';
 import router from 'koa-router';
 import conditionalGet from 'koa-conditional-get';
 import etag from 'koa-etag';
-import csrf from 'koa-csrf';
+import CSRF from 'koa-csrf';
 import convert from 'koa-convert';
 import session from 'koa-generic-session';
 import compress from 'koa-compress';
@@ -64,10 +64,16 @@ export const assetsLayer = app => {
 export const securityLayer = app => {
   app.keys = [process.env.SECRET_KEY];
 
-  csrf(app);
   app
     .use(convert(session())) // https://github.com/koajs/session
-    .use(convert(csrf.middleware)) // https://github.com/koajs/csrf
+    .use(new CSRF({
+      invalidSessionSecretMessage: 'Invalid session secret',
+      invalidSessionSecretStatusCode: 403,
+      invalidTokenMessage: 'Invalid CSRF token',
+      invalidTokenStatusCode: 403,
+      excludedMethods: ['GET', 'HEAD', 'OPTIONS'],
+      disableQuery: false,
+    })) // https://github.com/koajs/csrf
     .use(helmet()); // https://github.com/venables/koa-helmet
 };
 

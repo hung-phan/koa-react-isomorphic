@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "2.12.2",
+  "version": "2.13.0",
   "dependencies": {
     "accepts": {
       "version": "1.3.3",
@@ -387,9 +387,9 @@
       "resolved": "https://registry.npmjs.org/header-case/-/header-case-1.0.0.tgz"
     },
     "helmet": {
-      "version": "2.2.0",
+      "version": "2.3.0",
       "from": "helmet@>=2.1.1 <3.0.0",
-      "resolved": "https://registry.npmjs.org/helmet/-/helmet-2.2.0.tgz"
+      "resolved": "https://registry.npmjs.org/helmet/-/helmet-2.3.0.tgz"
     },
     "helmet-csp": {
       "version": "1.2.2",
@@ -419,9 +419,9 @@
       "resolved": "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz"
     },
     "hpkp": {
-      "version": "1.1.0",
-      "from": "hpkp@1.1.0",
-      "resolved": "https://registry.npmjs.org/hpkp/-/hpkp-1.1.0.tgz"
+      "version": "1.2.0",
+      "from": "hpkp@1.2.0",
+      "resolved": "https://registry.npmjs.org/hpkp/-/hpkp-1.2.0.tgz"
     },
     "hsts": {
       "version": "1.0.0",
@@ -596,9 +596,9 @@
       "resolved": "https://registry.npmjs.org/koa-cors/-/koa-cors-0.0.16.tgz"
     },
     "koa-csrf": {
-      "version": "2.5.0",
-      "from": "koa-csrf@>=2.5.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/koa-csrf/-/koa-csrf-2.5.0.tgz"
+      "version": "3.0.4",
+      "from": "koa-csrf@>=3.0.4 <4.0.0",
+      "resolved": "https://registry.npmjs.org/koa-csrf/-/koa-csrf-3.0.4.tgz"
     },
     "koa-etag": {
       "version": "2.1.1",
