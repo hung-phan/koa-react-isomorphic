@@ -6,6 +6,21 @@ import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import navigateTo from './navigation';
 
+function render(props, domNode) {
+  if (process.env.NODE_ENV === 'development') {
+    const { AppContainer } = require('react-hot-loader');
+
+    ReactDOM.render(
+      <AppContainer>
+        <Router {...props} />
+      </AppContainer>,
+      domNode
+    );
+  } else {
+    ReactDOM.render(<Router {...props} />, domNode);
+  }
+}
+
 export function prepareInitialRender(routes, domNode) {
   match({ routes, history: browserHistory }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -15,7 +30,7 @@ export function prepareInitialRender(routes, domNode) {
     } else if (renderProps) {
       IsomorphicRouter.prepareInitialRender(Relay.Store, renderProps)
         .then(props => {
-          ReactDOM.render(<Router {...props} />, domNode);
+          render(props, domNode);
         });
     } else {
       navigateTo('/404.html');

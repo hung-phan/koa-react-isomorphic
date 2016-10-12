@@ -3,12 +3,18 @@ import { renderToString } from 'react-dom/server';
 import { match } from 'react-router';
 import { DefaultNetworkLayer } from 'react-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
-import routes from 'app/routes.jsx';
 
 const networkLayer = new DefaultNetworkLayer(
   // $FlowFixMe
   `http://localhost:${process.env.PORT}/graphql`
 );
+let routes = require('app/routes.jsx').default;
+
+if (module.hot) {
+  module.hot.accept('./../../routes.jsx', () => {
+    routes = require('./../../routes.jsx').default;
+  });
+}
 
 export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {

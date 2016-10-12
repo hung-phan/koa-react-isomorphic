@@ -20,7 +20,6 @@ global.nodeRequire = require;
 global.regeneratorRuntime = require('regenerator-runtime');
 
 global.webpackIsomorphicTools
-  .development(process.env.NODE_ENV === 'development')
   .server(ROOT, () => {
     if (process.env.NODE_DEBUGGER) {
       require('babel-core/register');
