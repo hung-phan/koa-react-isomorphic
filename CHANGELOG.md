@@ -1,3 +1,9 @@
+## 2.14.0
+- Remove why-did-you-update
+- Add react-hot-loader-3 - Known problem: [react-router/issues/2704](https://github.com/ReactTraining/react-router/issues/2704)
+- Update webpack-isomorphic-tools new api
+- Drop support for node 4
+
 ## 2.13.0
 - Update koa-csrf
 - Remove flow libs

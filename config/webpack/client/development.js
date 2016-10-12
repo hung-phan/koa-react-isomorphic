@@ -12,6 +12,11 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
 const developmentConfig = require('./default');
 
 _.mergeWith(developmentConfig, {
+  entry: {
+    app: [
+      'react-hot-loader/patch',
+    ],
+  },
   output: {
     publicPath: `http://localhost:8080${config.path.build}`,
     filename: '[name].js',

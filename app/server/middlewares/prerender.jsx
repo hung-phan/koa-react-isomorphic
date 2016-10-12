@@ -4,8 +4,18 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { serverFetchData } from 'client/helpers/fetch-data';
 import configureStore from 'client/main-store';
-import { getRoutes, getServerHistory } from 'app/routes.jsx';
 import App from 'client/components/main/app.jsx';
+
+const routesModule = require('app/routes.jsx');
+
+const getServerHistory = routesModule.getServerHistory;
+let getRoutes = routesModule.getRoutes;
+
+if (module.hot) {
+  module.hot.accept('./../../routes.jsx', () => {
+    getRoutes = require('./../../routes.jsx').getRoutes;
+  });
+}
 
 export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
