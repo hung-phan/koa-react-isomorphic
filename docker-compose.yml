@@ -1,4 +1,8 @@
-app:
-  build: .
-  ports:
-    - "80:3000"
+version: '2'
+
+services:
+  webapp:
+    container_name: webapp
+    build: .
+    ports:
+      - "3000:3000"
