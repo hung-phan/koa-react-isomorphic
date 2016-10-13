@@ -1,3 +1,6 @@
+## 2.14.2
+- Update Dockerfile and pm2 script
+
 ## 2.14.0
 - Remove why-did-you-update
 - Add react-hot-loader-3 - Known problem: [react-router/issues/2704](https://github.com/ReactTraining/react-router/issues/2704)

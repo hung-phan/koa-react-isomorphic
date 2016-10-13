@@ -1,12 +1,12 @@
 {
   "apps": [
     {
-      "name": "All hail the R",
-      "node_args": ["--harmony"],
+      "name": "koa-react-isomorphic",
       "script": "prod-server.js",
       "env": {
         "DEBUG": "error",
         "NODE_ENV": "production",
+        "SECRET_KEY": "secret",
         "PORT": 3000
       },
       "max_restarts": 10
