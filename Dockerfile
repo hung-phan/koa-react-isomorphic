@@ -6,14 +6,14 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 
 RUN chmod +x /usr/local/bin/dumb-init
 
-ENV NODE_ENV=production \
-    SECRET_KEY=secret
-
 WORKDIR /opt/app
 
 COPY package.json .
 
 RUN npm i
+
+ENV NODE_ENV=production \
+    SECRET_KEY=secret
 
 COPY . .
 
