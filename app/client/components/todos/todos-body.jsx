@@ -5,7 +5,7 @@ import style from './todos-body-style.css';
 import type { TodoType, CompleteTodoActionType, RemoveTodoActionType } from './types';
 
 const TodosBody = ({ todos, completeTodo, removeTodo }: {
-  todos: TodoType[], completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType
+  todos: TodoType[], completeTodo: CompleteTodoActionType, removeTodo: RemoveTodoActionType,
 }) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
