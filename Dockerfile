@@ -10,9 +10,9 @@ RUN npm install -g yarn
 
 WORKDIR /opt/app
 
-COPY package.json .
+COPY package.json yarn.lock ./
 
-COPY yarn.lock .
+COPY scripts/postinstall ./scripts/postinstall
 
 RUN yarn install
 
