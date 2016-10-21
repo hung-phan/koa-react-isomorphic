@@ -6,17 +6,21 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 
 RUN chmod +x /usr/local/bin/dumb-init
 
+RUN npm install -g yarn
+
 WORKDIR /opt/app
 
-COPY package.json .
+COPY package.json yarn.lock ./
 
-RUN npm i
+COPY scripts/postinstall ./scripts/postinstall
+
+RUN yarn install
 
 ENV NODE_ENV=production \
     SECRET_KEY=secret
 
 COPY . .
 
-RUN npm run build
+RUN yarn run build
 
-CMD ["dumb-init", "npm", "start"]
+CMD ["dumb-init", "yarn", "start"]
