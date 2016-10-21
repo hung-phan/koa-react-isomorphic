@@ -1,3 +1,6 @@
+## 2.14.4
+- Use [yarn](https://github.com/yarnpkg/yarn)
+
 ## 2.14.2
 - Update Dockerfile and pm2 script
 
