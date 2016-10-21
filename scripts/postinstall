@@ -1,4 +1,4 @@
 #!/bin/bash
 if [ $BUILD_ASSETS ]; then
-  npm run build
+  yarn run build
 fi

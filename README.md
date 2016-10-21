@@ -23,7 +23,8 @@ So far, I manage to put together these following technologies:
 * [Mocha](https://mochajs.org/), [Chai](http://chaijs.com/), [Testdouble](https://github.com/testdouble/testdouble.js/), [Nock](https://github.com/pgte/nock) and [Istanbul](https://github.com/gotwarlost/istanbul)
 
 ## Requirement
-Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.
+- Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.
+- Install [yarn](https://github.com/yarnpkg/yarn)
 
 ## Explanation
 What initially gets run is `build/server.js`, which is complied by Webpack to utilise the power of ES6 and ES7 in server-side code.

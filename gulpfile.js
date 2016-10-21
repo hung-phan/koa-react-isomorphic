@@ -38,17 +38,15 @@ gulp.task('set-development-env', () => {
 });
 
 gulp.task('compile-templates', (done) =>
-  shell.exec('npm run compile-templates', () => done())
+  shell.exec('yarn run compile-templates', () => done())
 );
 
 gulp.task('update-schema', (done) =>
-  shell.exec('npm run update-schema', () => done())
+  shell.exec('yarn run update-schema', () => done())
 );
 
 gulp.task('frontend:watch', ['set-development-env'], (done) =>
-  shell.exec('npm run frontend:watch', () => {
-    done();
-  })
+  shell.exec('yarn run frontend:watch', () => done())
 );
 
 gulp.task('frontend:build', ['set-production-env'], (done) => {

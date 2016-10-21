@@ -163,7 +163,7 @@
     "dev": "./scripts/dev",
     "flow:status": "flow status; test $? -eq 0 -o $? -eq 2",
     "flow:stop": "flow stop",
-    "flow:watch": "npm run flow:status && chokidar './app/**/*.js' './app/**/*.jsx' './tests/**/*.js' -c 'npm run flow:status'",
+    "flow:watch": "yarn run flow:status && chokidar './app/**/*.js' './app/**/*.jsx' './tests/**/*.js' -c 'yarn run flow:status'",
     "frontend:watch": "webpack-dev-server --config config/webpack/client/development.js",
     "pm2:delete": "pm2 delete config/pm2/production.json",
     "pm2:start": "pm2 start config/pm2/production.json",
