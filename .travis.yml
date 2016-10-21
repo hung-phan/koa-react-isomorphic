@@ -2,10 +2,16 @@ language: node_js
 node_js:
   - 6
 before_install:
-  - npm install -g npm
+  - sudo apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3
+  - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq yarn
   - npm install -g codecov
 script:
   - npm run test:coverage
   - codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+cache:
+  directories:
+  - $HOME/.yarn-cache

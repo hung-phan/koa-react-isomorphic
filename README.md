@@ -247,27 +247,27 @@ export default handleActions({
 ```bash
 $ git clone git@github.com:hung-phan/koa-react-isomorphic.git
 $ cd koa-react-isomorphic
-$ npm install
+$ yarn install
 ```
 
 ### Hot reload
 
 ```bash
-$ npm run watch
-$ npm run dev
+$ yarn run watch
+$ yarn run dev
 ```
 
 ### With server rendering - encourage for testing only
 
 ```bash
-$ SERVER_RENDERING=true npm run watch
-$ npm run dev
+$ SERVER_RENDERING=true yarn run watch
+$ yarn run dev
 ```
 
 ### Enable flowtype in development
 ```bash
-$ npm run flow:watch
-$ npm run flow:stop # to terminate the server
+$ yarn run flow:watch
+$ yarn run flow:stop # to terminate the server
 ```
 
 You need to add annotation to the file to enable flowtype (`// @flow`)
@@ -276,16 +276,16 @@ You need to add annotation to the file to enable flowtype (`// @flow`)
 ## Test
 
 ```bash
-$ npm test
-$ npm run test:watch
-$ npm run test:lint
-$ npm run test:coverage
+$ yarn test
+$ yarn run test:watch
+$ yarn run test:lint
+$ yarn run test:coverage
 ```
 
 ## Debug
 ```bash
-$ npm run watch
-$ npm run debug
+$ yarn run watch
+$ yarn run debug
 ```
 
 If you use tool like Webstorm or any JetBrains product to debug, you need update `cli` option in `.node-inspectorrc` to prevent
@@ -311,16 +311,16 @@ using default browser to debug. Example:
 ### Without pm2
 
 ```bash
-$ npm run build
-$ SECRET_KEY=your_env_key npm start
+$ yarn run build
+$ SECRET_KEY=your_env_key yarn start
 ```
 
 ### With pm2
 
 ```bash
-$ npm run build
-$ SECRET_KEY=your_env_key npm run pm2:start
-$ npm run pm2:stop # to terminate the server
+$ yarn run build
+$ SECRET_KEY=your_env_key yarn run pm2:start
+$ yarn run pm2:stop # to terminate the server
 ```
 
 ### Docker container
