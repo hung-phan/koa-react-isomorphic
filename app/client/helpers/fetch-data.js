@@ -4,16 +4,16 @@ import { trigger } from 'redial';
 import { match } from 'react-router';
 import navigateTo from './navigation';
 
-export const getLocals = (store, renderProps) => ({
+export const getLocals = (store, { location, params }) => ({
   store,
-  location: renderProps.location,
-  params: renderProps.params,
+  location,
+  params,
 });
 
 export const serverFetchData = (renderProps, store) =>
   trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
 
-export const clientFetchData = (history, routes, store) =>
+export const clientFetchData = (history, routes, store) => {
   history.listen(location => {
     match({ routes, location }, (error, redirectLocation, renderProps) => {
       if (error) {
@@ -33,3 +33,4 @@ export const clientFetchData = (history, routes, store) =>
       }
     });
   });
+};

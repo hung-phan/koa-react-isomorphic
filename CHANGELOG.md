@@ -1,3 +1,7 @@
+## 2.15.0
+- Update react-router
+- Update clientFetchData to manually call the routeOnChange handler
+
 ## 2.14.4
 - Use [yarn](https://github.com/yarnpkg/yarn)
 

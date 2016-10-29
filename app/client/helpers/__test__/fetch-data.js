@@ -54,10 +54,6 @@ describe('Helper: fetchData', () => {
       store = faker.random.uuid();
     });
 
-    after(() => {
-      Module.__ResetDependency__('browserHistory');
-    });
-
     describe('# match route', () => {
       let navigateToSpy;
       let triggerSpy;
