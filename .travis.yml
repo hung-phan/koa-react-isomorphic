@@ -7,6 +7,8 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y -qq yarn
   - npm install -g codecov
+install:
+  - yarn
 script:
   - npm run test:coverage
   - codecov
