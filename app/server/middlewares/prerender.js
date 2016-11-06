@@ -11,6 +11,7 @@ const networkLayer = new DefaultNetworkLayer(
 let routes = require('app/routes.jsx').default;
 
 if (module.hot) {
+  // $FlowFixMe
   module.hot.accept('./../../routes.jsx', () => {
     routes = require('./../../routes.jsx').default;
   });
