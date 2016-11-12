@@ -23,7 +23,6 @@
     "babel-types": "^6.18.0",
     "bootstrap": "^3.3.7",
     "bundle-loader": "^0.5.4",
-    "chai": "^3.5.0",
     "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.25.0",
     "debug": "^2.3.2",
@@ -105,6 +104,7 @@
     "webpack-node-externals": "^1.5.4"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "chokidar": "^1.6.1",
     "chokidar-cli": "^1.2.0",
     "enzyme": "^2.6.0",
