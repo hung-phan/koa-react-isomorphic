@@ -57,7 +57,7 @@ productionConfig.plugins.push(
     minChunks: module => /node_modules/.test(module.resource),
   }),
   new ExtractTextPlugin({
-    filename: '[name]-[contenthash].css',
+    filename: '[name].[contenthash].css',
     allChunks: true,
   }),
   new webpack.LoaderOptionsPlugin({

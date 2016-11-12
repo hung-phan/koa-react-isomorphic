@@ -14,7 +14,7 @@ COPY package.json yarn.lock ./
 
 COPY scripts/postinstall ./scripts/postinstall
 
-RUN yarn install
+RUN yarn install --production
 
 ENV NODE_ENV=production \
     SECRET_KEY=secret
