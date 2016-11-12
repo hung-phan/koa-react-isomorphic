@@ -3515,14 +3515,14 @@ hide-powered-by@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hide-powered-by/-/hide-powered-by-1.0.0.tgz#4a85ad65881f62857fc70af7174a1184dccce32b"
 
-history@^3.0.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/history/-/history-3.2.1.tgz#71c7497f4e6090363d19a6713bb52a1bfcdd99aa"
+history@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/history/-/history-2.1.2.tgz#4aa2de897a0e4867e4539843be6ecdb2986bfdec"
   dependencies:
-    invariant "^2.2.1"
-    loose-envify "^1.2.0"
-    query-string "^4.2.2"
-    warning "^3.0.0"
+    deep-equal "^1.0.0"
+    invariant "^2.0.0"
+    query-string "^3.0.0"
+    warning "^2.0.0"
 
 hoek@2.x.x:
   version "2.16.3"
@@ -3790,7 +3790,7 @@ interpret@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.1.tgz#d579fb7f693b858004947af39fa0db49f795602c"
 
-invariant@^2.2.0, invariant@^2.2.1:
+invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.1.tgz#b097010547668c7e337028ebe816ebe36c8a8d54"
   dependencies:
@@ -6449,7 +6449,13 @@ qs@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
 
-query-string@^4.1.0, query-string@^4.2.2:
+query-string@^3.0.0:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-3.0.3.tgz#ae2e14b4d05071d4e9b9eb4873c35b0dcd42e638"
+  dependencies:
+    strict-uri-encode "^1.0.0"
+
+query-string@^4.1.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.2.3.tgz#9f27273d207a25a8ee4c7b8c74dcd45d556db822"
   dependencies:
@@ -6650,11 +6656,11 @@ react-router-relay@0.13.5:
     lodash "^4.15.0"
     react-static-container "^1.0.1"
 
-react-router@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-3.0.0.tgz#3f313e4dbaf57048c48dd0a8c3cac24d93667dff"
+react-router@^2.3.0:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-2.8.1.tgz#73e9491f6ceb316d0f779829081863e378ee4ed7"
   dependencies:
-    history "^3.0.0"
+    history "^2.1.2"
     hoist-non-react-statics "^1.2.0"
     invariant "^2.2.1"
     loose-envify "^1.2.0"
@@ -7940,6 +7946,12 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+warning@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-2.1.0.tgz#21220d9c63afc77a8c92111e011af705ce0c6901"
+  dependencies:
+    loose-envify "^1.0.0"
 
 warning@^3.0.0:
   version "3.0.0"
