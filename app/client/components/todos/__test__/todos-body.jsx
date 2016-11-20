@@ -35,7 +35,7 @@ describe('Component: TodosBody', () => {
       removeButton.simulate('click');
 
       assert.ok(removeButton);
-      td.verify(removeTodo(index, td.matchers.anything(), td.matchers.anything()));
+      td.verify(removeTodo(index, td.matchers.anything()));
     });
     assert.equal(td.explain(removeTodo).callCount, todos.length);
   });
@@ -52,7 +52,7 @@ describe('Component: TodosBody', () => {
       completeButton.simulate('click');
 
       assert.ok(completeButton);
-      td.verify(completeTodo(index, td.matchers.anything(), td.matchers.anything()));
+      td.verify(completeTodo(index, td.matchers.anything()));
     });
     assert.equal(td.explain(completeTodo).callCount, todos.length);
   });

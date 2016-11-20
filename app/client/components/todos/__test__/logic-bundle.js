@@ -59,7 +59,7 @@ describe('Module: Todos', () => {
 
     it('should return the default state', () => {
       assert(is(
-        reducer(fromJS([]), { type: 'ANOTHER_ACTION', random: 'random value' }),
+        reducer(fromJS([]), { type: 'ANOTHER_ACTION', payload: 'random value' }),
         fromJS([])
       ));
     });
