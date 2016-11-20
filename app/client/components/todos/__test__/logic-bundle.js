@@ -58,7 +58,7 @@ describe('Module: Todos', () => {
 
     it('should return the default state', () => {
       assert.deepEqual(
-        reducer([], { type: 'ANOTHER_ACTION', random: 'random value' }),
+        reducer([], { type: 'ANOTHER_ACTION', payload: 'random value' }),
         []
       );
     });
