@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "2.16.3",
+  "version": "2.16.4",
   "dependencies": {
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
