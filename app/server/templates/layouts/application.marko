@@ -15,10 +15,6 @@
     <body>
         <layout-placeholder name="mainContent" />
 
-        <if(data.layoutData.env.NODE_ENV === 'production')>
-            <javascript-include-tag src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" />
-        </if>
-
         <prerender-data data=data.layoutData.prerenderData />
 
         <webpack-bundle-tag name='common' asset-manifest=data.layoutData.assetManifest.javascript />

@@ -36,9 +36,16 @@ module.exports = {
       path.resolve('./app'),
       'node_modules',
     ],
+    alias: {
+      modernizr$: path.join(ROOT, '.modernizrrc')
+    },
   },
   module: {
     loaders: [
+      {
+        test: /\.modernizrrc$/,
+        loader: 'modernizr',
+      },
       {
         test: /\.async\.jsx$/,
         loader: 'react-proxy-loader!exports-loader?exports.default',
