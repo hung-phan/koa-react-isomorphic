@@ -8,7 +8,7 @@ import TodosHeader from './todos-header';
 import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
-import { addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
+import { selectors, addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
 import type { TodoType } from './types';
 
 export const Todos = ({ todos, actions }: { todos: TodoType[], actions: Object }) => (
@@ -31,8 +31,8 @@ export const enhance = compose(
     ({ store }) => store.dispatch(fetchTodos())
   ),
   connect(
-    ({ todos }) => ({
-      todos,
+    state => ({
+      todos: selectors.getTodos(state),
     }),
     dispatch => ({
       actions: bindActionCreators({

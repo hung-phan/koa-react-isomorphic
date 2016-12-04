@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { routerReducer as routing } from 'react-router-redux';
-import todos from './components/todos/logic-bundle';
+import todosReducer, { mountPoint as todosMountPoint } from './components/todos/logic-bundle';
+import routingReducer, { mountPoint as routingMountPoint } from './components/routing/logic-bundle';
 
 export default combineReducers({
-  todos,
-  routing,
+  [todosMountPoint]: todosReducer,
+  [routingMountPoint]: routingReducer,
 });

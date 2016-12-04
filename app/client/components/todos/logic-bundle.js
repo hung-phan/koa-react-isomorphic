@@ -1,7 +1,9 @@
 // @flow
 import fetch from 'isomorphic-fetch';
+import identity from 'lodash/identity';
 import { createAction, handleActions } from 'redux-actions';
 import getUrl from 'client/helpers/get-url';
+import globalizeSelectors from 'client/helpers/globalize-selectors';
 import type {
   TodoType,
   AddTodoActionType,
@@ -9,6 +11,12 @@ import type {
   CompleteTodoActionType,
   SetTodosActionType,
 } from './types';
+
+export const mountPoint = 'todos';
+
+export const selectors = globalizeSelectors({
+  getTodos: identity,
+}, mountPoint);
 
 export const ADD_TODO = 'todos/ADD_TODO';
 export const REMOVE_TODO = 'todos/REMOVE_TODO';
