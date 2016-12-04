@@ -191,6 +191,7 @@ using [react-proxy-loader](https://github.com/webpack/react-proxy-loader).
   },
 ```
 
+
 ### Idea to structure redux application
 For now, the best way is to place all logic in the same place with components to make it less painful when scaling the application.
 Current structure is the combination of ideas from [organizing-redux](http://jaysoo.ca/2016/02/28/organizing-redux-application/) and
@@ -199,29 +200,67 @@ in the same place with featured components.
 
 ![alt text](https://raw.githubusercontent.com/hung-phan/koa-react-isomorphic/master/redux-structure.png "redux structure")
 
+#### Localize selectors
+Some great ideas from [scoped-selectors-for-redux-modules](http://www.datchley.name/scoped-selectors-for-redux-modules/).
+You can create a localized scope for selector using `globalizeSelectors`.
+
+
+```javascript
+export const mountPoint = 'todos';
+
+export const selectors = globalizeSelectors({
+  getTodos: identity, // it will also work with reselect library
+}, mountPoint);
+```
+
+Then in main reducer, you can have sth like this, which helps reduce the coupling with React view
+
+```javascript
+import { combineReducers } from 'redux';
+import todosReducer, { mountPoint as todosMountPoint } from './components/todos/logic-bundle';
+import routingReducer, { mountPoint as routingMountPoint } from './components/routing/logic-bundle';
+
+export default combineReducers({
+  [todosMountPoint]: todosReducer,
+  [routingMountPoint]: routingReducer,
+});
+```
+
 Sample for logic-bundle:
 
-```
+```javascript
 import fetch from 'isomorphic-fetch';
+import identity from 'lodash/identity';
 import { createAction, handleActions } from 'redux-actions';
 import getUrl from 'client/helpers/get-url';
+import globalizeSelectors from 'client/helpers/globalize-selectors';
+import type {
+  TodoType,
+  AddTodoActionType,
+  RemoveTodoActionType,
+  CompleteTodoActionType,
+  SetTodosActionType,
+} from './types';
+
+export const mountPoint = 'todos';
+
+export const selectors = globalizeSelectors({
+  getTodos: identity,
+}, mountPoint);
 
 export const ADD_TODO = 'todos/ADD_TODO';
 export const REMOVE_TODO = 'todos/REMOVE_TODO';
 export const COMPLETE_TODO = 'todos/COMPLETE_TODO';
 export const SET_TODOS = 'todos/SET_TODOS';
 
-export const addTodo = createAction(ADD_TODO);
-export const removeTodo = createAction(REMOVE_TODO);
-export const completeTodo = createAction(COMPLETE_TODO);
-export const setTodos = createAction(SET_TODOS);
-
-export const fetchTodos = () => dispatch =>
+export const addTodo: AddTodoActionType = createAction(ADD_TODO);
+export const removeTodo: RemoveTodoActionType = createAction(REMOVE_TODO);
+export const completeTodo: CompleteTodoActionType = createAction(COMPLETE_TODO);
+export const setTodos: SetTodosActionType = createAction(SET_TODOS);
+export const fetchTodos = () => (dispatch: Function): Promise<TodoType[]> =>
   fetch(getUrl('/api/v1/todos'))
     .then(res => res.json())
-    .then(res => dispatch(setTodos(res)));
-
-const initialState = [];
+    .then((res: TodoType[]) => dispatch(setTodos(res)));
 
 export default handleActions({
   [ADD_TODO]: (state, { payload: text }) => [
@@ -237,7 +276,7 @@ export default handleActions({
     ...state.slice(index + 1),
   ],
   [SET_TODOS]: (state, { payload: todos }) => todos,
-}, initialState);
+}, []);
 ```
 
 ## Upcoming

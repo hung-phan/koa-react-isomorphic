@@ -23,7 +23,7 @@ export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) 
 );
 
 export const enhance = compose(
-  (Component) =>
+  Component =>
     Relay.createContainer(Component, {
       initialVariables: {
         numberOfTodos: 10,
