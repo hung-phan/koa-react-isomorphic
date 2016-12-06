@@ -43,7 +43,7 @@ module.exports = {
     loaders: [
       {
         test: /\.modernizrrc$/,
-        loader: 'modernizr',
+        loader: 'modernizr-loader',
       },
       {
         test: /\.async\.jsx$/,
