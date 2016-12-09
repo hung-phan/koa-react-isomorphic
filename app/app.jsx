@@ -11,7 +11,7 @@ const appDOM = document.getElementById('app');
 
 renderComponents(routes, appDOM);
 
-if (module.hot) {
+if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./routes', () => {
     const newRoutes = require('./routes').default;
 
