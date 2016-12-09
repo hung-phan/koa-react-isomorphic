@@ -33,6 +33,7 @@ gulp.task('set-development-env', () => {
   env({
     vars: {
       RUN_MODE: 'es',
+      NODE_ENV: 'development',
     },
   });
 });
