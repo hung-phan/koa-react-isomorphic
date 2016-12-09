@@ -42,7 +42,7 @@ export default function (initialState = {}) {
     ...enhancers
   ));
 
-  if (module.hot) {
+  if (process.env.NODE_ENV === 'development' && module.hot) {
     module.hot.accept('./main-reducer', () =>
       store.replaceReducer(require('./main-reducer').default)
     );

@@ -22,7 +22,7 @@ const render = (_store, _routes, _appDOM) => {
 clientFetchData(history, routes, store);
 render(store, routes, appDOM);
 
-if (module.hot) {
+if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./routes', () => {
     const { getRoutes: newGetRoutes } = require('./routes');
 

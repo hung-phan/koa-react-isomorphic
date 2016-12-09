@@ -11,7 +11,7 @@ const routesModule = require('app/routes.jsx');
 const getServerHistory = routesModule.getServerHistory;
 let getRoutes = routesModule.getRoutes;
 
-if (module.hot) {
+if (process.env.NODE_ENV === 'development' && module.hot) {
   // $FlowFixMe
   module.hot.accept('./../../routes.jsx', () => {
     getRoutes = require('./../../routes.jsx').getRoutes;
