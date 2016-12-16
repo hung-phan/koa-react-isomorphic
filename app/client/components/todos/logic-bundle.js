@@ -28,9 +28,11 @@ export const removeTodo: RemoveTodoActionType = createAction(REMOVE_TODO);
 export const completeTodo: CompleteTodoActionType = createAction(COMPLETE_TODO);
 export const setTodos: SetTodosActionType = createAction(SET_TODOS);
 export const fetchTodos = () => (dispatch: Function): Promise<TodoType[]> =>
-  fetch(getUrl('/api/v1/todos'))
-    .then(res => res.json())
-    .then((res: TodoType[]) => dispatch(setTodos(res)));
+  dispatch(
+    fetch(getUrl('/api/v1/todos'))
+      .then(res => res.json())
+      .then((res: TodoType[]) => setTodos(res))
+  );
 
 export default handleActions({
   [ADD_TODO]: (state, { payload: text }) => [
