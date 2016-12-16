@@ -1,12 +1,14 @@
 import { fromJS } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import promiseMiddleware from 'redux-promise';
 import loggerMiddleware from 'redux-logger';
 import { persistState } from 'redux-devtools';
 import reducers from './main-reducer';
 
 let middlewares = [
   thunkMiddleware,
+  promiseMiddleware,
 ];
 let enhancers = [];
 
