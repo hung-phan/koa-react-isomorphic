@@ -25,6 +25,7 @@
     "bundle-loader": "^0.5.4",
     "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.26.1",
+    "dataloader": "^1.2.0",
     "debug": "^2.4.1",
     "del": "^2.2.2",
     "eslint": "^3.12.1",

@@ -1,3 +1,4 @@
+// @flow
 import _ from 'lodash';
 import debug from 'debug';
 import {
@@ -19,12 +20,7 @@ import {
   fromGlobalId,
   mutationWithClientMutationId,
 } from 'graphql-relay';
-import {
-  Todo,
-  Viewer,
-  viewer,
-  getTodo,
-} from './database';
+import { Todo, TodosDAO, todosDao } from './database';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
   (globalId) => {
@@ -32,9 +28,9 @@ const { nodeInterface, nodeField } = nodeDefinitions(
 
     switch (type) {
       case 'Viewer':
-        return viewer;
+        return todosDao;
       case 'Todo':
-        return getTodo(id);
+        return todosDao.get(id);
       default:
         debug('schema')(type, id);
         return undefined;
@@ -65,21 +61,21 @@ const { connectionType: TodoConnection, edgeType: GraphQLTodoEdge } = connection
 const ViewerType = new GraphQLObjectType({
   name: 'Viewer',
   description: 'This represents the root query of app',
-  isTypeOf: (obj) => obj instanceof Viewer,
+  isTypeOf: (obj) => obj instanceof TodosDAO,
   fields() {
     return {
       id: globalIdField('Viewer'),
       todos: {
         type: TodoConnection,
         args: connectionArgs,
-        resolve({ todos }, args) {
-          return connectionFromArray(todos, args);
+        resolve(viewer, args) {
+          return connectionFromArray(viewer.all(), args);
         },
       },
       numberOfTodos: {
         type: GraphQLInt,
-        resolve() {
-          return viewer.todos.length;
+        resolve(viewer) {
+          return viewer.all().length;
         },
       },
     };
@@ -95,7 +91,7 @@ const query = new GraphQLObjectType({
     viewer: {
       type: ViewerType,
       resolve() {
-        return viewer;
+        return todosDao;
       },
     },
   }),
@@ -110,24 +106,23 @@ const addTodoMutation = mutationWithClientMutationId({
     todoEdge: {
       type: GraphQLTodoEdge,
       resolve({ todoId }) {
-        const todo = getTodo(todoId);
-        return {
-          cursor: cursorForObjectInConnection(viewer.todos, todo),
+        return todosDao.get(todoId).then(todo => ({
+          cursor: cursorForObjectInConnection(todosDao.all(), todo),
           node: todo,
-        };
+        }));
       },
     },
     viewer: {
       type: ViewerType,
       resolve() {
-        return viewer;
+        return todosDao;
       },
     },
   },
   mutateAndGetPayload({ text }) {
     const todo = new Todo({ text, complete: false });
 
-    viewer.todos.push(todo);
+    todosDao.insert(todo);
 
     return {
       todoId: todo.id,
@@ -150,13 +145,14 @@ const removeTodoMutation = mutationWithClientMutationId({
     viewer: {
       type: ViewerType,
       resolve() {
-        return viewer;
+        return todosDao;
       },
     },
   },
   mutateAndGetPayload({ id }) {
     const { id: todoId } = fromGlobalId(id);
-    _.remove(viewer.todos, { id: todoId });
+
+    todosDao.remove(todoId);
 
     return { id };
   },
@@ -171,19 +167,19 @@ const completeTodoMutation = mutationWithClientMutationId({
     todo: {
       type: TodoType,
       resolve({ todoId }) {
-        return getTodo(todoId);
+        return todosDao.get(todoId);
       },
     },
     viewer: {
       type: ViewerType,
       resolve() {
-        return viewer;
+        return todosDao;
       },
     },
   },
   mutateAndGetPayload({ id }) {
     const { id: todoId } = fromGlobalId(id);
-    const todo = _.find(viewer.todos, { id: todoId });
+    const todo = _.find(todosDao.all(), { id: todoId });
 
     todo.complete = !todo.complete;
 
