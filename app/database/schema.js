@@ -75,7 +75,7 @@ const ViewerType = new GraphQLObjectType({
       numberOfTodos: {
         type: GraphQLInt,
         resolve(viewer) {
-          return viewer.all().length;
+          return viewer.count();
         },
       },
     };

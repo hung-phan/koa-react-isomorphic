@@ -32,6 +32,10 @@ export class TodosDAO {
     this.dataloader = new DataLoader((ids: string[]): Promise<Todo[]> => this.getByIds(ids));
   }
 
+  count(): number {
+    return this.data.length;
+  }
+
   all(): Todo[] {
     return this.data;
   }
