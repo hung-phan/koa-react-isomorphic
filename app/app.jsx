@@ -3,10 +3,6 @@ import 'client/libs';
 import renderComponents from './client/helpers/inject-data-utils';
 import routes from './routes';
 
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install();
-}
-
 const appDOM = document.getElementById('app');
 
 renderComponents(routes, appDOM);
@@ -17,4 +13,8 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 
     renderComponents(newRoutes, appDOM);
   });
+}
+
+if (process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install();
 }
