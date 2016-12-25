@@ -7,10 +7,6 @@ import configureStore from './client/main-store';
 import { clientFetchData } from './client/helpers/fetch-data';
 import { getRoutes, getClientHistory } from './routes';
 
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install();
-}
-
 const appDOM = document.getElementById('app');
 const store = configureStore(window.prerenderData);
 const history = getClientHistory(store);
@@ -28,4 +24,8 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 
     render(store, newGetRoutes(history), appDOM);
   });
+}
+
+if (process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install();
 }
