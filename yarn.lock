@@ -7049,6 +7049,14 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
 
+relay-subscriptions:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/relay-subscriptions/-/relay-subscriptions-1.0.0.tgz#6fd35f132719a9cf83b715c3c27abc7d4ef02edd"
+  dependencies:
+    invariant "^2.2.1"
+    lodash "^4.15.0"
+    warning "^3.0.0"
+
 repeat-element@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/repeat-element/-/repeat-element-1.1.2.tgz#ef089a178d1483baae4d93eb98b4f9e4e11d990a"

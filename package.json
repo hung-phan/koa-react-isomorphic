@@ -94,6 +94,7 @@
     "react-router": "^3.0.0",
     "recompose": "^0.21.1",
     "regenerator-runtime": "^0.10.1",
+    "relay-subscriptions": "^1.0.0",
     "reselect": "^2.5.4",
     "rx": "^4.1.0",
     "sass-loader": "^4.1.1",
