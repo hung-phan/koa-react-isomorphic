@@ -1,7 +1,6 @@
 import cors from 'koa-cors';
 import logger from 'koa-logger';
 import bodyParser from 'koa-bodyparser';
-import staticAssets from 'koa-static';
 import htmlMinifier from 'koa-html-minifier';
 import router from 'koa-router';
 import conditionalGet from 'koa-conditional-get';
@@ -42,10 +41,12 @@ export const apiLayer = (app, apiRoutes) => {
 };
 
 export const assetsLayer = app => {
-  // remove staticAssets middleware if you have nginx already serves
-  // the public folder in production mode
-  app
-    .use(convert(staticAssets(settings.path.PUBLIC, { gzip: true }))); // https://github.com/koajs/static
+  if (!process.env.SERVER_STATIC_ASSETS) {
+    const staticAssets = require('koa-static');
+
+    app
+      .use(convert(staticAssets(settings.path.PUBLIC, { gzip: true }))); // https://github.com/koajs/static
+  }
 };
 
 export const securityLayer = app => {
