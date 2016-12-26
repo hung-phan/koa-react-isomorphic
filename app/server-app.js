@@ -1,5 +1,4 @@
 import Koa from 'koa';
-import debug from 'debug';
 import {
   loggingLayer,
   initialLayer,
@@ -25,10 +24,5 @@ assetsLayer(app);
 securityLayer(app);
 renderLayer(app, controllers);
 errorLayer(app);
-
-// istanbul ignore next
-app.on('error', (error) => {
-  debug('error')(error);
-});
 
 export default app;
