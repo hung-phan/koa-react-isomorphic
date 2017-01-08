@@ -52,7 +52,10 @@ developmentConfig.module.loaders.push(
 );
 
 developmentConfig.plugins.push(
-  new BundleAnalyzerPlugin(),
+  new BundleAnalyzerPlugin({
+    analyzerPort: 8888,
+    openAnalyzer: false,
+  }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'development'",
     'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false,
