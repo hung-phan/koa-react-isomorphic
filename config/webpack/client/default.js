@@ -14,15 +14,6 @@ module.exports = {
     ],
     common: [
       path.join(ROOT, config.path.app, 'client/libs/index'),
-      'isomorphic-fetch',
-      'isomorphic-relay',
-      'isomorphic-relay-router',
-      'lodash',
-      'react',
-      'react-dom',
-      'react-relay',
-      'react-router',
-      'recompose',
     ],
   },
   output: {
@@ -81,6 +72,10 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'client'",
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['common'],
+      minChunks: Infinity,
     }),
   ],
 };
