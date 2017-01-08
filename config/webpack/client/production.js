@@ -52,10 +52,6 @@ productionConfig.plugins.push(
     'process.env.NODE_ENV': "'production'",
     'process.env.SERVER_RENDERING': true,
   }),
-  new webpack.optimize.CommonsChunkPlugin({
-    names: ['common'],
-    minChunks: module => /node_modules/.test(module.resource),
-  }),
   new ExtractTextPlugin({
     filename: '[name].[contenthash].css',
     allChunks: true,

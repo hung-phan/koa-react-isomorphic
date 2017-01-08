@@ -17,7 +17,6 @@ global.webpackIsomorphicTools = new WebpackIsomorphicTools(
 
 // to get the node require instead of dynamic require by webpack
 global.nodeRequire = require;
-global.regeneratorRuntime = require('regenerator-runtime');
 
 global.webpackIsomorphicTools
   .server(ROOT, () => {

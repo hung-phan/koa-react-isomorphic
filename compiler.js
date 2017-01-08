@@ -2,7 +2,6 @@ require('babel-register');
 require('jsdom-global')();
 
 global.nodeRequire = require;
-global.regeneratorRuntime = require('regenerator-runtime');
 
 const noop = (module, file) => {
   module._compile('', file);

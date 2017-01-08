@@ -14,19 +14,6 @@ module.exports = {
     ],
     common: [
       path.join(ROOT, config.path.app, 'client/libs/index'),
-      'immutable',
-      'isomorphic-fetch',
-      'lodash',
-      'react',
-      'react-dom',
-      'react-immutable-render-mixin',
-      'react-router',
-      'react-router-redux',
-      'redux-immutable',
-      'recompose',
-      'redial',
-      'redux',
-      'redux-thunk',
     ],
   },
   output: {
@@ -85,6 +72,10 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.RUNTIME_ENV': "'client'",
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['common'],
+      minChunks: Infinity,
     }),
   ],
 };
