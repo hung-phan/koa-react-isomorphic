@@ -5,6 +5,7 @@ const path = require('path');
 const ROOT = require('./../../path-helper').ROOT;
 const config = require('./../../index');
 const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require('./../../webpack/webpack-isomorphic-tools')
@@ -51,15 +52,12 @@ developmentConfig.module.loaders.push(
 );
 
 developmentConfig.plugins.push(
+  new BundleAnalyzerPlugin(),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'development'",
     'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false,
   }),
   new webpack.NamedModulesPlugin(),
-  new webpack.optimize.CommonsChunkPlugin({
-    names: ['common'],
-    minChunks: module => /node_modules/.test(module.resource),
-  }),
   webpackIsomorphicToolsPlugin.development(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin()
