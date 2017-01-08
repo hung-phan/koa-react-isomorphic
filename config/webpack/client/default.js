@@ -14,16 +14,6 @@ module.exports = {
     ],
     common: [
       path.join(ROOT, config.path.app, 'client/libs/index'),
-      'isomorphic-fetch',
-      'lodash',
-      'react',
-      'react-dom',
-      'react-router',
-      'react-router-redux',
-      'recompose',
-      'redial',
-      'redux',
-      'redux-thunk',
     ],
   },
   output: {

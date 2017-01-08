@@ -1,3 +1,7 @@
+## 2.18.3
+- Remove binding regenerator-runtime in global
+- Update dependencies
+
 ## 2.15.0
 - Update react-router
 - Update clientFetchData to manually call the routeOnChange handler
