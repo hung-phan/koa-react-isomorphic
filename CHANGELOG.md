@@ -1,3 +1,6 @@
+## 3.0.1
+- Update eslint with v3
+
 ## 3.0.0
 - Add BundleAnalyzerPlugin plugin
 - Optimize common chunks
