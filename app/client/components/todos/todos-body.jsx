@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { List } from 'immutable';
 import partial from 'lodash/partial';
