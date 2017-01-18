@@ -27,7 +27,7 @@ developmentConfig.plugins.push(
   }),
   new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin()
+  new webpack.NoEmitOnErrorsPlugin()
 );
 
 module.exports = developmentConfig;
