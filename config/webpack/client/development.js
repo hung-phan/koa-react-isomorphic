@@ -63,7 +63,7 @@ developmentConfig.plugins.push(
   new webpack.NamedModulesPlugin(),
   webpackIsomorphicToolsPlugin.development(),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin()
+  new webpack.NoEmitOnErrorsPlugin()
 );
 
 module.exports = developmentConfig;
