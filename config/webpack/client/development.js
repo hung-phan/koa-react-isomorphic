@@ -5,7 +5,6 @@ const path = require('path');
 const ROOT = require('./../../path-helper').ROOT;
 const config = require('./../../index');
 const webpack = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require('./../../webpack/webpack-isomorphic-tools')
@@ -52,10 +51,6 @@ developmentConfig.module.loaders.push(
 );
 
 developmentConfig.plugins.push(
-  new BundleAnalyzerPlugin({
-    analyzerPort: 8888,
-    openAnalyzer: false,
-  }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'development'",
     'process.env.SERVER_RENDERING': process.env.SERVER_RENDERING || false,
