@@ -6,15 +6,12 @@ import { serverFetchData } from 'client/helpers/fetch-data';
 import configureStore from 'client/main-store';
 import App from 'client/components/main/app.jsx';
 
-const routesModule = require('app/routes.jsx');
-
-const getServerHistory = routesModule.getServerHistory;
-let getRoutes = routesModule.getRoutes;
+let routesModule = require('./../../routes.jsx');
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   // $FlowFixMe
   module.hot.accept('./../../routes.jsx', () => {
-    getRoutes = require('./../../routes.jsx').getRoutes;
+    routesModule = require('./../../routes.jsx');
   });
 }
 
@@ -22,8 +19,8 @@ export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
     ctx.prerender = (template: string, parameters: Object = {}, initialState: Object = {}) => {
       const store = configureStore(initialState);
-      const history = getServerHistory(store, ctx.req.url);
-      const routes = getRoutes(history);
+      const history = routesModule.getServerHistory(store, ctx.req.url);
+      const routes = routesModule.getRoutes(history);
 
       return new Promise((resolve, reject) => {
         match({ routes, history }, (error, redirectLocation, renderProps) => {
