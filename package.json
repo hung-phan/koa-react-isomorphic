@@ -161,7 +161,7 @@
   "scripts": {
     "backend:build": "./scripts/backend-build",
     "backend:watch": "./scripts/backend-watch",
-    "build": "yarn run clean && yarn run compile-templates && yarn run update-schema && yarn run frontend:build && yarn run backend:build",
+    "build": "yarn run clean && (yarn run compile-templates & yarn run update-schema & yarn run frontend:build & yarn run backend:build)",
     "clean": "node ./scripts/clean.js",
     "compile-templates": "markoc ./app/server/templates",
     "debug": "./scripts/debug",
