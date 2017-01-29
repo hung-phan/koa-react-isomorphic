@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source $(dirname "$0")/env/production-build
+
+webpack --config config/webpack/server/production.js

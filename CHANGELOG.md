@@ -1,3 +1,8 @@
+## 3.1.0
+- Replace gulp with npm scripts
+- Replace react-proxy-loader with react-async-component
+- Update dependencies
+
 ## 3.0.1
 - Update eslint with v3
 
