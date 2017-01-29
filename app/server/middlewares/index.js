@@ -58,7 +58,7 @@ export const assetsLayer = app => {
     const staticAssets = require('koa-static');
 
     app
-      .use(convert(staticAssets(settings.path.PUBLIC, { gzip: true }))); // https://github.com/koajs/static
+      .use(convert(staticAssets(settings.path.PUBLIC, { gzip: true, maxage: 31536000 }))); // https://github.com/koajs/static
   }
 };
 

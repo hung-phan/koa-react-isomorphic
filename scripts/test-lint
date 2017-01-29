@@ -1,2 +1,3 @@
 #!/bin/bash
+
 esw -w 'app/**/__tests__/*.js' 'app/**/__tests__/*.jsx' 'test/**/*.js'
