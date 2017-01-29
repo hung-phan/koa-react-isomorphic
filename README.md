@@ -181,15 +181,8 @@ Will receive additional parameter `initialState` which is the state of redux sto
 * Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
 ### Async react components
-Add `.async` to current file will give it the ability to load async (for example, `big-component.async.js`)
-using [react-proxy-loader](https://github.com/webpack/react-proxy-loader).
 
-```
-  {
-    test: /\.async\.js$/,
-    loader: 'react-proxy-loader!exports-loader?exports.default',
-  },
-```
+[react-async-component](https://github.com/ctrlplusb/react-async-component)
 
 
 ### Idea to structure redux application
@@ -375,7 +368,7 @@ Access `http://localhost:3000` to see the application
 ### Deploy heroku
 
 ```base
-$heroku config:set BUILD_ASSETS=1 # run once
+$ heroku config:set BUILD_ASSETS=1 # run once
 ```
 
 ```bash
