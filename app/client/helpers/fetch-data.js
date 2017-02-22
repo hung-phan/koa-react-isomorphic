@@ -13,6 +13,7 @@ export const getLocals = (store, { location, params }) => ({
 export const serverFetchData = (renderProps, store) =>
   trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
 
+
 export const clientFetchData = (history, routes, store) => {
   history.listen(location => {
     match({ routes, location }, (error, redirectLocation, renderProps) => {
