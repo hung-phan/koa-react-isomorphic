@@ -11,9 +11,10 @@ const appDOM = document.getElementById('app');
 const store = configureStore(window.prerenderData);
 const history = getClientHistory(store);
 const routes = getRoutes(history);
-const render = (_store, _routes, _appDOM) => {
+
+function render(_store, _routes, _appDOM) {
   ReactDOM.render(<App store={_store} routes={_routes} />, _appDOM);
-};
+}
 
 clientFetchData(history, routes, store);
 render(store, routes, appDOM);

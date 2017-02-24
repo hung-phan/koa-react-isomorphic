@@ -14,8 +14,9 @@ export const serverFetchData = (renderProps, store) =>
   trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
 
 export const clientFetchData = (history, routes, store) => {
-  history.listen(location => {
-    match({ routes, location }, (error, redirectLocation, renderProps) => {
+  const callback = (location) => match(
+    { routes, location },
+    (error, redirectLocation, renderProps) => {
       if (error) {
         navigateTo('/500.html');
       } else if (redirectLocation) {
@@ -32,5 +33,10 @@ export const clientFetchData = (history, routes, store) => {
         navigateTo('/404.html');
       }
     });
-  });
+
+  history.listen(callback);
+
+  if (!process.env.SERVER_RENDERING) {
+    callback(history.getCurrentLocation());
+  }
 };
