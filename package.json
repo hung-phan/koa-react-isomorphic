@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "dependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
