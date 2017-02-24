@@ -10,17 +10,17 @@ describe('Helper: fetchData', () => {
   });
 
   context('# serverFetchData', () => {
-    let routes;
     let trigger;
     let renderProps;
+    let components;
     let store;
 
     before(() => {
-      routes = _.range(4);
+      components = _.range(4);
       trigger = td.function();
       store = faker.random.uuid();
       renderProps = {
-        routes: _.map(routes, (component) => ({ component })),
+        components: _.range(4),
         params: faker.random.uuid(),
         location: faker.random.uuid(),
       };
@@ -35,7 +35,7 @@ describe('Helper: fetchData', () => {
     });
 
     it('should call "trigger" with "components" and "locals"', () => {
-      td.verify(trigger('fetchData', routes, {
+      td.verify(trigger('fetchData', components, {
         store,
         params: renderProps.params,
         location: renderProps.location,
@@ -46,13 +46,13 @@ describe('Helper: fetchData', () => {
   context('# clientFetchData', () => {
     let history;
     let store;
-    let routes;
+    let components;
 
     before(() => {
       history = {
         listen: callback => callback(faker.random.uuid()),
         getCurrentLocation: _.noop };
-      routes = _.range(4);
+      components = _.range(4);
       store = faker.random.uuid();
     });
 
@@ -79,7 +79,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(history, routes, store);
+        clientFetchData(history, components, store);
         td.verify(navigateToSpy('/500.html'));
 
         Module.__ResetDependency__('match');
@@ -92,7 +92,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(history, routes, store);
+        clientFetchData(history, components, store);
         td.verify(navigateToSpy('/hello-world.html'));
 
         Module.__ResetDependency__('match');
@@ -100,7 +100,7 @@ describe('Helper: fetchData', () => {
 
       it('should trigger not fetchData', () => {
         const renderProps = {
-          components: _.range(4),
+          components,
           location: '/',
           params: {
             test: faker.random.uuid(),
@@ -113,7 +113,7 @@ describe('Helper: fetchData', () => {
         window.prerenderData = faker.random.uuid();
         Module.__Rewire__('match', match);
 
-        clientFetchData(history, routes, store);
+        clientFetchData(history, components, store);
 
         assert.isUndefined(window.prerenderData);
 
@@ -122,7 +122,7 @@ describe('Helper: fetchData', () => {
 
       it('should trigger fetchData', () => {
         const renderProps = {
-          components: _.range(4),
+          components,
           location: '/',
           params: {
             test: faker.random.uuid(),
@@ -134,7 +134,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(history, routes, store);
+        clientFetchData(history, components, store);
         td.verify(
           triggerSpy('fetchData', renderProps.components, getLocals(store, renderProps))
         );
@@ -149,7 +149,7 @@ describe('Helper: fetchData', () => {
 
         Module.__Rewire__('match', match);
 
-        clientFetchData(history, routes, store);
+        clientFetchData(history, components, store);
         td.verify(navigateToSpy('/404.html'));
 
         Module.__ResetDependency__('match');

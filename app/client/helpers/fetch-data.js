@@ -23,7 +23,7 @@ export const clientFetchData = (history, routes, store) => {
       } else if (renderProps) {
         if (!isEmpty(window.prerenderData)) {
           // Delete initial data so that subsequent data fetches can occur
-          delete window.prerenderData;
+          window.prerenderData = undefined;
         } else {
           // Fetch mandatory data dependencies for 2nd route change onwards
           trigger('fetchData', renderProps.components, getLocals(store, renderProps));
