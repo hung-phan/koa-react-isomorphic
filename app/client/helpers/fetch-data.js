@@ -1,4 +1,3 @@
-import map from 'lodash/fp/map';
 import isEmpty from 'lodash/isEmpty';
 import { trigger } from 'redial';
 import { match } from 'react-router';
@@ -11,7 +10,7 @@ export const getLocals = (store, { location, params }) => ({
 });
 
 export const serverFetchData = (renderProps, store) =>
-  trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
+  trigger('fetchData', renderProps.components, getLocals(store, renderProps));
 
 export const clientFetchData = (history, routes, store) => {
   const callback = (location) => match(
@@ -24,7 +23,7 @@ export const clientFetchData = (history, routes, store) => {
       } else if (renderProps) {
         if (!isEmpty(window.prerenderData)) {
           // Delete initial data so that subsequent data fetches can occur
-          window.prerenderData = undefined;
+          delete window.prerenderData;
         } else {
           // Fetch mandatory data dependencies for 2nd route change onwards
           trigger('fetchData', renderProps.components, getLocals(store, renderProps));
@@ -35,8 +34,5 @@ export const clientFetchData = (history, routes, store) => {
     });
 
   history.listen(callback);
-
-  if (!process.env.SERVER_RENDERING) {
-    callback(history.getCurrentLocation());
-  }
+  callback(history.getCurrentLocation());
 };
