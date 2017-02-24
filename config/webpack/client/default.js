@@ -13,6 +13,8 @@ module.exports = {
       path.join(ROOT, config.path.app, 'app'),
     ],
     common: [
+      'lodash',
+      'recompose',
       path.join(ROOT, config.path.app, 'client/libs/index'),
     ],
   },
