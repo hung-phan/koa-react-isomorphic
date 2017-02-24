@@ -27,22 +27,22 @@ productionConfig.module.loaders.push(
   {
     test: /\.css$/,
     loader: ExtractTextPlugin.extract({
-      fallbackLoader: 'style-loader',
-      loader: `css-loader${config.cssModules}!postcss-loader`,
+      fallback: 'style-loader',
+      use: `css-loader${config.cssModules}!postcss-loader`,
     }),
   },
   {
     test: /\.less$/,
     loader: ExtractTextPlugin.extract({
-      fallbackLoader: 'style-loader',
-      loader: `css-loader${config.cssModules}!postcss-loader!less-loader`,
+      fallback: 'style-loader',
+      use: `css-loader${config.cssModules}!postcss-loader!less-loader`,
     }),
   },
   {
     test: /\.scss-loader$/,
     loader: ExtractTextPlugin.extract({
-      fallbackLoader: 'style-loader',
-      loader: `css-loader${config.cssModules}!postcss-loader!sass-loader`,
+      fallback: 'style-loader',
+      use: `css-loader${config.cssModules}!postcss-loader!sass-loader`,
     }),
   }
 );
