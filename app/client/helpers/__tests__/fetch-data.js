@@ -49,7 +49,9 @@ describe('Helper: fetchData', () => {
     let routes;
 
     before(() => {
-      history = { listen: callback => callback(faker.random.uuid()) };
+      history = {
+        listen: callback => callback(faker.random.uuid()),
+        getCurrentLocation: _.noop };
       routes = _.range(4);
       store = faker.random.uuid();
     });
