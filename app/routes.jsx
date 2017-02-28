@@ -8,7 +8,7 @@ export default createRoutes(
       getComponent={(nextState, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./client/components/todos').default);
-        });
+        }, 'todos-page');
       }}
       queries={ViewerQuery}
     />
@@ -17,7 +17,7 @@ export default createRoutes(
       getComponent={(nextState, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./client/components/static-page').default);
-        });
+        }, 'static-page');
       }}
     />
   </Route>

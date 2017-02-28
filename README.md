@@ -82,64 +82,77 @@ Note: `nodeRequire` will resolve the path from project root directory.
 
 ### Server-side data fetching
 
-#### Redux
-We ask react-router for route which matches the current request and then check to see if has a static `fetchData()` function.
-If it does, we pass the redux dispatcher to it and collect the promises returned. Those promises will be resolved when each matching route has loaded its
-necessary data from the API server. The current implementation is based on [redial](https://github.com/markdalgleish/redial).
+#### Preload assets via redial
+To be able to support for asynchronous chunks loading using `<link rel='preload' ... />`, I return the javascript assets map for all the routes to the client
+via `window.javascriptAssets`.
+
+You can use this to inject assets for the next page to improve performance. This is what I am trying to achive [preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin).
+
+#### Redux and preload assets via [Redial](https://github.com/markdalgleish/redial)
+
+I use react-route for route matching the current request and then check to see if it defines any redial hook.
+If it does, I pass the redux dispatcher and collect the promises returned. Will be fullfil on the server or on the client depending on the hook.
+
 
 ```javascript
-export default (callback) => (ComposedComponent) => {
-  class FetchDataEnhancer extends ComposedComponent {
-    render() {
-      return (
-        <ComposedComponent { ...this.props } />
-      );
-    }
-  }
-
-  return provideHooks({
-    fetchData(...args) {
-      return callback(...args);
-    },
-  })(FetchDataEnhancer);
-};
+export default (hooks: Object) => (ComposedComponent: ReactClass<*>) =>
+  provideHooks(
+    mapValues(hooks, callback => (...args) => callback(...args))
+  )(
+    props => <ComposedComponent {...props} />
+  );
 ```
 
 and
 
 ```javascript
-export function serverFetchData(renderProps, store) {
-  return trigger('fetchData', map('component', renderProps.routes), getLocals(store, renderProps));
-}
+export const serverFetchData = (renderProps, store) =>
+  trigger(FETCH_DATA_HOOK, renderProps.components, getLocals(store, renderProps));
 
-export function clientFetchData(routes, store) {
-  browserHistory.listen(location => {
-    match({ routes, location }, (error, redirectLocation, renderProps) => {
+export const clientFetchData = (history, routes, store) => {
+  const callback = (location) => match(
+    { routes, location },
+    (error, redirectLocation, renderProps) => {
       if (error) {
-        window.location.href = '/500.html';
+        navigateTo('/500.html');
       } else if (redirectLocation) {
-        window.location.href = redirectLocation.pathname + redirectLocation.search;
+        navigateTo(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        if (window.prerenderData) {
+        if (!isEmpty(window.prerenderData)) {
           // Delete initial data so that subsequent data fetches can occur
-          delete window.prerenderData;
+          window.prerenderData = undefined;
         } else {
           // Fetch mandatory data dependencies for 2nd route change onwards
-          trigger('fetchData', renderProps.components, getLocals(store, renderProps));
+          trigger(FETCH_DATA_HOOK, renderProps.components, getLocals(store, renderProps));
         }
+
+        trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, getLocals(store, renderProps));
       } else {
-        window.location.href = '/404.html';
+        navigateTo('/404.html');
       }
     });
-  });
-}
+
+  history.listen(callback);
+  callback(history.getCurrentLocation());
+};
 ```
 
-Takes a look at `templates/todos`, we will have sth like `@fetchDataEnhancer(({ store }) => store.dispatch(fetchTodos()))` to let the server calls `fetchData()` function
-on a component from the server.
+Takes a look at `templates/todos`, I will have sth like:
+
+```javascript
+  redialEnhancer({
+    [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
+    [INJECT_PRELOAD_LINK_HOOK]: ({ store }) => store.dispatch(updateLink([
+      // window.javascriptAssets will be injected to do preload link for optimizing route
+      { rel: 'preload', href: window.javascriptAssets['static-page'], as: 'script' },
+    ])),
+  }),
+```
+
+This will map the hook with the current component and trigger it (Note: This will only be applied to root component).
 
 #### Relay
-We rely on [isomorphic-relay-router](https://github.com/denvned/isomorphic-relay-router) to do the server-rendering path.
+I rely on [isomorphic-relay-router](https://github.com/denvned/isomorphic-relay-router) to do the server-rendering path.
 
 ```javascript
 IsomorphicRouter.prepareData(renderProps)
@@ -188,7 +201,7 @@ Will receive additional parameter `initialState` which is the state of redux sto
 ### Idea to structure redux application
 For now, the best way is to place all logic in the same place with components to make it less painful when scaling the application.
 Current structure is the combination of ideas from [organizing-redux](http://jaysoo.ca/2016/02/28/organizing-redux-application/) and
-[ducks-modular-redux](https://github.com/erikras/ducks-modular-redux). Briefly, we will have our reducer, action-types, and actions
+[ducks-modular-redux](https://github.com/erikras/ducks-modular-redux). Briefly, I will have our reducer, action-types, and actions
 in the same place with featured components.
 
 ![alt text](https://raw.githubusercontent.com/hung-phan/koa-react-isomorphic/master/redux-structure.png "redux structure")

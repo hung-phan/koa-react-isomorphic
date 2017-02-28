@@ -10,7 +10,6 @@ import convert from 'koa-convert';
 import session from 'koa-generic-session';
 import compress from 'koa-compress';
 import helmet from 'koa-helmet';
-import mount from 'koa-mount';
 import graphqlHTTP from 'koa-graphql';
 import settings from 'server/initializers/settings';
 import render from './render';
@@ -19,32 +18,28 @@ import error from './error';
 
 export const loggingLayer = app =>
   app
-    .use(convert(logger())); // https://github.com/koajs/logger
+    .use(logger()); // https://github.com/koajs/logger
 
 export const initialLayer = app =>
   app
     .use(bodyParser()) // https://github.com/koajs/bodyparser
-    .use(convert(conditionalGet())) // https://github.com/koajs/conditional-get
-    .use(convert(etag())); // https://github.com/koajs/etag
+    .use(conditionalGet()) // https://github.com/koajs/conditional-get
+    .use(etag()); // https://github.com/koajs/etag
 
-export const graphQLLayer = (app, schema) =>
-  app.use(
-    convert(
-      mount('/graphql', graphqlHTTP({
-        schema,
-        graphiql: process.env.NODE_ENV === 'development',
-        pretty: process.env.NODE_ENV === 'development',
-      })
-    )
-  ));
-
-export const apiLayer = (app, apiRoutes) => {
+export const apiLayer = (app, schema, apiRoutes) => {
   const newRouter = router();
 
   newRouter
     .use(convert(cors())); // https://github.com/koajs/cors
 
   apiRoutes(newRouter);
+
+  // add graphql
+  newRouter.all('/graphql', convert(graphqlHTTP({
+    schema,
+    graphiql: process.env.NODE_ENV === 'development',
+    pretty: process.env.NODE_ENV === 'development',
+  })));
 
   app
     .use(newRouter.routes())
@@ -58,7 +53,7 @@ export const assetsLayer = app => {
     const staticAssets = require('koa-static');
 
     app
-      .use(convert(staticAssets(settings.path.PUBLIC, { gzip: true, maxage: 31536000 }))); // https://github.com/koajs/static
+      .use(staticAssets(settings.path.PUBLIC, { gzip: true, maxage: 31536000 })); // https://github.com/koajs/static
   }
 };
 
@@ -91,7 +86,7 @@ export const renderLayer = (app, templateRoutes) => {
       removeEmptyAttributes: false,
       removeIgnored: true,
     }))) // https://github.com/kangax/html-minifier
-    .use(convert(compress())); // https://github.com/koajs/compress
+    .use(compress()); // https://github.com/koajs/compress
 
   templateRoutes(newRouter);
 

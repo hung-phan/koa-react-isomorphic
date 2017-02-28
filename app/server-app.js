@@ -3,7 +3,6 @@ import {
   loggingLayer,
   initialLayer,
   apiLayer,
-  graphQLLayer,
   securityLayer,
   assetsLayer,
   renderLayer,
@@ -18,8 +17,7 @@ const app = new Koa();
 // setup middlewares
 loggingLayer(app);
 initialLayer(app);
-graphQLLayer(app, schema);
-apiLayer(app, apis);
+apiLayer(app, schema, apis);
 assetsLayer(app);
 securityLayer(app);
 renderLayer(app, controllers);
