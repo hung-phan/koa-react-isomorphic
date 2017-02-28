@@ -2,6 +2,7 @@ import _ from 'lodash';
 import td from 'testdouble';
 import faker from 'faker';
 import { assert } from 'chai';
+import { FETCH_DATA_HOOK } from './../redial-enhancer';
 import { serverFetchData, clientFetchData, getLocals, __RewireAPI__ as Module } from './../fetch-data';
 
 describe('Helper: fetchData', () => {
@@ -35,7 +36,7 @@ describe('Helper: fetchData', () => {
     });
 
     it('should call "trigger" with "components" and "locals"', () => {
-      td.verify(trigger('fetchData', components, {
+      td.verify(trigger(FETCH_DATA_HOOK, components, {
         store,
         params: renderProps.params,
         location: renderProps.location,
@@ -98,7 +99,7 @@ describe('Helper: fetchData', () => {
         Module.__ResetDependency__('match');
       });
 
-      it('should trigger not fetchData', () => {
+      it('should trigger not FETCH_DATA_HOOK', () => {
         const renderProps = {
           components,
           location: '/',
@@ -120,7 +121,7 @@ describe('Helper: fetchData', () => {
         Module.__ResetDependency__('match');
       });
 
-      it('should trigger fetchData', () => {
+      it('should trigger FETCH_DATA_HOOK', () => {
         const renderProps = {
           components,
           location: '/',
@@ -136,7 +137,7 @@ describe('Helper: fetchData', () => {
 
         clientFetchData(history, components, store);
         td.verify(
-          triggerSpy('fetchData', renderProps.components, getLocals(store, renderProps))
+          triggerSpy(FETCH_DATA_HOOK, renderProps.components, getLocals(store, renderProps))
         );
 
         Module.__ResetDependency__('match');

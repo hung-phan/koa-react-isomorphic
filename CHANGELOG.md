@@ -1,3 +1,7 @@
+## 3.3.0
+- Add preload for next route
+- Update redial webhook
+
 ## 3.1.0
 - Replace gulp with npm scripts
 - Replace react-proxy-loader with react-async-component

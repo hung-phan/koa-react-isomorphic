@@ -15,7 +15,7 @@ export const getRoutes = (history, options = {}) => (
       getComponent={(nextState, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./client/components/todos').default);
-        });
+        }, 'todos-page');
       }}
     />
     <Route
@@ -23,7 +23,7 @@ export const getRoutes = (history, options = {}) => (
       getComponent={(nextState, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./client/components/static-page').default);
-        });
+        }, 'static-page');
       }}
     />
   </Router>

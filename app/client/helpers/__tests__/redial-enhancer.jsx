@@ -6,20 +6,22 @@ import { mount } from 'enzyme';
 import propName from 'redial/lib/propName';
 import mockingComponent from './../../test-helpers/mocking-component';
 import Provider from './../../test-helpers/provider-mock';
-import fetchDataEnhancer from './../fetch-data-enhancer';
+import redialEnhancer from './../redial-enhancer';
 
-describe('Helper: fetchDataEnhancer', () => {
+describe('Helper: redialEnhancer', () => {
   let Handler;
-  let callback;
+  let callback1;
+  let callback2;
 
   beforeEach(() => {
     Handler = mockingComponent('Handler', ['message']);
-    callback = td.function();
+    callback1 = td.function();
+    callback2 = td.function();
   });
 
   it('should be a function', () => {
-    assert.ok(fetchDataEnhancer);
-    assert.isFunction(fetchDataEnhancer);
+    assert.ok(redialEnhancer);
+    assert.isFunction(redialEnhancer);
   });
 
   context('# component', () => {
@@ -28,7 +30,7 @@ describe('Helper: fetchDataEnhancer', () => {
     let store;
 
     beforeEach(() => {
-      Component = fetchDataEnhancer(callback)(Handler);
+      Component = redialEnhancer({ callback1, callback2 })(Handler);
       store = { data: faker.random.uuid() };
       component = mount(
         <Provider store={store}>
@@ -37,9 +39,11 @@ describe('Helper: fetchDataEnhancer', () => {
       );
     });
 
-    it(`should define static "${propName}.fetchData"`, () => {
-      assert.ok(Component[propName].fetchData);
-      assert.isFunction(Component[propName].fetchData);
+    it(`should define static "${propName}.callback1" and "${propName}.callback2"`, () => {
+      assert.ok(Component[propName].callback1);
+      assert.isFunction(Component[propName].callback1);
+      assert.ok(Component[propName].callback2);
+      assert.isFunction(Component[propName].callback2);
     });
 
     it('should call the "callback" function with arguments', () => {
@@ -50,9 +54,11 @@ describe('Helper: fetchDataEnhancer', () => {
         faker.random.uuid(),
       ];
 
-      Component[propName].fetchData(...args);
+      Component[propName].callback1(...args);
+      Component[propName].callback2(...args);
 
-      td.verify(callback(...args));
+      td.verify(callback1(...args));
+      td.verify(callback2(...args));
     });
 
     it('should render message', () => {

@@ -2,6 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 import { trigger } from 'redial';
 import { match } from 'react-router';
 import navigateTo from './navigation';
+import { FETCH_DATA_HOOK, INJECT_PRELOAD_LINK_HOOK } from './redial-enhancer';
 
 export const getLocals = (store, { location, params }) => ({
   store,
@@ -10,7 +11,7 @@ export const getLocals = (store, { location, params }) => ({
 });
 
 export const serverFetchData = (renderProps, store) =>
-  trigger('fetchData', renderProps.components, getLocals(store, renderProps));
+  trigger(FETCH_DATA_HOOK, renderProps.components, getLocals(store, renderProps));
 
 export const clientFetchData = (history, routes, store) => {
   const callback = (location) => match(
@@ -26,8 +27,10 @@ export const clientFetchData = (history, routes, store) => {
           window.prerenderData = undefined;
         } else {
           // Fetch mandatory data dependencies for 2nd route change onwards
-          trigger('fetchData', renderProps.components, getLocals(store, renderProps));
+          trigger(FETCH_DATA_HOOK, renderProps.components, getLocals(store, renderProps));
         }
+
+        trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, getLocals(store, renderProps));
       } else {
         navigateTo('/404.html');
       }

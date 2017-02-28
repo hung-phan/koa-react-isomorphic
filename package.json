@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "dependencies": {
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
@@ -76,6 +76,7 @@
     "react": "^15.4.2",
     "react-async-component": "^0.2.2",
     "react-dom": "^15.4.2",
+    "react-helmet": "^4.0.0",
     "react-redux": "^5.0.3",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",
