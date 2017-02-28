@@ -138,7 +138,8 @@ export const clientFetchData = (history, routes, store) => {
 ```
 
 Takes a look at `templates/todos`, I will have sth like:
-```
+
+```javascript
   redialEnhancer({
     [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
     [INJECT_PRELOAD_LINK_HOOK]: ({ store }) => store.dispatch(updateLink([
