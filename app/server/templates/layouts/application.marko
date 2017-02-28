@@ -15,6 +15,7 @@
     <body>
         <layout-placeholder name="mainContent" />
 
+        <render-javascript-assets-tag javascript=data.layoutData.assetManifest.javascript />
         <prerender-data data=data.layoutData.prerenderData />
 
         <webpack-bundle-tag name='common' asset-manifest=data.layoutData.assetManifest.javascript />

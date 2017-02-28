@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import Helmet from 'client/components/helmet';
 
 const App = ({ store, routes }: { store: Object, routes: Object }) => {
   if (process.env.NODE_ENV === 'development') {
@@ -8,7 +9,10 @@ const App = ({ store, routes }: { store: Object, routes: Object }) => {
     return (
       <AppContainer>
         <Provider key="provider" store={store}>
-          {routes}
+          <div>
+            <Helmet />
+            {routes}
+          </div>
         </Provider>
       </AppContainer>
     );
@@ -16,7 +20,10 @@ const App = ({ store, routes }: { store: Object, routes: Object }) => {
 
   return (
     <Provider key="provider" store={store}>
-      {routes}
+      <div>
+        <Helmet />
+        {routes}
+      </div>
     </Provider>
   );
 };
