@@ -25,7 +25,13 @@ export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) 
 
 export const enhance = compose(
   redialEnhancer({
-    [INJECT_PRELOAD_LINK_HOOK]: () => console.log('YOLO'),
+    [INJECT_PRELOAD_LINK_HOOK]: ({ helmetObserver }) => {
+      helmetObserver.next({
+        link: [
+          { rel: 'preload', href: window.javascriptAssets['static-page'], as: 'script' },
+        ],
+      });
+    },
   }),
   Component =>
     Relay.createContainer(Component, {

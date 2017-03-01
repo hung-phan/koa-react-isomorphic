@@ -6,7 +6,7 @@ import { browserHistory as history, match } from 'react-router';
 import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import App from 'client/components/main/app';
-import { INJECT_PRELOAD_LINK_HOOK } from './redial-enhancer';
+import { helmetObserver, INJECT_PRELOAD_LINK_HOOK } from './redial-enhancer';
 import navigateTo from './navigation';
 
 export const createHandler = callback => (error, redirectLocation, renderProps) => {
@@ -21,19 +21,25 @@ export const createHandler = callback => (error, redirectLocation, renderProps) 
   }
 };
 
+export const getLocals = ({ location, params }) => ({
+  helmetObserver,
+  location,
+  params,
+});
+
 export const prepareInitialRender = (routes, domNode) => {
   match({ routes, history }, createHandler(renderProps => {
     IsomorphicRouter.prepareInitialRender(Relay.Store, renderProps)
       .then(props => {
         ReactDOM.render(<App {...props} />, domNode);
-      });
 
-    trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, renderProps);
+        trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, getLocals(renderProps));
+      });
   }));
 
   history.listen(location => {
     match({ routes, location }, createHandler(renderProps => {
-      trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, renderProps);
+      trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, getLocals(renderProps));
     }));
   });
 };

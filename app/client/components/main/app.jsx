@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Router } from 'react-router';
+import Helmet from 'client/components/helmet';
 
 export default (props: Object) => {
   if (process.env.NODE_ENV === 'development') {
@@ -9,6 +10,7 @@ export default (props: Object) => {
     return (
       <AppContainer>
         <div>
+          <Helmet />
           <Router {...props} />
         </div>
       </AppContainer>
@@ -17,6 +19,7 @@ export default (props: Object) => {
 
   return (
     <div>
+      <Helmet />
       <Router {...props} />
     </div>
   );

@@ -1,12 +1,32 @@
 // @flow
 import React from 'react';
 import Helmet from 'react-helmet';
-import { compose } from 'recompose';
+import { helmetObserver } from 'client/helpers/redial-enhancer';
 
-export const HelmetComponent = ({ helmet }: { helmet: Object }) => (
-  <Helmet {...helmet} />
-);
+class HelmetComponent extends React.Component {
+  state: { helmet: Object } = {
+    helmet: {},
+  };
 
-export const enhance = compose();
+  componentWillMount() {
+    this.observer = helmetObserver.subscribe(
+      helmet => {
+        this.setState({ helmet });
+      }
+    );
+  }
 
-export default enhance(HelmetComponent);
+  componentWillUnmount() {
+    this.observer.unsubscribe();
+  }
+
+  props: {
+    observer: Object,
+  };
+
+  render() {
+    return (<Helmet {...this.state.helmet} />);
+  }
+}
+
+export default HelmetComponent;
