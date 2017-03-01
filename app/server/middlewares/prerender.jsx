@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import Helmet from 'react-helmet';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { serverFetchData } from 'client/helpers/fetch-data';
@@ -36,6 +37,9 @@ export default async (ctx: Object, next: Function) => {
                   <App store={store} routes={currentRoutes} />
                 );
                 const prerenderData = store.getState().toJS();
+
+                // prevent memory leak
+                Helmet.rewind();
 
                 ctx.render(template, {
                   ...parameters,
