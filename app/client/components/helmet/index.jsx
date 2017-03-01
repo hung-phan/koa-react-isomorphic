@@ -6,10 +6,7 @@ import { connect } from 'react-redux';
 import { selectors } from './logic-bundle';
 
 export const HelmetComponent = ({ helmet }: { helmet: Object }) => (
-  <Helmet
-    title={helmet.title}
-    link={helmet.link}
-  />
+  <Helmet {...helmet} />
 );
 
 export const enhance = compose(
