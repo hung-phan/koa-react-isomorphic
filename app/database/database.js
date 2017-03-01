@@ -20,7 +20,7 @@ export class Todo {
 
 export class TodosDAO {
   data: Todo[];
-  dataloader: DataLoader;
+  dataloader: DataLoader<string, Todo>;
 
   constructor() {
     this.data =
@@ -29,7 +29,9 @@ export class TodosDAO {
         .map(() => new Todo())
         .value();
 
-    this.dataloader = new DataLoader((ids: string[]): Promise<Todo[]> => this.getByIds(ids));
+    this.dataloader = new DataLoader(
+      (ids: string[]): Promise<Array<Todo | Error>> => this.getByIds(ids)
+    );
   }
 
   count(): number {
@@ -40,7 +42,7 @@ export class TodosDAO {
     return this.data;
   }
 
-  getByIds(ids: string[]): Promise<Todo[]> {
+  getByIds(ids: string[]): Promise<Array<Todo | Error>> {
     const set: Set<string> = new Set(ids);
 
     return Promise.resolve(

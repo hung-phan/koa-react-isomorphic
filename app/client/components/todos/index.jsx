@@ -10,6 +10,7 @@ import TodosAdd from './todos-add';
 import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
 import type { ViewerType } from './types';
+import redialEnhancer, { INJECT_PRELOAD_LINK_HOOK } from './../../helpers/redial-enhancer';
 
 export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) => (
   <div className="container">
@@ -23,6 +24,9 @@ export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) 
 );
 
 export const enhance = compose(
+  redialEnhancer({
+    [INJECT_PRELOAD_LINK_HOOK]: () => console.log('YOLO'),
+  }),
   Component =>
     Relay.createContainer(Component, {
       initialVariables: {

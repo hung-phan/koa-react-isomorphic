@@ -3,6 +3,7 @@
 .*/config/.*
 .*/node_modules/fbjs/.*
 .*/node_modules/nock/.*
+.*/node_modules/babel-relay-plugin-loader/.*
 .*/test/.*
 
 [include]

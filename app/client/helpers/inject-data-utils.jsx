@@ -1,41 +1,36 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Relay from 'react-relay';
-import { browserHistory, match, Router } from 'react-router';
+import ReactDOM from 'react-dom';
+import { trigger } from 'redial';
+import { browserHistory as history, match } from 'react-router';
 import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
+import App from 'client/components/main/app';
 import navigateTo from './navigation';
-
-function render(props, domNode) {
-  if (process.env.NODE_ENV === 'development') {
-    const { AppContainer } = require('react-hot-loader');
-
-    ReactDOM.render(
-      <AppContainer>
-        <Router {...props} />
-      </AppContainer>,
-      domNode
-    );
-  } else {
-    ReactDOM.render(<Router {...props} />, domNode);
-  }
-}
+import { INJECT_PRELOAD_LINK_HOOK } from './redial-enhancer';
 
 export function prepareInitialRender(routes, domNode) {
-  match({ routes, history: browserHistory }, (error, redirectLocation, renderProps) => {
-    if (error) {
-      navigateTo('/500.html');
-    } else if (redirectLocation) {
-      navigateTo(redirectLocation.pathname + redirectLocation.search);
-    } else if (renderProps) {
-      IsomorphicRouter.prepareInitialRender(Relay.Store, renderProps)
-        .then(props => {
-          render(props, domNode);
-        });
-    } else {
-      navigateTo('/404.html');
-    }
-  });
+  const callback = location => match(
+    { routes, location },
+    (error, redirectLocation, renderProps) => {
+      if (error) {
+        navigateTo('/500.html');
+      } else if (redirectLocation) {
+        navigateTo(redirectLocation.pathname + redirectLocation.search);
+      } else if (renderProps) {
+        IsomorphicRouter.prepareInitialRender(Relay.Store, renderProps)
+          .then(props => {
+            ReactDOM.render(<App {...props} />, domNode);
+          });
+
+        trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, renderProps);
+      } else {
+        navigateTo('/404.html');
+      }
+    });
+
+  history.listen(callback);
+  callback(history.getCurrentLocation());
 }
 
 export default function (routes, domNode) {
