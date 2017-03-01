@@ -74,6 +74,19 @@ productionConfig.plugins.push(
   new OfflinePlugin({
     publicPath: config.path.assets,
     relativePaths: false,
+    safeToUseOptionalCaches: true,
+    externals: [
+      '/',
+      '/static-page',
+    ],
+    updateStrategy: 'all',
+    ServiceWorker: {
+      events: true,
+    },
+    AppCache: {
+      events: true,
+      directory: 'appcache/',
+    },
   })
 );
 
