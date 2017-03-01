@@ -90,7 +90,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",
     "rimraf": "^2.6.1",
-    "rx": "^4.1.0",
+    "rxjs": "^5.2.0",
     "sass-loader": "^6.0.2",
     "script-loader": "^0.7.0",
     "style-loader": "^0.13.2",
