@@ -27,7 +27,8 @@ export function prepareInitialRender(routes, domNode) {
       } else {
         navigateTo('/404.html');
       }
-    });
+    }
+  );
 
   history.listen(callback);
   callback(history.getCurrentLocation());

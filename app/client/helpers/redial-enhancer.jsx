@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import { provideHooks } from 'redial';
 import mapValues from 'lodash/mapValues';
 
