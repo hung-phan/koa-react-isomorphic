@@ -1,14 +1,14 @@
 'use strict';
 
 const _ = require('lodash');
-const config = require('./../../index');
+const config = require('../../index');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
-  require('./../../webpack/webpack-isomorphic-tools')
+  require('../../webpack/webpack-isomorphic-tools')
 );
 const productionConfig = require('./default');
 

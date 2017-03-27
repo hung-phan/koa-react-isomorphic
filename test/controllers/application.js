@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import supertest from 'supertest';
-import app from 'app/server-app';
+import app from '../../app/server/infrastructure/app';
 
 describe('Controller: application', function applicationTest() {
   const request = supertest(app.listen());

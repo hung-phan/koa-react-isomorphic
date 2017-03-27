@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Application</title>
+
+        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <webpack-css-bundle-tag env=input.env.NODE_ENV asset-manifest=input.assetManifest.styles name="common" />
+        <webpack-css-bundle-tag env=input.env.NODE_ENV asset-manifest=input.assetManifest.styles name="app" />
+    </head>
+
+    <body>
+        <include(input.mainContent) />
+
+        <render-javascript-assets-tag javascript=input.assetManifest.javascript />
+        <prerender-data data=input.prerenderData />
+
+        <webpack-bundle-tag name='common' asset-manifest=input.assetManifest.javascript />
+        <webpack-bundle-tag name='app' asset-manifest=input.assetManifest.javascript />
+    </body>
+</html>

@@ -1,18 +1,19 @@
-// @flow
+/* @flow */
 import React from 'react';
 import { List } from 'immutable';
 import { compose, shouldUpdate } from 'recompose';
 import shallowEqualImmutable from 'react-immutable-render-mixin/lib/shallowEqualImmutable';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import TodosHeader from './todos-header';
-import TodosAdd from './todos-add';
-import TodosBody from './todos-body';
-import TodosFooter from './todos-footer';
+import TodosHeader from './TodosHeader';
+import TodosAdd from './TodosAdd';
+import TodosBody from './TodosBody';
+import TodosFooter from './TodosFooter';
 import type { TodoType } from './types';
-import { selectors, addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
-import { updateLink } from './../helmet/logic-bundle';
-import redialEnhancer, { FETCH_DATA_HOOK, INJECT_PRELOAD_LINK_HOOK } from './../../helpers/redial-enhancer';
+import { addTodo, completeTodo, fetchTodos, removeTodo, selectors } from './logicBundle';
+import { updateLink } from '../helmet/logicBundle';
+import createRedialHooks from '../../helpers/createRedialHooks';
+import { FETCH_DATA_HOOK, INJECT_PRELOAD_LINK_HOOK } from '../../helpers/fetchData';
 
 export const Todos = ({ todos, actions }: { todos: List<TodoType>, actions: Object }) => (
   <div className="container">
@@ -30,7 +31,7 @@ export const Todos = ({ todos, actions }: { todos: List<TodoType>, actions: Obje
 );
 
 export const enhance = compose(
-  redialEnhancer({
+  createRedialHooks({
     [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
     [INJECT_PRELOAD_LINK_HOOK]: ({ store }) => store.dispatch(updateLink([
       // window.javascriptAssets will be injected to do preload link for optimizing route

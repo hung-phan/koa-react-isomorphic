@@ -1,12 +1,9 @@
-import log4js from 'log4js';
-import app from './server-app';
+/* @flow */
+/* global process */
+import './server/infrastructure';
+import app from './server/infrastructure/app';
 
-log4js.configure({
-  appenders: [
-    { type: 'console' },
-  ],
-  replaceConsole: true,
-});
+const PORT = process.env.PORT || 3000;
 
-app.listen(process.env.PORT);
-console.log(`Server listening on port ${process.env.PORT}`); // eslint-disable-line no-console
+app.listen(PORT);
+console.log(`Server listening on port ${PORT}`); // eslint-disable-line no-console
