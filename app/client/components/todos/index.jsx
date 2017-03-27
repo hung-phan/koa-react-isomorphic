@@ -9,8 +9,8 @@ import TodosBody from './todos-body';
 import TodosFooter from './todos-footer';
 import type { TodoType } from './types';
 import { selectors, addTodo, removeTodo, completeTodo, fetchTodos } from './logic-bundle';
-import { updateLink } from './../helmet/logic-bundle';
-import redialEnhancer, { FETCH_DATA_HOOK, INJECT_PRELOAD_LINK_HOOK } from './../../helpers/redial-enhancer';
+import { updateLink } from '../helmet/logic-bundle';
+import redialEnhancer, { FETCH_DATA_HOOK, INJECT_PRELOAD_LINK_HOOK } from '../../helpers/redial-enhancer';
 
 export const Todos = ({ todos, actions }: { todos: TodoType[], actions: Object }) => (
   <div className="container">

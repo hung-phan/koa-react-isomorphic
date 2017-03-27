@@ -4,9 +4,9 @@ import React from 'react';
 import { assert } from 'chai';
 import { mount } from 'enzyme';
 import propName from 'redial/lib/propName';
-import mockingComponent from './../../test-helpers/mocking-component';
-import Provider from './../../test-helpers/provider-mock';
-import redialEnhancer from './../redial-enhancer';
+import mockingComponent from '../../test-helpers/mocking-component';
+import Provider from '../../test-helpers/provider-mock';
+import redialEnhancer from '../redial-enhancer';
 
 describe('Helper: redialEnhancer', () => {
   let Handler;

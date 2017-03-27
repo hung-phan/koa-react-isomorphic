@@ -1,5 +1,5 @@
-<layout-use("./../layouts/application.marko") layout-data=data>
-    <layout-put into="mainContent">
-        <div id="app">$!{data.prerenderComponent}</div>
-    </layout-put>
-</layout-use>
+<include("./../layouts/application.marko", input)>
+    <@mainContent>
+        <div id="app">$!{input.prerenderComponent}</div>
+    </@mainContent>
+</include>

@@ -41,7 +41,7 @@ the support of external webpack.
       const regexp = new RegExp(`${assets}$`);
 
       return regexp.test(request)
-        ? callback(null, `commonjs ${path.join(context.replace(ROOT, './../'), request)}`)
+        ? callback(null, `commonjs ${path.join(context.replace(ROOT, '../'), request)}`)
         : callback();
     },
 ```

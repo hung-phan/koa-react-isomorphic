@@ -3,8 +3,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const ROOT = require('./../../path-helper').ROOT;
-const config = require('./../../index');
+const ROOT = require('../../path-helper').ROOT;
+const config = require('../../index');
 const assets = '(.css|.less|.scss|.gif|.jpg|.jpeg|.png|.svg|.ttf|.eot|.woff|.woff2)';
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
       const regexp = new RegExp(`${assets}$`);
 
       return regexp.test(request)
-        ? callback(null, `commonjs ${path.join(context.replace(ROOT, './../'), request)}`)
+        ? callback(null, `commonjs ${path.join(context.replace(ROOT, '../'), request)}`)
         : callback();
     },
   ],

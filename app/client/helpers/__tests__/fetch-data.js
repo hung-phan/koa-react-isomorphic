@@ -2,8 +2,8 @@ import _ from 'lodash';
 import td from 'testdouble';
 import faker from 'faker';
 import { assert } from 'chai';
-import { FETCH_DATA_HOOK } from './../redial-enhancer';
-import { serverFetchData, clientFetchData, getLocals, __RewireAPI__ as Module } from './../fetch-data';
+import { FETCH_DATA_HOOK } from '../redial-enhancer';
+import { serverFetchData, clientFetchData, getLocals, __RewireAPI__ as Module } from '../fetch-data';
 
 describe('Helper: fetchData', () => {
   it('should be an object', () => {

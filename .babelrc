@@ -5,10 +5,7 @@
     ["module-resolver", {
       "root": ["."],
       "alias": {
-        "app": "./app",
-        "config": "./config",
-        "client": "./app/client",
-        "server": "./app/server"
+        "app": "./app"
       }
     }]
   ],

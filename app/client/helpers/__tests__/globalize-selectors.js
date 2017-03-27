@@ -1,5 +1,5 @@
 import td from 'testdouble';
-import globalizeSelectors from './../globalize-selectors';
+import globalizeSelectors from '../globalize-selectors';
 
 describe('Helper: localize-module', () => {
   it('should return a selector function with state mounted to the local modules', () => {

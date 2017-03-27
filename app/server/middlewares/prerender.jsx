@@ -7,12 +7,12 @@ import { serverFetchData } from 'client/helpers/fetch-data';
 import configureStore from 'client/main-store';
 import App from 'client/components/main/app';
 
-let routesModule = require('./../../routes.jsx');
+let routesModule = require('../../routes.jsx');
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   // $FlowFixMe
-  module.hot.accept('./../../routes.jsx', () => {
-    routesModule = require('./../../routes.jsx');
+  module.hot.accept('../../routes.jsx', () => {
+    routesModule = require('../../routes.jsx');
   });
 }
 

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import faker from 'faker';
 import { assert } from 'chai';
-import reducer, { updateTitle, updateLink } from './../logic-bundle';
+import reducer, { updateTitle, updateLink } from '../logic-bundle';
 
 describe('Module: Helmet', () => {
   describe('Reducer', () => {
