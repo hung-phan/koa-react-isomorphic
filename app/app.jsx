@@ -1,15 +1,16 @@
-import 'client/libs';
-
+/* @flow */
+/* global process */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { match, Router } from 'react-router';
-import App from './client/components/main/app';
-import configureStore from './client/main-store';
-import { clientFetchData } from './client/helpers/fetch-data';
+import App from './client/components/app';
+import createStore from './client/createStore';
+import { clientFetchData } from './client/helpers/fetchData';
 import { getClientHistory } from './routes';
+import './client/helpers/loadExternalLibs';
 
 const appDOM = document.getElementById('app');
-const store = configureStore(window.prerenderData);
+const store = createStore(window.prerenderData);
 const history = getClientHistory(store);
 let getRoutes = require('./routes').getRoutes;
 
@@ -30,6 +31,7 @@ function initialize() {
 initialize();
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
+  // $FlowFixMe
   module.hot.accept('./routes', () => {
     getRoutes = require('./routes').getRoutes;
     initialize();

@@ -1,7 +1,8 @@
+/* @flow */
 import React from 'react';
 import { Link } from 'react-router';
 
-const StaticPage = () => (
+export default () => (
   <div className="container">
     <div className="row">
       <div className="col-md-12">
@@ -11,5 +12,3 @@ const StaticPage = () => (
     </div>
   </div>
 );
-
-export default StaticPage;
