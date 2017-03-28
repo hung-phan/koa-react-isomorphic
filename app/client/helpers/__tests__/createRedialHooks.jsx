@@ -5,7 +5,6 @@ import { assert } from 'chai';
 import { mount } from 'enzyme';
 import propName from 'redial/lib/propName';
 import mockingComponent from '../createMockingComponent';
-import Provider from '../FakeReduxProvider';
 import redialEnhancer from '../createRedialHooks';
 
 describe('Helper: createRedialHooks', () => {
@@ -27,15 +26,11 @@ describe('Helper: createRedialHooks', () => {
   context('# component', () => {
     let Component;
     let component;
-    let store;
 
     beforeEach(() => {
       Component = redialEnhancer({ callback1, callback2 })(Handler);
-      store = { data: faker.random.uuid() };
       component = mount(
-        <Provider store={store}>
-          <Component message="Hello world" />
-        </Provider>
+        <Component message="Hello world" />
       );
     });
 
