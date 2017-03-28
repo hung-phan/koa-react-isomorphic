@@ -2,8 +2,8 @@
 
 const path = require('path');
 const rimraf = require('rimraf');
-const configuration = require('./../config');
-const ROOT = require('./../config/path-helper').ROOT;
+const configuration = require('../config');
+const ROOT = require('../config/path-helper').ROOT;
 
 const removeDirectory = glob => {
   rimraf(glob, err => {

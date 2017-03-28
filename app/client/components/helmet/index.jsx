@@ -1,7 +1,7 @@
-// @flow
+/* @flow */
 import React from 'react';
 import Helmet from 'react-helmet';
-import { helmetObserver } from 'client/helpers/redial-enhancer';
+import { helmetObserver } from '../../helpers/fetchData';
 
 class HelmetComponent extends React.Component {
   state: { helmet: Object } = {
@@ -20,9 +20,7 @@ class HelmetComponent extends React.Component {
     this.observer.unsubscribe();
   }
 
-  props: {
-    observer: Object,
-  };
+  observer: Object;
 
   render() {
     return (<Helmet {...this.state.helmet} />);

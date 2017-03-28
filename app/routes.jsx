@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import { createRoutes, Route, IndexRoute } from 'react-router';
 import ViewerQuery from 'client/queries/viewer';
@@ -6,6 +7,7 @@ export default createRoutes(
   <Route path="/">
     <IndexRoute
       getComponent={(nextState, cb) => {
+        // $FlowFixMe
         require.ensure([], (require) => {
           cb(null, require('./client/components/todos').default);
         }, 'todos-page');
@@ -15,6 +17,7 @@ export default createRoutes(
     <Route
       path="static-page"
       getComponent={(nextState, cb) => {
+        // $FlowFixMe
         require.ensure([], (require) => {
           cb(null, require('./client/components/static-page').default);
         }, 'static-page');

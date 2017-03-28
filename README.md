@@ -41,7 +41,7 @@ the support of external webpack.
       const regexp = new RegExp(`${assets}$`);
 
       return regexp.test(request)
-        ? callback(null, `commonjs ${path.join(context.replace(ROOT, './../'), request)}`)
+        ? callback(null, `commonjs ${path.join(context.replace(ROOT, '../'), request)}`)
         : callback();
     },
 ```
@@ -59,8 +59,8 @@ Handles routing for server, and generates page which will be returned by react-r
 Then performs server-side process.
 
 ### Marko template
-[Custom taglibs](http://markojs.com/docs/marko/custom-taglibs/) are defined under `app/server/templates/helpers`. To see it usage, look
-for `app/server/templates/layout/application.marko`. For example:
+[Custom taglibs](http://markojs.com/docs/marko/custom-taglibs/) are defined under `app/server/application/templates/helpers`. To see it usage, look
+for `app/server/application/templates/layout/application.marko`. For example:
 
 ```html
     <prerender-data data=data.layoutData.prerenderData />
@@ -223,8 +223,8 @@ Then in main reducer, you can have sth like this, which helps reduce the couplin
 
 ```javascript
 import { combineReducers } from 'redux';
-import todosReducer, { mountPoint as todosMountPoint } from './components/todos/logic-bundle';
-import routingReducer, { mountPoint as routingMountPoint } from './components/routing/logic-bundle';
+import todosReducer, { mountPoint as todosMountPoint } from './components/todos/logicBundle';
+import routingReducer, { mountPoint as routingMountPoint } from './components/routing/logicBundle';
 
 export default combineReducers({
   [todosMountPoint]: todosReducer,
@@ -232,14 +232,14 @@ export default combineReducers({
 });
 ```
 
-Sample for logic-bundle:
+Sample for logicBundle:
 
 ```javascript
 import fetch from 'isomorphic-fetch';
 import identity from 'lodash/identity';
 import { createAction, handleActions } from 'redux-actions';
 import getUrl from 'client/helpers/get-url';
-import globalizeSelectors from 'client/helpers/globalize-selectors';
+import globalizeSelectors from 'client/helpers/globalizeSelectors';
 import type {
   TodoType,
   AddTodoActionType,

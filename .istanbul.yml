@@ -11,10 +11,7 @@ instrumentation:
       'routes.jsx',
       'server.js',
       'client/mutations/**/*.js',
-      'client/queries/**/*.js',
-      'client/test-helpers/**/*.js',
-      'client/test-helpers/**/*.jsx',
-      'client/libs/**/*.js'
+      'client/queries/**/*.js'
     ]
     include-all-sources: true
     es-modules: true

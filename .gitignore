@@ -6,8 +6,6 @@ node_modules/
 public/assets/
 tmp/
 coverage
-app/database/schema.graphql
-app/database/schema.json
 *.marko.js
 
 # IntelliJ project files

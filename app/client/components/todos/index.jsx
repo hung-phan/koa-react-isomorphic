@@ -1,16 +1,17 @@
-// @flow
+/* @flow */
 import React from 'react';
 import Relay from 'react-relay';
 import { compose, onlyUpdateForKeys } from 'recompose';
-import AddTodoMutation from 'client/mutations/add-todo';
-import CompleteTodoMutation from 'client/mutations/complete-todo';
-import RemoveTodoMutation from 'client/mutations/remove-todo';
-import TodosHeader from './todos-header';
-import TodosAdd from './todos-add';
-import TodosBody from './todos-body';
-import TodosFooter from './todos-footer';
+import TodosHeader from './TodosHeader';
+import TodosAdd from './TodosAdd';
+import TodosBody from './TodosBody';
+import TodosFooter from './TodosFooter';
 import type { ViewerType } from './types';
-import redialEnhancer, { INJECT_PRELOAD_LINK_HOOK } from './../../helpers/redial-enhancer';
+import createRedialHooks from '../../helpers/createRedialHooks';
+import { INJECT_PRELOAD_LINK_HOOK } from '../../helpers/fetchData';
+import AddTodoMutation from '../../mutations/AddTodoMutation';
+import RemoveTodoMutation from '../../mutations/RemoveTodoMutation';
+import CompleteTodoMutation from '../../mutations/CompleteTodoMutation';
 
 export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) => (
   <div className="container">
@@ -24,7 +25,7 @@ export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) 
 );
 
 export const enhance = compose(
-  redialEnhancer({
+  createRedialHooks({
     [INJECT_PRELOAD_LINK_HOOK]: ({ helmetObserver }) => {
       helmetObserver.next({
         link: [
@@ -52,8 +53,8 @@ export const enhance = compose(
             }
             numberOfTodos
             ${AddTodoMutation.getFragment('viewer')}
-            ${CompleteTodoMutation.getFragment('viewer')}
             ${RemoveTodoMutation.getFragment('viewer')}
+            ${CompleteTodoMutation.getFragment('viewer')}
           }
         `,
       },

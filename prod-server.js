@@ -28,6 +28,6 @@ global.webpackIsomorphicTools
     }
 
     if (process.env.NODE_ENV === 'development') {
-      hotReloadTemplate('./app/server/templates/**/*.marko');
+      hotReloadTemplate('./app/server/application/templates/**/*.marko');
     }
   });

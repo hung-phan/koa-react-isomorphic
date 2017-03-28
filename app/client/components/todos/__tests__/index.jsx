@@ -1,10 +1,10 @@
 import { assert } from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Todos } from './../index';
-import TodosHeader from './../todos-header';
-import TodosAdd from './../todos-add';
-import TodosBody from './../todos-body';
+import { Todos } from '../index';
+import TodosHeader from '../TodosHeader';
+import TodosAdd from '../TodosAdd';
+import TodosBody from '../TodosBody';
 
 describe('Component: Todos', () => {
   const viewer = {

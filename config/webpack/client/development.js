@@ -2,12 +2,12 @@
 
 const _ = require('lodash');
 const path = require('path');
-const ROOT = require('./../../path-helper').ROOT;
-const config = require('./../../index');
+const ROOT = require('../../path-helper').ROOT;
+const config = require('../../index');
 const webpack = require('webpack');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
-  require('./../../webpack/webpack-isomorphic-tools')
+  require('../../webpack/webpack-isomorphic-tools')
 );
 const developmentConfig = require('./default');
 
