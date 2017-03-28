@@ -4,10 +4,7 @@
 [![Dependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic)
 [![devDependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic/dev-status.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic#info=devDependencies)
 
-The idea of this repository is to try out all new concepts and libraries which work great for React.js.
-Additionally, this will be the boilerplate for koa isomorphic (or universal) application.
-
-So far, I manage to put together these following technologies:
+The idea of this repository is to implement all new concepts and libraries which work great for React.js.
 
 * [Koa.js](https://github.com/koajs/koa)
 * [Webpack](https://github.com/webpack/webpack)
@@ -27,52 +24,34 @@ So far, I manage to put together these following technologies:
 - Install [yarn](https://github.com/yarnpkg/yarn)
 
 ## Explanation
-What initially gets run is `build/server.js`, which is complied by Webpack to utilise the power of ES6 and ES7 in server-side code.
-In `server.js`, I initialse all middlewares from `config/middleware/index`, then start server at `localhost:3000`. API calls
-from client side eventually will request to `/api/*`, which are created by `app/server/apis`. Rendering tasks will be delegated to
-[React-Router](https://github.com/rackt/react-router) to do server rendering for React.
 
-### Require assets in server
-Leverage the power of [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to hack `require` module with
-the support of external webpack.
+### Templates
+Templates are written in marko.js with predefined template helpers. To see its usage, please refer to `layout/application.marko`.
+
+### Server side rendering
+I use [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to support loading assets in
+the server side. You can see the configuration file under `config` folder.
+
+#### Fetch data
+- For redux, data is fetched using redial hooks on the server side.
+
+Takes a look at `templates/todos`, I will have sth like:
 
 ```javascript
-    (context, request, callback) => {
-      const regexp = new RegExp(`${assets}$`);
-
-      return regexp.test(request)
-        ? callback(null, `commonjs ${path.join(context.replace(ROOT, '../'), request)}`)
-        : callback();
-    },
+  createRedialEnhancer({
+    [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
+    [INJECT_PRELOAD_LINK_HOOK]: ({ store }) => store.dispatch(updateLink([
+      // window.javascriptAssets will be injected to do preload link for optimizing route
+      { rel: 'preload', href: window.javascriptAssets['static-page'], as: 'script' },
+    ])),
+  })
 ```
 
-### app/routes.js
-Contains all components and routing.
+- For relay, data is fetched using isomorphic-relay-router on the server side.
 
-### app/app.js
-
-Binds root component to `<div id='app'></div>`, and prepopulate redux store with server-rendering data from `window.prerenderData`
-
-### app/server.js
-
-Handles routing for server, and generates page which will be returned by react-router and marko. I make a facade `getUrl` for data fetching in both client and server.
-Then performs server-side process.
-
-### Marko template
-[Custom taglibs](http://markojs.com/docs/marko/custom-taglibs/) are defined under `app/server/application/templates/helpers`. To see it usage, look
-for `app/server/application/templates/layout/application.marko`. For example:
-
-```html
-    <prerender-data data=data.layoutData.prerenderData />
-```
-
-#### Partial template data
-For now, the way to pass data to template is done via `layout-data=data`. This makes the current data
-accesible at the `layouts/application.marko`.
-
-### Node require in server
-To be able to use the default node `require` instead of webpack dynamic `require`, use `global.nodeRequire`. This is defined
-in `prod-server.js` to fix the problem that server wants to require somethings that are not bundled into current build. For example,
+### Default require for node
+The default `require` node statement has been modified by webpack-isomorphic-tools, so I remap it with `nodeRequire`
+under `global`. For example, you can use it like as below:
 
 ```javascript
 const { ROOT, PUBLIC } = global.nodeRequire('./config/path-helper');
@@ -80,123 +59,22 @@ const { ROOT, PUBLIC } = global.nodeRequire('./config/path-helper');
 
 Note: `nodeRequire` will resolve the path from project root directory.
 
-### Server-side data fetching
 
 #### Preload assets via redial
-To be able to support for asynchronous chunks loading using `<link rel='preload' ... />`, I return the javascript assets map for all the routes to the client
-via `window.javascriptAssets`.
+To be able to support for asynchronous chunks loading using `<link rel='preload' ... />`, I returned the javascript
+assets map for all the routes to the client via `window.javascriptAssets`.
 
-You can use this to inject assets for the next page to improve performance. This is what I am trying to achive [preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin).
-
-#### Redux and preload assets via [Redial](https://github.com/markdalgleish/redial)
-
-I use react-route for route matching the current request and then check to see if it defines any redial hook.
-If it does, I pass the redux dispatcher and collect the promises returned. Will be fullfil on the server or on the client depending on the hook.
-
-
-```javascript
-export default (hooks: Object) => (ComposedComponent: ReactClass<*>) =>
-  provideHooks(
-    mapValues(hooks, callback => (...args) => callback(...args))
-  )(
-    props => <ComposedComponent {...props} />
-  );
-```
-
-and
-
-```javascript
-export const serverFetchData = (renderProps, store) =>
-  trigger(FETCH_DATA_HOOK, renderProps.components, getLocals(store, renderProps));
-
-export const clientFetchData = (history, routes, store) => {
-  const callback = (location) => match(
-    { routes, location },
-    (error, redirectLocation, renderProps) => {
-      if (error) {
-        navigateTo('/500.html');
-      } else if (redirectLocation) {
-        navigateTo(redirectLocation.pathname + redirectLocation.search);
-      } else if (renderProps) {
-        if (!isEmpty(window.prerenderData)) {
-          // Delete initial data so that subsequent data fetches can occur
-          window.prerenderData = undefined;
-        } else {
-          // Fetch mandatory data dependencies for 2nd route change onwards
-          trigger(FETCH_DATA_HOOK, renderProps.components, getLocals(store, renderProps));
-        }
-
-        trigger(INJECT_PRELOAD_LINK_HOOK, renderProps.components, getLocals(store, renderProps));
-      } else {
-        navigateTo('/404.html');
-      }
-    });
-
-  history.listen(callback);
-  callback(history.getCurrentLocation());
-};
-```
-
-Takes a look at `templates/todos`, I will have sth like:
-
-```javascript
-  redialEnhancer({
-    [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
-    [INJECT_PRELOAD_LINK_HOOK]: ({ store }) => store.dispatch(updateLink([
-      // window.javascriptAssets will be injected to do preload link for optimizing route
-      { rel: 'preload', href: window.javascriptAssets['static-page'], as: 'script' },
-    ])),
-  }),
-```
+You can use this to inject assets for the next page to improve performance. This is what I am trying to achieve
+[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin).
 
 This will map the hook with the current component and trigger it (Note: This will only be applied to root component).
-
-#### Relay
-I rely on [isomorphic-relay-router](https://github.com/denvned/isomorphic-relay-router) to do the server-rendering path.
-
-```javascript
-IsomorphicRouter.prepareData(renderProps)
-  .then(({ data: prerenderData, props }) => {
-    const prerenderComponent = renderToString(
-      <IsomorphicRouter.RouterContext {...props} />
-    );
-
-    resolve(
-      this.render(template, {
-        ...parameters,
-        prerenderComponent,
-        prerenderData,
-      })
-    );
-  });
-```
-
-### Render methods
-this.render:
-
-```javascript
-this.render = this.render || function (template: string, parameters: Object = {}) {...}
-```
-
-Will receive a template and its additional parameters. See [settings.js](https://github.com/hung-phan/koa-react-isomorphic/blob/master/config%2Finitializers%2Fsettings.js) for more info.
-It will pass this object to template.
-
-this.prerender:
-
-```javascript
-this.prerender = this.prerender || function (template: string, parameters: Object = {}, initialState: Object = {}) {...}
-```
-
-Will receive additional parameter `initialState` which is the state of redux store (This will not apply for relay branch).
 
 ## Features
 * Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
 * Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
 ### Async react components
-
 [react-async-component](https://github.com/ctrlplusb/react-async-component)
-
 
 ### Idea to structure redux application
 For now, the best way is to place all logic in the same place with components to make it less painful when scaling the application.
@@ -222,30 +100,34 @@ export const selectors = globalizeSelectors({
 Then in main reducer, you can have sth like this, which helps reduce the coupling with React view
 
 ```javascript
+/* @flow */
 import { combineReducers } from 'redux';
 import todosReducer, { mountPoint as todosMountPoint } from './components/todos/logicBundle';
 import routingReducer, { mountPoint as routingMountPoint } from './components/routing/logicBundle';
+import helmetReducer, { mountPoint as helmetMountPoint } from './components/helmet/logicBundle';
 
 export default combineReducers({
   [todosMountPoint]: todosReducer,
   [routingMountPoint]: routingReducer,
+  [helmetMountPoint]: helmetReducer,
 });
 ```
 
 Sample for logicBundle:
 
 ```javascript
+/* @flow */
 import fetch from 'isomorphic-fetch';
 import identity from 'lodash/identity';
 import { createAction, handleActions } from 'redux-actions';
-import getUrl from 'client/helpers/get-url';
-import globalizeSelectors from 'client/helpers/globalizeSelectors';
+import globalizeSelectors from '../../helpers/globalizeSelectors';
+import { getUrl } from '../../helpers/handleHTTP';
 import type {
-  TodoType,
   AddTodoActionType,
-  RemoveTodoActionType,
   CompleteTodoActionType,
+  RemoveTodoActionType,
   SetTodosActionType,
+  TodoType
 } from './types';
 
 export const mountPoint = 'todos';
