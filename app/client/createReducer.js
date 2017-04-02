@@ -1,11 +1,8 @@
 /* @flow */
-import { combineReducers } from 'redux-immutable';
-import todosReducer, { mountPoint as todosMountPoint } from './components/todos/logicBundle';
 import routingReducer, { mountPoint as routingMountPoint } from './components/routing/logicBundle';
 import helmetReducer, { mountPoint as helmetMountPoint } from './components/helmet/logicBundle';
 
-export default combineReducers({
-  [todosMountPoint]: todosReducer,
+export default {
   [routingMountPoint]: routingReducer,
   [helmetMountPoint]: helmetReducer,
-});
+};

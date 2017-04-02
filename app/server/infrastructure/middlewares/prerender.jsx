@@ -22,7 +22,7 @@ export default async (ctx: Object, next: Function) => {
     ctx.prerender = (template: string, parameters: Object = {}, initialState: Object = {}) => {
       const store = createStore(initialState);
       const history = routesModule.getServerHistory(store, ctx.req.url);
-      const routes = routesModule.getRoutes(history);
+      const routes = routesModule.getRoutes(history, store);
 
       return new Promise((resolve, reject) => {
         match({ routes, history }, (error, redirectLocation, renderProps) => {
