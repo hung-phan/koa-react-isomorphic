@@ -15,7 +15,7 @@ const history = getClientHistory(store);
 let getRoutes = require('./routes').getRoutes;
 
 function initialize() {
-  const routes = getRoutes(history);
+  const routes = getRoutes(history, store);
 
   clientFetchData(history, routes, store);
 
