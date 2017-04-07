@@ -77,11 +77,11 @@ productionConfig.plugins.push(
     safeToUseOptionalCaches: true,
     externals: [
       '/',
-      '/static-page',
     ],
     updateStrategy: 'all',
     ServiceWorker: {
       events: true,
+      navigateFallbackURL: '/'
     },
     AppCache: {
       events: true,
