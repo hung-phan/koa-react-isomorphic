@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "dependencies": {
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.1",
@@ -155,7 +155,7 @@
   "scripts": {
     "backend:build": "./scripts/backend-build",
     "backend:watch": "./scripts/backend-watch",
-    "build": "yarn run clean && (yarn run compile-templates & yarn run frontend:build & yarn run backend:build)",
+    "build": "yarn run clean && yarn run compile-templates && yarn run frontend:build && yarn run backend:build",
     "clean": "node ./scripts/clean.js",
     "compile-templates": "markoc ./app/server/application/templates",
     "debug": "./scripts/debug",
