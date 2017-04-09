@@ -1,12 +1,13 @@
 /* @flow */
-import Relay from 'react-relay';
+/* eslint-disable class-methods-use-this */
+import Relay from "react-relay";
 
 export default class RemoveTodoMutation extends Relay.Mutation {
   static fragments = {
-    viewer: () => Relay.QL`fragment on Viewer { id }`,
+    viewer: () => Relay.QL`fragment on Viewer { id }`
   };
 
-  getMutation() { // eslint-disable-line
+  getMutation() {
     return Relay.QL`mutation { removeTodo }`;
   }
 
@@ -14,7 +15,7 @@ export default class RemoveTodoMutation extends Relay.Mutation {
     return { id: this.props.todo.id };
   }
 
-  getFatQuery() { // eslint-disable-line
+  getFatQuery() {
     return Relay.QL`
       fragment on RemoveTodoMutationPayload {
         id
@@ -29,12 +30,12 @@ export default class RemoveTodoMutation extends Relay.Mutation {
   getConfigs() {
     return [
       {
-        type: 'NODE_DELETE',
-        parentName: 'viewer',
+        type: "NODE_DELETE",
+        parentName: "viewer",
         parentID: this.props.viewer.id,
-        connectionName: 'todos',
-        deletedIDFieldName: 'id',
-      },
+        connectionName: "todos",
+        deletedIDFieldName: "id"
+      }
     ];
   }
 
@@ -42,8 +43,8 @@ export default class RemoveTodoMutation extends Relay.Mutation {
     return {
       id: this.props.todo.id,
       viewer: {
-        numberOfTodos: this.props.viewer.numberOfTodos - 1,
-      },
+        numberOfTodos: this.props.viewer.numberOfTodos - 1
+      }
     };
   }
 }

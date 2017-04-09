@@ -1,2 +1,2 @@
-import 'bootstrap/less/bootstrap.less';
-import 'font-awesome/less/font-awesome.less';
+import "bootstrap/less/bootstrap.less";
+import "font-awesome/less/font-awesome.less";

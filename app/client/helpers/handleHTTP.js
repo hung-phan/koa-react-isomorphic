@@ -1,7 +1,7 @@
 /* @flow */
 /* global process */
 export const getUrl = (url: string): string => {
-  if (process.env.RUNTIME_ENV === 'client') {
+  if (process.env.RUNTIME_ENV === "client") {
     return url;
   }
 

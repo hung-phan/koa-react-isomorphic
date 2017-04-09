@@ -1,12 +1,13 @@
 /* @flow */
-import Relay from 'react-relay';
+/* eslint-disable class-methods-use-this */
+import Relay from "react-relay";
 
 export default class CompleteTodoMutation extends Relay.Mutation {
   static fragments = {
-    viewer: () => Relay.QL`fragment on Viewer { id }`,
+    viewer: () => Relay.QL`fragment on Viewer { id }`
   };
 
-  getMutation() { // eslint-disable-line
+  getMutation() {
     return Relay.QL`mutation { completeTodo }`;
   }
 
@@ -14,7 +15,7 @@ export default class CompleteTodoMutation extends Relay.Mutation {
     return { id: this.props.todo.id };
   }
 
-  getFatQuery() { // eslint-disable-line
+  getFatQuery() {
     return Relay.QL`
       fragment on CompleteTodoMutationPayload {
         todo
@@ -28,12 +29,12 @@ export default class CompleteTodoMutation extends Relay.Mutation {
   getConfigs() {
     return [
       {
-        type: 'FIELDS_CHANGE',
+        type: "FIELDS_CHANGE",
         fieldIDs: {
           todo: this.props.todo.id,
-          viewer: this.props.viewer.id,
-        },
-      },
+          viewer: this.props.viewer.id
+        }
+      }
     ];
   }
 }

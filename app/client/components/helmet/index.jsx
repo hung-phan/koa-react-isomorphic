@@ -1,19 +1,17 @@
 /* @flow */
-import React from 'react';
-import Helmet from 'react-helmet';
-import { helmetObserver } from '../../helpers/fetchData';
+import React from "react";
+import Helmet from "react-helmet";
+import { helmetObserver } from "../../helpers/fetchData";
 
 class HelmetComponent extends React.Component {
   state: { helmet: Object } = {
-    helmet: {},
+    helmet: {}
   };
 
   componentWillMount() {
-    this.observer = helmetObserver.subscribe(
-      helmet => {
-        this.setState({ helmet });
-      }
-    );
+    this.observer = helmetObserver.subscribe(helmet => {
+      this.setState({ helmet });
+    });
   }
 
   componentWillUnmount() {
@@ -23,7 +21,7 @@ class HelmetComponent extends React.Component {
   observer: Object;
 
   render() {
-    return (<Helmet {...this.state.helmet} />);
+    return <Helmet {...this.state.helmet} />;
   }
 }
 

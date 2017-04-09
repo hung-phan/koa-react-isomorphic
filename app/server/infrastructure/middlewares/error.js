@@ -1,6 +1,6 @@
 /* @flow */
 /* global process */
-import settings from '../settings';
+import settings from "../settings";
 
 export default async (ctx: Object, next: Function) => {
   try {
@@ -13,36 +13,36 @@ export default async (ctx: Object, next: Function) => {
     ctx.status = err.status || 500;
 
     // application
-    ctx.app.emit('error', err, ctx);
+    ctx.app.emit("error", err, ctx);
 
     // accepted types
-    switch (ctx.accepts('html', 'text', 'json')) {
-      case 'text':
-        ctx.type = 'text/plain';
-        if (process.env.NODE_ENV === 'development' || err.expose) {
+    switch (ctx.accepts("html", "text", "json")) {
+      case "text":
+        ctx.type = "text/plain";
+        if (process.env.NODE_ENV === "development" || err.expose) {
           ctx.body = err.message;
         } else {
           throw err;
         }
         break;
 
-      case 'json':
-        ctx.type = 'application/json';
-        if (process.env.NODE_ENV === 'development' || err.expose) {
+      case "json":
+        ctx.type = "application/json";
+        if (process.env.NODE_ENV === "development" || err.expose) {
           ctx.body = {
-            error: err.message,
+            error: err.message
           };
         } else {
           ctx.body = {
-            error: ctx.status,
+            error: ctx.status
           };
         }
         break;
 
-      case 'html':
-        ctx.type = 'text/html';
-        if (process.env.NODE_ENV === 'development' || process.env.DEBUG) {
-          ctx.body = await ctx.render('layouts/error.marko', {
+      case "html":
+        ctx.type = "text/html";
+        if (process.env.NODE_ENV === "development" || process.env.DEBUG) {
+          ctx.body = await ctx.render("layouts/error.marko", {
             ...settings,
             ctx,
             request: ctx.request,
@@ -50,12 +50,12 @@ export default async (ctx: Object, next: Function) => {
             status: ctx.status,
             error: err.message,
             stack: err.stack,
-            code: err.code,
+            code: err.code
           });
         } else if ([404, 422].includes(ctx.status)) {
           ctx.redirect(`/${ctx.status}.html`);
         } else {
-          ctx.redirect('/500.html');
+          ctx.redirect("/500.html");
         }
         break;
       default:

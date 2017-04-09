@@ -1,3 +1,3 @@
 /* @flow */
 /* global process */
-import './logger';
+import "./logger";

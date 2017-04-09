@@ -1,34 +1,34 @@
-'use strict';
+"use strict";
 
-const _ = require('lodash');
-const webpack = require('webpack');
-const defaultConfig = require('./default');
-const productionConfig = require('./default');
+const _ = require("lodash");
+const webpack = require("webpack");
+const defaultConfig = require("./default");
+const productionConfig = require("./default");
 
 _.mergeWith(defaultConfig, {
-  devtool: false,
+  devtool: false
 });
 
 productionConfig.plugins.push(
   new webpack.LoaderOptionsPlugin({
     minimize: true,
-    debug: false,
+    debug: false
   }),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
-      warnings: false,
+      warnings: false
     },
     output: {
-      comments: false,
+      comments: false
     },
     sourceMap: false,
     mangle: {
-      except: ['GeneratorFunction', 'GeneratorFunctionPrototype'],
-    },
+      except: ["GeneratorFunction", "GeneratorFunctionPrototype"]
+    }
   }),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': "'production'",
-    'process.env.SERVER_RENDERING': true,
+    "process.env.NODE_ENV": "'production'",
+    "process.env.SERVER_RENDERING": true
   })
 );
 

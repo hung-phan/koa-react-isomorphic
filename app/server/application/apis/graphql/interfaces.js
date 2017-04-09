@@ -1,22 +1,20 @@
 /* @flow */
-import debug from 'debug';
-import { fromGlobalId, nodeDefinitions } from 'graphql-relay';
-import * as todosDAO from '../../../infrastructure/daos/TodosDAO';
+import debug from "debug";
+import { fromGlobalId, nodeDefinitions } from "graphql-relay";
+import * as todosDAO from "../../../infrastructure/daos/TodosDAO";
 
-export const Viewer = Symbol('Viewer');
+export const Viewer = Symbol("Viewer");
 
-export const { nodeInterface, nodeField } = nodeDefinitions(
-  (globalId) => {
-    const { type, id } = fromGlobalId(globalId);
+export const { nodeInterface, nodeField } = nodeDefinitions(globalId => {
+  const { type, id } = fromGlobalId(globalId);
 
-    switch (type) {
-      case 'Viewer':
-        return Viewer;
-      case 'Todo':
-        return todosDAO.getById(id);
-      default:
-        debug('schema')(type, id);
-        return undefined;
-    }
+  switch (type) {
+    case "Viewer":
+      return Viewer;
+    case "Todo":
+      return todosDAO.getById(id);
+    default:
+      debug("schema")(type, id);
+      return undefined;
   }
-);
+});

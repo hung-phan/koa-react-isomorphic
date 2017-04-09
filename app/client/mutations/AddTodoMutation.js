@@ -1,12 +1,13 @@
 /* @flow */
-import Relay from 'react-relay';
+/* eslint-disable class-methods-use-this */
+import Relay from "react-relay";
 
 export default class AddTodoMutation extends Relay.Mutation {
   static fragments = {
-    viewer: () => Relay.QL`fragment on Viewer { id }`,
+    viewer: () => Relay.QL`fragment on Viewer { id }`
   };
 
-  getMutation() { //eslint-disable-line
+  getMutation() {
     return Relay.QL`mutation { addTodo }`;
   }
 
@@ -14,7 +15,7 @@ export default class AddTodoMutation extends Relay.Mutation {
     return { text: this.props.text };
   }
 
-  getFatQuery() { //eslint-disable-line
+  getFatQuery() {
     return Relay.QL`
       fragment on AddTodoMutationPayload {
         todoEdge
@@ -29,15 +30,15 @@ export default class AddTodoMutation extends Relay.Mutation {
   getConfigs() {
     return [
       {
-        type: 'RANGE_ADD',
-        parentName: 'viewer',
+        type: "RANGE_ADD",
+        parentName: "viewer",
         parentID: this.props.viewer.id,
-        connectionName: 'todos',
-        edgeName: 'todoEdge',
+        connectionName: "todos",
+        edgeName: "todoEdge",
         rangeBehaviors: {
-          '': 'append',
-        },
-      },
+          "": "append"
+        }
+      }
     ];
   }
 
@@ -46,12 +47,12 @@ export default class AddTodoMutation extends Relay.Mutation {
       todoEdge: {
         node: {
           complete: false,
-          text: this.props.text,
-        },
+          text: this.props.text
+        }
       },
       viewer: {
-        numberOfTodos: this.props.viewer.numberOfTodos + 1,
-      },
+        numberOfTodos: this.props.viewer.numberOfTodos + 1
+      }
     };
   }
 }

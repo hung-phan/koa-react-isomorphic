@@ -1,12 +1,12 @@
 /* @flow */
-import DataLoader from 'dataloader';
-import database from '../database';
-import Todo from '../../domain/Todo';
+import DataLoader from "dataloader";
+import database from "../database";
+import Todo from "../../domain/Todo";
 
 type RawTodoType = {
   id: string,
   text: string,
-  complete: boolean,
+  complete: boolean
 };
 
 let data = database.todos;
@@ -20,9 +20,7 @@ const dataloader = new DataLoader(
     const set: Set<string> = new Set(ids);
 
     return Promise.resolve(
-      data
-        .filter(({ id }: RawTodoType) => set.has(id))
-        .map(builder)
+      data.filter(({ id }: RawTodoType) => set.has(id)).map(builder)
     );
   }
 );
@@ -33,7 +31,8 @@ export const all = (): Promise<Todo[]> => Promise.resolve(data.map(builder));
 
 export const getById = (id: string): Promise<Todo> => dataloader.load(id);
 
-export const getByIds = (ids: string[]): Promise<Todo[]> => dataloader.loadMany(ids);
+export const getByIds = (ids: string[]): Promise<Todo[]> =>
+  dataloader.loadMany(ids);
 
 export const insert = (todo: Todo) => {
   data.push({ id: todo.id, text: todo.text, complete: todo.complete });
@@ -49,7 +48,7 @@ export const update = (todo: Todo) => {
   if (todoObj) {
     Object.assign(todoObj, {
       text: todo.text,
-      complete: todo.complete,
+      complete: todo.complete
     });
   }
 };

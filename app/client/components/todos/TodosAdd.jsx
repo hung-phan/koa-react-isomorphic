@@ -1,18 +1,18 @@
 /* @flow */
-import React from 'react';
-import Relay from 'react-relay';
-import type { ViewerType } from './types';
-import AddTodoMutation from '../../mutations/AddTodoMutation';
+import React from "react";
+import Relay from "react-relay";
+import type { ViewerType } from "./types";
+import AddTodoMutation from "../../mutations/AddTodoMutation";
 
 export default class TodosAdd extends React.PureComponent {
   state: { todo: string, numberOfTodos: number } = {
-    todo: '',
-    numberOfTodos: 20,
+    todo: "",
+    numberOfTodos: 20
   };
 
   props: {
     viewer: ViewerType,
-    relay: Object,
+    relay: Object
   };
 
   updateTodo = (e: Object) => {
@@ -23,14 +23,16 @@ export default class TodosAdd extends React.PureComponent {
     Relay.Store.commitUpdate(
       new AddTodoMutation({ text: this.state.todo, viewer: this.props.viewer })
     );
-    this.setState({ todo: '' });
+    this.setState({ todo: "" });
   };
 
   changeNumberOfTodoList = (e: Object) => {
     this.setState({ numberOfTodos: parseInt(e.target.value, 10) }, () => {
-      this.props.relay.setVariables({ numberOfTodos: this.state.numberOfTodos });
+      this.props.relay.setVariables({
+        numberOfTodos: this.state.numberOfTodos
+      });
     });
-  }
+  };
 
   render() {
     return (
@@ -41,10 +43,17 @@ export default class TodosAdd extends React.PureComponent {
               type="text"
               className="form-control"
               placeholder="Todo"
-              value={this.state.todo} onChange={this.updateTodo}
+              value={this.state.todo}
+              onChange={this.updateTodo}
             />
           </div>
-          <button type="button" className="btn btn-success" onClick={this.addTodo}>Add Todo</button>
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={this.addTodo}
+          >
+            Add Todo
+          </button>
         </div>
 
         <div className="form-inline">
@@ -53,7 +62,8 @@ export default class TodosAdd extends React.PureComponent {
               type="range"
               min="1"
               max={this.props.viewer.numberOfTodos}
-              value={this.state.numberOfTodos} onChange={this.changeNumberOfTodoList}
+              value={this.state.numberOfTodos}
+              onChange={this.changeNumberOfTodoList}
             />
           </div>
         </div>

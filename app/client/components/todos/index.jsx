@@ -1,19 +1,21 @@
 /* @flow */
-import React from 'react';
-import Relay from 'react-relay';
-import { compose, onlyUpdateForKeys } from 'recompose';
-import TodosHeader from './TodosHeader';
-import TodosAdd from './TodosAdd';
-import TodosBody from './TodosBody';
-import TodosFooter from './TodosFooter';
-import type { ViewerType } from './types';
-import createRedialHooks from '../../helpers/createRedialHooks';
-import { INJECT_PRELOAD_LINK_HOOK } from '../../helpers/fetchData';
-import AddTodoMutation from '../../mutations/AddTodoMutation';
-import RemoveTodoMutation from '../../mutations/RemoveTodoMutation';
-import CompleteTodoMutation from '../../mutations/CompleteTodoMutation';
+import React from "react";
+import Relay from "react-relay";
+import { compose, onlyUpdateForKeys } from "recompose";
+import TodosHeader from "./TodosHeader";
+import TodosAdd from "./TodosAdd";
+import TodosBody from "./TodosBody";
+import TodosFooter from "./TodosFooter";
+import type { ViewerType } from "./types";
+import createRedialHooks from "../../helpers/createRedialHooks";
+import { INJECT_PRELOAD_LINK_HOOK } from "../../helpers/fetchData";
+import AddTodoMutation from "../../mutations/AddTodoMutation";
+import RemoveTodoMutation from "../../mutations/RemoveTodoMutation";
+import CompleteTodoMutation from "../../mutations/CompleteTodoMutation";
 
-export const Todos = ({ viewer, relay }: { viewer: ViewerType, relay: Object }) => (
+export const Todos = (
+  { viewer, relay }: { viewer: ViewerType, relay: Object }
+) => (
   <div className="container">
     <div className="row">
       <TodosHeader />
@@ -29,18 +31,21 @@ export const enhance = compose(
     [INJECT_PRELOAD_LINK_HOOK]: ({ helmetObserver }) => {
       helmetObserver.next({
         link: [
-          { rel: 'preload', href: window.javascriptAssets['static-page'], as: 'script' },
-        ],
+          {
+            rel: "preload",
+            href: window.javascriptAssets["static-page"],
+            as: "script"
+          }
+        ]
       });
-    },
+    }
   }),
-  Component =>
-    Relay.createContainer(Component, {
-      initialVariables: {
-        numberOfTodos: 10,
-      },
-      fragments: {
-        viewer: () => Relay.QL`
+  Component => Relay.createContainer(Component, {
+    initialVariables: {
+      numberOfTodos: 10
+    },
+    fragments: {
+      viewer: () => Relay.QL`
           fragment on Viewer {
             todos(last: $numberOfTodos) {
               edges {
@@ -52,14 +57,14 @@ export const enhance = compose(
               }
             }
             numberOfTodos
-            ${AddTodoMutation.getFragment('viewer')}
-            ${RemoveTodoMutation.getFragment('viewer')}
-            ${CompleteTodoMutation.getFragment('viewer')}
+            ${AddTodoMutation.getFragment("viewer")}
+            ${RemoveTodoMutation.getFragment("viewer")}
+            ${CompleteTodoMutation.getFragment("viewer")}
           }
-        `,
-      },
-    }),
-  onlyUpdateForKeys(['viewer', 'relay'])
+        `
+    }
+  }),
+  onlyUpdateForKeys(["viewer", "relay"])
 );
 
 export default enhance(Todos);
