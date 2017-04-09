@@ -8,6 +8,7 @@
     "node": true
   },
   "rules": {
+    "quotes": [2, "double"],
     "comma-dangle": 0,
     "no-param-reassign": 0,
     "global-require": 0,
