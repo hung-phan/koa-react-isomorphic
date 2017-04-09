@@ -1,8 +1,8 @@
 /* @flow */
 /* global process */
-import React from 'react';
-import { Provider } from 'react-redux';
-import Helmet from '../helmet';
+import React from "react";
+import { Provider } from "react-redux";
+import Helmet from "../helmet";
 
 export default ({ store, routes }: { store: Object, routes: Object }) => {
   let Component = (
@@ -14,8 +14,8 @@ export default ({ store, routes }: { store: Object, routes: Object }) => {
     </Provider>
   );
 
-  if (process.env.NODE_ENV === 'development') {
-    const { AppContainer } = require('react-hot-loader');
+  if (process.env.NODE_ENV === "development") {
+    const { AppContainer } = require("react-hot-loader");
 
     Component = (
       <AppContainer>

@@ -1,9 +1,9 @@
-import React from 'react';
-import { assert } from 'chai';
-import { shallow } from 'enzyme';
-import StaticPage from '../index';
+import React from "react";
+import { assert } from "chai";
+import { shallow } from "enzyme";
+import StaticPage from "../index";
 
-describe('Component: StaticPage', () => {
+describe("Component: StaticPage", () => {
   let component;
 
   beforeEach(() => {
@@ -11,6 +11,6 @@ describe('Component: StaticPage', () => {
   });
 
   it("should render 'Back to Home page' link", () => {
-    assert.include(component.html(), 'Back to Home page');
+    assert.include(component.html(), "Back to Home page");
   });
 });

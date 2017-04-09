@@ -1,7 +1,7 @@
 /* @flow */
 /* global process */
-import './server/infrastructure';
-import app from './server/infrastructure/app';
+import "./server/infrastructure";
+import app from "./server/infrastructure/app";
 
 const PORT = process.env.PORT || 3000;
 

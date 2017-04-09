@@ -1,19 +1,25 @@
 /* @flow */
-import { Map } from 'immutable';
-import { handleActions } from 'redux-actions';
-import { LOCATION_CHANGE } from 'react-router-redux';
-import globalizeSelectors from '../../helpers/globalizeSelectors';
+import { Map } from "immutable";
+import { handleActions } from "redux-actions";
+import { LOCATION_CHANGE } from "react-router-redux";
+import globalizeSelectors from "../../helpers/globalizeSelectors";
 
-export const mountPoint = 'routing';
+export const mountPoint = "routing";
 
-export const selectors = globalizeSelectors({
-  selectLocationState: (state) => state.get('object'),
-}, mountPoint);
+export const selectors = globalizeSelectors(
+  {
+    selectLocationState: state => state.get("object")
+  },
+  mountPoint
+);
 
-export default handleActions({
-  [LOCATION_CHANGE]: (state, { payload }) => state.set('object', {
-    locationBeforeTransitions: payload,
-  }),
-}, new Map({
-  object: { locationBeforeTransitions: null },
-}));
+export default handleActions(
+  {
+    [LOCATION_CHANGE]: (state, { payload }) => state.set("object", {
+      locationBeforeTransitions: payload
+    })
+  },
+  new Map({
+    object: { locationBeforeTransitions: null }
+  })
+);
