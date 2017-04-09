@@ -1,18 +1,18 @@
-import { assert } from 'chai';
-import td from 'testdouble';
-import React from 'react';
-import { shallow } from 'enzyme';
-import { Todos } from '../index';
-import TodosHeader from '../TodosHeader';
-import TodosAdd from '../TodosAdd';
-import TodosBody from '../TodosBody';
+import { assert } from "chai";
+import td from "testdouble";
+import React from "react";
+import { shallow } from "enzyme";
+import { Todos } from "../index";
+import TodosHeader from "../TodosHeader";
+import TodosAdd from "../TodosAdd";
+import TodosBody from "../TodosBody";
 
-describe('Component: Todos', () => {
+describe("Component: Todos", () => {
   const todos = [
-    { text: 'Todo 1', complete: false },
-    { text: 'Todo 2', complete: false },
-    { text: 'Todo 3', complete: false },
-    { text: 'Todo 4', complete: false },
+    { text: "Todo 1", complete: false },
+    { text: "Todo 2", complete: false },
+    { text: "Todo 3", complete: false },
+    { text: "Todo 4", complete: false }
   ];
   let actions;
   let component;
@@ -21,7 +21,7 @@ describe('Component: Todos', () => {
     actions = {
       addTodo: td.function(),
       removeTodo: td.function(),
-      completeTodo: td.function(),
+      completeTodo: td.function()
     };
     component = shallow(<Todos todos={todos} actions={actions} />);
   });

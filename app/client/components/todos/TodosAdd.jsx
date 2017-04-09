@@ -1,14 +1,14 @@
 /* @flow */
-import React from 'react';
-import type { AddTodoActionType } from './types';
+import React from "react";
+import type { AddTodoActionType } from "./types";
 
 export default class TodosAdd extends React.PureComponent {
   state: { todo: string } = {
-    todo: '',
+    todo: ""
   };
 
   props: {
-    addTodo: AddTodoActionType;
+    addTodo: AddTodoActionType
   };
 
   updateTodo = (e: Object) => {
@@ -17,7 +17,7 @@ export default class TodosAdd extends React.PureComponent {
 
   addTodo = () => {
     this.props.addTodo(this.state.todo);
-    this.setState({ todo: '' });
+    this.setState({ todo: "" });
   };
 
   render() {
@@ -29,10 +29,17 @@ export default class TodosAdd extends React.PureComponent {
               type="text"
               className="form-control"
               placeholder="Todo"
-              value={this.state.todo} onChange={this.updateTodo}
+              value={this.state.todo}
+              onChange={this.updateTodo}
             />
           </div>
-          <button type="button" className="btn btn-success" onClick={this.addTodo}>Add Todo</button>
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={this.addTodo}
+          >
+            Add Todo
+          </button>
         </div>
       </div>
     );

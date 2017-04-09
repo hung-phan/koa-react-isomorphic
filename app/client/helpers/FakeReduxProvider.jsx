@@ -1,9 +1,9 @@
 /* @flow */
-import React from 'react';
+import React from "react";
 
 export default class ProviderMock extends React.Component {
   static childContextTypes = {
-    store: React.PropTypes.object.isRequired,
+    store: React.PropTypes.object.isRequired
   };
 
   getChildContext() {
@@ -16,6 +16,6 @@ export default class ProviderMock extends React.Component {
   };
 
   render() {
-    return (<div>{this.props.children}</div>);
+    return <div>{this.props.children}</div>;
   }
 }

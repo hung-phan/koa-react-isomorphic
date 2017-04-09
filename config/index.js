@@ -1,10 +1,10 @@
 module.exports = {
   path: {
-    app: '/app/',
-    assets: '/assets/',
-    publicAssets: '/public/assets/',
-    build: '/build/',
-    tmp: '/tmp/',
+    app: "/app/",
+    assets: "/assets/",
+    publicAssets: "/public/assets/",
+    build: "/build/",
+    tmp: "/tmp/"
   },
-  cssModules: '?localIdentName=[local]__[hash:base64:5]',
+  cssModules: "?localIdentName=[local]__[hash:base64:5]"
 };

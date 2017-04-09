@@ -1,9 +1,9 @@
-import React from 'react';
-import { assert } from 'chai';
-import { shallow } from 'enzyme';
-import TodosFooter from '../TodosFooter';
+import React from "react";
+import { assert } from "chai";
+import { shallow } from "enzyme";
+import TodosFooter from "../TodosFooter";
 
-describe('Component: TodosFooter', () => {
+describe("Component: TodosFooter", () => {
   let component;
 
   beforeEach(() => {
@@ -11,6 +11,6 @@ describe('Component: TodosFooter', () => {
   });
 
   it("should render 'Go to static page' link", () => {
-    assert.include(component.html(), 'Go to static page');
+    assert.include(component.html(), "Go to static page");
   });
 });

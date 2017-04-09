@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import React from "react";
 
 export default () => (
   <div className="col-md-12">

@@ -1,5 +1,5 @@
 /* @flow */
-import Koa from 'koa';
+import Koa from "koa";
 import {
   apiLayer,
   assetsLayer,
@@ -8,9 +8,9 @@ import {
   loggingLayer,
   renderLayer,
   securityLayer
-} from './middlewares';
-import apis from '../application/apis';
-import controllers from '../application/controllers';
+} from "./middlewares";
+import apis from "../application/apis";
+import controllers from "../application/controllers";
 
 const app = new Koa();
 

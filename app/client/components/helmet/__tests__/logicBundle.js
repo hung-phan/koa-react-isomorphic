@@ -1,11 +1,11 @@
-import _ from 'lodash';
-import faker from 'faker';
-import { assert } from 'chai';
-import reducer, { updateLink, updateTitle } from '../logicBundle';
+import _ from "lodash";
+import faker from "faker";
+import { assert } from "chai";
+import reducer, { updateLink, updateTitle } from "../logicBundle";
 
-describe('Module: Helmet', () => {
-  describe('Reducer', () => {
-    it('should be a function', () => {
+describe("Module: Helmet", () => {
+  describe("Reducer", () => {
+    it("should be a function", () => {
       assert.ok(reducer);
       assert.isFunction(reducer);
     });
@@ -14,7 +14,10 @@ describe('Module: Helmet', () => {
       const newTitle = faker.random.uuid();
 
       assert.deepEqual(
-        reducer({ title: 'Koa React Isomorphic', link: [] }, updateTitle(newTitle)),
+        reducer(
+          { title: "Koa React Isomorphic", link: [] },
+          updateTitle(newTitle)
+        ),
         { title: newTitle, link: [] }
       );
     });
@@ -23,8 +26,11 @@ describe('Module: Helmet', () => {
       const newLink = _.range(10).map(() => faker.random.uuid());
 
       assert.deepEqual(
-        reducer({ title: 'Koa React Isomorphic', link: [] }, updateLink(newLink)),
-        { title: 'Koa React Isomorphic', link: newLink }
+        reducer(
+          { title: "Koa React Isomorphic", link: [] },
+          updateLink(newLink)
+        ),
+        { title: "Koa React Isomorphic", link: newLink }
       );
     });
   });

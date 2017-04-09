@@ -1,25 +1,29 @@
 /* @flow */
 /* global process */
-import React from 'react';
-import Helmet from 'react-helmet';
-import { renderToString } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
-import App from '../../../client/components/app';
-import createStore from '../../../client/createStore';
-import { serverFetchData } from '../../../client/helpers/fetchData';
+import React from "react";
+import Helmet from "react-helmet";
+import { renderToString } from "react-dom/server";
+import { match, RouterContext } from "react-router";
+import App from "../../../client/components/app";
+import createStore from "../../../client/createStore";
+import { serverFetchData } from "../../../client/helpers/fetchData";
 
-let routesModule = require('../../../routes');
+let routesModule = require("../../../routes");
 
-if (process.env.NODE_ENV === 'development' && module.hot) {
+if (process.env.NODE_ENV === "development" && module.hot) {
   // $FlowFixMe
-  module.hot.accept('../../../routes', () => {
-    routesModule = require('../../../routes');
+  module.hot.accept("../../../routes", () => {
+    routesModule = require("../../../routes");
   });
 }
 
 export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
-    ctx.prerender = (template: string, parameters: Object = {}, initialState: Object = {}) => {
+    ctx.prerender = (
+      template: string,
+      parameters: Object = {},
+      initialState: Object = {}
+    ) => {
       const store = createStore(initialState);
       const history = routesModule.getServerHistory(store, ctx.req.url);
       const routes = routesModule.getRoutes(history, store);
@@ -31,23 +35,25 @@ export default async (ctx: Object, next: Function) => {
           } else if (redirectLocation) {
             ctx.redirect(redirectLocation.pathname + redirectLocation.search);
           } else if (renderProps) {
-            serverFetchData(renderProps, store)
-              .then(() => {
-                const currentRoutes = <RouterContext {...renderProps} />;
-                const prerenderComponent = renderToString(
-                  <App store={store} routes={currentRoutes} />
-                );
-                const prerenderData = store.getState();
+            serverFetchData(renderProps, store).then(() => {
+              const currentRoutes = <RouterContext {...renderProps} />;
+              const prerenderComponent = renderToString(
+                <App store={store} routes={currentRoutes} />
+              );
+              const prerenderData = store.getState();
 
-                // prevent memory leak
-                Helmet.rewind();
+              // prevent memory leak
+              Helmet.rewind();
 
-                ctx.render(template, {
+              ctx
+                .render(template, {
                   ...parameters,
                   prerenderComponent,
-                  prerenderData,
-                }).then(resolve).catch(reject);
-              });
+                  prerenderData
+                })
+                .then(resolve)
+                .catch(reject);
+            });
           } else {
             ctx.throw(404);
           }
