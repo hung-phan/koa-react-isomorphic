@@ -6280,10 +6280,6 @@ react-addons-test-utils@^15.5.1:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
-react-async-component@^1.0.0-beta.2:
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/react-async-component/-/react-async-component-1.0.0-beta.2.tgz#5041311598b7faa80d1990e98723eb4b5b69d237"
-
 react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
@@ -6315,6 +6311,12 @@ react-hot-loader@^3.0.0-beta.6:
     react-proxy "^3.0.0-alpha.0"
     redbox-react "^1.2.5"
     source-map "^0.4.4"
+
+react-loadable@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-loadable/-/react-loadable-3.2.2.tgz#59c1b6d20abbefda9f57cf42d2e275cfdaf394df"
+  dependencies:
+    babel-plugin-syntax-dynamic-import "^6.18.0"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
