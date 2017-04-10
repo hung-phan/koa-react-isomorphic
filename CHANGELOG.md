@@ -1,3 +1,8 @@
+## 4.0.2
+- Refactor the whole application with DDD
+- Update eslint style
+- Replace react-async-component with react-loadable
+
 ## 3.3.0
 - Add preload for next route
 - Update redial webhook
