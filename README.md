@@ -74,7 +74,7 @@ This will map the hook with the current component and trigger it (Note: This wil
 * Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
 ### Async react components
-[react-async-component](https://github.com/ctrlplusb/react-async-component)
+[react-loadable](https://github.com/thejameskyle/react-loadable)
 
 ### Idea to structure redux application
 For now, the best way is to place all logic in the same place with components to make it less painful when scaling the application.
