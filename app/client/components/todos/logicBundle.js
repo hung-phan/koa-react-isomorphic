@@ -2,6 +2,7 @@
 import fetch from "isomorphic-fetch";
 import { List, fromJS } from "immutable";
 import identity from "lodash/identity";
+import update from "immutability-helper";
 import { createAction, handleActions } from "redux-actions";
 import globalizeSelectors from "../../helpers/globalizeSelectors";
 import { getUrl } from "../../helpers/handleHTTP";

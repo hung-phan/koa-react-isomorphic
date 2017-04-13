@@ -9,8 +9,8 @@ import { createLogger } from "redux-logger";
 import { persistState } from "redux-devtools";
 import reducers from "./createReducer";
 
-let middlewares = [thunkMiddleware, promiseMiddleware];
-let enhancers = [];
+const middlewares = [thunkMiddleware, promiseMiddleware];
+const enhancers = [];
 
 // support for development
 if (
@@ -21,17 +21,13 @@ if (
     stateTransformer: state => state.toJS()
   });
 
-  middlewares = [...middlewares, loggerMiddleware];
-
-  enhancers = [
-    ...enhancers,
-    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-  ];
+  middlewares.push(loggerMiddleware);
+  enhancers.push(persistState("/[?&]debug_session=([^&]+)\b/"));
 }
 
 // support redux-devtools
 if (process.env.RUNTIME_ENV === "client" && window.devToolsExtension) {
-  enhancers = [...enhancers, window.devToolsExtension()];
+  enhancers.push(window.devToolsExtension());
 }
 
 export default (initialState: Object = {}) => {
