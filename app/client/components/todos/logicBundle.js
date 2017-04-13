@@ -1,6 +1,7 @@
 /* @flow */
 import fetch from "isomorphic-fetch";
 import identity from "lodash/identity";
+import update from "immutability-helper";
 import { createAction, handleActions } from "redux-actions";
 import globalizeSelectors from "../../helpers/globalizeSelectors";
 import { getUrl } from "../../helpers/handleHTTP";
@@ -38,19 +39,18 @@ export const fetchTodos = () =>
 
 export default handleActions(
   {
-    [ADD_TODO]: (state, { payload: text }) => [
-      ...state,
-      { text, complete: false }
-    ],
-    [REMOVE_TODO]: (state, { payload: index }) => [
-      ...state.slice(0, index),
-      ...state.slice(index + 1)
-    ],
-    [COMPLETE_TODO]: (state, { payload: index }) => [
-      ...state.slice(0, index),
-      { ...state[index], complete: !state[index].complete },
-      ...state.slice(index + 1)
-    ],
+    [ADD_TODO]: (state, { payload: text }) => update(state, {
+      $push: [{ text, complete: false }]
+    }),
+    [REMOVE_TODO]: (state, { payload: index }) => update(state, {
+      $splice: [[index, 1]]
+    }),
+    [COMPLETE_TODO]: (state, { payload: index }) => update(state, {
+      $splice: [
+        [index, 1],
+        [index, 0, { ...state[index], complete: !state[index].complete }]
+      ]
+    }),
     [SET_TODOS]: (state, { payload: todos }) => todos
   },
   []
