@@ -5,7 +5,7 @@ import faker from "faker";
 import { Store } from "react-relay";
 import { __RewireAPI__ as Module, prepareInitialRender } from "../fetchData";
 
-describe("Helper: inject-data-utils", () => {
+describe("Helper: fetchData", () => {
   context("# prepareInitialRender", () => {
     let browserHistoryListen;
     let domNode;
