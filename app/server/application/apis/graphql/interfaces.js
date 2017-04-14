@@ -1,7 +1,7 @@
 /* @flow */
 import debug from "debug";
 import { fromGlobalId, nodeDefinitions } from "graphql-relay";
-import * as todosDAO from "../../../infrastructure/daos/TodosDAO";
+import * as todosDAO from "../../../domain/repositories/TodoDAO";
 
 export const Viewer = Symbol("Viewer");
 

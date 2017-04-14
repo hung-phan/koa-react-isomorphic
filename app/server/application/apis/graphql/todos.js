@@ -16,8 +16,8 @@ import {
 } from "graphql-relay";
 import { nodeInterface, Viewer } from "./interfaces";
 import ViewerType from "./viewer";
-import Todo from "../../../domain/Todo";
-import * as todosDAO from "../../../infrastructure/daos/TodosDAO";
+import Todo from "../../../domain/models/Todo";
+import * as todosDAO from "../../../domain/repositories/TodoDAO";
 
 export const TodoType = new GraphQLObjectType({
   name: "Todo",

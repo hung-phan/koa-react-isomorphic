@@ -1033,17 +1033,11 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-relay-plugin-loader@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/babel-relay-plugin-loader/-/babel-relay-plugin-loader-0.10.0.tgz#1dff6f6d6355243fe23a2dec5483d4c45a111300"
+babel-relay-plugin-loader@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/babel-relay-plugin-loader/-/babel-relay-plugin-loader-0.11.0.tgz#adf536b8dc75c001d20ce9fcdd5d6a3f17a98e4e"
   dependencies:
-    babel-relay-plugin "^0.10.0"
-
-babel-relay-plugin@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/babel-relay-plugin/-/babel-relay-plugin-0.10.0.tgz#c7adede2b27dcc4aeedcb1ae760e364b2bacfaa0"
-  dependencies:
-    graphql "0.8.2"
+    babel-relay-plugin "^0.11.0"
 
 babel-relay-plugin@^0.11.0:
   version "0.11.0"
@@ -3248,12 +3242,6 @@ graphql-relay@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.1.tgz#3b3e44430a24c0f636e713f43f65bd542fe02ac9"
 
-graphql@0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.8.2.tgz#eb1bb524b38104bbf2c9157f9abc67db2feba7d2"
-  dependencies:
-    iterall "1.0.2"
-
 graphql@0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.1.tgz#f4d154cbec054d4a5d3b1be95f23435c09aa86c8"
@@ -4012,10 +4000,6 @@ istanbul@^1.0.0-alpha.2:
     nopt "3.x"
     which "^1.1.1"
     wordwrap "^1.0.0"
-
-iterall@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.0.2.tgz#41a2e96ce9eda5e61c767ee5dc312373bb046e91"
 
 iterall@1.0.3:
   version "1.0.3"

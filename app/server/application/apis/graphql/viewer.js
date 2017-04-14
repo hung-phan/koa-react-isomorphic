@@ -7,7 +7,7 @@ import {
 } from "graphql-relay";
 import { nodeInterface, Viewer } from "./interfaces";
 import { TodoConnection } from "./todos";
-import * as todosDAO from "../../../infrastructure/daos/TodosDAO";
+import * as todosDAO from "../../../domain/repositories/TodoDAO";
 
 // https://github.com/facebook/relay/issues/112
 export default new GraphQLObjectType({
