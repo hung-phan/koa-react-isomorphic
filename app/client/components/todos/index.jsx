@@ -8,7 +8,7 @@ import TodosBody from "./TodosBody";
 import TodosFooter from "./TodosFooter";
 import type { ViewerType } from "./types";
 import createRedialHooks from "../../helpers/createRedialHooks";
-import { INJECT_PRELOAD_LINK_HOOK } from "../../helpers/fetchData";
+import { UPDATE_HEADER_HOOK } from "../../helpers/fetchData";
 import AddTodoMutation from "../../mutations/AddTodoMutation";
 import RemoveTodoMutation from "../../mutations/RemoveTodoMutation";
 import CompleteTodoMutation from "../../mutations/CompleteTodoMutation";
@@ -28,11 +28,11 @@ export const Todos = (
 
 export const enhance = compose(
   createRedialHooks({
-    [INJECT_PRELOAD_LINK_HOOK]: ({ helmetObserver }) => {
+    [UPDATE_HEADER_HOOK]: ({ helmetObserver }) => {
       helmetObserver.next({
         link: [
           {
-            rel: "preload",
+            rel: "prefetch",
             href: window.javascriptAssets["static-page"],
             as: "script"
           }

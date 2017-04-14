@@ -12,7 +12,7 @@ import { redirectTo } from "./handleHTTP";
 
 export const helmetObserver = new Rx.Subject();
 
-export const INJECT_PRELOAD_LINK_HOOK = "INJECT_PRELOAD_LINK_HOOK";
+export const UPDATE_HEADER_HOOK = "UPDATE_HEADER_HOOK";
 
 export const createHandler = callback => (
   error,
@@ -47,7 +47,7 @@ export const prepareInitialRender = (routes, domNode) => {
         ReactDOM.render(<App {...props} />, domNode);
 
         trigger(
-          INJECT_PRELOAD_LINK_HOOK,
+          UPDATE_HEADER_HOOK,
           renderProps.components,
           getDefaultParams(renderProps)
         );
@@ -60,7 +60,7 @@ export const prepareInitialRender = (routes, domNode) => {
       { routes, location },
       createHandler(renderProps => {
         trigger(
-          INJECT_PRELOAD_LINK_HOOK,
+          UPDATE_HEADER_HOOK,
           renderProps.components,
           getDefaultParams(renderProps)
         );
