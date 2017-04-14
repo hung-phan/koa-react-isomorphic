@@ -1,7 +1,7 @@
 /* @flow */
 import DataLoader from "dataloader";
-import database from "../database";
-import Todo from "../../domain/Todo";
+import database from "../../infrastructure/database";
+import Todo from "../models/Todo";
 
 type RawTodoType = {
   id: string,
