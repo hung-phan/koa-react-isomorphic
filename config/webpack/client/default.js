@@ -10,7 +10,7 @@ module.exports = {
   context: ROOT,
   entry: {
     app: [path.join(ROOT, config.path.app, "app")],
-    common: [
+    vendor: [
       path.join(ROOT, config.path.app, "client/helpers/loadExternalLibs")
     ]
   },
@@ -69,8 +69,17 @@ module.exports = {
       "process.env.RUNTIME_ENV": "'client'"
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ["common"],
+      name: "vendor",
+      minChunks: module => module.context && module.context.includes("node_modules")
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "manifest",
       minChunks: Infinity
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: true,
+      children: true,
+      minChunks: 4
     })
   ]
 };
