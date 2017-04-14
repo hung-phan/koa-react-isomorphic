@@ -19,7 +19,7 @@ import { updateLink } from "../helmet/logicBundle";
 import createRedialHooks from "../../helpers/createRedialHooks";
 import {
   FETCH_DATA_HOOK,
-  INJECT_PRELOAD_LINK_HOOK
+  UPDATE_HEADER_HOOK
 } from "../../helpers/fetchData";
 
 export const Todos = (
@@ -42,11 +42,11 @@ export const Todos = (
 export const enhance = compose(
   createRedialHooks({
     [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
-    [INJECT_PRELOAD_LINK_HOOK]: ({ store }) => store.dispatch(
+    [UPDATE_HEADER_HOOK]: ({ store }) => store.dispatch(
       updateLink([
         // window.javascriptAssets will be injected to do preload link for optimizing route
         {
-          rel: "preload",
+          rel: "prefetch",
           href: window.javascriptAssets["static-page"],
           as: "script"
         }

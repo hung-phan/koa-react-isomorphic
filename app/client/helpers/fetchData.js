@@ -6,7 +6,7 @@ import { redirectTo } from "./handleHTTP";
 
 export const FETCH_DATA_HOOK = "FETCH_DATA_HOOK";
 
-export const INJECT_PRELOAD_LINK_HOOK = "INJECT_PRELOAD_LINK_HOOK";
+export const UPDATE_HEADER_HOOK = "UPDATE_HEADER_HOOK";
 
 export const getDefaultParams = (
   store: Object,
@@ -48,7 +48,7 @@ export const clientFetchData = (
         }
 
         trigger(
-          INJECT_PRELOAD_LINK_HOOK,
+          UPDATE_HEADER_HOOK,
           renderProps.components,
           getDefaultParams(store, renderProps)
         );

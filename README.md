@@ -40,7 +40,7 @@ Takes a look at `templates/todos`, I will have sth like:
 ```javascript
   createRedialEnhancer({
     [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
-    [INJECT_PRELOAD_LINK_HOOK]: ({ store }) => store.dispatch(updateLink([
+    [UPDATE_HEADER_HOOK]: ({ store }) => store.dispatch(updateLink([
       // window.javascriptAssets will be injected to do preload link for optimizing route
       { rel: 'preload', href: window.javascriptAssets['static-page'], as: 'script' },
     ])),
