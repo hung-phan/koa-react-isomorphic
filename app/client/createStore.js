@@ -6,7 +6,6 @@ import { applyMiddleware, compose, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import promiseMiddleware from "redux-promise";
 import { createLogger } from "redux-logger";
-import { persistState } from "redux-devtools";
 import reducers from "./createReducer";
 
 const middlewares = [thunkMiddleware, promiseMiddleware];
@@ -22,7 +21,6 @@ if (
   });
 
   middlewares.push(loggerMiddleware);
-  enhancers.push(persistState("/[?&]debug_session=([^&]+)\b/"));
 }
 
 // support redux-devtools
