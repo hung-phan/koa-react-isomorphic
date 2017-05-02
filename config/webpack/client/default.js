@@ -32,10 +32,6 @@ module.exports = {
         loader: "modernizr-loader"
       },
       {
-        test: /\.async\.jsx$/,
-        loader: "react-proxy-loader!exports-loader?exports.default"
-      },
-      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: ["babel-loader", "eslint-loader"]
