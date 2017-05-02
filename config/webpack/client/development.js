@@ -28,6 +28,9 @@ _.mergeWith(
       contentBase: ROOT,
       noInfo: true,
       hot: true,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
       inline: true
     },
     recordsPath: path.join(ROOT, config.path.tmp, "client-records.json")
