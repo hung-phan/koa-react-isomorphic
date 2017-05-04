@@ -6,6 +6,7 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const OfflinePlugin = require("offline-plugin");
+const PrepackWebpackPlugin = require("prepack-webpack-plugin").default;
 const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require("../../webpack/webpack-isomorphic-tools")
@@ -58,6 +59,7 @@ productionConfig.plugins.push(
     filename: "[name].[contenthash].css",
     allChunks: true
   }),
+  new PrepackWebpackPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
