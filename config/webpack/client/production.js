@@ -3,9 +3,10 @@
 const _ = require("lodash");
 const config = require("../../index");
 const webpack = require("webpack");
+const OfflinePlugin = require("offline-plugin");
+const BabiliPlugin = require("babili-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const OfflinePlugin = require("offline-plugin");
 const PrepackWebpackPlugin = require("prepack-webpack-plugin").default;
 const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
@@ -64,14 +65,8 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    },
-    output: {
-      comments: false
-    },
-    sourceMap: false
+  new BabiliPlugin({}, {
+    comments: false
   }),
   new CompressionPlugin(),
   webpackIsomorphicToolsPlugin,
