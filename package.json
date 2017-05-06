@@ -99,7 +99,7 @@
     "script-loader": "^0.7.0",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
-    "webpack": "^2.4.1",
+    "webpack": "^2.5.0",
     "webpack-dev-server": "^2.4.5",
     "webpack-isomorphic-tools": "^3.0.2",
     "webpack-node-externals": "^1.5.4"
