@@ -1,3 +1,7 @@
+## 4.1.0
+- Add Babili and Prepack
+- Restructure babel-preset for current node env
+
 ## 4.0.2
 - Refactor the whole application with DDD
 - Update eslint style

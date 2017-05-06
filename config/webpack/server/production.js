@@ -2,6 +2,7 @@
 
 const _ = require("lodash");
 const webpack = require("webpack");
+const BabiliPlugin = require("babili-webpack-plugin");
 const defaultConfig = require("./default");
 const productionConfig = require("./default");
 
@@ -14,17 +15,8 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    },
-    output: {
-      comments: false
-    },
-    sourceMap: false,
-    mangle: {
-      except: ["GeneratorFunction", "GeneratorFunctionPrototype"]
-    }
+  new BabiliPlugin({}, {
+    comments: false
   }),
   new webpack.DefinePlugin({
     "process.env.NODE_ENV": "'production'",

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ -z "${RUNTIME_ENV}" ]; then
+  export RUNTIME_ENV=${1:-client}
+fi
