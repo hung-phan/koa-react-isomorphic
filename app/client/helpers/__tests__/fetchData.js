@@ -11,10 +11,6 @@ import {
 } from "../fetchData";
 
 describe("Helper: fetchData", () => {
-  it("should be an object", () => {
-    assert.isObject(Module);
-  });
-
   context("# serverFetchData", () => {
     let trigger;
     let renderProps;
@@ -32,15 +28,15 @@ describe("Helper: fetchData", () => {
       };
 
       Module.__Rewire__("trigger", trigger);
-
-      serverFetchData(renderProps, store);
     });
 
     after(() => {
       Module.__ResetDependency__("trigger");
     });
 
-    it('should call "trigger" with "components" and "locals"', () => {
+    it("should call 'trigger' with 'components' and 'locals'", () => {
+      serverFetchData(renderProps, store);
+
       td.verify(
         trigger(FETCH_DATA_HOOK, components, {
           store,
