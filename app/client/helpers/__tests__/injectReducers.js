@@ -1,5 +1,3 @@
-import td from "testdouble";
-import { assert } from "chai";
 import { createAction, handleAction } from "redux-actions";
 import createStore from "../../createStore";
 import injectReducers from "../injectReducers";
@@ -23,27 +21,27 @@ describe("Helper: injectReducers", () => {
   });
 
   it("should not contain 'newReducer' state", () => {
-    assert.notProperty(store.getState(), "newReducer");
+    expect(store.getState()).not.toHaveProperty("newReducer");
   });
 
-  context("injectReducers", () => {
+  describe("injectReducers", () => {
     beforeEach(() => {
       injectReducers(store, newReducers);
     });
 
     it("should inject 'newReducer'", () => {
-      assert.property(store.getState(), "newReducer");
+      expect(store.getState()).toHaveProperty("newReducer");
     });
 
     it("should have default state", () => {
-      assert.equal(store.getState().newReducer, null);
+      expect(store.getState().newReducer).toEqual(null);
     });
 
     it("should work when dispatch 'NEW_ACTION'", () => {
       const data = Symbol("data");
       store.dispatch(newAction(data));
 
-      assert.equal(store.getState().newReducer, data);
+      expect(store.getState().newReducer).toEqual(data);
     });
   });
 });

@@ -1,4 +1,3 @@
-import { assert } from "chai";
 import td from "testdouble";
 import React from "react";
 import { mount } from "enzyme";
@@ -19,10 +18,10 @@ describe("Component: TodosBody", () => {
     );
     const trComponents = component.find("tr");
 
-    assert.lengthOf(trComponents, todos.length);
+    expect(trComponents).toHaveLength(todos.length);
   });
 
-  it('should call "removeTodo" when click on the delete button', () => {
+  it("should call 'removeTodo' when click on the delete button", () => {
     const removeTodo = td.function();
     const component = mount(
       <TodosBody todos={todos} removeTodo={removeTodo} completeTodo={noop} />
@@ -33,13 +32,13 @@ describe("Component: TodosBody", () => {
       const removeButton = tr.find(".btn-danger");
       removeButton.simulate("click");
 
-      assert.ok(removeButton);
+      expect(removeButton).toBeDefined();
       td.verify(removeTodo(index, td.matchers.anything()));
     });
-    assert.equal(td.explain(removeTodo).callCount, todos.length);
+    expect(td.explain(removeTodo).callCount).toEqual(todos.length);
   });
 
-  it('should call "completeTodo" when click on the complete button', () => {
+  it("should call 'completeTodo' when click on the complete button", () => {
     const completeTodo = td.function();
     const component = mount(
       <TodosBody todos={todos} removeTodo={noop} completeTodo={completeTodo} />
@@ -50,9 +49,9 @@ describe("Component: TodosBody", () => {
       const completeButton = tr.find(".btn-success");
       completeButton.simulate("click");
 
-      assert.ok(completeButton);
+      expect(completeButton).toBeDefined();
       td.verify(completeTodo(index, td.matchers.anything()));
     });
-    assert.equal(td.explain(completeTodo).callCount, todos.length);
+    expect(td.explain(completeTodo).callCount).toEqual(todos.length);
   });
 });

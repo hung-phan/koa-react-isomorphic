@@ -1,3 +1,7 @@
+## 4.2.0
+- Update dependencies
+- Migrate tests to Jest
+
 ## 4.1.0
 - Add Babili and Prepack
 - Restructure babel-preset for current node env

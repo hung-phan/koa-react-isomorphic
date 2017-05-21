@@ -1,6 +1,6 @@
 {
   "name": "koa-react-isomorphic",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "dependencies": {
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
@@ -32,8 +32,8 @@
     "eslint-loader": "^1.7.1",
     "eslint-plugin-flowtype": "^2.33.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-mocha": "^4.9.0",
     "eslint-plugin-react": "^7.0.1",
     "estraverse": "^4.2.0",
     "estraverse-fb": "^1.3.1",
@@ -78,6 +78,7 @@
     "postcss-cssnext": "^2.11.0",
     "postcss-loader": "^2.0.5",
     "prepack-webpack-plugin": "^1.1.0",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-helmet": "^5.1.3",
@@ -111,14 +112,13 @@
     "enzyme": "^2.8.2",
     "eslint-watch": "^3.1.0",
     "flow-bin": "^0.46.0",
-    "istanbul": "^1.0.0-alpha.2",
-    "jsdom": "^10.1.0",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^3.4.1",
+    "jest": "^20.0.3",
+    "jest-css-modules": "^1.1.0",
     "nock": "^9.0.13",
     "nodemon": "^1.11.0",
     "react-addons-test-utils": "^15.5.1",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-test-renderer": "^15.5.4",
     "redux-mock-store": "^1.2.3",
     "supertest": "^3.0.0",
     "testdouble": "^2.1.2"
@@ -146,7 +146,7 @@
     "es6",
     "isomorphic",
     "koa",
-    "mocha",
+    "jest",
     "ramda",
     "react",
     "redux",
@@ -154,6 +154,14 @@
     "rxjs",
     "universal"
   ],
+  "jest": {
+    "testRegex": "/__tests__/.*\\.(js|jsx)$",
+    "setupTestFrameworkScriptFile": "./test-setup.js",
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+  },
   "license": "MIT",
   "scripts": {
     "backend:build": "./scripts/backend-build",

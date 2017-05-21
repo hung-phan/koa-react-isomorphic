@@ -1,7 +1,6 @@
 import _ from "lodash";
 import td from "testdouble";
 import faker from "faker";
-import { assert } from "chai";
 import {
   __RewireAPI__ as Module,
   clientFetchData,
@@ -11,13 +10,13 @@ import {
 } from "../fetchData";
 
 describe("Helper: fetchData", () => {
-  context("# serverFetchData", () => {
+  describe("# serverFetchData", () => {
     let trigger;
     let renderProps;
     let components;
     let store;
 
-    before(() => {
+    beforeAll(() => {
       components = _.range(4);
       trigger = td.function();
       store = faker.random.uuid();
@@ -30,7 +29,7 @@ describe("Helper: fetchData", () => {
       Module.__Rewire__("trigger", trigger);
     });
 
-    after(() => {
+    afterAll(() => {
       Module.__ResetDependency__("trigger");
     });
 
@@ -47,12 +46,12 @@ describe("Helper: fetchData", () => {
     });
   });
 
-  context("# clientFetchData", () => {
+  describe("# clientFetchData", () => {
     let history;
     let store;
     let components;
 
-    before(() => {
+    beforeAll(() => {
       history = {
         listen: callback => callback(faker.random.uuid()),
         getCurrentLocation: _.noop
@@ -124,7 +123,7 @@ describe("Helper: fetchData", () => {
 
         clientFetchData(history, components, store);
 
-        assert.isUndefined(window.prerenderData);
+        expect(window.prerenderData).toBeUndefined();
 
         Module.__ResetDependency__("match");
       });
