@@ -1,7 +1,6 @@
 import td from "testdouble";
 import faker from "faker";
 import React from "react";
-import { assert } from "chai";
 import { mount } from "enzyme";
 import propName from "redial/lib/propName";
 import mockingComponent from "../createMockingComponent";
@@ -19,11 +18,11 @@ describe("Helper: createRedialHooks", () => {
   });
 
   it("should be a function", () => {
-    assert.ok(redialEnhancer);
-    assert.isFunction(redialEnhancer);
+    expect(redialEnhancer).toBeDefined();
+    expect(typeof redialEnhancer === "function");
   });
 
-  context("# component", () => {
+  describe("# component", () => {
     let Component;
     let component;
 
@@ -35,14 +34,12 @@ describe("Helper: createRedialHooks", () => {
     it(
       `should define static "${propName}.callback1" and "${propName}.callback2"`,
       () => {
-        assert.ok(Component[propName].callback1);
-        assert.isFunction(Component[propName].callback1);
-        assert.ok(Component[propName].callback2);
-        assert.isFunction(Component[propName].callback2);
+        expect(typeof Component[propName].callback1 === "function");
+        expect(typeof Component[propName].callback2 === "function");
       }
     );
 
-    it('should call the "callback" function with arguments', () => {
+    it("should call the 'callback' function with arguments", () => {
       const args = [
         faker.random.uuid(),
         faker.random.uuid(),
@@ -58,7 +55,7 @@ describe("Helper: createRedialHooks", () => {
     });
 
     it("should render message", () => {
-      assert.include(component.text(), "Hello world");
+      expect(component.text()).toContain("Hello world");
     });
   });
 });

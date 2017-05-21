@@ -1,5 +1,4 @@
 import _ from "lodash";
-import { assert } from "chai";
 import faker from "faker";
 import td from "testdouble";
 import React from "react";
@@ -42,10 +41,10 @@ describe("Component: TodosBody", () => {
 
   it("should display a list of todos", () => {
     const trComponents = component.find("tr");
-    assert.lengthOf(trComponents, viewer.todos.edges.length);
+    expect(trComponents).toHaveLength(viewer.todos.edges.length);
   });
 
-  context("# when click on delete button", () => {
+  describe("# when click on delete button", () => {
     let removeTodoMutation;
 
     beforeEach(() => {
@@ -67,17 +66,14 @@ describe("Component: TodosBody", () => {
         const removeButton = tr.find(".btn-danger");
         removeButton.simulate("click");
 
-        assert.ok(removeButton);
+        expect(removeButton).toBeDefined();
         td.verify(Relay.Store.commitUpdate({ randomUUID }));
       });
-      assert.equal(
-        td.explain(Relay.Store.commitUpdate).callCount,
-        viewer.todos.edges.length
-      );
+      expect(td.explain(Relay.Store.commitUpdate).callCount).toEqual(viewer.todos.edges.length);
     });
   });
 
-  context("# when click on complete button", () => {
+  describe("# when click on complete button", () => {
     let completeTodoMutation;
 
     beforeEach(() => {
@@ -99,13 +95,10 @@ describe("Component: TodosBody", () => {
         const completeButton = tr.find(".btn-success");
         completeButton.simulate("click");
 
-        assert.ok(completeButton);
+        expect(completeButton).toBeDefined();
         td.verify(Relay.Store.commitUpdate({ randomUUID }));
       });
-      assert.equal(
-        td.explain(Relay.Store.commitUpdate).callCount,
-        viewer.todos.edges.length
-      );
+      expect(td.explain(Relay.Store.commitUpdate).callCount).toEqual(viewer.todos.edges.length);
     });
   });
 });

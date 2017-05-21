@@ -6,13 +6,13 @@ import { Store } from "react-relay";
 import { __RewireAPI__ as Module, prepareInitialRender } from "../fetchData";
 
 describe("Helper: fetchData", () => {
-  context("# prepareInitialRender", () => {
+  describe("# prepareInitialRender", () => {
     let browserHistoryListen;
     let domNode;
     let routes;
     let defaultProps;
 
-    before(() => {
+    beforeAll(() => {
       routes = _.range(4);
       domNode = faker.random.uuid();
       defaultProps = faker.random.uuid();
@@ -22,7 +22,7 @@ describe("Helper: fetchData", () => {
       });
     });
 
-    after(() => {
+    afterAll(() => {
       Module.__ResetDependency__("browserHistory");
     });
 

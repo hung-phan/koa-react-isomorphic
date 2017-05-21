@@ -1,9 +1,9 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
-  "plugins": ["mocha", "flowtype"],
+  "plugins": ["jest", "flowtype"],
   "env": {
-    "mocha": true,
+    "jest/globals": true,
     "browser": true,
     "node": true
   },

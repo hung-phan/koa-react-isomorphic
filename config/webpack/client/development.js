@@ -15,7 +15,11 @@ _.mergeWith(
   developmentConfig,
   {
     entry: {
-      app: ["react-hot-loader/patch"]
+      app: [
+        "react-hot-loader/patch",
+        "webpack-dev-server/client?http://localhost:8080",
+        "webpack/hot/only-dev-server",
+      ]
     },
     output: {
       publicPath: `http://localhost:8080${config.path.build}`,

@@ -2,4 +2,4 @@
 
 source $(dirname "$0")/env/test
 
-mocha --watch --reporter progress --opts mocha.opts
+jest --watch

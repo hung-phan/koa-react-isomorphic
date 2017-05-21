@@ -1,5 +1,4 @@
 import React from "react";
-import { assert } from "chai";
 import { shallow } from "enzyme";
 import TodosFooter from "../TodosFooter";
 
@@ -11,6 +10,6 @@ describe("Component: TodosFooter", () => {
   });
 
   it("should render 'Go to static page' link", () => {
-    assert.include(component.html(), "Go to static page");
+    expect(component.html()).toContain("Go to static page");
   });
 });

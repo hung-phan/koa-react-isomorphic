@@ -1,20 +1,11 @@
-import { assert } from "chai";
 import { getUrl } from "../handleHTTP";
 
 describe("Helper: getUrl", () => {
-  it("should be defined", () => {
-    assert.ok(getUrl);
-  });
-
-  it("should be a function", () => {
-    assert.isFunction(getUrl);
-  });
-
   it("should return url '/api/v1/todos' in client environment", () => {
     process.env.RUNTIME_ENV = "client";
 
     const url = "/api/v1/todos";
-    assert.equal(getUrl(url), url);
+    expect(getUrl(url)).toEqual(url);
   });
 
   it(
@@ -23,7 +14,7 @@ describe("Helper: getUrl", () => {
       process.env.RUNTIME_ENV = "server";
 
       const url = "/api/v1/todos";
-      assert.equal(getUrl(url), `http://localhost:${process.env.PORT}${url}`);
+      expect(getUrl(url)).toEqual(`http://localhost:${process.env.PORT}${url}`);
     }
   );
 });

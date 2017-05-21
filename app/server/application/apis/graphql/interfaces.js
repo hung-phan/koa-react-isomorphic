@@ -5,7 +5,7 @@ import * as todosDAO from "../../../domain/repositories/TodoDAO";
 
 export const Viewer = Symbol("Viewer");
 
-export const { nodeInterface, nodeField } = nodeDefinitions(globalId => {
+const { nodeInterface, nodeField } = nodeDefinitions(globalId => {
   const { type, id } = fromGlobalId(globalId);
 
   switch (type) {
@@ -18,3 +18,5 @@ export const { nodeInterface, nodeField } = nodeDefinitions(globalId => {
       return undefined;
   }
 });
+
+export { nodeInterface, nodeField };

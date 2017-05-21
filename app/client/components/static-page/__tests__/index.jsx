@@ -1,5 +1,4 @@
 import React from "react";
-import { assert } from "chai";
 import { shallow } from "enzyme";
 import StaticPage from "../index";
 
@@ -11,6 +10,6 @@ describe("Component: StaticPage", () => {
   });
 
   it("should render 'Back to Home page' link", () => {
-    assert.include(component.html(), "Back to Home page");
+    expect(component.html()).toContain("Back to Home page");
   });
 });

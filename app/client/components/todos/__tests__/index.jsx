@@ -1,4 +1,3 @@
-import { assert } from "chai";
 import React from "react";
 import { shallow } from "enzyme";
 import { Todos } from "../index";
@@ -28,15 +27,15 @@ describe("Component: Todos", () => {
     component = shallow(<Todos viewer={viewer} relay={relay} />);
   });
 
-  it('should have "TodosHeader" component', () => {
-    assert.ok(component.find(TodosHeader).node);
+  it("should have 'TodosHeader' component", () => {
+    expect(component.find(TodosHeader).node).toBeDefined();
   });
 
-  it('should have "TodosAdd" component', () => {
-    assert.ok(component.find(TodosAdd).node);
+  it("should have 'TodosAdd' component", () => {
+    expect(component.find(TodosAdd).node).toBeDefined();
   });
 
-  it('should have "TodosBody" component', () => {
-    assert.ok(component.find(TodosBody).node);
+  it("should have 'TodosBody' component", () => {
+    expect(component.find(TodosBody).node).toBeDefined();
   });
 });

@@ -12,7 +12,7 @@ export default new GraphQLSchema({
   query: new GraphQLObjectType({
     name: "Query",
     description: "Root of the Blog Schema",
-    fields: () => ({
+    fields: {
       node: nodeField,
       viewer: {
         type: ViewerType,
@@ -20,16 +20,14 @@ export default new GraphQLSchema({
           return Viewer;
         }
       }
-    })
+    }
   }),
   mutation: new GraphQLObjectType({
     name: "Mutation",
-    fields() {
-      return {
-        addTodo: AddTodoMutation,
-        removeTodo: RemoveTodoMutation,
-        completeTodo: CompleteTodoMutation
-      };
+    fields: {
+      addTodo: AddTodoMutation,
+      removeTodo: RemoveTodoMutation,
+      completeTodo: CompleteTodoMutation
     }
   })
 });

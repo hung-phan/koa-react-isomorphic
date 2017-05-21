@@ -1,4 +1,3 @@
-import { assert } from "chai";
 import td from "testdouble";
 import React from "react";
 import { mount } from "enzyme";
@@ -34,10 +33,10 @@ describe("Component: TodosAdd", () => {
   });
 
   it('should define default value for "state.todo"', () => {
-    assert.equal(component.state().todo, "");
+    expect(component.state().todo).toEqual("");
   });
 
-  context('# click on "Add Todo" button', () => {
+  describe('# click on "Add Todo" button', () => {
     let button;
 
     beforeEach(() => {
@@ -61,7 +60,7 @@ describe("Component: TodosAdd", () => {
     });
 
     it('should reset "state.todo"', () => {
-      assert.equal(component.state().todo, "");
+      expect(component.state().todo).toEqual("");
     });
   });
 });

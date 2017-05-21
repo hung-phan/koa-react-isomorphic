@@ -33,13 +33,15 @@ export const TodoType = new GraphQLObjectType({
   interfaces: [nodeInterface]
 });
 
-export const {
+const {
   connectionType: TodoConnection,
   edgeType: GraphQLTodoEdge
 } = connectionDefinitions({
   name: "Todo",
   nodeType: TodoType
 });
+
+export { TodoConnection, GraphQLTodoEdge };
 
 export const AddTodoMutation = mutationWithClientMutationId({
   name: "AddTodoMutation",
