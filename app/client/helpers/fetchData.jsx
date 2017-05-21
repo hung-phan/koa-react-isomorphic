@@ -14,10 +14,10 @@ export const helmetObserver = new Rx.Subject();
 
 export const UPDATE_HEADER_HOOK = "UPDATE_HEADER_HOOK";
 
-export const createHandler = callback => (
-  error,
-  redirectLocation,
-  renderProps
+export const createHandler = (callback: Function) => (
+  error: ?Object,
+  redirectLocation: { pathname: string, search: string },
+  renderProps: ?Object
 ) => {
   if (error) {
     redirectTo("/500.html");
