@@ -1,7 +1,6 @@
 import _ from "lodash";
 import td from "testdouble";
 import faker from "faker";
-import { assert } from "chai";
 import {
   __RewireAPI__ as Module,
   clientFetchData,
@@ -11,17 +10,13 @@ import {
 } from "../fetchData";
 
 describe("Helper: fetchData", () => {
-  it("should be an object", () => {
-    assert.isObject(Module);
-  });
-
-  context("# serverFetchData", () => {
+  describe("# serverFetchData", () => {
     let trigger;
     let renderProps;
     let components;
     let store;
 
-    before(() => {
+    beforeAll(() => {
       components = _.range(4);
       trigger = td.function();
       store = faker.random.uuid();
@@ -32,15 +27,15 @@ describe("Helper: fetchData", () => {
       };
 
       Module.__Rewire__("trigger", trigger);
-
-      serverFetchData(renderProps, store);
     });
 
-    after(() => {
+    afterAll(() => {
       Module.__ResetDependency__("trigger");
     });
 
-    it('should call "trigger" with "components" and "locals"', () => {
+    it("should call 'trigger' with 'components' and 'locals'", () => {
+      serverFetchData(renderProps, store);
+
       td.verify(
         trigger(FETCH_DATA_HOOK, components, {
           store,
@@ -51,12 +46,12 @@ describe("Helper: fetchData", () => {
     });
   });
 
-  context("# clientFetchData", () => {
+  describe("# clientFetchData", () => {
     let history;
     let store;
     let components;
 
-    before(() => {
+    beforeAll(() => {
       history = {
         listen: callback => callback(faker.random.uuid()),
         getCurrentLocation: _.noop
@@ -128,7 +123,7 @@ describe("Helper: fetchData", () => {
 
         clientFetchData(history, components, store);
 
-        assert.isUndefined(window.prerenderData);
+        expect(window.prerenderData).toBeUndefined();
 
         Module.__ResetDependency__("match");
       });

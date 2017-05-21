@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import app from "../../../app/server/infrastructure/app";
+import app from "../../../infrastructure/app";
 
 describe("API: v1/todos", () => {
   const request = supertest(app.listen());
