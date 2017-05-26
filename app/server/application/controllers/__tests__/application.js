@@ -2,10 +2,8 @@ import supertest from "supertest";
 import app from "../../../infrastructure/app";
 
 describe("Controller: application", () => {
-  const request = supertest(app.listen());
-
   it("should render single page", async () => {
-    const result = await request
+    const result = await supertest(app.listen())
       .get("/")
       .set("Accept", "text/html")
       .set("X-CSRF-Token", process.env.SECRET_KEY.toString("base64"))
