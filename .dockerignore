@@ -1,0 +1,8 @@
+.idea
+.tern-port
+build/
+node_modules/
+public/assets/
+tmp/
+coverage
+*.marko.js
