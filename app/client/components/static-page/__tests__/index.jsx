@@ -9,7 +9,7 @@ describe("Component: StaticPage", () => {
     component = shallow(<StaticPage />);
   });
 
-  it("should render 'Back to Home page' link", () => {
-    expect(component.html()).toContain("Back to Home page");
+  it("should render component", () => {
+    expect(component).toMatchSnapshot();
   });
 });

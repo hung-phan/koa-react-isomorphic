@@ -36,12 +36,14 @@ export default (initialState: Object = {}) => {
   );
 
   // enable async reducers for each page load
+  // $FlowFixMe
   store.reducers = reducers;
 
   if (process.env.NODE_ENV === "development" && module.hot) {
     // $FlowFixMe
-    module.hot.accept("./createReducer", () =>
-      store.replaceReducer(require("./createReducer").default));
+    module.hot.accept("./createReducer", () => store.replaceReducer(
+      combineReducers(require("./createReducer").default)
+    ));
   }
 
   return store;
