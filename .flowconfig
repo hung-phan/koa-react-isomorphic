@@ -1,25 +1,17 @@
 [ignore]
 .*/build/.*
-.*/config/.*
 .*/node_modules/fbjs/.*
 .*/node_modules/nock/.*
-.*/test/.*
+.*/node_modules/nock/.*
+.*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
 
 [include]
 
 [libs]
 
 [options]
-module.system=haste
-
-# alias for babel-plugin-module-alias
-module.name_mapper='^app\/\(.*\)$' -> '<PROJECT_ROOT>/app/\1'
-module.name_mapper='^config\/\(.*\)$' -> '<PROJECT_ROOT>/config/\1'
-module.name_mapper='^client\/\(.*\)$' -> '<PROJECT_ROOT>/app/client/\1'
-module.name_mapper='^server\/\(.*\)$' -> '<PROJECT_ROOT>/app/server/\1'
-
-module.name_mapper='.*\.\(css\|scss\)$' -> '<PROJECT_ROOT>/flow-interfaces/css-modules.js.flow'
-module.name_mapper='.*\.\(svg\|png\|jpg\|jpeg\|gif\)$' -> '<PROJECT_ROOT>/flow-interfaces/webpack-assets.js.flow'
+module.name_mapper='.*\.\(css\|sass\|scss\|less\)$' -> '<PROJECT_ROOT>/flow/css-modules.js.flow'
+module.name_mapper='.*\.\(svg\|png\|jpg\|jpeg\|gif\)$' -> '<PROJECT_ROOT>/flow/webpack-assets.js.flow'
 
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
