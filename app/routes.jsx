@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import { createRoutes, Route, IndexRoute } from "react-router";
-import ViewerQuery from "client/queries/viewer";
+import ViewerQuery from "./client/queries/viewer";
 
 export default createRoutes(
   <Route path="/">

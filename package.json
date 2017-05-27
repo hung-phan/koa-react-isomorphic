@@ -6,7 +6,6 @@
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
-    "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
@@ -30,7 +29,6 @@
     "debug": "^2.6.8",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
-    "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-flowtype": "^2.33.0",
@@ -54,7 +52,6 @@
     "isomorphic-fetch": "^2.2.1",
     "isomorphic-relay": "^0.7.4",
     "isomorphic-relay-router": "^0.8.6",
-    "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
@@ -108,10 +105,10 @@
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "chokidar": "^1.7.0",
     "chokidar-cli": "^1.2.0",
     "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
     "eslint-watch": "^3.1.0",
     "flow-bin": "^0.47.0",
     "jest": "^20.0.4",
@@ -158,6 +155,7 @@
   "jest": {
     "testRegex": "/__tests__/.*\\.(js|jsx)$",
     "setupTestFrameworkScriptFile": "./test-setup.js",
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
