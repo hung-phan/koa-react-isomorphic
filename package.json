@@ -104,7 +104,6 @@
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "chokidar": "^1.7.0",
     "chokidar-cli": "^1.2.0",
     "enzyme": "^2.8.2",
