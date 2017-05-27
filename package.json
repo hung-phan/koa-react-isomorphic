@@ -107,6 +107,7 @@
     "chokidar": "^1.7.0",
     "chokidar-cli": "^1.2.0",
     "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
     "eslint-watch": "^3.1.0",
     "flow-bin": "^0.47.0",
     "jest": "^20.0.4",
@@ -154,6 +155,7 @@
   "jest": {
     "testRegex": "/__tests__/.*\\.(js|jsx)$",
     "setupTestFrameworkScriptFile": "./test-setup.js",
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
