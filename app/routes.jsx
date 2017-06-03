@@ -31,10 +31,7 @@ export const getRoutes = (
       getComponent={(nextState, cb) => {
         // $FlowFixMe
         require.ensure(
-          [
-            "./client/components/todos",
-            "./client/components/todos/logicBundle"
-          ],
+          [],
           require => {
             const {
               default: todosReducer,
@@ -53,7 +50,7 @@ export const getRoutes = (
       getComponent={(nextState, cb) => {
         // $FlowFixMe
         require.ensure(
-          ["./client/components/static-page"],
+          [],
           require => {
             cb(null, require("./client/components/static-page").default);
           },
