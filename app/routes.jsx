@@ -9,7 +9,7 @@ export default createRoutes(
       getComponent={(nextState, cb) => {
         // $FlowFixMe
         require.ensure(
-          [],
+          ["./client/components/todos"],
           require => {
             cb(null, require("./client/components/todos").default);
           },
