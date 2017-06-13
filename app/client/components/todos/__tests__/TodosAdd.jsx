@@ -1,4 +1,3 @@
-import td from "testdouble";
 import React from "react";
 import { mount } from "enzyme";
 import TodosAdd from "../TodosAdd";
@@ -11,7 +10,7 @@ describe("Component: TodosAdd", () => {
   });
 
   it("should call the addTodo action when click on the 'Add Todo' button", () => {
-    const callback = td.function();
+    const callback = jest.fn();
     const component = mount(<TodosAdd addTodo={callback} />);
     const input = component.find("input");
     const button = component.find("button");
@@ -21,7 +20,7 @@ describe("Component: TodosAdd", () => {
     expect(component.state().todo).toEqual("do chore");
 
     button.simulate("click");
-    td.verify(callback("do chore"));
+    expect(callback).toBeCalledWith("do chore");
     expect(component.state().todo).toEqual("");
   });
 });

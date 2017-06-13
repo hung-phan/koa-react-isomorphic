@@ -1,4 +1,3 @@
-import td from "testdouble";
 import faker from "faker";
 import React from "react";
 import { mount } from "enzyme";
@@ -14,8 +13,8 @@ describe("Helper: createRedialHooks", () => {
 
   beforeEach(() => {
     Handler = mockingComponent("Handler", ["message"]);
-    callback1 = td.function();
-    callback2 = td.function();
+    callback1 = jest.fn();
+    callback2 = jest.fn();
   });
 
   it("should be a function", () => {
@@ -57,8 +56,8 @@ describe("Helper: createRedialHooks", () => {
       Component[propName].callback1(...args);
       Component[propName].callback2(...args);
 
-      td.verify(callback1(...args));
-      td.verify(callback2(...args));
+      expect(callback1).toBeCalledWith(...args);
+      expect(callback2).toBeCalledWith(...args);
     });
 
     it("should render message", () => {

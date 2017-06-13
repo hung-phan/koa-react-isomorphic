@@ -17,7 +17,7 @@ The idea of this repository is to implement all new concepts and libraries which
 * [Immutablejs](https://facebook.github.io/immutable-js/)
 * [ServiceWorker and AppCache](http://www.html5rocks.com/en/tutorials/service-worker/introduction/)
 * [PostCSS](https://github.com/postcss/postcss), [CSSNext](http://cssnext.io/), [CSSNano](http://cssnano.co/)
-* [Jest](https://facebook.github.io/jest), [Testdouble](https://github.com/testdouble/testdouble.js/), [Nock](https://github.com/pgte/nock)
+* [Jest](https://facebook.github.io/jest), [Nock](https://github.com/pgte/nock)
 
 ## Requirement
 - Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.

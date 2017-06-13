@@ -1,5 +1,4 @@
 import _ from "lodash";
-import td from "testdouble";
 import faker from "faker";
 import {
   __RewireAPI__ as Module,
@@ -18,7 +17,7 @@ describe("Helper: fetchData", () => {
 
     beforeAll(() => {
       components = _.range(4);
-      trigger = td.function();
+      trigger = jest.fn();
       store = faker.random.uuid();
       renderProps = {
         components: _.range(4),
@@ -36,13 +35,11 @@ describe("Helper: fetchData", () => {
     it("should call 'trigger' with 'components' and 'locals'", () => {
       serverFetchData(renderProps, store);
 
-      td.verify(
-        trigger(FETCH_DATA_HOOK, components, {
-          store,
-          params: renderProps.params,
-          location: renderProps.location
-        })
-      );
+      expect(trigger).toBeCalledWith(FETCH_DATA_HOOK, components, {
+        store,
+        params: renderProps.params,
+        location: renderProps.location
+      });
     });
   });
 
@@ -65,8 +62,8 @@ describe("Helper: fetchData", () => {
       let triggerSpy;
 
       beforeEach(() => {
-        navigateToSpy = td.function();
-        triggerSpy = td.function();
+        navigateToSpy = jest.fn();
+        triggerSpy = jest.fn();
         Module.__Rewire__("redirectTo", navigateToSpy);
         Module.__Rewire__("trigger", triggerSpy);
       });
@@ -84,7 +81,7 @@ describe("Helper: fetchData", () => {
         Module.__Rewire__("match", match);
 
         clientFetchData(history, components, store);
-        td.verify(navigateToSpy("/500.html"));
+        expect(navigateToSpy).toBeCalledWith("/500.html");
 
         Module.__ResetDependency__("match");
       });
@@ -101,7 +98,7 @@ describe("Helper: fetchData", () => {
         Module.__Rewire__("match", match);
 
         clientFetchData(history, components, store);
-        td.verify(navigateToSpy("/hello-world.html"));
+        expect(navigateToSpy).toBeCalledWith("/hello-world.html");
 
         Module.__ResetDependency__("match");
       });
@@ -143,12 +140,10 @@ describe("Helper: fetchData", () => {
         Module.__Rewire__("match", match);
 
         clientFetchData(history, components, store);
-        td.verify(
-          triggerSpy(
-            FETCH_DATA_HOOK,
-            renderProps.components,
-            getDefaultParams(store, renderProps)
-          )
+        expect(triggerSpy).toBeCalledWith(
+          FETCH_DATA_HOOK,
+          renderProps.components,
+          getDefaultParams(store, renderProps)
         );
 
         Module.__ResetDependency__("match");
@@ -162,7 +157,7 @@ describe("Helper: fetchData", () => {
         Module.__Rewire__("match", match);
 
         clientFetchData(history, components, store);
-        td.verify(navigateToSpy("/404.html"));
+        expect(navigateToSpy).toBeCalledWith("/404.html");
 
         Module.__ResetDependency__("match");
       });
