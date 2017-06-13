@@ -23,6 +23,10 @@ The idea of this repository is to implement all new concepts and libraries which
 - Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.
 - Install [yarn](https://github.com/yarnpkg/yarn)
 
+## Features
+* Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
+* Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
+
 ## Explanation
 
 ### Templates
@@ -68,10 +72,6 @@ You can use this to inject assets for the next page to improve performance. This
 [preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin).
 
 This will map the hook with the current component and trigger it (Note: This will only be applied to root component).
-
-## Features
-* Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
-* Relay: Available on [features/relay](https://github.com/hung-phan/koa-react-isomorphic/tree/features/relay)
 
 ### Async react components
 [react-loadable](https://github.com/thejameskyle/react-loadable)
