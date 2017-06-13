@@ -1,5 +1,4 @@
 import { List } from "immutable";
-import td from "testdouble";
 import React from "react";
 import { shallow } from "enzyme";
 import { Todos } from "../index";
@@ -20,9 +19,9 @@ describe("Component: Todos", () => {
 
   beforeEach(() => {
     actions = {
-      addTodo: td.function(),
-      removeTodo: td.function(),
-      completeTodo: td.function()
+      addTodo: jest.fn(),
+      removeTodo: jest.fn(),
+      completeTodo: jest.fn()
     };
     component = shallow(<Todos todos={todos} actions={actions} />);
   });

@@ -1,5 +1,4 @@
 import { fromJS } from "immutable";
-import td from "testdouble";
 import React from "react";
 import { mount } from "enzyme";
 import { noop } from "lodash";
@@ -23,7 +22,7 @@ describe("Component: TodosBody", () => {
   });
 
   it("should call 'removeTodo' when click on the delete button", () => {
-    const removeTodo = td.function();
+    const removeTodo = jest.fn();
     const component = mount(
       <TodosBody
         todos={fromJS(todos)}
@@ -37,14 +36,13 @@ describe("Component: TodosBody", () => {
       const removeButton = tr.find(".btn-danger");
       removeButton.simulate("click");
 
-      expect(removeButton).toBeDefined();
-      td.verify(removeTodo(index, td.matchers.anything()));
+      expect(removeTodo.mock.calls[index][0]).toBe(index);
     });
-    expect(td.explain(removeTodo).callCount).toEqual(todos.length);
+    expect(removeTodo.mock.calls.length).toEqual(todos.length);
   });
 
   it("should call 'completeTodo' when click on the complete button", () => {
-    const completeTodo = td.function();
+    const completeTodo = jest.fn();
     const component = mount(
       <TodosBody
         todos={fromJS(todos)}
@@ -58,9 +56,8 @@ describe("Component: TodosBody", () => {
       const completeButton = tr.find(".btn-success");
       completeButton.simulate("click");
 
-      expect(completeButton).toBeDefined();
-      td.verify(completeTodo(index, td.matchers.anything()));
+      expect(completeTodo.mock.calls[index][0]).toBe(index);
     });
-    expect(td.explain(completeTodo).callCount).toEqual(todos.length);
+    expect(completeTodo.mock.calls.length).toEqual(todos.length);
   });
 });

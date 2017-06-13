@@ -1,6 +1,5 @@
 /* global process */
 import { fromJS, is } from "immutable";
-import td from "testdouble";
 import nock from "nock";
 import reducer, {
   addTodo,
@@ -36,12 +35,12 @@ describe("Module: Todos", () => {
       });
 
       it("should return a function when calls 'fetchTodos' then return 'setTodos' action", async () => {
-        const callback = td.function();
+        const callback = jest.fn();
         const action = fetchTodos();
 
         await action(callback);
 
-        td.verify(callback(setTodos(todos)));
+        expect(callback).toBeCalledWith(setTodos(todos));
       });
     });
   });
