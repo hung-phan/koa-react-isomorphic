@@ -7,7 +7,7 @@ const OfflinePlugin = require("offline-plugin");
 const BabiliPlugin = require("babili-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const PrepackWebpackPlugin = require("prepack-webpack-plugin").default;
+// const PrepackWebpackPlugin = require("prepack-webpack-plugin").default;
 const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require("../../webpack/webpack-isomorphic-tools")
@@ -24,7 +24,7 @@ _.mergeWith(
       chunkFilename: "[id].[chunkhash].js"
     }
   },
-  (obj1, obj2) => _.isArray(obj2) ? obj2.concat(obj1) : undefined
+  (obj1, obj2) => (_.isArray(obj2) ? obj2.concat(obj1) : undefined)
 );
 
 productionConfig.module.loaders.push(
@@ -60,7 +60,7 @@ productionConfig.plugins.push(
     filename: "[name].[contenthash].css",
     allChunks: true
   }),
-  new PrepackWebpackPlugin(),
+  // new PrepackWebpackPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
@@ -71,18 +71,29 @@ productionConfig.plugins.push(
   new CompressionPlugin(),
   webpackIsomorphicToolsPlugin,
   new OfflinePlugin({
-    publicPath: config.path.assets,
-    relativePaths: false,
     safeToUseOptionalCaches: true,
-    externals: ["/"],
-    updateStrategy: "all",
+    caches: {
+      main: [
+        "*.js",
+        "*.css",
+        "/"
+      ],
+      additional: [
+        "*.woff",
+        "*.woff2",
+        "*.eot",
+        "*.ttf"
+      ],
+      optional: [":rest:"]
+    },
+    relativePaths: false,
     ServiceWorker: {
-      events: true,
-      navigateFallbackURL: "/"
+      output: "../sw.js",
+      publicPath: "/sw.js",
+      events: true
     },
     AppCache: {
-      events: true,
-      directory: "appcache/"
+      events: true
     }
   })
 );

@@ -1,6 +1,5 @@
 import _ from "lodash";
 import faker from "faker";
-import td from "testdouble";
 import React from "react";
 import { mount } from "enzyme";
 import TodosBody from "../TodosBody";
@@ -29,7 +28,7 @@ describe("Component: TodosBody", () => {
     component = mount(<TodosBody viewer={viewer} />);
     Relay = {
       Store: {
-        commitUpdate: td.function()
+        commitUpdate: jest.fn()
       }
     };
     TodosBody.__Rewire__("Relay", Relay);
@@ -48,10 +47,7 @@ describe("Component: TodosBody", () => {
     let removeTodoMutation;
 
     beforeEach(() => {
-      removeTodoMutation = td.function();
-      td
-        .when(removeTodoMutation(td.matchers.anything()))
-        .thenReturn({ randomUUID });
+      removeTodoMutation = jest.fn(() => ({ randomUUID }));
       TodosBody.__Rewire__("RemoveTodoMutation", removeTodoMutation);
     });
 
@@ -59,7 +55,7 @@ describe("Component: TodosBody", () => {
       TodosBody.__ResetDependency__("RemoveTodoMutation");
     });
 
-    it('should call "removeTodo"', () => {
+    it("should call 'removeTodo'", () => {
       const trComponents = component.find("tr");
 
       trComponents.forEach(tr => {
@@ -67,9 +63,9 @@ describe("Component: TodosBody", () => {
         removeButton.simulate("click");
 
         expect(removeButton).toBeDefined();
-        td.verify(Relay.Store.commitUpdate({ randomUUID }));
+        expect(Relay.Store.commitUpdate).toBeCalledWith({ randomUUID });
       });
-      expect(td.explain(Relay.Store.commitUpdate).callCount).toEqual(viewer.todos.edges.length);
+      expect(Relay.Store.commitUpdate.mock.calls.length).toBe(viewer.todos.edges.length);
     });
   });
 
@@ -77,10 +73,7 @@ describe("Component: TodosBody", () => {
     let completeTodoMutation;
 
     beforeEach(() => {
-      completeTodoMutation = td.function();
-      td
-        .when(completeTodoMutation(td.matchers.anything()))
-        .thenReturn({ randomUUID });
+      completeTodoMutation = jest.fn(() => ({ randomUUID }));
       TodosBody.__Rewire__("CompleteTodoMutation", completeTodoMutation);
     });
 
@@ -96,9 +89,9 @@ describe("Component: TodosBody", () => {
         completeButton.simulate("click");
 
         expect(completeButton).toBeDefined();
-        td.verify(Relay.Store.commitUpdate({ randomUUID }));
+        expect(Relay.Store.commitUpdate).toBeCalledWith({ randomUUID });
       });
-      expect(td.explain(Relay.Store.commitUpdate).callCount).toEqual(viewer.todos.edges.length);
+      expect(Relay.Store.commitUpdate.mock.calls.length).toBe(viewer.todos.edges.length);
     });
   });
 });

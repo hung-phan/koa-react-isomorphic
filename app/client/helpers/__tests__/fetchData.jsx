@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React from "react";
-import td from "testdouble";
 import faker from "faker";
 import { Store } from "react-relay";
 import { __RewireAPI__ as Module, prepareInitialRender } from "../fetchData";
@@ -31,18 +30,10 @@ describe("Helper: fetchData", () => {
       let prepareInitialRenderStub;
 
       beforeEach(() => {
-        navigateToSpy = td.function();
-        prepareInitialRenderStub = td.function();
-        td
-          .when(
-            prepareInitialRenderStub(
-              td.matchers.anything(),
-              td.matchers.anything()
-            )
-          )
-          .thenReturn({
-            then: callback => callback(defaultProps)
-          });
+        navigateToSpy = jest.fn();
+        prepareInitialRenderStub = jest.fn(() => ({
+          then: callback => callback(defaultProps)
+        }));
 
         Module.__Rewire__("redirectTo", navigateToSpy);
         Module.__Rewire__("IsomorphicRouter", {
@@ -66,7 +57,7 @@ describe("Helper: fetchData", () => {
         Module.__Rewire__("match", match);
 
         prepareInitialRender(routes, domNode);
-        td.verify(navigateToSpy("/500.html"));
+        expect(navigateToSpy).toBeCalledWith("/500.html");
       });
 
       it("should redirect to /hello-world.html page", () => {
@@ -81,7 +72,7 @@ describe("Helper: fetchData", () => {
         Module.__Rewire__("match", match);
 
         prepareInitialRender(routes, domNode);
-        td.verify(navigateToSpy("/hello-world.html"));
+        expect(navigateToSpy).toBeCalledWith("/hello-world.html");
       });
 
       it("should trigger fetchData", () => {
@@ -105,7 +96,7 @@ describe("Helper: fetchData", () => {
         });
 
         prepareInitialRender(routes, domNode);
-        td.verify(prepareInitialRenderStub(Store, renderProps));
+        expect(prepareInitialRenderStub).toBeCalledWith(Store, renderProps);
       });
 
       it("should navigate to /404.html page", () => {
@@ -116,7 +107,7 @@ describe("Helper: fetchData", () => {
         Module.__Rewire__("match", match);
 
         prepareInitialRender(routes, domNode);
-        td.verify(navigateToSpy("/404.html"));
+        expect(navigateToSpy).toBeCalledWith("/404.html");
       });
     });
   });
