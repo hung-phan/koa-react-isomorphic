@@ -15,11 +15,6 @@
         "transform-react-inline-elements",
         "transform-react-remove-prop-types"
       ]
-    },
-    "test": {
-      "plugins": [
-        "rewire"
-      ]
     }
   }
 }

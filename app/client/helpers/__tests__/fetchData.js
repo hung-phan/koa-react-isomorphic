@@ -1,41 +1,48 @@
 import _ from "lodash";
 import faker from "faker";
-import {
-  __RewireAPI__ as Module,
-  clientFetchData,
-  FETCH_DATA_HOOK,
-  getDefaultParams,
-  serverFetchData
-} from "../fetchData";
 
 describe("Helper: fetchData", () => {
+  let redial;
+  let reactRouter;
+  let handleHTTP;
+  let fetchData;
+
+  beforeAll(() => {
+    jest.mock("redial", () => jest.genMockFromModule("redial"));
+    jest.mock("react-router", () => jest.genMockFromModule("react-router"));
+    jest.mock("../handleHTTP", () => jest.genMockFromModule("../handleHTTP"));
+
+    redial = require("redial");
+    reactRouter = require("react-router");
+    handleHTTP = require("../handleHTTP");
+    fetchData = require("../fetchData");
+  });
+
+  afterAll(() => {
+    jest.unmock("redial");
+    jest.unmock("react-router");
+    jest.unmock("../handleHTTP");
+  });
+
   describe("# serverFetchData", () => {
-    let trigger;
-    let renderProps;
     let components;
+    let renderProps;
     let store;
 
     beforeAll(() => {
       components = _.range(4);
-      trigger = jest.fn();
-      store = faker.random.uuid();
       renderProps = {
         components: _.range(4),
         params: faker.random.uuid(),
         location: faker.random.uuid()
       };
-
-      Module.__Rewire__("trigger", trigger);
-    });
-
-    afterAll(() => {
-      Module.__ResetDependency__("trigger");
+      store = faker.random.uuid();
     });
 
     it("should call 'trigger' with 'components' and 'locals'", () => {
-      serverFetchData(renderProps, store);
+      fetchData.serverFetchData(renderProps, store);
 
-      expect(trigger).toBeCalledWith(FETCH_DATA_HOOK, components, {
+      expect(redial.trigger).toBeCalledWith(fetchData.FETCH_DATA_HOOK, components, {
         store,
         params: renderProps.params,
         location: renderProps.location
@@ -58,71 +65,34 @@ describe("Helper: fetchData", () => {
     });
 
     describe("# match route", () => {
-      let navigateToSpy;
-      let triggerSpy;
-
-      beforeEach(() => {
-        navigateToSpy = jest.fn();
-        triggerSpy = jest.fn();
-        Module.__Rewire__("redirectTo", navigateToSpy);
-        Module.__Rewire__("trigger", triggerSpy);
-      });
-
-      afterEach(() => {
-        Module.__ResetDependency__("redirectTo");
-        Module.__ResetDependency__("trigger");
-      });
-
       it("should navigate to error page", () => {
-        const match = (route, callback) => {
-          callback(true, undefined, undefined);
-        };
-
-        Module.__Rewire__("match", match);
-
-        clientFetchData(history, components, store);
-        expect(navigateToSpy).toBeCalledWith("/500.html");
-
-        Module.__ResetDependency__("match");
+        fetchData.clientFetchData(history, components, store);
+        reactRouter.match.mock.calls[0][1](true);
+        expect(handleHTTP.redirectTo).toBeCalledWith("/500.html");
       });
 
       it("should redirect to /hello-world.html page", () => {
-        const match = (route, callback) => {
-          callback(
-            undefined,
-            { pathname: "/hello-world.html", search: "" },
-            undefined
-          );
-        };
-
-        Module.__Rewire__("match", match);
-
-        clientFetchData(history, components, store);
-        expect(navigateToSpy).toBeCalledWith("/hello-world.html");
-
-        Module.__ResetDependency__("match");
+        fetchData.clientFetchData(history, components, store);
+        reactRouter.match.mock.calls[0][1](undefined, {
+          pathname: "/hello-world.html",
+          search: ""
+        });
+        expect(handleHTTP.redirectTo).toBeCalledWith("/hello-world.html");
       });
 
       it("should trigger not FETCH_DATA_HOOK", () => {
-        const renderProps = {
+        window.prerenderData = faker.random.uuid();
+
+        fetchData.clientFetchData(history, components, store);
+        reactRouter.match.mock.calls[0][1](undefined, undefined, {
           components,
           location: "/",
           params: {
             test: faker.random.uuid()
           }
-        };
-        const match = (route, callback) => {
-          callback(undefined, undefined, renderProps);
-        };
-
-        window.prerenderData = faker.random.uuid();
-        Module.__Rewire__("match", match);
-
-        clientFetchData(history, components, store);
+        });
 
         expect(window.prerenderData).toBeUndefined();
-
-        Module.__ResetDependency__("match");
       });
 
       it("should trigger FETCH_DATA_HOOK", () => {
@@ -133,33 +103,22 @@ describe("Helper: fetchData", () => {
             test: faker.random.uuid()
           }
         };
-        const match = (route, callback) => {
-          callback(undefined, undefined, renderProps);
-        };
 
-        Module.__Rewire__("match", match);
+        fetchData.clientFetchData(history, components, store);
+        reactRouter.match.mock.calls[0][1](undefined, undefined, renderProps);
 
-        clientFetchData(history, components, store);
-        expect(triggerSpy).toBeCalledWith(
-          FETCH_DATA_HOOK,
+        expect(redial.trigger).toBeCalledWith(
+          fetchData.FETCH_DATA_HOOK,
           renderProps.components,
-          getDefaultParams(store, renderProps)
+          fetchData.getDefaultParams(store, renderProps)
         );
-
-        Module.__ResetDependency__("match");
       });
 
       it("should navigate to /404.html page", () => {
-        const match = (route, callback) => {
-          callback(undefined, undefined, undefined);
-        };
+        fetchData.clientFetchData(history, components, store);
+        reactRouter.match.mock.calls[0][1](undefined, undefined, undefined);
 
-        Module.__Rewire__("match", match);
-
-        clientFetchData(history, components, store);
-        expect(navigateToSpy).toBeCalledWith("/404.html");
-
-        Module.__ResetDependency__("match");
+        expect(handleHTTP.redirectTo).toBeCalledWith("/404.html");
       });
     });
   });
