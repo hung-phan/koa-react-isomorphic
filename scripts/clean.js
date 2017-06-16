@@ -1,9 +1,7 @@
-'use strict';
-
-const path = require('path');
-const rimraf = require('rimraf');
-const configuration = require('../config');
-const ROOT = require('../config/path-helper').ROOT;
+const path = require("path");
+const rimraf = require("rimraf");
+const configuration = require("../config");
+const ROOT = require("../config/path-helper").ROOT;
 
 const removeDirectory = glob => {
   rimraf(glob, err => {
@@ -17,3 +15,4 @@ const removeDirectory = glob => {
 
 removeDirectory(path.join(ROOT, configuration.path.build));
 removeDirectory(path.join(ROOT, configuration.path.publicAssets));
+removeDirectory(path.join(ROOT, configuration.path.publicAssets, "../sw.js"));
