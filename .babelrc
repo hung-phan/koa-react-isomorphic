@@ -1,27 +1,20 @@
 {
   "presets": ["./scripts/preset-js", "react", "stage-0"],
   "plugins": [
+    "babel-relay-plugin-loader",
     "transform-runtime"
   ],
   "env": {
     "development": {
       "plugins": [
-        "babel-relay-plugin-loader",
         "react-hot-loader/babel"
       ]
     },
     "production": {
       "plugins": [
-        "babel-relay-plugin-loader",
         "transform-react-constant-elements",
         "transform-react-inline-elements",
         "transform-react-remove-prop-types"
-      ]
-    },
-    "test": {
-      "plugins": [
-        "babel-relay-plugin-loader",
-        "rewire"
       ]
     }
   }

@@ -15,7 +15,7 @@ export default class TodosAdd extends React.PureComponent {
     relay: Object
   };
 
-  updateTodo = (e: Object) => {
+  updateTodo = (e: SyntheticInputEvent) => {
     this.setState({ todo: e.target.value });
   };
 
@@ -26,7 +26,7 @@ export default class TodosAdd extends React.PureComponent {
     this.setState({ todo: "" });
   };
 
-  changeNumberOfTodoList = (e: Object) => {
+  changeNumberOfTodoList = (e: SyntheticInputEvent) => {
     this.setState({ numberOfTodos: parseInt(e.target.value, 10) }, () => {
       this.props.relay.setVariables({
         numberOfTodos: this.state.numberOfTodos
