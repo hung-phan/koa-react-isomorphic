@@ -5,13 +5,11 @@ import { introspectionQuery, printSchema } from "graphql/utilities";
 import schema from "../app/server/application/apis/graphqlSchema";
 
 // Save JSON of full schema introspection for Babel Relay Plugin to use
-export default async () => {
-  if (!fs.existsSync("../build")) {
-    fs.mkdirSync("../build");
-  }
+if (!fs.existsSync("../build")) {
+  fs.mkdirSync("../build");
+}
 
-  const result = await graphql(schema, introspectionQuery);
-
+graphql(schema, introspectionQuery).then(result => {
   fs.writeFileSync(
     path.join(__dirname, "../build/schema.json"),
     JSON.stringify(result, null, 2)
@@ -22,4 +20,4 @@ export default async () => {
     path.join(__dirname, "../build/schema.graphql"),
     printSchema(schema)
   );
-};
+});

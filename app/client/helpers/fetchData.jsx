@@ -1,12 +1,9 @@
 /* @flow */
 import Rx from "rxjs/Rx";
 import React from "react";
-import Relay from "react-relay/classic";
 import { trigger } from "redial";
 import ReactDOM from "react-dom";
 import { browserHistory as history, match } from "react-router";
-import IsomorphicRelay from "isomorphic-relay";
-import IsomorphicRouter from "isomorphic-relay-router";
 import App from "../components/app";
 import { redirectTo } from "./handleHTTP";
 
@@ -40,18 +37,13 @@ export const prepareInitialRender = (routes: Object, domNode: Object) => {
   match(
     { routes, history },
     createHandler(renderProps => {
-      IsomorphicRouter.prepareInitialRender(
-        Relay.Store,
-        renderProps
-      ).then(props => {
-        ReactDOM.render(<App {...props} />, domNode);
+      ReactDOM.render(<App {...renderProps} />, domNode);
 
-        trigger(
-          UPDATE_HEADER_HOOK,
-          renderProps.components,
-          getDefaultParams(renderProps)
-        );
-      });
+      trigger(
+        UPDATE_HEADER_HOOK,
+        renderProps.components,
+        getDefaultParams(renderProps)
+      );
     })
   );
 
@@ -70,9 +62,5 @@ export const prepareInitialRender = (routes: Object, domNode: Object) => {
 };
 
 export default (routes: Object, domNode: Object) => {
-  if (process.env.SERVER_RENDERING) {
-    IsomorphicRelay.injectPreparedData(Relay.Store, window.prerenderData);
-  }
-
   prepareInitialRender(routes, domNode);
 };
