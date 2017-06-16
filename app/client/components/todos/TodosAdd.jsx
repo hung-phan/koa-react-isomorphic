@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import Relay from "react-relay";
+import Relay from "react-relay/classic";
 import type { ViewerType } from "./types";
 import AddTodoMutation from "../../mutations/AddTodoMutation";
 

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+yarn run clean
+yarn run update-schema
+yarn run relay
+yarn run compile-templates
+yarn run frontend:build
+yarn run backend:build

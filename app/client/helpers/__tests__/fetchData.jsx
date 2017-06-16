@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import faker from "faker";
-import { Store } from "react-relay";
+import { Store } from "react-relay/classic";
 import { __RewireAPI__ as Module, prepareInitialRender } from "../fetchData";
 
 describe("Helper: fetchData", () => {

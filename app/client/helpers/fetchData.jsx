@@ -1,7 +1,7 @@
 /* @flow */
 import Rx from "rxjs/Rx";
 import React from "react";
-import Relay from "react-relay";
+import Relay from "react-relay/classic";
 import { trigger } from "redial";
 import ReactDOM from "react-dom";
 import { browserHistory as history, match } from "react-router";
@@ -30,13 +30,13 @@ export const createHandler = (callback: Function) => (
   }
 };
 
-export const getDefaultParams = ({ location, params }) => ({
+export const getDefaultParams = ({ location, params }: { location: Object, params: Object }) => ({
   helmetObserver,
   location,
   params
 });
 
-export const prepareInitialRender = (routes, domNode) => {
+export const prepareInitialRender = (routes: Object, domNode: Object) => {
   match(
     { routes, history },
     createHandler(renderProps => {
@@ -69,7 +69,7 @@ export const prepareInitialRender = (routes, domNode) => {
   });
 };
 
-export default (routes, domNode) => {
+export default (routes: Object, domNode: Object) => {
   if (process.env.SERVER_RENDERING) {
     IsomorphicRelay.injectPreparedData(Relay.Store, window.prerenderData);
   }

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+yarn run clean
+yarn run update-schema
+yarn run relay -- --watch & yarn run frontend:watch & yarn run backend:watch

@@ -1,6 +1,6 @@
 /* @flow */
 /* eslint-disable class-methods-use-this */
-import Relay from "react-relay";
+import Relay from "react-relay/classic";
 
 export default class AddTodoMutation extends Relay.Mutation {
   static fragments = {

@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import Relay from "react-relay";
+import Relay from "react-relay/classic";
 import { compose, onlyUpdateForKeys } from "recompose";
 import TodosHeader from "./TodosHeader";
 import TodosAdd from "./TodosAdd";

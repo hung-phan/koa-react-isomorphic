@@ -2,7 +2,7 @@
 /* global process */
 import { renderToString } from "react-dom/server";
 import { match } from "react-router";
-import { DefaultNetworkLayer } from "react-relay";
+import { DefaultNetworkLayer } from "react-relay/classic";
 import IsomorphicRouter from "isomorphic-relay-router";
 
 const networkLayer = new DefaultNetworkLayer(

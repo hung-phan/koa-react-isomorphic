@@ -12,17 +12,10 @@ export default async () => {
 
   const result = await graphql(schema, introspectionQuery);
 
-  if (result.errors) {
-    console.error(
-      "ERROR introspecting schema: ",
-      JSON.stringify(result.errors, null, 2)
-    );
-  } else {
-    fs.writeFileSync(
-      path.join(__dirname, "../build/schema.json"),
-      JSON.stringify(result, null, 2)
-    );
-  }
+  fs.writeFileSync(
+    path.join(__dirname, "../build/schema.json"),
+    JSON.stringify(result, null, 2)
+  );
 
   // Save user readable type system shorthand of schema
   fs.writeFileSync(
