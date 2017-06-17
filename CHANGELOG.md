@@ -1,3 +1,7 @@
+## 4.3.0
+- Fix bugs
+- Update run scripts
+
 ## 4.2.0
 - Update dependencies
 - Migrate tests to Jest

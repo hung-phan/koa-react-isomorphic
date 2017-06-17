@@ -2,25 +2,22 @@
 /* global process */
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
-import promiseMiddleware from "redux-promise";
 import { createLogger } from "redux-logger";
+import injectReducers from "./helpers/injectReducers";
 import reducers from "./createReducer";
 
-const middlewares = [thunkMiddleware, promiseMiddleware];
+const middlewares = [thunkMiddleware];
 const enhancers = [];
 
 // support for development
-if (
-  process.env.NODE_ENV === "development" && process.env.RUNTIME_ENV === "client"
-) {
-  const loggerMiddleware = createLogger({ level: "info" });
+if (process.env.RUNTIME_ENV === "client") {
+  if (process.env.NODE_ENV === "development") {
+    middlewares.push(createLogger({ level: "info" }));
+  }
 
-  middlewares.push(loggerMiddleware);
-}
-
-// support redux-devtools
-if (process.env.RUNTIME_ENV === "client" && window.devToolsExtension) {
-  enhancers.push(window.devToolsExtension());
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    enhancers.push(global.__REDUX_DEVTOOLS_EXTENSION__());
+  }
 }
 
 export default (initialState: Object = {}) => {
@@ -36,9 +33,9 @@ export default (initialState: Object = {}) => {
 
   if (process.env.NODE_ENV === "development" && module.hot) {
     // $FlowFixMe
-    module.hot.accept("./createReducer", () => store.replaceReducer(
-      combineReducers(require("./createReducer").default)
-    ));
+    module.hot.accept("./createReducer", () =>
+      injectReducers(store, combineReducers(require("./createReducer").default))
+    );
   }
 
   return store;
