@@ -6,9 +6,9 @@ const ROOT = require("../config/path-helper").ROOT;
 const removeDirectory = glob => {
   rimraf(glob, err => {
     if (err) {
-      console.error(err);
+      console.error(err); // eslint-disable-line
     } else {
-      console.log(`Deleted files/folders: ${glob}`);
+      console.log(`Deleted files/folders: ${glob}`); // eslint-disable-line
     }
   });
 };

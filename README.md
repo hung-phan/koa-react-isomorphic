@@ -116,55 +116,48 @@ export default combineReducers({
 Sample for logicBundle:
 
 ```javascript
-/* @flow */
-import fetch from 'isomorphic-fetch';
-import identity from 'lodash/identity';
-import { createAction, handleActions } from 'redux-actions';
-import globalizeSelectors from '../../helpers/globalizeSelectors';
-import { getUrl } from '../../helpers/handleHTTP';
-import type {
-  AddTodoActionType,
-  CompleteTodoActionType,
-  RemoveTodoActionType,
-  SetTodosActionType,
-  TodoType
-} from './types';
+export const mountPoint = "todos";
 
-export const mountPoint = 'todos';
+export const selectors = globalizeSelectors(
+  {
+    getTodos: identity
+  },
+  mountPoint
+);
 
-export const selectors = globalizeSelectors({
-  getTodos: identity,
-}, mountPoint);
-
-export const ADD_TODO = 'todos/ADD_TODO';
-export const REMOVE_TODO = 'todos/REMOVE_TODO';
-export const COMPLETE_TODO = 'todos/COMPLETE_TODO';
-export const SET_TODOS = 'todos/SET_TODOS';
+export const ADD_TODO = "todos/ADD_TODO";
+export const REMOVE_TODO = "todos/REMOVE_TODO";
+export const COMPLETE_TODO = "todos/COMPLETE_TODO";
+export const SET_TODOS = "todos/SET_TODOS";
 
 export const addTodo: AddTodoActionType = createAction(ADD_TODO);
 export const removeTodo: RemoveTodoActionType = createAction(REMOVE_TODO);
 export const completeTodo: CompleteTodoActionType = createAction(COMPLETE_TODO);
 export const setTodos: SetTodosActionType = createAction(SET_TODOS);
-export const fetchTodos = () => (dispatch: Function): Promise<TodoType[]> =>
-  fetch(getUrl('/api/v1/todos'))
-    .then(res => res.json())
-    .then((res: TodoType[]) => dispatch(setTodos(res)));
+export const fetchTodos = () =>
+  (dispatch: Function): Promise<TodoType[]> =>
+    fetch(getUrl("/api/v1/todos"))
+      .then(res => res.json())
+      .then((res: TodoType[]) => dispatch(setTodos(res)));
 
-export default handleActions({
-  [ADD_TODO]: (state, { payload: text }) => [
-    ...state, { text, complete: false },
-  ],
-  [REMOVE_TODO]: (state, { payload: index }) => [
-    ...state.slice(0, index),
-    ...state.slice(index + 1),
-  ],
-  [COMPLETE_TODO]: (state, { payload: index }) => [
-    ...state.slice(0, index),
-    { ...state[index], complete: !state[index].complete },
-    ...state.slice(index + 1),
-  ],
-  [SET_TODOS]: (state, { payload: todos }) => todos,
-}, []);
+export default handleActions(
+  {
+    [ADD_TODO]: (state, { payload: text }) => update(state, {
+      $push: [{ text, complete: false }]
+    }),
+    [REMOVE_TODO]: (state, { payload: index }) => update(state, {
+      $splice: [[index, 1]]
+    }),
+    [COMPLETE_TODO]: (state, { payload: index }) => update(state, {
+      $splice: [
+        [index, 1],
+        [index, 0, { ...state[index], complete: !state[index].complete }]
+      ]
+    }),
+    [SET_TODOS]: (state, { payload: todos }) => todos
+  },
+  []
+);
 ```
 
 ## Upcoming
@@ -194,8 +187,8 @@ $ yarn run dev
 
 ### Enable flowtype in development
 ```bash
-$ yarn run flow:watch
-$ yarn run flow:stop # to terminate the server
+$ yarn run flow-watch
+$ yarn run flow-stop # to terminate the server
 ```
 
 You need to add annotation to the file to enable flowtype (`// @flow`)
@@ -205,9 +198,6 @@ You need to add annotation to the file to enable flowtype (`// @flow`)
 
 ```bash
 $ yarn test
-$ yarn run test:watch
-$ yarn run test:lint
-$ yarn run test:coverage
 ```
 
 ## Debug
@@ -236,19 +226,11 @@ using default browser to debug. Example:
 
 ## Production
 
-### Without pm2
+### Start production server
 
 ```bash
 $ yarn run build
 $ SECRET_KEY=your_env_key yarn start
-```
-
-### With pm2
-
-```bash
-$ yarn run build
-$ SECRET_KEY=your_env_key yarn run pm2:start
-$ yarn run pm2:stop # to terminate the server
 ```
 
 ### Docker container
@@ -259,17 +241,6 @@ $ docker-compose up
 ```
 
 Access `http://localhost:3000` to see the application
-
-### Deploy heroku
-
-```base
-$ heroku config:set BUILD_ASSETS=1 # run once
-```
-
-```bash
-$ heroku create
-$ git push heroku master
-```
 
 ## QA
 

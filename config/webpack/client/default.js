@@ -1,5 +1,3 @@
-"use strict";
-
 const path = require("path");
 const cssnext = require("postcss-cssnext");
 const ROOT = require("../../path-helper").ROOT;
