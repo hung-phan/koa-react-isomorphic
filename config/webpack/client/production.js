@@ -75,8 +75,7 @@ productionConfig.plugins.push(
     caches: {
       main: [
         "*.js",
-        "*.css",
-        "/"
+        "*.css"
       ],
       additional: [
         "*.woff",
@@ -86,6 +85,7 @@ productionConfig.plugins.push(
       ],
       optional: [":rest:"]
     },
+    externals: ["/"],
     relativePaths: false,
     ServiceWorker: {
       output: "../sw.js",

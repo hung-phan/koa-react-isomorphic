@@ -1,13 +1,3 @@
-#!/bin/bash
-
-if [ -z "${NODE_ENV}" ]; then
-  export NODE_ENV=${1:-test}
-fi
-
-if [ -z "${PORT}" ]; then
-  export PORT=${2:-3001}
-fi
-
-if [ -z "${SECRET_KEY}" ]; then
-  export SECRET_KEY=${3:-secret}
-fi
+NODE_ENV=test
+PORT=3001
+SECRET_KEY=secret

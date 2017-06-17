@@ -1,6 +1,0 @@
-#!/bin/bash
-
-source $(dirname "$0")/env/frontend
-source $(dirname "$0")/env/development-build
-
-webpack-dev-server --config config/webpack/client/development.js
