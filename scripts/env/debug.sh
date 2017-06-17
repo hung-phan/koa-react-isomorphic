@@ -1,25 +1,25 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -z "${NODE_ENV}" ]; then
-  export NODE_ENV=${1:-production}
+  export NODE_ENV=production
 fi
 
 if [ -z "${PORT}" ]; then
-  export PORT=${2:-3000}
+  export PORT=3000
 fi
 
 if [ -z "${NODE_DEBUGGER}" ]; then
-  export NODE_DEBUGGER=${3:-node-inspector}
+  export NODE_DEBUGGER=node-inspector
 fi
 
 if [ -z "${RUNTIME_ENV}" ]; then
-  export RUNTIME_ENV=${4:-server}
+  export RUNTIME_ENV=server
 fi
 
 if [ -z "${SECRET_KEY}" ]; then
-  export SECRET_KEY=${5:-secret}
+  export SECRET_KEY=secret
 fi
 
 if [ -z "${SERVER_RENDERING}" ]; then
-  export SERVER_RENDERING=${6:-0}
+  export SERVER_RENDERING=0
 fi

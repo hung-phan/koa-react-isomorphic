@@ -1,5 +1,3 @@
-"use strict";
-
 const _ = require("lodash");
 const webpack = require("webpack");
 const BabiliPlugin = require("babili-webpack-plugin");

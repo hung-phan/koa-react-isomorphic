@@ -1,5 +1,3 @@
-"use strict";
-
 const _ = require("lodash");
 const config = require("../../index");
 const webpack = require("webpack");
@@ -7,7 +5,6 @@ const OfflinePlugin = require("offline-plugin");
 const BabiliPlugin = require("babili-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-// const PrepackWebpackPlugin = require("prepack-webpack-plugin").default;
 const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require("../../webpack/webpack-isomorphic-tools")
@@ -60,7 +57,6 @@ productionConfig.plugins.push(
     filename: "[name].[contenthash].css",
     allChunks: true
   }),
-  // new PrepackWebpackPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
@@ -86,13 +82,11 @@ productionConfig.plugins.push(
       ],
       optional: [":rest:"]
     },
+    externals: ["/"],
     relativePaths: false,
     ServiceWorker: {
       output: "../sw.js",
       publicPath: "/sw.js",
-      events: true
-    },
-    AppCache: {
       events: true
     }
   })
