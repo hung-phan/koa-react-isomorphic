@@ -10,7 +10,7 @@ import {
   Store
 } from "relay-runtime";
 
-const create = ({
+export default ({
   baseUrl,
   headers = {}
 }: {
@@ -61,5 +61,3 @@ const create = ({
     commitLocalUpdate: commitLocalUpdate.bind(undefined, environment)
   };
 };
-
-export default { create };

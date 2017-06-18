@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import Relay from "react-relay/classic";
-import { compose, onlyUpdateForKeys } from "recompose";
+import { compose } from "recompose";
 import TodosHeader from "./TodosHeader";
 import TodosAdd from "./TodosAdd";
 import TodosBody from "./TodosBody";
@@ -63,8 +63,7 @@ export const enhance = compose(
           }
         `
     }
-  }),
-  onlyUpdateForKeys(["viewer", "relay"])
+  })
 );
 
 export default enhance(Todos);

@@ -51,11 +51,16 @@ export const AddTodoMutation = mutationWithClientMutationId({
   outputFields: {
     todoEdge: {
       type: GraphQLTodoEdge,
-      resolve({ todoId }) {
-        return todosDAO.getById(todoId).then(todo => ({
-          cursor: cursorForObjectInConnection(todosDAO.all(), todo),
+      async resolve({ todoId }) {
+        const [todo, todos] = await Promise.all([
+          todosDAO.getById(todoId),
+          todosDAO.all()
+        ]);
+
+        return {
+          cursor: cursorForObjectInConnection(todos, todo),
           node: todo
-        }));
+        };
       }
     },
     viewer: {

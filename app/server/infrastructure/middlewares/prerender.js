@@ -1,13 +1,9 @@
 /* @flow */
 /* global process */
+import Helmet from "react-helmet";
 import { match } from "react-router";
 import { renderToString } from "react-dom/server";
-import { DefaultNetworkLayer } from "react-relay/classic";
 
-const networkLayer = new DefaultNetworkLayer(
-  // $FlowFixMe
-  `http://localhost:${process.env.PORT}/graphql`
-);
 let routes = require("../../../routes").default;
 
 if (process.env.NODE_ENV === "development" && module.hot) {
@@ -29,13 +25,15 @@ export default async (ctx: Object, next: Function) => {
             } else if (redirectLocation) {
               ctx.redirect(redirectLocation.pathname + redirectLocation.search);
             } else if (renderProps) {
-              IsomorphicRouter.prepareData(renderProps, networkLayer).then(({
-                data: prerenderData,
-                props
-              }) => {
+              serverFetchData(renderProps, store).then(() => {
+                const currentRoutes = <RouterContext {...renderProps} />;
                 const prerenderComponent = renderToString(
-                  IsomorphicRouter.render(props)
+                  <App store={store} routes={currentRoutes} />
                 );
+                const prerenderData = store.getState();
+
+                // prevent memory leak
+                Helmet.rewind();
 
                 ctx
                   .render(template, {
