@@ -1,60 +1,29 @@
+import _ from "lodash";
 import faker from "faker";
 import React from "react";
-import { mount } from "enzyme";
-import propName from "redial/lib/propName";
-import mockingComponent from "../createMockingComponent";
+import { render } from "enzyme";
+import { trigger } from "redial";
+import createMockingComponent from "../createMockingComponent";
 import redialEnhancer from "../createRedialHooks";
 
-describe("Helper: createRedialHooks", () => {
+describe("createRedialHooks", () => {
   let Handler;
-  let callback1;
-  let callback2;
+  let Component;
+  let callback;
 
   beforeEach(() => {
-    Handler = mockingComponent("Handler", ["message"]);
-    callback1 = jest.fn();
-    callback2 = jest.fn();
+    callback = jest.fn();
+    Handler = createMockingComponent("Handler", ["message"]);
+    Component = redialEnhancer({ callback })(Handler);
   });
 
-  it("should be a function", () => {
-    expect(redialEnhancer).toBeDefined();
-    expect(typeof redialEnhancer === "function");
+  it("should 'trigger' the 'callback' function with arguments", async () => {
+    const args = _.range(4).map(() => faker.random.uuid());
+    await trigger("callback", Component, args);
+    expect(callback).toBeCalledWith(args);
   });
 
-  describe("# component", () => {
-    let Component;
-    let component;
-
-    beforeEach(() => {
-      Component = redialEnhancer({ callback1, callback2 })(Handler);
-      component = mount(<Component message="Hello world" />);
-    });
-
-    it(
-      `should define static "${propName}.callback1" and "${propName}.callback2"`,
-      () => {
-        expect(typeof Component[propName].callback1 === "function");
-        expect(typeof Component[propName].callback2 === "function");
-      }
-    );
-
-    it("should call the 'callback' function with arguments", () => {
-      const args = [
-        faker.random.uuid(),
-        faker.random.uuid(),
-        faker.random.uuid(),
-        faker.random.uuid()
-      ];
-
-      Component[propName].callback1(...args);
-      Component[propName].callback2(...args);
-
-      expect(callback1).toBeCalledWith(...args);
-      expect(callback2).toBeCalledWith(...args);
-    });
-
-    it("should render message", () => {
-      expect(component.text()).toContain("Hello world");
-    });
+  it("should render component", () => {
+    expect(render(<Component message="Hello world" />)).toMatchSnapshot();
   });
 });

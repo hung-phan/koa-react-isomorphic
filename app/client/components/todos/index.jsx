@@ -26,7 +26,7 @@ export const Todos = (
   </div>
 );
 
-export const enhance = compose(
+export default compose(
   createRedialHooks({
     [UPDATE_HEADER_HOOK]: ({ helmetObserver }) => {
       helmetObserver.next({

@@ -10,20 +10,13 @@ import {
   Store
 } from "relay-runtime";
 
-export default ({
-  baseUrl,
-  headers = {}
-}: {
-  baseUrl: string,
-  headers: Object
-}) => {
+const create = (baseUrl: string) => {
   // Default options for the Fetch API
   // https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch
   const defaults = {
     mode: baseUrl ? "cors" : "same-origin",
     credentials: baseUrl ? "include" : "same-origin",
     headers: {
-      ...headers,
       Accept: "application/json",
       "Content-Type": "application/json"
     }
@@ -47,7 +40,7 @@ export default ({
 
   return {
     environment,
-    fetch: (url: string, options: Object) =>
+    fetch: <T>(url: string, options: { [key: string]: any } = {}): Promise<T> =>
       fetch(`${baseUrl}${url}`, {
         ...defaults,
         ...options,
@@ -61,3 +54,19 @@ export default ({
     commitLocalUpdate: commitLocalUpdate.bind(undefined, environment)
   };
 };
+
+let baseUrl;
+
+if (process.env.RUNTIME_ENV === "client") {
+  baseUrl = "";
+} else {
+  const PORT = process.env.PORT;
+
+  if (!PORT) {
+    throw new Error("Missing 'process.env.PORT'.");
+  }
+
+  baseUrl = `http://localhost:${PORT}`;
+}
+
+export default create(baseUrl);
