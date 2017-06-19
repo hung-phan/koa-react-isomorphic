@@ -1,10 +1,9 @@
 /* @flow */
-import fetch from "isomorphic-fetch";
 import identity from "lodash/identity";
 import update from "immutability-helper";
 import { createAction, handleActions } from "redux-actions";
 import globalizeSelectors from "../../helpers/globalizeSelectors";
-import { getUrl } from "../../helpers/handleHTTP";
+import Api from "../../../shared/helpers/api";
 import type {
   AddTodoActionType,
   CompleteTodoActionType,
@@ -33,7 +32,7 @@ export const completeTodo: CompleteTodoActionType = createAction(COMPLETE_TODO);
 export const setTodos: SetTodosActionType = createAction(SET_TODOS);
 export const fetchTodos = () =>
   (dispatch: Function): Promise<TodoType[]> =>
-    fetch(getUrl("/api/v1/todos"))
+    Api.fetch("/api/v1/todos")
       .then(res => res.json())
       .then((res: TodoType[]) => dispatch(setTodos(res)));
 

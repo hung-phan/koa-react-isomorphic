@@ -1,15 +1,15 @@
-import { createAction, handleAction } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import createStore from "../../createStore";
 import injectReducers from "../injectReducers";
 
-describe("Helper: injectReducers", () => {
+describe("injectReducers", () => {
+  const mountPoint = "newReducer";
   const NEW_ACTION = "action/NEW_ACTION";
   const newAction = createAction(NEW_ACTION);
-  const newReducers = {
-    newReducer: handleAction(
-      NEW_ACTION,
+  const newReducer = {
+    [mountPoint]: handleActions(
       {
-        next: (state, { payload }) => payload
+        [NEW_ACTION]: (state, { payload }) => payload
       },
       null
     )
@@ -20,28 +20,28 @@ describe("Helper: injectReducers", () => {
     store = createStore();
   });
 
-  it("should not contain 'newReducer' state", () => {
-    expect(store.getState()).not.toHaveProperty("newReducer");
+  it(`should not contain '${mountPoint}' state`, () => {
+    expect(store.getState()).not.toHaveProperty(mountPoint);
   });
 
-  describe("injectReducers", () => {
+  describe("injecting", () => {
     beforeEach(() => {
-      injectReducers(store, newReducers);
+      injectReducers(store, newReducer);
     });
 
-    it("should inject 'newReducer'", () => {
-      expect(store.getState()).toHaveProperty("newReducer");
+    it(`should inject '${mountPoint}'`, () => {
+      expect(store.getState()).toHaveProperty(mountPoint);
     });
 
     it("should have default state", () => {
-      expect(store.getState().newReducer).toEqual(null);
+      expect(store.getState()[mountPoint]).toEqual(null);
     });
 
     it("should work when dispatch 'NEW_ACTION'", () => {
       const data = Symbol("data");
       store.dispatch(newAction(data));
 
-      expect(store.getState().newReducer).toEqual(data);
+      expect(store.getState()[mountPoint]).toEqual(data);
     });
   });
 });

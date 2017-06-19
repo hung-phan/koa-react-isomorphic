@@ -1,38 +1,34 @@
 import React from "react";
-import { shallow } from "enzyme";
-import { Todos } from "../index";
-import TodosHeader from "../TodosHeader";
-import TodosAdd from "../TodosAdd";
-import TodosBody from "../TodosBody";
+import { render } from "enzyme";
+import { Provider } from "react-redux";
+import createStore from "../../../createStore";
+import todosReducer, { mountPoint as todosMountPoint, setTodos } from "../logicBundle";
+import injectReducers from "../../../helpers/injectReducers";
+import Todos from "..";
 
 describe("Component: Todos", () => {
-  const todos = [
-    { text: "Todo 1", complete: false },
-    { text: "Todo 2", complete: false },
-    { text: "Todo 3", complete: false },
-    { text: "Todo 4", complete: false }
-  ];
-  let actions;
-  let component;
+  let store;
 
   beforeEach(() => {
-    actions = {
-      addTodo: jest.fn(),
-      removeTodo: jest.fn(),
-      completeTodo: jest.fn()
-    };
-    component = shallow(<Todos todos={todos} actions={actions} />);
+    store = createStore();
+    injectReducers(store, { [todosMountPoint]: todosReducer });
+    store.dispatch(setTodos([
+      { text: "Todo 1", complete: false },
+      { text: "Todo 2", complete: false },
+      { text: "Todo 3", complete: false },
+      { text: "Todo 4", complete: false }
+    ]));
   });
 
-  it("should have 'TodosHeader' component", () => {
-    expect(component.find(TodosHeader).node).toBeDefined();
-  });
-
-  it("should have 'TodosAdd' component", () => {
-    expect(component.find(TodosAdd).node).toBeDefined();
-  });
-
-  it("should have 'TodosBody' component", () => {
-    expect(component.find(TodosBody).node).toBeDefined();
+  it("should render component", () => {
+    expect(
+      render(
+        <Provider key="provider" store={store}>
+          <div>
+            <Todos />
+          </div>
+        </Provider>
+      )
+    ).toMatchSnapshot();
   });
 });

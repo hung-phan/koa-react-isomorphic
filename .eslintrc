@@ -16,6 +16,7 @@
     "arrow-parens": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
     "react/require-extension": 0,
     "flowtype/define-flow-type": 1,
     "flowtype/space-after-type-colon": [1, "always"],

@@ -1,18 +1,14 @@
 /* @flow */
 import React from "react";
-import Helmet from "react-helmet";
-import { compose } from "recompose";
+import { compose } from "redux";
 import { connect } from "react-redux";
+import ReactHelmet from "react-helmet";
 import { selectors } from "./logicBundle";
 
-export const HelmetComponent = ({ helmet }: { helmet: Object }) => (
-  <Helmet {...helmet} />
-);
+export const Helmet = ({ helmet }: { helmet: Object }) => (<ReactHelmet {...helmet} />);
 
-export const enhance = compose(
+export default compose(
   connect(state => ({
     helmet: selectors.getHelmet(state)
   }))
-);
-
-export default enhance(HelmetComponent);
+)(Helmet);
