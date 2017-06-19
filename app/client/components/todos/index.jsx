@@ -1,8 +1,7 @@
 /* @flow */
 import React from "react";
 import { List, is } from "immutable";
-import { compose, shouldUpdate } from "recompose";
-import { bindActionCreators } from "redux";
+import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import TodosHeader from "./TodosHeader";
 import TodosAdd from "./TodosAdd";
@@ -18,14 +17,15 @@ import {
 } from "./logicBundle";
 import { updateLink } from "../helmet/logicBundle";
 import createRedialHooks from "../../helpers/createRedialHooks";
-import {
-  FETCH_DATA_HOOK,
-  UPDATE_HEADER_HOOK
-} from "../../helpers/fetchData";
+import { FETCH_DATA_HOOK, UPDATE_HEADER_HOOK } from "../../helpers/fetchData";
 
-export const Todos = (
-  { todos, actions }: { todos: List<TodoType>, actions: Object }
-) => (
+export const Todos = ({
+  todos,
+  actions
+}: {
+  todos: List<TodoType>,
+  actions: Object
+}) => (
   <div className="container">
     <div className="row">
       <TodosHeader />
@@ -40,19 +40,20 @@ export const Todos = (
   </div>
 );
 
-export const enhance = compose(
+export default compose(
   createRedialHooks({
     [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
-    [UPDATE_HEADER_HOOK]: ({ store }) => store.dispatch(
-      updateLink([
-        // window.javascriptAssets will be injected to do preload link for optimizing route
-        {
-          rel: "prefetch",
-          href: window.javascriptAssets["static-page"],
-          as: "script"
-        }
-      ])
-    )
+    [UPDATE_HEADER_HOOK]: ({ store }) =>
+      store.dispatch(
+        updateLink([
+          // window.javascriptAssets will be injected to do preload link for optimizing route
+          {
+            rel: "prefetch",
+            href: window.javascriptAssets["static-page"],
+            as: "script"
+          }
+        ])
+      )
   }),
   connect(
     state => ({
@@ -68,10 +69,5 @@ export const enhance = compose(
         dispatch
       )
     })
-  ),
-  shouldUpdate(
-    (props, nextProps) => !is(props.todos, nextProps.todos)
   )
-);
-
-export default enhance(Todos);
+)(Todos);
