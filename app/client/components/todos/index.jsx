@@ -68,6 +68,10 @@ export default compose(
         },
         dispatch
       )
-    })
+    }),
+    null,
+    {
+      areStatePropsEqual: (nextStateProps, stateProps) => is(nextStateProps.todos, stateProps.todos)
+    }
   )
 )(Todos);
