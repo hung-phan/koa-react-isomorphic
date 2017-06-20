@@ -31,8 +31,6 @@ function initialize() {
   }
 }
 
-initialize();
-
 if (process.env.NODE_ENV === "development" && module.hot) {
   // $FlowFixMe
   module.hot.accept("./routes", () => {
@@ -40,6 +38,8 @@ if (process.env.NODE_ENV === "development" && module.hot) {
     initialize();
   });
 }
+
+initialize();
 
 if (process.env.NODE_ENV === "production") {
   const runtime = require("offline-plugin/runtime");
