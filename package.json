@@ -43,8 +43,11 @@
     "expose-loader": "^0.7.3",
     "extract-text-webpack-plugin": "^2.1.2",
     "faker": "^4.1.0",
+    "farce": "^0.2.1",
     "file-loader": "^0.11.2",
     "font-awesome": "^4.7.0",
+    "found": "^0.3.0",
+    "found-relay": "next",
     "global": "^4.3.2",
     "graphql": "^0.9.2",
     "graphql-relay": "^0.5.2",
@@ -170,10 +173,11 @@
     "flow-watch": "yarn run flow-status && chokidar './app/**/*.js' './app/**/*.jsx' -c 'yarn run flow:status'",
     "frontend-build": "./scripts/frontend-build.sh",
     "frontend-watch": "./scripts/frontend-watch.sh",
+    "pretest": "npm run update-schema",
+    "relay": "relay-compiler --src ./app/client --schema ./build/schema.graphql",
     "start": "./scripts/start.sh",
     "test": "env-cmd --no-override ./scripts/env/test jest",
     "update-schema": "./scripts/update-schema.sh",
-    "relay": "relay-compiler --src ./app --schema ./build/schema.graphql",
     "watch": "./scripts/watch.sh"
   }
 }

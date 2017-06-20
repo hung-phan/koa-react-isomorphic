@@ -1,17 +1,14 @@
 /* @flow */
 import React from "react";
+import compose from "lodash/flowRight";
 import Relay from "react-relay/classic";
-import { compose } from "recompose";
 import TodosHeader from "./TodosHeader";
 import TodosAdd from "./TodosAdd";
 import TodosBody from "./TodosBody";
 import TodosFooter from "./TodosFooter";
 import type { ViewerType } from "./types";
 import createRedialHooks from "../../helpers/createRedialHooks";
-import { UPDATE_HEADER_HOOK } from "../../helpers/fetchData";
-import AddTodoMutation from "../../mutations/AddTodoMutation";
-import RemoveTodoMutation from "../../mutations/RemoveTodoMutation";
-import CompleteTodoMutation from "../../mutations/CompleteTodoMutation";
+import { UPDATE_HEADER_HOOK } from "../../helpers/initialize";
 
 export const Todos = (
   { viewer, relay }: { viewer: ViewerType, relay: Object }
@@ -57,13 +54,8 @@ export default compose(
               }
             }
             numberOfTodos
-            ${AddTodoMutation.getFragment("viewer")}
-            ${RemoveTodoMutation.getFragment("viewer")}
-            ${CompleteTodoMutation.getFragment("viewer")}
           }
         `
     }
   })
-);
-
-export default enhance(Todos);
+)(Todos);

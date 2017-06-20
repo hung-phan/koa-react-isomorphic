@@ -1,40 +1,21 @@
 /* @flow */
-/* eslint-disable class-methods-use-this */
-import Relay from "react-relay/classic";
+import { graphql } from "react-relay";
+import Api from "../../shared/helpers/api";
+import createClientMutationId from "./createClientMutationId";
 
-export default class CompleteTodoMutation extends Relay.Mutation {
-  static fragments = {
-    viewer: () => Relay.QL`fragment on Viewer { id }`
-  };
-
-  getMutation() {
-    return Relay.QL`mutation { completeTodo }`;
-  }
-
-  getVariables() {
-    return { id: this.props.todo.id };
-  }
-
-  getFatQuery() {
-    return Relay.QL`
-      fragment on CompleteTodoMutationPayload {
-        todo
-        viewer {
-          todos
-        }
+const mutation = graphql`
+  mutation CompleteTodoMutation($input: CompleteTodoMutationInput!) {
+    completeTodo(input: $input) {
+      todo{
+        id
+        text
+        complete
       }
-    `;
+    }
   }
+`;
 
-  getConfigs() {
-    return [
-      {
-        type: "FIELDS_CHANGE",
-        fieldIDs: {
-          todo: this.props.todo.id,
-          viewer: this.props.viewer.id
-        }
-      }
-    ];
-  }
-}
+export default (id: string) => Api.commitMutation({
+  mutation,
+  variables: { id, clientMutationId: createClientMutationId() }
+});

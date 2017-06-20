@@ -1,35 +1,49 @@
 /* @flow */
 import React from "react";
-import { createRoutes, Route, IndexRoute } from "react-router";
-import ViewerQuery from "./client/queries/viewer";
+import { Route } from "found";
+import { graphql } from "react-relay";
+import createRender from "found/lib/createRender";
+import makeRouteConfig from "found/lib/makeRouteConfig";
 
-export default createRoutes(
+export const routeConfig = makeRouteConfig(
   <Route path="/">
-    <IndexRoute
-      getComponent={(nextState, cb) => {
-        // $FlowFixMe
-        require.ensure(
-          [],
-          require => {
-            cb(null, require("./client/components/todos").default);
-          },
-          "todos-page"
-        );
-      }}
-      queries={ViewerQuery}
+    <Route
+      getComponent={() =>
+        new Promise((resolve, reject) => {
+          // $FlowFixMe
+          require.ensure(
+            [],
+            require => {
+              resolve(require("./client/components/todos").default);
+            },
+            reject,
+            "todos-page"
+          );
+        })}
+      queries={graphql`
+        query router_Todo_Query {
+          viewer {
+            ...Todo_viewer
+          }
+        }
+      `}
     />
     <Route
       path="static-page"
-      getComponent={(nextState, cb) => {
-        // $FlowFixMe
-        require.ensure(
-          [],
-          require => {
-            cb(null, require("./client/components/static-page").default);
-          },
-          "static-page"
-        );
-      }}
+      getComponent={() =>
+        new Promise((resolve, reject) => {
+          // $FlowFixMe
+          require.ensure(
+            [],
+            require => {
+              resolve(require("./client/components/static-page").default);
+            },
+            reject,
+            "static-page"
+          );
+        })}
     />
   </Route>
 );
+
+export const render = createRender({});

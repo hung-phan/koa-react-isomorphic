@@ -1,14 +1,13 @@
 /* @flow */
 /* global process */
 import React from "react";
-import { Router } from "react-router";
 import Helmet from "../helmet";
 
-export default (props: Object) => {
+export default ({ router }: { router: Object}) => {
   let Component = (
     <div>
       <Helmet />
-      <Router {...props} />
+      {router}
     </div>
   );
 

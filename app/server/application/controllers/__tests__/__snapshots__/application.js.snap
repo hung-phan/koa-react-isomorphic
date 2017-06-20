@@ -3,7 +3,5 @@
 exports[`Controller: application should render single page 1`] = `
 "<!doctype html><html lang=\\"en\\"><head><meta charset=\\"utf-8\\"><meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\"><meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"><meta name=\\"theme-color\\" content=\\"#000000\\"><title>Application</title><link rel=\\"manifest\\" href=\\"/manifest.json\\"><link href=\\"/favicon.ico\\" rel=\\"shortcut icon\\" type=\\"image/x-icon\\"></head><body><div id=\\"app\\"></div><script type=\\"text/javascript\\">
     window.javascriptAssets = {};
-</script><script type=\\"text/javascript\\">
-        window.prerenderData = {};
-    </script><script type=\\"text/javascript\\"></script><script type=\\"text/javascript\\"></script><script type=\\"text/javascript\\"></script></body></html>"
+</script><script type=\\"text/javascript\\"></script><script type=\\"text/javascript\\"></script><script type=\\"text/javascript\\"></script></body></html>"
 `;

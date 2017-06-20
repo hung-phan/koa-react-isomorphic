@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "found";
 
 export default () => (
   <div className="container">

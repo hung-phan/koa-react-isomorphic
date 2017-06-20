@@ -1,25 +1,25 @@
 /* @flow */
 /* global process */
 import "./client/helpers/loadExternalLibs";
-import renderComponents from "./client/helpers/fetchData";
-import routes from "./routes";
+import getRouter from "./client/helpers/getRouter";
+import initialize from "./client/helpers/initialize";
 
-const appDOM = document.getElementById("app");
+(async () => {
+  const appDOM = document.getElementById("app");
 
-if (!appDOM) {
-  throw new Error("Cannot initialise application");
-}
+  if (!appDOM) {
+    throw new Error("Cannot initialise application");
+  }
 
-renderComponents(routes, appDOM);
+  initialize(await getRouter(), appDOM);
 
-if (process.env.NODE_ENV === "development" && module.hot) {
-  // $FlowFixMe
-  module.hot.accept("./routes", () => {
-    const newRoutes = require("./routes").default;
-
-    renderComponents(newRoutes, appDOM);
-  });
-}
+  if (process.env.NODE_ENV === "development" && module.hot) {
+    // $FlowFixMe
+    module.hot.accept("./client/helpers/getRouter", async () => {
+      initialize(await require("./client/helpers/getRouter").default(), appDOM);
+    });
+  }
+})();
 
 if (process.env.NODE_ENV === "production") {
   const runtime = require("offline-plugin/runtime");

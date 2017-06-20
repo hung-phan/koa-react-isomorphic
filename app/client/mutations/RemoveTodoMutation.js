@@ -1,50 +1,20 @@
 /* @flow */
-/* eslint-disable class-methods-use-this */
-import Relay from "react-relay/classic";
+import { graphql } from "react-relay";
+import Api from "../../shared/helpers/api";
+import createClientMutationId from "./createClientMutationId";
 
-export default class RemoveTodoMutation extends Relay.Mutation {
-  static fragments = {
-    viewer: () => Relay.QL`fragment on Viewer { id }`
-  };
-
-  getMutation() {
-    return Relay.QL`mutation { removeTodo }`;
-  }
-
-  getVariables() {
-    return { id: this.props.todo.id };
-  }
-
-  getFatQuery() {
-    return Relay.QL`
-      fragment on RemoveTodoMutationPayload {
-        id
-        viewer {
-          todos
-          numberOfTodos
-        }
+const mutation = graphql`
+  mutation RemoveTodoMutation($input: RemoveTodoMutationInput!) {
+    removeTodo(input: $input) {
+      id
+      viewer {
+        numberOfTodos 
       }
-    `;
+    }
   }
+`;
 
-  getConfigs() {
-    return [
-      {
-        type: "NODE_DELETE",
-        parentName: "viewer",
-        parentID: this.props.viewer.id,
-        connectionName: "todos",
-        deletedIDFieldName: "id"
-      }
-    ];
-  }
-
-  getOptimisticResponse() {
-    return {
-      id: this.props.todo.id,
-      viewer: {
-        numberOfTodos: this.props.viewer.numberOfTodos - 1
-      }
-    };
-  }
-}
+export default (id: string) => Api.commitMutation({
+  mutation,
+  variables: { id, clientMutationId: createClientMutationId() }
+});
