@@ -1,25 +1,15 @@
 /* @flow */
 /* global process */
 import "./client/helpers/loadExternalLibs";
-import getRouter from "./client/helpers/getRouter";
 import initialize from "./client/helpers/initialize";
 
-(async () => {
-  const appDOM = document.getElementById("app");
+const appDOM = document.getElementById("app");
 
-  if (!appDOM) {
-    throw new Error("Cannot initialise application");
-  }
+if (!appDOM) {
+  throw new Error("Cannot initialise application");
+}
 
-  initialize(await getRouter(), appDOM);
-
-  if (process.env.NODE_ENV === "development" && module.hot) {
-    // $FlowFixMe
-    module.hot.accept("./client/helpers/getRouter", async () => {
-      initialize(await require("./client/helpers/getRouter").default(), appDOM);
-    });
-  }
-})();
+initialize(appDOM);
 
 if (process.env.NODE_ENV === "production") {
   const runtime = require("offline-plugin/runtime");

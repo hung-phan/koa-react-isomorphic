@@ -1,8 +1,7 @@
 /* @flow */
 import React from "react";
-import Relay from "react-relay/classic";
-import type { ViewerType } from "./types";
-import AddTodoMutation from "../../mutations/AddTodoMutation";
+import { commit as addTodoAction } from "../../mutations/AddTodoMutation";
+import type { todos_viewer } from "./__generated__/todos_viewer.graphql";
 
 export default class TodosAdd extends React.PureComponent {
   state: { todo: string, numberOfTodos: number } = {
@@ -11,7 +10,7 @@ export default class TodosAdd extends React.PureComponent {
   };
 
   props: {
-    viewer: ViewerType,
+    viewer: todos_viewer,
     relay: Object
   };
 
@@ -20,9 +19,7 @@ export default class TodosAdd extends React.PureComponent {
   };
 
   addTodo = () => {
-    Relay.Store.commitUpdate(
-      new AddTodoMutation({ text: this.state.todo, viewer: this.props.viewer })
-    );
+    addTodoAction(this.state.todo);
     this.setState({ todo: "" });
   };
 

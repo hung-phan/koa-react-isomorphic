@@ -1,9 +1,9 @@
 /* @flow */
 import { graphql } from "react-relay";
-import Api from "../../shared/helpers/api";
+import { Api } from "../helpers/initialize";
 import createClientMutationId from "./createClientMutationId";
 
-const mutation = graphql`
+export const mutation = graphql`
   mutation CompleteTodoMutation($input: CompleteTodoMutationInput!) {
     completeTodo(input: $input) {
       todo{
@@ -15,7 +15,7 @@ const mutation = graphql`
   }
 `;
 
-export default (id: string) => Api.commitMutation({
+export const commit = (id: string) => Api.commitMutation({
   mutation,
   variables: { id, clientMutationId: createClientMutationId() }
 });

@@ -51,7 +51,7 @@ class ClientFetcher extends FetcherBase {
 
 export default () => {
   if (process.env.RUNTIME_ENV === "client") {
-    return new ClientFetcher(window.prerenderData);
+    return new ClientFetcher(window.prerenderData || []);
   }
 
   return new ServerFetcher();

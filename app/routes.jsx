@@ -20,10 +20,10 @@ export const routeConfig = makeRouteConfig(
             "todos-page"
           );
         })}
-      queries={graphql`
-        query router_Todo_Query {
+      query={graphql`
+        query routes_TodoQuery {
           viewer {
-            ...Todo_viewer
+            ...todos_viewer
           }
         }
       `}

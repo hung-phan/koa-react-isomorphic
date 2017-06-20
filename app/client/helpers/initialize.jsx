@@ -1,13 +1,23 @@
 /* @flow */
-import Rx from "rxjs/Rx";
 import React from "react";
 import ReactDOM from "react-dom";
+import createApi from "../../shared/helpers/createApi";
+import createRouter from "./createRouter";
 import App from "../components/app";
 
-export const helmetObserver = new Rx.Subject();
+export const Api = createApi();
 
-export const UPDATE_HEADER_HOOK = "UPDATE_HEADER_HOOK";
-
-export default (router: Object, domNode: Object) => {
+const renderComponent = (router: Object, domNode: Object) => {
   ReactDOM.render(<App router={router} />, domNode);
+};
+
+export default async (domNode: Object) => {
+  renderComponent(await createRouter(Api), domNode);
+
+  if (process.env.NODE_ENV === "development" && module.hot) {
+    // $FlowFixMe
+    module.hot.accept("./createRouter", async () => {
+      renderComponent(await require("./createRouter").default(Api), domNode);
+    });
+  }
 };
