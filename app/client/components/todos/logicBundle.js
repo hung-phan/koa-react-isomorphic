@@ -3,7 +3,7 @@ import { List, fromJS } from "immutable";
 import identity from "lodash/identity";
 import { createAction, handleActions } from "redux-actions";
 import globalizeSelectors from "../../helpers/globalizeSelectors";
-import Api from "../../../shared/helpers/api";
+import fetch from "../../../shared/helpers/fetch";
 import type {
   AddTodoActionType,
   CompleteTodoActionType,
@@ -32,7 +32,7 @@ export const completeTodo: CompleteTodoActionType = createAction(COMPLETE_TODO);
 export const setTodos: SetTodosActionType = createAction(SET_TODOS);
 export const fetchTodos = () =>
   (dispatch: Function): Promise<TodoType[]> =>
-    Api.fetch("/api/v1/todos")
+    fetch("/api/v1/todos")
       .then(res => res.json())
       .then((res: TodoType[]) => dispatch(setTodos(res)));
 
