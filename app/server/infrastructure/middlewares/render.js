@@ -7,7 +7,8 @@ import settings from "../settings";
 export default async (ctx: Object, next: Function) => {
   ctx.render = (template: string, parameters: Object = {}) => {
     ctx.type = "text/html";
-    return async () => {
+
+    return new Promise((resolve, reject) => {
       const templatePath = path.join(
         settings.path.ROOT,
         `${settings.path.TEMPLATES_DIR}/${template}`
@@ -16,12 +17,18 @@ export default async (ctx: Object, next: Function) => {
         ? global.nodeRequire(`${templatePath}.js`)
         : marko.load(templatePath);
 
-      return currentTemplate.stream({
-        ...settings,
-        ...parameters,
-        csrf: ctx.csrf
-      });
-    };
+      try {
+        resolve(
+          currentTemplate.stream({
+            ...settings,
+            ...parameters,
+            csrf: ctx.csrf
+          })
+        );
+      } catch (e) {
+        reject(e);
+      }
+    });
   };
 
   await next();

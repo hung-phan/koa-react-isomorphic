@@ -16,28 +16,31 @@ if (process.env.NODE_ENV === "development" && module.hot) {
 
 export default async (ctx: Object, next: Function) => {
   if (process.env.SERVER_RENDERING) {
-    ctx.prerender = async (template: string, parameters: Object = {}) => {
-      const { Api, redirect, status, element } = await getRouter(ctx.req.url);
+    ctx.prerender = (template: string, parameters: Object = {}) =>
+      new Promise(async (resolve, reject) => {
+        const { Api, redirect, status, element } = await getRouter(ctx.req.url);
 
-      if (redirect) {
-        ctx.redirect(redirect.url);
-      } else if ([404, 500].includes(status)) {
-        ctx.throw(status);
-      } else {
-        const prerenderComponent = renderToString(<App router={element} />);
-        const prerenderData = Api.fetcher.toJSON();
+        if (redirect) {
+          ctx.redirect(redirect.url);
+        } else if ([404, 500].includes(status)) {
+          ctx.throw(status);
+        } else {
+          const prerenderComponent = renderToString(<App router={element} />);
+          const prerenderData = Api.fetcher.toJSON();
 
-        // prevent memory leak
-        Helmet.rewind();
+          // prevent memory leak
+          Helmet.rewind();
 
-        ctx
-          .render(template, {
-            ...parameters,
-            prerenderComponent,
-            prerenderData
-          });
-      }
-    };
+          ctx
+            .render(template, {
+              ...parameters,
+              prerenderComponent,
+              prerenderData
+            })
+            .then(resolve)
+            .catch(reject);
+        }
+      });
     await next();
   } else {
     ctx.prerender = ctx.render;
