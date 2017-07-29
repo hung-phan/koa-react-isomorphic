@@ -22,7 +22,7 @@ import { FETCH_DATA_HOOK, UPDATE_HEADER_HOOK } from "../../helpers/fetchData";
 export const Todos = ({
   todos,
   actions
-}: {
+}: { // eslint-disable-line indent
   todos: List<TodoType>,
   actions: Object
 }) => (

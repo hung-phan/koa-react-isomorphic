@@ -14,7 +14,7 @@ _.mergeWith(
     },
     recordsPath: path.join(ROOT, config.path.tmp, "server-records.json")
   },
-  (obj1, obj2) => _.isArray(obj2) ? obj2.concat(obj1) : undefined
+  (obj1, obj2) => (_.isArray(obj2) ? obj2.concat(obj1) : undefined)
 );
 
 developmentConfig.plugins.push(
