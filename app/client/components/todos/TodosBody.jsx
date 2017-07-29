@@ -9,17 +9,15 @@ import type {
   TodoType
 } from "./types";
 
-const TodosBody = (
-  {
-    todos,
-    completeTodo,
-    removeTodo
-  }: {
-    todos: TodoType[],
-    completeTodo: CompleteTodoActionType,
-    removeTodo: RemoveTodoActionType
-  }
-) => (
+const TodosBody = ({
+  todos,
+  completeTodo,
+  removeTodo
+}: { // eslint-disable-line indent
+  todos: TodoType[],
+  completeTodo: CompleteTodoActionType,
+  removeTodo: RemoveTodoActionType
+}) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
       <tbody>
@@ -30,8 +28,14 @@ const TodosBody = (
 
           return (
             <tr key={index}>
-              <td><span>{index + 1}</span></td>
-              <td>{text}</td>
+              <td>
+                <span>
+                  {index + 1}
+                </span>
+              </td>
+              <td>
+                {text}
+              </td>
               <td>
                 <button
                   type="button"
