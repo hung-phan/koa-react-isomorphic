@@ -1,10 +1,11 @@
 /* @flow */
 import React from "react";
 import BrowserProtocol from "farce/lib/BrowserProtocol";
-import createInitialFarceRouter from "found/lib/createInitialFarceRouter";
+import { createInitialFarceRouter } from "found";
 import { routeConfig, render } from "../../routes";
+import { Api } from "./singletons";
 
-export default async (Api: Object) => {
+export default async () => {
   const Router = await createInitialFarceRouter({
     historyProtocol: new BrowserProtocol(),
     historyMiddlewares: Api.historyMiddlewares,
@@ -12,5 +13,6 @@ export default async (Api: Object) => {
     routeConfig,
     render
   });
+
   return <Router resolver={Api.resolver} />;
 };

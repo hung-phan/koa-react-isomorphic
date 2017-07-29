@@ -9,6 +9,7 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type todos_viewer = {|
+  +id: string;
   +todos: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
@@ -24,24 +25,42 @@ export type todos_viewer = {|
 
 
 const fragment /*: ConcreteFragment*/ = {
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "kind": "LocalArgument",
+      "name": "numberOfTodos",
+      "type": "Int",
+      "defaultValue": 10
+    }
+  ],
   "kind": "Fragment",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": "numberOfTodos",
+        "cursor": null,
+        "direction": "backward",
+        "path": [
+          "todos"
+        ]
+      }
+    ]
+  },
   "name": "todos_viewer",
   "selections": [
     {
-      "kind": "LinkedField",
+      "kind": "ScalarField",
       "alias": null,
-      "args": [
-        {
-          "kind": "Literal",
-          "name": "last",
-          "value": 10,
-          "type": "Int"
-        }
-      ],
+      "args": null,
+      "name": "id",
+      "storageKey": null
+    },
+    {
+      "kind": "LinkedField",
+      "alias": "todos",
+      "args": null,
       "concreteType": "TodoConnection",
-      "name": "todos",
+      "name": "__AllTodos_todos_connection",
       "plural": false,
       "selections": [
         {
@@ -88,7 +107,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": "todos{\"last\":10}"
+      "storageKey": null
     },
     {
       "kind": "ScalarField",

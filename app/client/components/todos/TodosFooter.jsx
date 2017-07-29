@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import Link from "found/lib/Link";
+import { Link } from "found";
 
 export default () => (
   <div className="col-md-12">

@@ -1,7 +1,8 @@
 /* @flow */
 import { graphql } from "react-relay";
-import { Api } from "../helpers/initialize";
-import createClientMutationId from "./createClientMutationId";
+import { Api } from "../helpers/singletons";
+import createClientMutationId from "../helpers/createClientMutationId";
+import type { AddTodoMutationVariables } from "./__generated__/AddTodoMutation.graphql";
 
 export const mutation = graphql`
   mutation AddTodoMutation($input: AddTodoMutationInput!) {
@@ -20,7 +21,25 @@ export const mutation = graphql`
   }
 `;
 
-export const commit = (text: string) => Api.commitMutation({
-  mutation,
-  variables: { text, clientMutationId: createClientMutationId() }
-});
+export const commit = (text: string, parentID: string) => {
+  const variables: AddTodoMutationVariables = {
+    input: {
+      text,
+      clientMutationId: createClientMutationId()
+    }
+  };
+
+  Api.commitMutation({
+    mutation,
+    variables,
+    configs: [{
+      type: "RANGE_ADD",
+      parentID,
+      connectionInfo: [{
+        key: "AllTodos_todos",
+        rangeBehavior: "append",
+      }],
+      edgeName: "todoEdge",
+    }]
+  });
+};

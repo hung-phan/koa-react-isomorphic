@@ -19,15 +19,15 @@ export default class TodosAdd extends React.PureComponent {
   };
 
   addTodo = () => {
-    addTodoAction(this.state.todo);
+    addTodoAction(this.state.todo, this.props.viewer.id);
     this.setState({ todo: "" });
   };
 
   changeNumberOfTodoList = (e: SyntheticInputEvent) => {
     this.setState({ numberOfTodos: parseInt(e.target.value, 10) }, () => {
-      this.props.relay.setVariables({
+      this.props.relay.refetch(() => ({
         numberOfTodos: this.state.numberOfTodos
-      });
+      }));
     });
   };
 

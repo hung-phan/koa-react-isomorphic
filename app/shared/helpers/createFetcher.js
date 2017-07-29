@@ -30,17 +30,21 @@ class ServerFetcher extends FetcherBase {
     super([]);
   }
 
-  async fetch(operation: Object, variables: Object) {
-    const index = this.payloads.length;
-    this.payloads.push(null);
-    const payload = await super.fetch(operation, variables);
-    this.payloads[index] = payload;
-    return payload;
+  fetch(operation: Object, variables: Object) {
+    const superFetch = super.fetch;
+
+    return (async () => {
+      const index = this.payloads.length;
+      this.payloads.push(null);
+      const payload = await superFetch(operation, variables);
+      this.payloads[index] = payload;
+      return payload;
+    })();
   }
 }
 
 class ClientFetcher extends FetcherBase {
-  async fetch(operation: Object, variables: Object) {
+  fetch(operation: Object, variables: Object) {
     if (this.payloads.length) {
       return this.payloads.shift();
     }

@@ -10,13 +10,12 @@ import {
   RecordSource,
   Store
 } from "relay-runtime";
-import createFetcher from "../../shared/helpers/createFetcher";
-import fetch from "../../shared/helpers/fetch";
+import createFetcher from "./createFetcher";
 
 export default () => {
   const fetcher = createFetcher();
   const environment = new Environment({
-    network: Network.create(fetcher.fetch),
+    network: Network.create(fetcher.fetch.bind(fetcher)),
     store: new Store(new RecordSource())
   });
   const resolver = new Resolver(environment);
@@ -24,7 +23,6 @@ export default () => {
   return {
     environment,
     resolver,
-    fetch,
     fetcher,
     historyMiddlewares: [queryMiddleware],
     fetchQuery: fetchQuery.bind(undefined, environment),

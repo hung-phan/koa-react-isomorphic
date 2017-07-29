@@ -1,7 +1,6 @@
 /* @flow */
 /* global process */
 import React from "react";
-import Helmet from "react-helmet";
 import { renderToString } from "react-dom/server";
 import App from "../../../client/components/app";
 
@@ -27,9 +26,6 @@ export default async (ctx: Object, next: Function) => {
         } else {
           const prerenderComponent = renderToString(<App router={element} />);
           const prerenderData = Api.fetcher.toJSON();
-
-          // prevent memory leak
-          Helmet.rewind();
 
           ctx
             .render(template, {

@@ -1,9 +1,7 @@
 /* @flow */
 import React from "react";
-import { Route } from "found";
 import { graphql } from "react-relay";
-import createRender from "found/lib/createRender";
-import makeRouteConfig from "found/lib/makeRouteConfig";
+import { Route, createRender, makeRouteConfig } from "found";
 
 export const routeConfig = makeRouteConfig(
   <Route path="/">
@@ -46,4 +44,12 @@ export const routeConfig = makeRouteConfig(
   </Route>
 );
 
-export const render = createRender({});
+export const render = createRender({
+  renderError: (
+    { error } // eslint-disable-line react/prop-types
+  ) => (
+    <div>
+      {error.status === 404 ? "Not found" : "Error"}
+    </div>
+  )
+});

@@ -3,13 +3,7 @@
 import "./client/helpers/loadExternalLibs";
 import initialize from "./client/helpers/initialize";
 
-const appDOM = document.getElementById("app");
-
-if (!appDOM) {
-  throw new Error("Cannot initialise application");
-}
-
-initialize(appDOM);
+initialize(document.getElementById("app"));
 
 if (process.env.NODE_ENV === "production") {
   const runtime = require("offline-plugin/runtime");

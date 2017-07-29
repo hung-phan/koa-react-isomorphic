@@ -1,12 +1,10 @@
 /* @flow */
 /* global process */
 import React from "react";
-import Helmet from "../helmet";
 
 export default ({ router }: { router: Object}) => {
   let Component = (
     <div>
-      <Helmet />
       {router}
     </div>
   );

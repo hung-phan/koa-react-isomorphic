@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`createRedialHooks should render component 1`] = `
-<div>
-  Handler {"message":"Hello world"}
-</div>
-`;
