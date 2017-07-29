@@ -23,8 +23,14 @@ export default function TodosBody({ viewer }: { viewer: todos_viewer }) {
 
       return (
         <tr key={todo.id}>
-          <td><span>{index + 1}</span></td>
-          <td>{text}</td>
+          <td>
+            <span>
+              {index + 1}
+            </span>
+          </td>
+          <td>
+            {text}
+          </td>
           <td>
             <button
               type="button"

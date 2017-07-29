@@ -8,6 +8,7 @@ public/sw.js
 tmp/
 coverage
 *.marko.js
+__generated__/
 
 # IntelliJ project files
 *.iml

@@ -7,3 +7,4 @@ public/sw.js
 tmp/
 coverage
 *.marko.js
+__generated__/

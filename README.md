@@ -22,6 +22,7 @@ The idea of this repository is to implement all new concepts and libraries which
 ## Requirement
 - Install [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to have better experience when developing.
 - Install [yarn](https://github.com/yarnpkg/yarn)
+- Install [watchman](https://facebook.github.io/watchman/)
 
 ## Features
 * Immutablejs: Available on [features/immutablejs](https://github.com/hung-phan/koa-react-isomorphic/tree/features/immutable-js)
