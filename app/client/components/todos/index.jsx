@@ -8,7 +8,7 @@ import TodosBody from "./TodosBody";
 import TodosFooter from "./TodosFooter";
 import type { todos_viewer } from "./__generated__/todos_viewer.graphql";
 
-const Todos = ({ viewer, relay }: {
+export const Todos = ({ viewer, relay }: {
   viewer: todos_viewer,
   relay: Object
 }) => (

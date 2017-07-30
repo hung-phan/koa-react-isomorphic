@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Todos from "..";
+import { Todos } from "..";
 
 describe("Component: Todos", () => {
   const viewer = {

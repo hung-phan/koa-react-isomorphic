@@ -1,11 +1,17 @@
 import React from "react";
+import { Link } from "found";
 import { shallow } from "enzyme";
 import TodosFooter from "../TodosFooter";
+
+jest.mock("found", () => ({
+  Link: require("../../../helpers/createMockingComponent").default("Link", ["children"])
+}));
 
 describe("Component: TodosFooter", () => {
   let component;
 
   beforeEach(() => {
+    console.log(Link);
     component = shallow(<TodosFooter />);
   });
 

@@ -13,13 +13,11 @@ exports[`Component: StaticPage should render component 1`] = `
       <h1>
         Static Page
       </h1>
-      <Link
-        onlyActiveOnIndex={false}
-        style={Object {}}
+      <Connect(BaseLink)
         to="/"
       >
         Back to Home page
-      </Link>
+      </Connect(BaseLink)>
     </div>
   </div>
 </div>

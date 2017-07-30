@@ -2,46 +2,8 @@
 
 exports[`App in development mode 1`] = `
 <AppContainer>
-  <Provider
-    store={
-      Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "reducers": Object {
-          "helmet": [Function],
-          "routing": [Function],
-        },
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      }
-    }
-  >
-    <div>
-      <Connect(Component) />
-      New Routes
-    </div>
-  </Provider>
+  <div />
 </AppContainer>
 `;
 
-exports[`App in production mode 1`] = `
-<Provider
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "reducers": Object {
-        "helmet": [Function],
-        "routing": [Function],
-      },
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-    }
-  }
->
-  <div>
-    <Connect(Component) />
-    New Routes
-  </div>
-</Provider>
-`;
+exports[`App in production mode 1`] = `<div />`;

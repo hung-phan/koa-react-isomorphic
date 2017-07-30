@@ -1,190 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: Todos should render component 1`] = `
-<div>
+<div
+  className="container"
+>
   <div
-    class="container"
+    className="row"
   >
-    <div
-      class="row"
-    >
-      <div
-        class="col-md-12"
-      >
-        <h1>
-          Todos List
-        </h1>
-      </div>
-      <div
-        class="col-md-12"
-      >
-        <div
-          class="form-inline"
-        >
-          <div
-            class="form-group"
-          >
-            <input
-              class="form-control"
-              placeholder="Todo"
-              type="text"
-              value=""
-            />
-          </div>
-          <button
-            class="btn btn-success"
-            type="button"
-          >
-            Add Todo
-          </button>
-        </div>
-      </div>
-      <div
-        class="col-md-12 container"
-      >
-        <table
-          class="table"
-        >
-          <tbody>
-            <tr>
-              <td>
-                <span>
-                  1
-                </span>
-              </td>
-              <td>
-                <span>
-                  Todo 1
-                </span>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-success"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-check"
-                  />
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-danger"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-remove"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>
-                  2
-                </span>
-              </td>
-              <td>
-                <span>
-                  Todo 2
-                </span>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-success"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-check"
-                  />
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-danger"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-remove"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>
-                  3
-                </span>
-              </td>
-              <td>
-                <span>
-                  Todo 3
-                </span>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-success"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-check"
-                  />
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-danger"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-remove"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>
-                  4
-                </span>
-              </td>
-              <td>
-                <span>
-                  Todo 4
-                </span>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-success"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-check"
-                  />
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn btn-xs btn-danger"
-                  type="button"
-                >
-                  <i
-                    class="fa fa-remove"
-                  />
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div
-        class="col-md-12"
-      >
-        <a>
-          Go to static page
-        </a>
-      </div>
-    </div>
+    <Component />
+    <TodosAdd
+      relay={Object {}}
+      viewer={
+        Object {
+          "numberOfTodos": 10,
+          "todos": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "complete": false,
+                  "id": 1,
+                  "text": "Todo 1",
+                },
+              },
+            ],
+          },
+        }
+      }
+    />
+    <TodosBody
+      viewer={
+        Object {
+          "numberOfTodos": 10,
+          "todos": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "complete": false,
+                  "id": 1,
+                  "text": "Todo 1",
+                },
+              },
+            ],
+          },
+        }
+      }
+    />
+    <Component />
   </div>
 </div>
 `;
