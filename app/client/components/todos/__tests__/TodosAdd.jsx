@@ -1,34 +1,31 @@
 import React from "react";
+import faker from "faker";
 import { mount } from "enzyme";
+
+jest.mock("react-relay", () => jest.genMockFromModule("react-relay"));
+jest.mock("../../../mutations/AddTodoMutation", () =>
+  jest.genMockFromModule("../../../mutations/AddTodoMutation")
+);
 
 describe("Component: TodosAdd", () => {
   let TodosAdd;
-  let Relay;
   let AddTodoMutation;
   let component;
   let randomUUID;
+  let viewerID;
 
   beforeEach(() => {
-    jest.mock("react-relay", () => jest.genMockFromModule("react-relay"));
-    jest.mock("../../../mutations/AddTodoMutation", () =>
-      jest.genMockFromModule("../../../mutations/AddTodoMutation")
-    );
-
-    Relay = require("react-relay");
-    AddTodoMutation = require("../../../mutations/AddTodoMutation").default;
+    viewerID = faker.random.uuid();
+    randomUUID = faker.random.uuid();
+    AddTodoMutation = require("../../../mutations/AddTodoMutation");
     TodosAdd = require("../TodosAdd").default;
 
     component = mount(
       <TodosAdd
-        viewer={{ numberOfTodos: 100 }}
-        relay={{ setVariables: jest.fn() }}
+        viewer={{ id: viewerID, numberOfTodos: 100 }}
+        relay={{ fetch: jest.fn() }}
       />
     );
-  });
-
-  afterEach(() => {
-    jest.unmock("react-relay");
-    jest.unmock("../../../mutations/AddTodoMutation");
   });
 
   it("should define default value for 'state.todo'", () => {
@@ -45,10 +42,8 @@ describe("Component: TodosAdd", () => {
       button.simulate("click");
     });
 
-    it("should call 'Relay.Store.commitUpdate' with 'AddTodoMutation'", () => {
-      expect(
-        Relay.Store.commitUpdate.mock.calls[0][0] instanceof AddTodoMutation
-      );
+    it("should call 'AddTodoMutation.commit'", () => {
+      expect(AddTodoMutation.commit).toHaveBeenCalledWith(randomUUID, viewerID);
     });
 
     it("should reset 'state.todo'", () => {
