@@ -32,14 +32,18 @@ export const commit = (text: string, parentID: string) => {
   Api.commitMutation({
     mutation,
     variables,
-    configs: [{
-      type: "RANGE_ADD",
-      parentID,
-      connectionInfo: [{
-        key: "AllTodos_todos",
-        rangeBehavior: "append",
-      }],
-      edgeName: "todoEdge",
-    }]
+    configs: [
+      {
+        type: "RANGE_ADD",
+        parentID,
+        connectionInfo: [
+          {
+            key: "AllTodos_todos",
+            rangeBehavior: "append"
+          }
+        ],
+        edgeName: "todoEdge"
+      }
+    ]
   });
 };

@@ -8,10 +8,13 @@ import TodosBody from "./TodosBody";
 import TodosFooter from "./TodosFooter";
 import type { todos_viewer } from "./__generated__/todos_viewer.graphql";
 
-export const Todos = ({ viewer, relay }: {
+export const Todos = ({
+  viewer,
+  relay
+}: {
   viewer: todos_viewer,
   relay: Object
-}) => (
+}) =>
   <div className="container">
     <div className="row">
       <TodosHeader />
@@ -19,20 +22,20 @@ export const Todos = ({ viewer, relay }: {
       <TodosBody viewer={viewer} />
       <TodosFooter />
     </div>
-  </div>
-);
+  </div>;
 
-export default compose(
-  Component => createRefetchContainer(
+export default compose(Component =>
+  createRefetchContainer(
     Component,
     {
       viewer: graphql.experimental`
         fragment todos_viewer on Viewer
-        @argumentDefinitions(
-          numberOfTodos: { type: "Int", defaultValue: 10 }
-        ) {
+          @argumentDefinitions(
+            numberOfTodos: { type: "Int", defaultValue: 10 }
+          ) {
           id
-          todos(last: $numberOfTodos) @connection(key: "AllTodos_todos", filters: []) {
+          todos(last: $numberOfTodos)
+            @connection(key: "AllTodos_todos", filters: []) {
             edges {
               node {
                 id

@@ -4,7 +4,9 @@ import { shallow } from "enzyme";
 import TodosFooter from "../TodosFooter";
 
 jest.mock("found", () => ({
-  Link: require("../../../helpers/createMockingComponent").default("Link", ["children"])
+  Link: require("../../../helpers/createMockingComponent").default("Link", [
+    "children"
+  ])
 }));
 
 describe("Component: TodosFooter", () => {

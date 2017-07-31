@@ -2,7 +2,7 @@
 /* global process */
 import React from "react";
 
-export default ({ router }: { router: Object}) => {
+export default ({ router }: { router: Object }) => {
   let Component = (
     <div>
       {router}

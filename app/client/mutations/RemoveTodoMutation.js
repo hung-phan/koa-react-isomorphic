@@ -9,7 +9,7 @@ export const mutation = graphql`
     removeTodo(input: $input) {
       id
       viewer {
-        numberOfTodos 
+        numberOfTodos
       }
     }
   }
@@ -26,9 +26,11 @@ export const commit = (id: string) => {
   Api.commitMutation({
     mutation,
     variables,
-    configs: [{
-      type: "NODE_DELETE",
-      deletedIDFieldName: "id"
-    }]
+    configs: [
+      {
+        type: "NODE_DELETE",
+        deletedIDFieldName: "id"
+      }
+    ]
   });
 };

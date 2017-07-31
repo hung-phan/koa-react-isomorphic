@@ -18,8 +18,12 @@ export default function TodosBody({ viewer }: { viewer: todos_viewer }) {
 
       const todo = edge.node;
       const text = todo.complete
-        ? <s>{todo.text}</s>
-        : <span>{todo.text}</span>;
+        ? <s>
+            {todo.text}
+          </s>
+        : <span>
+            {todo.text}
+          </span>;
 
       return (
         <tr key={todo.id}>

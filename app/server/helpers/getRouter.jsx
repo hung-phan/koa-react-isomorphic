@@ -10,7 +10,7 @@ export default async (url: string) => {
     historyMiddlewares: Api.historyMiddlewares,
     resolver: Api.resolver,
     routeConfig,
-    render,
+    render
   });
 
   return {
@@ -18,4 +18,3 @@ export default async (url: string) => {
     Api
   };
 };
-

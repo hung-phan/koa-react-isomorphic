@@ -13,9 +13,10 @@ export default async (ctx: Object, next: Function) => {
         settings.path.ROOT,
         `${settings.path.TEMPLATES_DIR}/${template}`
       );
-      const currentTemplate = process.env.NODE_ENV === "production"
-        ? global.nodeRequire(`${templatePath}.js`)
-        : marko.load(templatePath);
+      const currentTemplate =
+        process.env.NODE_ENV === "production"
+          ? global.nodeRequire(`${templatePath}.js`)
+          : marko.load(templatePath);
 
       try {
         resolve(
