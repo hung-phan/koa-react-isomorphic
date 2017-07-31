@@ -2,7 +2,6 @@
   "presets": ["./scripts/preset-js", "react", "stage-0"],
   "plugins": [
     ["relay", {
-      "compat": true,
       "schema": "./build/schema.graphql"
     }],
     "transform-runtime"
