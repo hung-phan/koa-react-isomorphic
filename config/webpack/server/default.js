@@ -17,6 +17,7 @@ module.exports = {
   entry: {
     server: [path.join(ROOT, config.path.app, "server")]
   },
+  devtool: "source-map",
   output: {
     path: path.join(ROOT, config.path.build),
     publicPath: config.path.assets,

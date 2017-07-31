@@ -20,6 +20,8 @@ global.nodeRequire = require;
 
 global.webpackIsomorphicTools
   .server(ROOT, () => {
+    require("source-map-support").install();
+
     if (process.env.NODE_DEBUGGER) {
       require("babel-core/register");
       require("./app/server");
