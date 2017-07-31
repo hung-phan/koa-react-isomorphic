@@ -12,8 +12,9 @@ const settings = {
   env: {
     NODE_ENV: process.env.NODE_ENV
   },
-  assetManifest: (global.webpackIsomorphicTools &&
-    global.webpackIsomorphicTools.assets()) || {}
+  assetManifest:
+    (global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets()) ||
+    {}
 };
 
 // ignore assets build for test

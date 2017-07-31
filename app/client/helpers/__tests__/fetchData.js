@@ -42,7 +42,9 @@ describe("Helper: fetchData", () => {
     it("should call 'trigger' with 'components' and 'locals'", () => {
       fetchData.serverFetchData(renderProps, store);
 
-      expect(redial.trigger).toBeCalledWith(fetchData.FETCH_DATA_HOOK, components, {
+      expect(
+        redial.trigger
+      ).toBeCalledWith(fetchData.FETCH_DATA_HOOK, components, {
         store,
         params: renderProps.params,
         location: renderProps.location

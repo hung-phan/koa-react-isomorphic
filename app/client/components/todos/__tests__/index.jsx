@@ -2,7 +2,10 @@ import React from "react";
 import { render } from "enzyme";
 import { Provider } from "react-redux";
 import createStore from "../../../createStore";
-import todosReducer, { mountPoint as todosMountPoint, setTodos } from "../logicBundle";
+import todosReducer, {
+  mountPoint as todosMountPoint,
+  setTodos
+} from "../logicBundle";
 import injectReducers from "../../../helpers/injectReducers";
 import Todos from "..";
 
@@ -12,12 +15,14 @@ describe("Component: Todos", () => {
   beforeEach(() => {
     store = createStore();
     injectReducers(store, { [todosMountPoint]: todosReducer });
-    store.dispatch(setTodos([
-      { text: "Todo 1", complete: false },
-      { text: "Todo 2", complete: false },
-      { text: "Todo 3", complete: false },
-      { text: "Todo 4", complete: false }
-    ]));
+    store.dispatch(
+      setTodos([
+        { text: "Todo 1", complete: false },
+        { text: "Todo 2", complete: false },
+        { text: "Todo 3", complete: false },
+        { text: "Todo 4", complete: false }
+      ])
+    );
   });
 
   it("should render component", () => {

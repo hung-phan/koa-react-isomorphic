@@ -21,10 +21,10 @@ import { FETCH_DATA_HOOK, UPDATE_HEADER_HOOK } from "../../helpers/fetchData";
 export const Todos = ({
   todos,
   actions
-}: { // eslint-disable-line indent
+}: {
   todos: TodoType[],
   actions: Object
-}) => (
+}) =>
   <div className="container">
     <div className="row">
       <TodosHeader />
@@ -36,8 +36,7 @@ export const Todos = ({
       />
       <TodosFooter />
     </div>
-  </div>
-);
+  </div>;
 
 export default compose(
   createRedialHooks({
