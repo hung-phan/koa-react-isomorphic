@@ -1,6 +1,8 @@
 /* @flow */
-const fromRoot = (path: string, selector: Function): Function =>
-  (state: Object, ...args: any[]): any => selector(state.get(path), ...args);
+const fromRoot = (path: string, selector: Function): Function => (
+  state: Object,
+  ...args: any[]
+): any => selector(state.get(path), ...args);
 
 export default (
   selectors: { [key: string]: Function },

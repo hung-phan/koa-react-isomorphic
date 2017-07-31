@@ -14,10 +14,12 @@ const enhancers = [];
 // support for development
 if (process.env.RUNTIME_ENV === "client") {
   if (process.env.NODE_ENV === "development") {
-    middlewares.push(createLogger({
-      level: "info",
-      stateTransformer: state => state.toJS()
-    }));
+    middlewares.push(
+      createLogger({
+        level: "info",
+        stateTransformer: state => state.toJS()
+      })
+    );
   }
 
   if (window.__REDUX_DEVTOOLS_EXTENSION__) {

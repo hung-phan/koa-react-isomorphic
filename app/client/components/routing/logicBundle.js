@@ -15,9 +15,10 @@ export const selectors = globalizeSelectors(
 
 export default handleActions(
   {
-    [LOCATION_CHANGE]: (state, { payload }) => state.set("object", {
-      locationBeforeTransitions: payload
-    })
+    [LOCATION_CHANGE]: (state, { payload }) =>
+      state.set("object", {
+        locationBeforeTransitions: payload
+      })
   },
   new Map({
     object: { locationBeforeTransitions: null }

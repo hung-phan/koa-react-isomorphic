@@ -24,7 +24,7 @@ export const getRoutes = (
   history: Object,
   store: Object,
   options: Object = {}
-): Object => (
+): Object =>
   <Router history={history} {...options}>
     <Route
       path="/"
@@ -58,5 +58,4 @@ export const getRoutes = (
         );
       }}
     />
-  </Router>
-);
+  </Router>;

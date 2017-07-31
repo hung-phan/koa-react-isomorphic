@@ -17,9 +17,10 @@ export default async (ctx: Object, next: Function) => {
         settings.path.ROOT,
         `${settings.path.TEMPLATES_DIR}/${template}`
       );
-      const currentTemplate = process.env.NODE_ENV === "production"
-        ? global.nodeRequire(`${templatePath}.js`)
-        : marko.load(templatePath);
+      const currentTemplate =
+        process.env.NODE_ENV === "production"
+          ? global.nodeRequire(`${templatePath}.js`)
+          : marko.load(templatePath);
 
       const builtParameters = {
         ...parameters,
@@ -31,12 +32,11 @@ export default async (ctx: Object, next: Function) => {
 
       try {
         resolve(
-          currentTemplate
-            .stream({
-              ...settings,
-              ...builtParameters,
-              csrf: ctx.csrf
-            })
+          currentTemplate.stream({
+            ...settings,
+            ...builtParameters,
+            csrf: ctx.csrf
+          })
         );
       } catch (e) {
         reject(e);

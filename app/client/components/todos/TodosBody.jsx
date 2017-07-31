@@ -14,18 +14,22 @@ const TodosBody = ({
   todos,
   completeTodo,
   removeTodo
-}: { // eslint-disable-line indent
+}: {
   todos: List<TodoType>,
   completeTodo: CompleteTodoActionType,
   removeTodo: RemoveTodoActionType
-}) => (
+}) =>
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
       <tbody>
         {todos.toJS().map((todo: TodoType, index: number) => {
           const text = todo.complete
-            ? <s>{todo.text}</s>
-            : <span>{todo.text}</span>;
+            ? <s>
+                {todo.text}
+              </s>
+            : <span>
+                {todo.text}
+              </span>;
 
           return (
             <tr key={index}>
@@ -60,7 +64,6 @@ const TodosBody = ({
         })}
       </tbody>
     </table>
-  </div>
-);
+  </div>;
 
 export default TodosBody;
