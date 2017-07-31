@@ -20,6 +20,7 @@ export default handleActions(
         locationBeforeTransitions: payload
       })
   },
+  // $FlowFixMe
   new Map({
     object: { locationBeforeTransitions: null }
   })
