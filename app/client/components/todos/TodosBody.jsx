@@ -14,7 +14,6 @@ const TodosBody = ({
   completeTodo,
   removeTodo
 }: {
-  // eslint-disable-line indent
   todos: TodoType[],
   completeTodo: CompleteTodoActionType,
   removeTodo: RemoveTodoActionType
