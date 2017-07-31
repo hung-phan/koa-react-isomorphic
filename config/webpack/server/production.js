@@ -1,12 +1,6 @@
-const _ = require("lodash");
 const webpack = require("webpack");
 const BabiliPlugin = require("babili-webpack-plugin");
-const defaultConfig = require("./default");
 const productionConfig = require("./default");
-
-_.mergeWith(defaultConfig, {
-  devtool: false
-});
 
 productionConfig.plugins.push(
   new webpack.LoaderOptionsPlugin({
