@@ -1,8 +1,8 @@
 const path = require("path");
+const webpack = require("webpack");
 const cssnext = require("postcss-cssnext");
 const ROOT = require("../../path-helper").ROOT;
-const config = require("../../index");
-const webpack = require("webpack");
+const config = require("../..");
 
 module.exports = {
   context: ROOT,

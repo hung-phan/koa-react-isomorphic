@@ -2,9 +2,9 @@ const _ = require("lodash");
 const path = require("path");
 const crypto = require("crypto");
 const webpack = require("webpack");
-const ROOT = require("../../path-helper").ROOT;
-const config = require("../../index");
 const developmentConfig = require("./default");
+const ROOT = require("../../path-helper").ROOT;
+const config = require("../..");
 
 _.mergeWith(
   developmentConfig,

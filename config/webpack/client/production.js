@@ -1,5 +1,4 @@
 const _ = require("lodash");
-const config = require("../../index");
 const webpack = require("webpack");
 const OfflinePlugin = require("offline-plugin");
 const BabiliPlugin = require("babili-webpack-plugin");
@@ -10,6 +9,7 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require("../../webpack/webpack-isomorphic-tools")
 );
 const productionConfig = require("./default");
+const config = require("../..");
 
 _.mergeWith(
   productionConfig,
