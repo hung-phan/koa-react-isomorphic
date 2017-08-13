@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const cssnext = require("postcss-cssnext");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
 const ROOT = require("../../path-helper").ROOT;
 const config = require("../..");
 
@@ -57,6 +58,7 @@ module.exports = {
         }
       }
     }),
+    new StyleLintPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
