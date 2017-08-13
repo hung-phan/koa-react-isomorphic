@@ -58,13 +58,13 @@ module.exports = {
         }
       }
     }),
+    new StyleLintPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       "process.env.RUNTIME_ENV": "'client'"
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new StyleLintPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       minChunks: module => module.context && module.context.includes("node_modules")

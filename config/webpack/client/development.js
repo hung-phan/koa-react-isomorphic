@@ -26,7 +26,6 @@ _.mergeWith(
     devtool: "source-map",
     devServer: {
       contentBase: ROOT,
-      noInfo: true,
       hot: true,
       headers: {
         "Access-Control-Allow-Origin": "*"

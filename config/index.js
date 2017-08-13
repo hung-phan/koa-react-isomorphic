@@ -6,5 +6,5 @@ module.exports = {
     build: "/build/",
     tmp: "/tmp/"
   },
-  cssModules: "?localIdentName=[local]__[hash:base64:5]"
+  cssModules: "?modules&localIdentName=[local]__[hash:base64:5]"
 };
