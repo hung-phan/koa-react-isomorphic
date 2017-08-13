@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import style from "./TodosBodyStyle.css";
+import style from "./TodosBodyStyle.scss";
 import { commit as removeTodoAction } from "../../mutations/RemoveTodoMutation";
 import { commit as completeTodoAction } from "../../mutations/CompleteTodoMutation";
 import type { todos_viewer } from "./__generated__/todos_viewer.graphql";
