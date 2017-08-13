@@ -3,7 +3,7 @@
 import React from "react";
 import { List } from "immutable";
 import partial from "lodash/partial";
-import style from "./TodosBodyStyle.css";
+import style from "./TodosBodyStyle.scss";
 import type {
   CompleteTodoActionType,
   RemoveTodoActionType,
