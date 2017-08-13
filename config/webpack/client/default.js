@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const cssnext = require("postcss-cssnext");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
 const ROOT = require("../../path-helper").ROOT;
 const config = require("../..");
 
@@ -63,6 +64,7 @@ module.exports = {
       "process.env.RUNTIME_ENV": "'client'"
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new StyleLintPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       minChunks: module => module.context && module.context.includes("node_modules")
