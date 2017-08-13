@@ -2,18 +2,7 @@ const path = require("path");
 const ROOT = require("./config/path-helper").ROOT;
 const WebpackIsomorphicTools = require("webpack-isomorphic-tools");
 
-require("source-map-support").install({
-  environment: "node"
-});
-
-function hotReloadTemplate(templatesDir) {
-  require("marko/hot-reload").enable();
-  require("chokidar")
-    .watch(templatesDir)
-    .on("change", filename => {
-      require("marko/hot-reload").handleFileModified(path.join(ROOT, filename));
-    });
-}
+require("source-map-support").install({ environment: "node" });
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(
   require("./config/webpack/webpack-isomorphic-tools")
@@ -32,6 +21,11 @@ global.webpackIsomorphicTools
     }
 
     if (process.env.NODE_ENV === "development") {
-      hotReloadTemplate("./app/server/application/templates/**/*.marko");
+      require("marko/hot-reload").enable();
+      require("chokidar")
+        .watch("./app/server/application/templates/**/*.marko")
+        .on("change", filename => {
+          require("marko/hot-reload").handleFileModified(path.join(ROOT, filename));
+        });
     }
   });
