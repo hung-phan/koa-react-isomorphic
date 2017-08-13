@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
 import partial from "lodash/partial";
-import style from "./TodosBodyStyle.css";
+import style from "./TodosBodyStyle.scss";
 import type {
   CompleteTodoActionType,
   RemoveTodoActionType,
