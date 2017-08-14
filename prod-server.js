@@ -14,6 +14,26 @@ global.nodeRequire = require;
 global.webpackIsomorphicTools
   .server(ROOT, () => {
     if (process.env.NODE_DEBUGGER) {
+      // Define require.ensure and require.include
+      const proto = Object.getPrototypeOf(require);
+
+      // eslint-disable-next-line no-prototype-builtins
+      if (!proto.hasOwnProperty("ensure")) {
+        Object.defineProperties(proto, {
+          "ensure": {
+            value: function ensure(modules, callback) {
+              callback(this);
+            },
+            writable: false
+          },
+          "include": {
+            value: function include() {
+            },
+            writable: false
+          }
+        });
+      }
+
       require("babel-core/register");
       require("./app/server");
     } else {
