@@ -4,9 +4,9 @@ import React from "react";
 import Helmet from "react-helmet";
 import { renderToString } from "react-dom/server";
 import { match, RouterContext } from "react-router";
-import App from "../../../client/components/app";
-import createStore from "../../../client/createStore";
-import { serverFetchData } from "../../../client/helpers/fetchData";
+import App from "../../../share/components/app";
+import createStore from "../../../share/createStore";
+import { serverFetchData } from "../../../share/helpers/fetchData";
 
 let routesModule = require("../../../routes");
 

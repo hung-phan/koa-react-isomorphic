@@ -3,11 +3,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { match, Router } from "react-router";
-import App from "./client/components/app";
-import createStore from "./client/createStore";
-import { clientFetchData } from "./client/helpers/fetchData";
+import App from "./share/components/app";
+import createStore from "./share/createStore";
+import { clientFetchData } from "./share/helpers/fetchData";
 import { getClientHistory } from "./routes";
-import "./client/helpers/loadExternalLibs";
+import "./client/loadExternalLibs";
 
 const appDOM = document.getElementById("app");
 const store = createStore(window.prerenderData);
