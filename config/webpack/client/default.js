@@ -10,7 +10,7 @@ module.exports = {
   entry: {
     app: [path.join(ROOT, config.path.app, "app")],
     vendor: [
-      path.join(ROOT, config.path.app, "client/helpers/loadExternalLibs")
+      path.join(ROOT, config.path.app, "client/loadExternalLibs")
     ]
   },
   output: {

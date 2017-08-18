@@ -12,7 +12,7 @@ export const routeConfig = makeRouteConfig(
           require.ensure(
             [],
             require => {
-              resolve(require("./client/components/todos").default);
+              resolve(require("./share/components/todos").default);
             },
             reject,
             "todos-page"
@@ -34,7 +34,7 @@ export const routeConfig = makeRouteConfig(
           require.ensure(
             [],
             require => {
-              resolve(require("./client/components/static-page").default);
+              resolve(require("./share/components/static-page").default);
             },
             reject,
             "static-page"

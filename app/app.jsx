@@ -1,9 +1,10 @@
 /* @flow */
 /* global process */
-import "./client/helpers/loadExternalLibs";
-import initialize from "./client/helpers/initialize";
+import "./client/loadExternalLibs";
+import initialize from "./share/helpers/initialize";
 
-initialize(document.getElementById("app"));
+initialize(document.getElementById("app"))
+  .catch(console.error); // eslint-disable-line
 
 if (process.env.NODE_ENV === "production") {
   const runtime = require("offline-plugin/runtime");

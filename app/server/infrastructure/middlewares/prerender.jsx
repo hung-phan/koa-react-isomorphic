@@ -2,7 +2,7 @@
 /* global process */
 import React from "react";
 import { renderToString } from "react-dom/server";
-import App from "../../../client/components/app";
+import App from "../../../share/components/app";
 
 let getRouter = require("../../helpers/getRouter").default;
 

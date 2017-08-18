@@ -2,6 +2,7 @@ const _ = require("lodash");
 const webpack = require("webpack");
 const OfflinePlugin = require("offline-plugin");
 const BabiliPlugin = require("babili-webpack-plugin");
+const ShakePlugin = require("webpack-common-shake").Plugin;
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
@@ -46,6 +47,10 @@ productionConfig.module.loaders.push(
       use: `css-loader${config.cssModules}!postcss-loader!sass-loader`
     })
   }
+);
+
+productionConfig.plugins.unshift(
+  new ShakePlugin()
 );
 
 productionConfig.plugins.push(

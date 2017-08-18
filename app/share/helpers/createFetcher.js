@@ -8,8 +8,8 @@ class FetcherBase {
     this.payloads = payloads;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async fetch(operation: Object, variables: Object) {
-    // eslint-disable-line
     const resp = await fetch("/graphql", {
       method: "POST",
       body: JSON.stringify({
