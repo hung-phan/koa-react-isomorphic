@@ -7,8 +7,8 @@ import {
   Router,
   Route
 } from "react-router";
-import { selectors } from "./client/components/routing/logicBundle";
-import injectReducers from "./client/helpers/injectReducers";
+import { selectors } from "./share/components/routing/logicBundle";
+import injectReducers from "./share/helpers/injectReducers";
 
 export const getClientHistory = (store: Object): Object =>
   syncHistoryWithStore(browserHistory, store, {
@@ -36,10 +36,10 @@ export const getRoutes = (
             const {
               default: todosReducer,
               mountPoint: todosMountPoint
-            } = require("./client/components/todos/logicBundle");
+            } = require("./share/components/todos/logicBundle");
 
             injectReducers(store, { [todosMountPoint]: todosReducer });
-            cb(null, require("./client/components/todos").default);
+            cb(null, require("./share/components/todos").default);
           },
           "todos-page"
         );
@@ -52,7 +52,7 @@ export const getRoutes = (
         require.ensure(
           [],
           require => {
-            cb(null, require("./client/components/static-page").default);
+            cb(null, require("./share/components/static-page").default);
           },
           "static-page"
         );

@@ -2,7 +2,6 @@
 import isEmpty from "lodash/isEmpty";
 import { trigger } from "redial";
 import { match } from "react-router";
-import { redirectTo } from "./handleHTTP";
 
 export const FETCH_DATA_HOOK = "FETCH_DATA_HOOK";
 
@@ -28,6 +27,13 @@ export const clientFetchData = (
   routes: Object,
   store: Object
 ) => {
+  const redirectTo = (url: string): void => {
+    // use for jsdom test
+    Object.defineProperty(window.location, "href", {
+      writable: true,
+      value: url
+    });
+  };
   const callback = location =>
     match({ routes, location }, (error, redirectLocation, renderProps) => {
       if (error) {

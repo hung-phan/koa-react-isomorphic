@@ -4,24 +4,20 @@ import faker from "faker";
 describe("Helper: fetchData", () => {
   let redial;
   let reactRouter;
-  let handleHTTP;
   let fetchData;
 
   beforeAll(() => {
     jest.mock("redial", () => jest.genMockFromModule("redial"));
     jest.mock("react-router", () => jest.genMockFromModule("react-router"));
-    jest.mock("../handleHTTP", () => jest.genMockFromModule("../handleHTTP"));
 
     redial = require("redial");
     reactRouter = require("react-router");
-    handleHTTP = require("../handleHTTP");
     fetchData = require("../fetchData");
   });
 
   afterAll(() => {
     jest.unmock("redial");
     jest.unmock("react-router");
-    jest.unmock("../handleHTTP");
   });
 
   describe("# serverFetchData", () => {
@@ -70,7 +66,7 @@ describe("Helper: fetchData", () => {
       it("should navigate to error page", () => {
         fetchData.clientFetchData(history, components, store);
         reactRouter.match.mock.calls[0][1](true);
-        expect(handleHTTP.redirectTo).toBeCalledWith("/500.html");
+        expect(window.location.href).toEqual("/500.html");
       });
 
       it("should redirect to /hello-world.html page", () => {
@@ -79,7 +75,7 @@ describe("Helper: fetchData", () => {
           pathname: "/hello-world.html",
           search: ""
         });
-        expect(handleHTTP.redirectTo).toBeCalledWith("/hello-world.html");
+        expect(window.location.href).toEqual("/hello-world.html");
       });
 
       it("should trigger not FETCH_DATA_HOOK", () => {
@@ -120,7 +116,7 @@ describe("Helper: fetchData", () => {
         fetchData.clientFetchData(history, components, store);
         reactRouter.match.mock.calls[0][1](undefined, undefined, undefined);
 
-        expect(handleHTTP.redirectTo).toBeCalledWith("/404.html");
+        expect(window.location.href).toEqual("/404.html");
       });
     });
   });
