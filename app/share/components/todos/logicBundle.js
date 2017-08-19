@@ -3,7 +3,7 @@ import { List, fromJS } from "immutable";
 import identity from "lodash/identity";
 import { createAction, handleActions } from "redux-actions";
 import globalizeSelectors from "../../helpers/globalizeSelectors";
-import fetch from "../..//helpers/fetch";
+import fetch from "../../helpers/fetch";
 import type {
   AddTodoActionType,
   CompleteTodoActionType,

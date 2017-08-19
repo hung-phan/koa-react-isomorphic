@@ -2,13 +2,12 @@
 import React from "react";
 import type { AddTodoActionType } from "./types";
 
-export default class TodosAdd extends React.PureComponent {
-  state: { todo: string } = {
+export default class TodosAdd extends React.PureComponent<
+  { addTodo: AddTodoActionType },
+  { todo: string }
+> {
+  state = {
     todo: ""
-  };
-
-  props: {
-    addTodo: AddTodoActionType
   };
 
   updateTodo = (e: Object) => {

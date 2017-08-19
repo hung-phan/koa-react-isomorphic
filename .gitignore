@@ -5,6 +5,7 @@ build/
 node_modules/
 public/assets/
 public/sw.js
+__generated__/
 tmp/
 coverage
 *.marko.js
