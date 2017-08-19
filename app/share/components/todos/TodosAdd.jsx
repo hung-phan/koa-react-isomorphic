@@ -3,18 +3,19 @@ import React from "react";
 import { commit as addTodoAction } from "../../mutations/AddTodoMutation";
 import type { todos_viewer } from "./__generated__/todos_viewer.graphql";
 
-export default class TodosAdd extends React.PureComponent {
-  state: { todo: string, numberOfTodos: number } = {
+export default class TodosAdd extends React.PureComponent<
+  {
+    viewer: todos_viewer,
+    relay: Object
+  },
+  { todo: string, numberOfTodos: number }
+> {
+  state = {
     todo: "",
     numberOfTodos: 20
   };
 
-  props: {
-    viewer: todos_viewer,
-    relay: Object
-  };
-
-  updateTodo = (e: SyntheticInputEvent) => {
+  updateTodo = (e: Object) => {
     this.setState({ todo: e.target.value });
   };
 
@@ -23,7 +24,7 @@ export default class TodosAdd extends React.PureComponent {
     this.setState({ todo: "" });
   };
 
-  changeNumberOfTodoList = (e: SyntheticInputEvent) => {
+  changeNumberOfTodoList = (e: SyntheticInputEvent<*>) => {
     this.setState({ numberOfTodos: parseInt(e.target.value, 10) }, () => {
       this.props.relay.refetch(() => ({
         numberOfTodos: this.state.numberOfTodos
