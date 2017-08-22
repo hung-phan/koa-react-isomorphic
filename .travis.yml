@@ -9,6 +9,4 @@ script:
   - codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-cache:
-  directories:
-  - $HOME/.yarn-cache
+cache: yarn
