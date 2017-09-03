@@ -174,7 +174,7 @@
     "dev": "./scripts/dev.sh",
     "flow-status": "flow status; test $? -eq 0 -o $? -eq 2",
     "flow-stop": "flow stop",
-    "flow-watch": "yarn run flow-status && chokidar './app/**/*.js' './app/**/*.jsx' -c 'yarn run flow:status'",
+    "flow-watch": "yarn run flow-status && chokidar './app/**/*.js' './app/**/*.jsx' -c 'yarn run flow-status'",
     "frontend-build": "./scripts/frontend-build.sh",
     "frontend-watch": "./scripts/frontend-watch.sh",
     "pretest": "npm run update-schema",
