@@ -13,6 +13,9 @@
 [options]
 module.name_mapper='.*\.\(css\|sass\|scss\|less\)$' -> '<PROJECT_ROOT>/flow/css-modules.js.flow'
 module.name_mapper='.*\.\(svg\|png\|jpg\|jpeg\|gif\)$' -> '<PROJECT_ROOT>/flow/webpack-assets.js.flow'
+module.name_mapper='^client\/\(.*\)$' -> '<PROJECT_ROOT>/app/client/\1'
+module.name_mapper='^server\/\(.*\)$' -> '<PROJECT_ROOT>/app/server/\1'
+module.name_mapper='^share\/\(.*\)$' -> '<PROJECT_ROOT>/app/share/\1'
 
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable

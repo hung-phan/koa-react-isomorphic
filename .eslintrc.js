@@ -1,19 +1,14 @@
-{
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react"
-  ],
-  "parser": "babel-eslint",
-  "plugins": ["jest", "flowtype"],
-  "env": {
+module.exports = {
+  extends: ["airbnb", "prettier", "prettier/flowtype", "prettier/react"],
+  parser: "babel-eslint",
+  plugins: ["jest", "flowtype"],
+  env: {
     "jest/globals": true,
-    "browser": true,
-    "node": true
+    browser: true,
+    node: true
   },
-  "rules": {
-    "quotes": [2, "double"],
+  rules: {
+    quotes: [2, "double"],
     "comma-dangle": 0,
     "no-param-reassign": 0,
     "global-require": 0,
@@ -31,9 +26,16 @@
     "flowtype/type-id-match": [1, "^([A-Z][a-z0-9]+)+Type$"],
     "flowtype/use-flow-type": 1
   },
-  "settings": {
+  settings: {
     "import/resolver": {
-      "webpack": {}
+      webpack: {
+        config: {
+          resolve: {
+            extensions: [".js", ".jsx"],
+            modules: ["app", "node_modules"]
+          }
+        }
+      }
     }
   }
-}
+};
