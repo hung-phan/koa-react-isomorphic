@@ -19,7 +19,7 @@ module.exports = {
   externals: [],
   resolve: {
     extensions: [".js", ".jsx"],
-    modules: [path.resolve("./app"), "node_modules"],
+    modules: [path.resolve(ROOT, "app"), "node_modules"],
     alias: {
       modernizr$: path.join(ROOT, ".modernizrrc")
     }
