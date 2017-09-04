@@ -1,10 +1,6 @@
 {
   "watch": [
-    "config/initializers",
-    "config/middlewares",
-    "app/server/apis",
-    "app/server/controllers",
-    "app/server-app.js",
+    "app/server",
     "app/server.js",
     "app/database/schema.js",
     "prod-server.js"
