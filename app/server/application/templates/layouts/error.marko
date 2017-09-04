@@ -34,13 +34,13 @@
         <div>
             <h1>Error</h1>
             <p>Looks like something broke!</p>
-            <h2>Message:</h2>
+            <h2>Settings:</h2>
             <pre>
-                <code>${input.error}</code>
+                <code>$!{JSON.stringify(input.settings, null, 2)}</code>
             </pre>
-            <h2>Stack:</h2>
+            <h2>Context:</h2>
             <pre>
-                <code>${input.stack}</code>
+                <code>$!{JSON.stringify(input.ctx, null, 2)}</code>
             </pre>
         </div>
     </body>
