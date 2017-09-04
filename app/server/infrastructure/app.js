@@ -18,10 +18,10 @@ const app = new Koa();
 // setup middlewares
 loggingLayer(app);
 errorLayer(app);
-initialLayer(app);
-apiLayer(app, schema, apis);
 assetsLayer(app);
 securityLayer(app);
+initialLayer(app);
+apiLayer(app, schema, apis);
 renderLayer(app, controllers);
 
 export default app;

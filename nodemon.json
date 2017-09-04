@@ -1,6 +1,9 @@
 {
   "watch": [
-    "app/server",
+    "app/server/application/apis",
+    "app/server/application/controllers",
+    "app/server/domain",
+    "app/server/infrastructure",
     "app/server.js",
     "app/database/schema.js",
     "prod-server.js"
