@@ -37,9 +37,9 @@ export default async (ctx: Object, next: Function) => {
             .catch(reject);
         }
       });
-    await next();
   } else {
     ctx.prerender = ctx.render;
-    await next();
   }
+
+  await next();
 };
