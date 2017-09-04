@@ -42,7 +42,7 @@ module.exports = {
   ],
   resolve: {
     extensions: [".js", ".jsx"],
-    modules: [path.resolve("./app"), "node_modules"]
+    modules: [path.resolve(ROOT, "app"), "node_modules"]
   },
   module: {
     loaders: [
