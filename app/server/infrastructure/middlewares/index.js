@@ -14,8 +14,6 @@ import compress from "koa-compress";
 import helmet from "koa-helmet";
 import graphqlHTTP from "koa-graphql";
 import settings from "../settings";
-import render from "./render";
-import prerender from "./prerender";
 import error from "./error";
 
 export const loggingLayer = (app: Object) => app.use(logger()); // https://github.com/koajs/logger
@@ -79,8 +77,6 @@ export const renderLayer = (app: Object, templateRoutes: Function) => {
   const newRouter = router();
 
   newRouter
-    .use(render)
-    .use(prerender)
     .use(
       convert(
         htmlMinifier({

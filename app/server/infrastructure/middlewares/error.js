@@ -1,7 +1,6 @@
 /* @flow */
 /* global process */
 import settings from "../settings";
-import { render } from "./render";
 
 export default async (ctx: Object, next: Function) => {
   try {
@@ -43,7 +42,7 @@ export default async (ctx: Object, next: Function) => {
       case "html":
         ctx.type = "text/html";
         if (process.env.NODE_ENV === "development" || process.env.DEBUG) {
-          ctx.body = await render(ctx)("layouts/error.marko", { settings, ctx });
+          ctx.body = await ctx.render("layouts/error.marko", { settings, ctx });
         } else if ([404, 422].includes(ctx.status)) {
           ctx.redirect(`/${ctx.status}.html`);
         } else {

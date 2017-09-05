@@ -1,5 +1,6 @@
 /* @flow */
 import Koa from "koa";
+import createContext from "./contexts";
 import {
   apiLayer,
   assetsLayer,
@@ -15,7 +16,7 @@ import controllers from "../application/controllers";
 
 const app = new Koa();
 
-// setup middlewares
+createContext(app);
 loggingLayer(app);
 errorLayer(app);
 assetsLayer(app);
