@@ -13,10 +13,7 @@ if (process.env.NODE_ENV === "development" && module.hot) {
   });
 }
 
-export default function(
-  template: string,
-  parameters: Object = {}
-) {
+export default function(template: string, parameters: Object = {}) {
   const ctx = this;
 
   if (!process.env.SERVER_RENDERING) {
@@ -24,24 +21,27 @@ export default function(
   }
 
   return new Promise(async (resolve, reject) => {
-    const { Api, redirect, status, element } = await getRouter(ctx.req.url);
+    try {
+      const { Api, redirect, status, element } = await getRouter(ctx.req.url);
+      if (redirect) {
+        ctx.redirect(redirect.url);
+      } else if ([404, 500].includes(status)) {
+        ctx.throw(status);
+      } else {
+        const prerenderComponent = renderToString(<App router={element} />);
+        const prerenderData = Api.fetcher.toJSON();
 
-    if (redirect) {
-      ctx.redirect(redirect.url);
-    } else if ([404, 500].includes(status)) {
-      ctx.throw(status);
-    } else {
-      const prerenderComponent = renderToString(<App router={element} />);
-      const prerenderData = Api.fetcher.toJSON();
-
-      ctx
-        .render(template, {
-          ...parameters,
-          prerenderComponent,
-          prerenderData
-        })
-        .then(resolve)
-        .catch(reject);
+        ctx
+          .render(template, {
+            ...parameters,
+            prerenderComponent,
+            prerenderData
+          })
+          .then(resolve)
+          .catch(reject);
+      }
+    } catch (e) {
+      reject(e);
     }
   });
 }

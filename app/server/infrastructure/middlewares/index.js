@@ -58,18 +58,19 @@ export const assetsLayer = (app: Object) => {
 export const securityLayer = (app: Object) => {
   app.keys = [process.env.SECRET_KEY];
 
+  const csrf = new CSRF();
+
   app
     .use(convert(session())) // https://github.com/koajs/session
-    .use(
-      new CSRF({
-        invalidSessionSecretMessage: "Invalid session secret",
-        invalidSessionSecretStatusCode: 403,
-        invalidTokenMessage: "Invalid CSRF token",
-        invalidTokenStatusCode: 403,
-        excludedMethods: ["GET", "HEAD", "OPTIONS"],
-        disableQuery: false
-      })
-    ) // https://github.com/koajs/csrf
+    .use((ctx, next) => {
+
+      // don't check csrf for request coming from the server
+      if (ctx.get("user-agent").startsWith("node-fetch")) {
+        return next();
+      }
+
+      return csrf(ctx, next)
+    }) // https://github.com/koajs/csrf
     .use(helmet()); // https://github.com/venables/koa-helmet
 };
 

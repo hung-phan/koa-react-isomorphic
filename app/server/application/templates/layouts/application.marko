@@ -20,6 +20,10 @@
         <render-javascript-assets-tag javascript=input.assetManifest.javascript />
         <prerender-data data=input.prerenderData />
 
+        <script type="text/javascript">
+            window.__csrf = "$!{input.csrf}";
+        </script>
+
         <webpack-bundle-tag name='manifest' asset-manifest=input.assetManifest.javascript />
         <webpack-bundle-tag name='vendor' asset-manifest=input.assetManifest.javascript />
         <webpack-bundle-tag name='app' asset-manifest=input.assetManifest.javascript />
