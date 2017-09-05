@@ -4,11 +4,13 @@ import path from "path";
 import marko from "marko";
 import settings from "../settings";
 
-export const render = (ctx: Object) => (
+export default function(
   template: string,
   parameters: Object = {},
   initialState: Object = {}
-) => {
+) {
+  const ctx = this;
+
   ctx.type = "text/html";
 
   return new Promise((resolve, reject) => {
@@ -41,10 +43,4 @@ export const render = (ctx: Object) => (
       reject(e);
     }
   });
-};
-
-export default async (ctx: Object, next: Function) => {
-  ctx.render = render(ctx);
-
-  await next();
-};
+}
