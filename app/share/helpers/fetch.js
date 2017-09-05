@@ -19,8 +19,15 @@ export const getBaseUrl = () => {
 export const create = (baseUrl: string) => (
   url: string,
   options: Object = {}
-) =>
-  fetch(`${baseUrl}${url}`, {
+) => {
+  if (process.env.RUNTIME_ENV === "client") {
+    options.headers = {
+      ...options.headers,
+      "X-CSRF-Token": window.__csrf
+    };
+  }
+
+  return fetch(`${baseUrl}${url}`, {
     mode: baseUrl ? "cors" : "same-origin",
     credentials: baseUrl ? "include" : "same-origin",
     ...options,
@@ -30,5 +37,6 @@ export const create = (baseUrl: string) => (
       ...(options && options.headers)
     }
   });
+};
 
 export default create(getBaseUrl());

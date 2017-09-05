@@ -40,23 +40,27 @@ export default function(
         ctx.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
         serverFetchData(renderProps, store).then(() => {
-          const currentRoutes = <RouterContext {...renderProps} />;
-          const prerenderComponent = renderToString(
-            <App store={store} routes={currentRoutes} />
-          );
-          const prerenderData = store.getState();
+          try {
+            const currentRoutes = <RouterContext {...renderProps} />;
+            const prerenderComponent = renderToString(
+              <App store={store} routes={currentRoutes} />
+            );
+            const prerenderData = store.getState();
 
-          // prevent memory leak
-          Helmet.rewind();
+            // prevent memory leak
+            Helmet.rewind();
 
-          ctx
-            .render(template, {
-              ...parameters,
-              prerenderComponent,
-              prerenderData
-            })
-            .then(resolve)
-            .catch(reject);
+            ctx
+              .render(template, {
+                ...parameters,
+                prerenderComponent,
+                prerenderData
+              })
+              .then(resolve)
+              .catch(reject);
+          } catch (e) {
+            reject(e);
+          }
         });
       } else {
         ctx.throw(404);
