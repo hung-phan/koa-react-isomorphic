@@ -11,23 +11,23 @@ type RawTodoType = {
 
 let data = database.todos;
 
-const builder = (todo: RawTodoType): Todo =>
-  new Todo(todo.id, todo.text, todo.complete);
-
 const dataloader = new DataLoader(
   // $FlowFixMe
   (ids: string[]): Promise<Array<Todo | Error>> => {
     const set: Set<string> = new Set(ids);
 
     return Promise.resolve(
-      data.filter(({ id }: RawTodoType) => set.has(id)).map(builder)
+      data
+        .filter(({ id }: RawTodoType) => set.has(id))
+        .map(opts => new Todo(opts))
     );
   }
 );
 
 export const count = (): number => data.length;
 
-export const all = (): Promise<Todo[]> => Promise.resolve(data.map(builder));
+export const all = (): Promise<Todo[]> =>
+  Promise.resolve(data.map(opts => new Todo(opts)));
 
 export const getById = (id: string): Promise<Todo> => dataloader.load(id);
 
