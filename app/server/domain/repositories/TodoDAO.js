@@ -9,16 +9,15 @@ type RawTodoType = {
   complete: boolean
 };
 
-const builder = (todo: RawTodoType): Todo =>
-  new Todo(todo.id, todo.text, todo.complete);
-
 const dataloader = new DataLoader(
   // $FlowFixMe
   (ids: string[]): Promise<Array<Todo | Error>> => {
     const set: Set<string> = new Set(ids);
 
     return Promise.resolve(
-      database.todos.filter(({ id }: RawTodoType) => set.has(id)).map(builder)
+      database.todos
+        .filter(({ id }: RawTodoType) => set.has(id))
+        .map(opts => new Todo(opts))
     );
   }
 );
@@ -26,7 +25,7 @@ const dataloader = new DataLoader(
 export const count = (): number => database.todos.length;
 
 export const all = (): Promise<Todo[]> =>
-  Promise.resolve(database.todos.map(builder));
+  Promise.resolve(database.todos.map(opts => new Todo(opts)));
 
 export const getById = (id: string): Promise<Todo> => dataloader.load(id);
 
