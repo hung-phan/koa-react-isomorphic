@@ -8,7 +8,7 @@ export default function(
   template: string,
   parameters: Object = {},
   initialState: Object = {}
-) {
+): Promise<string> {
   const ctx = this;
 
   ctx.type = "text/html";
