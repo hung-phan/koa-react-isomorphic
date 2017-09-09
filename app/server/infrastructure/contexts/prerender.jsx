@@ -21,7 +21,7 @@ export default function(
   template: string,
   parameters: Object = {},
   initialState: Object = {}
-) {
+): Promise<string> {
   const ctx = this;
 
   if (!process.env.SERVER_RENDERING) {
