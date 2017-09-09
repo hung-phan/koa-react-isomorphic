@@ -3,7 +3,7 @@ import { getFarceResult } from "found/lib/server";
 import { routeConfig, render } from "../../routes";
 import createApi from "../../share/helpers/createApi";
 
-export default async (url: string) => {
+export default async (url: string): Promise<Object> => {
   const Api = createApi();
   const result = await getFarceResult({
     url,

@@ -7,7 +7,7 @@ import settings from "../settings";
 export default function(
   template: string,
   parameters: Object = {}
-) {
+): Promise<string> {
   const ctx = this;
 
   ctx.type = "text/html";
