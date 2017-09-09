@@ -25,18 +25,18 @@ export default function(
 
   return getRouter(ctx.req.url).then(({ Api, redirect, status, element }) => {
     if (redirect) {
-      ctx.redirect(redirect.url);
+      return ctx.redirect(redirect.url);
     } else if ([404, 500].includes(status)) {
-      ctx.throw(status);
-    } else {
-      const prerenderComponent = renderToString(<App router={element} />);
-      const prerenderData = Api.fetcher.toJSON();
-
-      return ctx.render(template, {
-        ...parameters,
-        prerenderComponent,
-        prerenderData
-      });
+      return ctx.throw(status);
     }
+
+    const prerenderComponent = renderToString(<App router={element} />);
+    const prerenderData = Api.fetcher.toJSON();
+
+    return ctx.render(template, {
+      ...parameters,
+      prerenderComponent,
+      prerenderData
+    });
   });
 }
