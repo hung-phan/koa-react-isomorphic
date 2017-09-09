@@ -35,9 +35,9 @@ export default function(
 
     match({ routes, history }, (error, redirectLocation, renderProps) => {
       if (error) {
-        ctx.throw(500, error.message);
+        resolve(ctx.throw(500, error.message));
       } else if (redirectLocation) {
-        ctx.redirect(redirectLocation.pathname + redirectLocation.search);
+        resolve(ctx.redirect(redirectLocation.pathname + redirectLocation.search));
       } else if (renderProps) {
         serverFetchData(renderProps, store).then(() => {
           try {
@@ -62,13 +62,9 @@ export default function(
             reject(e);
           }
         });
-
-        return;
       } else {
-        ctx.throw(404);
+        resolve(ctx.throw(404));
       }
-
-      resolve();
     });
   });
 }
