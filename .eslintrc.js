@@ -14,6 +14,7 @@ module.exports = {
     "global-require": 0,
     "no-underscore-dangle": 0,
     "arrow-parens": 0,
+    "jsx-a11y/href-no-hash": "off",
     "import/no-extraneous-dependencies": 0,
     "import/no-named-as-default": 0,
     "import/prefer-default-export": 0,

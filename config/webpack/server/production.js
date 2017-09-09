@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const BabiliPlugin = require("babili-webpack-plugin");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const productionConfig = require("./default");
 
 productionConfig.plugins.push(
@@ -7,7 +7,7 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new BabiliPlugin({}, {
+  new MinifyPlugin({}, {
     comments: false
   }),
   new webpack.DefinePlugin({
