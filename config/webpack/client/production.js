@@ -1,7 +1,7 @@
 const _ = require("lodash");
 const webpack = require("webpack");
 const OfflinePlugin = require("offline-plugin");
-const BabiliPlugin = require("babili-webpack-plugin");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const ShakePlugin = require("webpack-common-shake").Plugin;
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
@@ -66,7 +66,7 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new BabiliPlugin({}, {
+  new MinifyPlugin({}, {
     comments: false
   }),
   new CompressionPlugin(),
