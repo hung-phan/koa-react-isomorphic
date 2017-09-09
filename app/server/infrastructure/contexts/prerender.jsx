@@ -21,7 +21,7 @@ export default function(
   template: string,
   parameters: Object = {},
   initialState: Object = {}
-): Promise<string> {
+): Promise<string | void> {
   const ctx = this;
 
   if (!process.env.SERVER_RENDERING) {
@@ -62,9 +62,13 @@ export default function(
             reject(e);
           }
         });
+
+        return;
       } else {
         ctx.throw(404);
       }
+
+      resolve();
     });
   });
 }
