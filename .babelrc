@@ -4,7 +4,7 @@
     ["relay", {
       "schema": "./build/schema.graphql"
     }],
-    "transform-runtime"
+    "transform-export-extensions"
   ],
   "env": {
     "development": {
