@@ -1,7 +1,7 @@
 {
   "presets": ["./scripts/preset-js", "react", "stage-0"],
   "plugins": [
-    "transform-runtime"
+    "transform-export-extensions"
   ],
   "env": {
     "development": {
