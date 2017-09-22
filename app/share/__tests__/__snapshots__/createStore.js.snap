@@ -2,12 +2,12 @@
 
 exports[`createStore default state 1`] = `
 Immutable.Map {
-  routing: Immutable.Map {
-    object: Object {
+  "routing": Immutable.Map {
+    "object": Object {
       "locationBeforeTransitions": null,
     },
   },
-  helmet: Object {
+  "helmet": Object {
     "link": Array [],
     "title": "Koa React Isomorphic",
   },
