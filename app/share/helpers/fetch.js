@@ -1,3 +1,4 @@
+import omit from "lodash/omit";
 import fetch from "isomorphic-fetch";
 
 export const getBaseUrl = () => {
@@ -20,22 +21,27 @@ export const create = (baseUrl: string) => (
   url: string,
   options: Object = {}
 ) => {
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    ...(options && options.headers)
+  };
+
   if (process.env.RUNTIME_ENV === "client") {
-    options.headers = {
-      ...options.headers,
+    Object.assign(headers, {
       "X-CSRF-Token": window.__csrf
-    };
+    });
+  } else {
+    Object.assign(headers, {
+      "X-App-Secret": process.env.SECRET_KEY
+    });
   }
 
   return fetch(`${baseUrl}${url}`, {
+    headers,
     mode: baseUrl ? "cors" : "same-origin",
     credentials: baseUrl ? "include" : "same-origin",
-    ...options,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...(options && options.headers)
-    }
+    ...omit(options, "headers"),
   });
 };
 
