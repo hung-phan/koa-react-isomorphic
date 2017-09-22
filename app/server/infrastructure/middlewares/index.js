@@ -52,7 +52,7 @@ export const securityLayer = (app: Object) => {
     .use((ctx, next) => {
 
       // don't check csrf for request coming from the server
-      if (ctx.get("user-agent").startsWith("node-fetch")) {
+      if (ctx.get("x-app-secret") === process.env.SECRET_KEY) {
         return next();
       }
 
