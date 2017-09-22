@@ -28,16 +28,19 @@ exports[`Helmet 1`] = `
         }
       >
         <HelmetWrapper
+          defer={true}
           encodeSpecialCharacters={true}
           link={Array []}
           title="Koa React Isomorphic"
         >
           <SideEffect(NullComponent)
+            defer={true}
             encodeSpecialCharacters={true}
             link={Array []}
             title="Koa React Isomorphic"
           >
             <NullComponent
+              defer={true}
               encodeSpecialCharacters={true}
               link={Array []}
               title="Koa React Isomorphic"
