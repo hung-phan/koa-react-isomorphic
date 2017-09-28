@@ -9,7 +9,7 @@ if [ -z "${PORT}" ]; then
 fi
 
 if [ -z "${NODE_DEBUGGER}" ]; then
-  export NODE_DEBUGGER=node-inspector
+  export NODE_DEBUGGER=1
 fi
 
 if [ -z "${RUNTIME_ENV}" ]; then
