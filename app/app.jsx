@@ -21,7 +21,7 @@ function initialize() {
 
   if (process.env.SERVER_RENDERING) {
     match({ history, routes }, (error, redirectLocation, renderProps) => {
-      ReactDOM.render(
+      ReactDOM.hydrate(
         <App store={store} routes={<Router {...renderProps} />} />,
         appDOM
       );
