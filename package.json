@@ -105,7 +105,7 @@
     "chokidar-cli": "^1.2.0",
     "enzyme": "^3.0.0",
     "enzyme-to-json": "^3.0.1",
-    "flow-bin": "^0.55.0",
+    "flow-bin": "^0.56.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.2.1",
     "nock": "^9.0.22",
