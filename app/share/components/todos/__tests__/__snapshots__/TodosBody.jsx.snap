@@ -46,7 +46,9 @@ exports[`Component: TodosBody should render component 1`] = `
       className="table"
     >
       <tbody>
-        <tr>
+        <tr
+          key="0"
+        >
           <td>
             <span>
               1
@@ -80,7 +82,9 @@ exports[`Component: TodosBody should render component 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr
+          key="1"
+        >
           <td>
             <span>
               2
@@ -114,7 +118,9 @@ exports[`Component: TodosBody should render component 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr
+          key="2"
+        >
           <td>
             <span>
               3
@@ -148,7 +154,9 @@ exports[`Component: TodosBody should render component 1`] = `
             </button>
           </td>
         </tr>
-        <tr>
+        <tr
+          key="3"
+        >
           <td>
             <span>
               4
