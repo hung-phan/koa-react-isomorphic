@@ -59,7 +59,7 @@ export const securityLayer = (app: Object) => {
   const csrf = new CSRF();
 
   app
-    .use(convert(session())) // https://github.com/koajs/session
+    .use(session()) // https://github.com/koajs/session
     .use((ctx, next) => {
       // don't check csrf for request coming from the server
       if (ctx.get("x-app-secret") === process.env.SECRET_KEY) {
