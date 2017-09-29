@@ -19,7 +19,10 @@ import error from "./error";
 export const loggingLayer = (app: Object) => app.use(logger()); // https://github.com/koajs/logger
 
 export const initialLayer = (app: Object) =>
-  app.use(bodyParser()).use(conditionalGet()).use(etag()); // https://github.com/koajs/bodyparser // https://github.com/koajs/conditional-get // https://github.com/koajs/etag
+  app
+    .use(bodyParser())
+    .use(conditionalGet())
+    .use(etag()); // https://github.com/koajs/bodyparser // https://github.com/koajs/conditional-get // https://github.com/koajs/etag
 
 export const apiLayer = (app: Object, schema: Object, apiRoutes: Function) => {
   const newRouter = router();
@@ -28,12 +31,10 @@ export const apiLayer = (app: Object, schema: Object, apiRoutes: Function) => {
 
   apiRoutes(newRouter);
 
-  // add graphql
-  newRouter.all(
+  newRouter.post(
     "/graphql",
     graphqlHTTP({
       schema,
-      graphiql: process.env.NODE_ENV === "development",
       pretty: process.env.NODE_ENV === "development"
     })
   );
