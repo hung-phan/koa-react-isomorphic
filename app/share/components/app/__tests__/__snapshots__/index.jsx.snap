@@ -3,6 +3,7 @@
 exports[`App in development mode 1`] = `
 <AppContainer>
   <Provider
+    key="provider"
     store={
       Object {
         "dispatch": [Function],
@@ -13,6 +14,7 @@ exports[`App in development mode 1`] = `
         },
         "replaceReducer": [Function],
         "subscribe": [Function],
+        Symbol(observable): [Function],
       }
     }
   >
@@ -26,6 +28,7 @@ exports[`App in development mode 1`] = `
 
 exports[`App in production mode 1`] = `
 <Provider
+  key="provider"
   store={
     Object {
       "dispatch": [Function],
@@ -36,6 +39,7 @@ exports[`App in production mode 1`] = `
       },
       "replaceReducer": [Function],
       "subscribe": [Function],
+      Symbol(observable): [Function],
     }
   }
 >
