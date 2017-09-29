@@ -15,8 +15,11 @@ describe("Component: TodosAdd", () => {
     const input = component.find("input");
     const button = component.find("button");
 
-    input.node.value = "do chore";
-    input.simulate("change");
+    input.simulate("change", {
+      target: {
+        value: "do chore"
+      }
+    });
     expect(component.state().todo).toEqual("do chore");
 
     button.simulate("click");
