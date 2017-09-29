@@ -71,7 +71,11 @@ export const AddTodoMutation = mutationWithClientMutationId({
     }
   },
   mutateAndGetPayload({ text }) {
-    const todo = new Todo(faker.random.uuid(), text, false);
+    const todo = new Todo({
+      id: faker.random.uuid(),
+      complete: false,
+      text,
+    });
     todosDAO.insert(todo);
     return { todoId: todo.id };
   }
