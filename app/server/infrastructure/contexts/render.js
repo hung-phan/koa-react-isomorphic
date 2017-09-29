@@ -8,30 +8,20 @@ export default function(
   template: string,
   parameters: Object = {}
 ): Promise<string> {
-  const ctx = this;
+  this.type = "text/html";
 
-  ctx.type = "text/html";
+  const templatePath = path.join(
+    settings.path.ROOT,
+    `${settings.path.TEMPLATES_DIR}/${template}`
+  );
+  const currentTemplate =
+    process.env.NODE_ENV === "production"
+      ? global.nodeRequire(`${templatePath}.js`)
+      : marko.load(templatePath);
 
-  return new Promise((resolve, reject) => {
-    const templatePath = path.join(
-      settings.path.ROOT,
-      `${settings.path.TEMPLATES_DIR}/${template}`
-    );
-    const currentTemplate =
-      process.env.NODE_ENV === "production"
-        ? global.nodeRequire(`${templatePath}.js`)
-        : marko.load(templatePath);
-
-      try {
-        resolve(
-          currentTemplate.stream({
-            ...settings,
-            ...parameters,
-            csrf: ctx.csrf
-          })
-        );
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }
+  return currentTemplate.stream({
+    ...settings,
+    ...parameters,
+    csrf: this.csrf
+  });
+}

@@ -17,10 +17,8 @@ export default function(
   template: string,
   parameters: Object = {}
 ): Promise<string | void> {
-  const ctx = this;
-
   if (!process.env.SERVER_RENDERING) {
-    return ctx.render.call(ctx, template, parameters);
+    return this.render(template, parameters);
   }
 
   return getRouter(ctx.req.url).then(({ Api, redirect, status, element }) => {

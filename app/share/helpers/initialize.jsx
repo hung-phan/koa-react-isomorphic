@@ -5,7 +5,11 @@ import App from "../components/app";
 import createRouter from "./createRouter";
 
 const renderComponent = (router: Object, domNode: Object) => {
-  ReactDOM.render(<App router={router} />, domNode);
+  if (process.env.SERVER_RENDERING) {
+    ReactDOM.hydrate(<App router={router} />, domNode);
+  } else {
+    ReactDOM.render(<App router={router} />, domNode);
+  }
 };
 
 export default async (_domNode: ?Object) => {

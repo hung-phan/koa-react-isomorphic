@@ -207,24 +207,6 @@ $ yarn run watch
 $ yarn run debug
 ```
 
-If you use tool like Webstorm or any JetBrains product to debug, you need update `cli` option in `.node-inspectorrc` to prevent
-using default browser to debug. Example:
-
-```
-{
-  "web-port": 9999,
-  "web-host": null,
-  "debug-port": 5858,
-  "save-live-edit": true,
-  "no-preload": true,
-  "cli": true,
-  "hidden": [],
-  "stack-trace-limit": 50
-}
-```
-
-![alt text](https://raw.githubusercontent.com/hung-phan/koa-react-isomorphic/master/node-inspector.png "node-inspector")
-
 ## Production
 
 ### Start production server

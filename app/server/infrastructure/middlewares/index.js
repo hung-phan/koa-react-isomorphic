@@ -3,7 +3,7 @@
 import cors from "koa-cors";
 import logger from "koa-logger";
 import bodyParser from "koa-bodyparser";
-import htmlMinifier from "koa-html-minifier";
+import htmlMinifier from "koa-html-minifier2";
 import router from "koa-router";
 import conditionalGet from "koa-conditional-get";
 import etag from "koa-etag";
@@ -63,13 +63,12 @@ export const securityLayer = (app: Object) => {
   app
     .use(convert(session())) // https://github.com/koajs/session
     .use((ctx, next) => {
-
       // don't check csrf for request coming from the server
       if (ctx.get("x-app-secret") === process.env.SECRET_KEY) {
         return next();
       }
 
-      return csrf(ctx, next)
+      return csrf(ctx, next);
     }) // https://github.com/koajs/csrf
     .use(helmet()); // https://github.com/venables/koa-helmet
 };
@@ -79,15 +78,13 @@ export const renderLayer = (app: Object, templateRoutes: Function) => {
 
   newRouter
     .use(
-      convert(
-        htmlMinifier({
-          collapseWhitespace: true,
-          removeComments: true,
-          preserveLineBreaks: false,
-          removeEmptyAttributes: false,
-          removeIgnored: true
-        })
-      )
+      htmlMinifier({
+        collapseWhitespace: true,
+        removeComments: true,
+        preserveLineBreaks: false,
+        removeEmptyAttributes: false,
+        removeIgnored: true
+      })
     ) // https://github.com/kangax/html-minifier
     .use(compress()); // https://github.com/koajs/compress
 
