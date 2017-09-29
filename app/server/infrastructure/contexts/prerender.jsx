@@ -21,17 +21,17 @@ export default function(
     return this.render(template, parameters);
   }
 
-  return getRouter(ctx.req.url).then(({ Api, redirect, status, element }) => {
+  return getRouter(this.req.url).then(({ Api, redirect, status, element }) => {
     if (redirect) {
-      return ctx.redirect(redirect.url);
+      return this.redirect(redirect.url);
     } else if ([404, 500].includes(status)) {
-      return ctx.throw(status);
+      return this.throw(status);
     }
 
     const prerenderComponent = renderToString(<App router={element} />);
     const prerenderData = Api.fetcher.toJSON();
 
-    return ctx.render(template, {
+    return this.render(template, {
       ...parameters,
       prerenderComponent,
       prerenderData

@@ -31,13 +31,11 @@ export const apiLayer = (app: Object, schema: Object, apiRoutes: Function) => {
   // add graphql
   newRouter.all(
     "/graphql",
-    convert(
-      graphqlHTTP({
-        schema,
-        graphiql: process.env.NODE_ENV === "development",
-        pretty: process.env.NODE_ENV === "development"
-      })
-    )
+    graphqlHTTP({
+      schema,
+      graphiql: process.env.NODE_ENV === "development",
+      pretty: process.env.NODE_ENV === "development"
+    })
   );
 
   app.use(newRouter.routes()).use(newRouter.allowedMethods());

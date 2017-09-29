@@ -28,7 +28,7 @@ export default compose(Component =>
   createRefetchContainer(
     Component,
     {
-      viewer: graphql.experimental`
+      viewer: graphql`
         fragment todos_viewer on Viewer
           @argumentDefinitions(
             numberOfTodos: { type: "Int", defaultValue: 10 }
@@ -48,7 +48,7 @@ export default compose(Component =>
         }
       `
     },
-    graphql.experimental`
+    graphql`
       query todos_RefetchQuery($numberOfTodos: Int) {
         viewer {
           ...todos_viewer @arguments(numberOfTodos: $numberOfTodos)
