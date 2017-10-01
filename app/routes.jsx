@@ -47,8 +47,5 @@ export const routeConfig = makeRouteConfig(
 export const render = createRender({
   renderError: (
     { error } // eslint-disable-line react/prop-types
-  ) =>
-    <div>
-      {error.status === 404 ? "Not found" : "Error"}
-    </div>
+  ) => <div>{error.status === 404 ? "Not found" : "Error"}</div>
 });

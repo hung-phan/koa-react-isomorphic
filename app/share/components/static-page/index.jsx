@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "found";
 
-export default () =>
+export default () => (
   <div className="container">
     <div className="row">
       <div className="col-md-12">
@@ -10,4 +10,5 @@ export default () =>
         <Link to="/">Back to Home page</Link>
       </div>
     </div>
-  </div>;
+  </div>
+);

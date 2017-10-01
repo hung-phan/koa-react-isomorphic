@@ -3,8 +3,7 @@
 import "./client/loadExternalLibs";
 import initialize from "./share/helpers/initialize";
 
-initialize(document.getElementById("app"))
-  .catch(console.error); // eslint-disable-line
+initialize(document.getElementById("app")).catch(console.error); // eslint-disable-line
 
 if (process.env.NODE_ENV === "production") {
   const runtime = require("offline-plugin/runtime");
