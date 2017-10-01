@@ -41,7 +41,7 @@ export const create = (baseUrl: string) => (
     headers,
     mode: baseUrl ? "cors" : "same-origin",
     credentials: baseUrl ? "include" : "same-origin",
-    ...omit(options, "headers"),
+    ...omit(options, "headers")
   });
 };
 

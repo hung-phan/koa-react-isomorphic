@@ -24,7 +24,7 @@ export const Todos = ({
 }: {
   todos: TodoType[],
   actions: Object
-}) =>
+}) => (
   <div className="container">
     <div className="row">
       <TodosHeader />
@@ -36,7 +36,8 @@ export const Todos = ({
       />
       <TodosFooter />
     </div>
-  </div>;
+  </div>
+);
 
 export default compose(
   createRedialHooks({

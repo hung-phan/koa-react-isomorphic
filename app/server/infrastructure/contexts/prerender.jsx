@@ -35,7 +35,9 @@ export default function(
       if (error) {
         resolve(this.throw(500, error.message));
       } else if (redirectLocation) {
-        resolve(this.redirect(redirectLocation.pathname + redirectLocation.search));
+        resolve(
+          this.redirect(redirectLocation.pathname + redirectLocation.search)
+        );
       } else if (renderProps) {
         serverFetchData(renderProps, store).then(() => {
           try {
@@ -49,12 +51,11 @@ export default function(
             Helmet.rewind();
 
             resolve(
-              this
-                .render(template, {
-                  ...parameters,
-                  prerenderComponent,
-                  prerenderData
-                })
+              this.render(template, {
+                ...parameters,
+                prerenderComponent,
+                prerenderData
+              })
             );
           } catch (e) {
             reject(e);
