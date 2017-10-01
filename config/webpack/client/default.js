@@ -9,9 +9,7 @@ module.exports = {
   context: ROOT,
   entry: {
     app: [path.join(ROOT, config.path.app, "app")],
-    vendor: [
-      path.join(ROOT, config.path.app, "client/loadExternalLibs")
-    ]
+    vendor: [path.join(ROOT, config.path.app, "client/loadExternalLibs")]
   },
   output: {
     path: path.join(ROOT, config.path.publicAssets)
@@ -67,7 +65,8 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
-      minChunks: module => module.context && module.context.includes("node_modules")
+      minChunks: module =>
+        module.context && module.context.includes("node_modules")
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "manifest",

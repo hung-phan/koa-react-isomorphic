@@ -7,9 +7,12 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new MinifyPlugin({}, {
-    comments: false
-  }),
+  new MinifyPlugin(
+    {},
+    {
+      comments: false
+    }
+  ),
   new webpack.DefinePlugin({
     "process.env.NODE_ENV": "'production'",
     "process.env.SERVER_RENDERING": true

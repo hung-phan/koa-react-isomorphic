@@ -49,9 +49,7 @@ productionConfig.module.loaders.push(
   }
 );
 
-productionConfig.plugins.unshift(
-  new ShakePlugin()
-);
+productionConfig.plugins.unshift(new ShakePlugin());
 
 productionConfig.plugins.push(
   new webpack.DefinePlugin({
@@ -66,25 +64,19 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new MinifyPlugin({}, {
-    comments: false
-  }),
+  new MinifyPlugin(
+    {},
+    {
+      comments: false
+    }
+  ),
   new CompressionPlugin(),
   webpackIsomorphicToolsPlugin,
   new OfflinePlugin({
     safeToUseOptionalCaches: true,
     caches: {
-      main: [
-        "*.js",
-        "*.css",
-        "/"
-      ],
-      additional: [
-        "*.woff",
-        "*.woff2",
-        "*.eot",
-        "*.ttf"
-      ],
+      main: ["*.js", "*.css", "/"],
+      additional: ["*.woff", "*.woff2", "*.eot", "*.ttf"],
       optional: [":rest:"]
     },
     externals: ["/"],

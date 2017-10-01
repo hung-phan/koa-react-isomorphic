@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import ReactHelmet from "react-helmet";
 import { selectors } from "./logicBundle";
 
-export const Helmet = ({ helmet }: { helmet: Object }) =>
-  <ReactHelmet {...helmet} />;
+export const Helmet = ({ helmet }: { helmet: Object }) => (
+  <ReactHelmet {...helmet} />
+);
 
 export default compose(
   connect(state => ({

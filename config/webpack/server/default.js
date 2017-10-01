@@ -34,9 +34,9 @@ module.exports = {
 
       return regexp.test(request)
         ? callback(
-          null,
-          `commonjs ${path.join(context.replace(ROOT, "../"), request)}`
-        )
+            null,
+            `commonjs ${path.join(context.replace(ROOT, "../"), request)}`
+          )
         : callback();
     }
   ],

@@ -18,29 +18,23 @@ const TodosBody = ({
   todos: List<TodoType>,
   completeTodo: CompleteTodoActionType,
   removeTodo: RemoveTodoActionType
-}) =>
+}) => (
   <div className={`col-md-12 ${style.container}`}>
     <table className="table">
       <tbody>
         {todos.toJS().map((todo: TodoType, index: number) => {
-          const text = todo.complete
-            ? <s>
-                {todo.text}
-              </s>
-            : <span>
-                {todo.text}
-              </span>;
+          const text = todo.complete ? (
+            <s>{todo.text}</s>
+          ) : (
+            <span>{todo.text}</span>
+          );
 
           return (
             <tr key={index}>
               <td>
-                <span>
-                  {index + 1}
-                </span>
+                <span>{index + 1}</span>
               </td>
-              <td>
-                {text}
-              </td>
+              <td>{text}</td>
               <td>
                 <button
                   type="button"
@@ -64,6 +58,7 @@ const TodosBody = ({
         })}
       </tbody>
     </table>
-  </div>;
+  </div>
+);
 
 export default TodosBody;

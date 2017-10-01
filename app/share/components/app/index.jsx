@@ -17,11 +17,7 @@ export default ({ store, routes }: { store: Object, routes: Object }) => {
   if (process.env.NODE_ENV === "development") {
     const { AppContainer } = require("react-hot-loader");
 
-    Component = (
-      <AppContainer>
-        {Component}
-      </AppContainer>
-    );
+    Component = <AppContainer>{Component}</AppContainer>;
   }
 
   return Component;
