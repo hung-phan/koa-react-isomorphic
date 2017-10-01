@@ -1,6 +1,5 @@
 /* @flow */
 import React from "react";
-import compose from "lodash/flowRight";
 import { graphql, createRefetchContainer } from "react-relay";
 import TodosHeader from "./TodosHeader";
 import TodosAdd from "./TodosAdd";
@@ -14,7 +13,7 @@ export const Todos = ({
 }: {
   viewer: todos_viewer,
   relay: Object
-}) =>
+}) => (
   <div className="container">
     <div className="row">
       <TodosHeader />
@@ -22,38 +21,35 @@ export const Todos = ({
       <TodosBody viewer={viewer} />
       <TodosFooter />
     </div>
-  </div>;
+  </div>
+);
 
-export default compose(Component =>
-  createRefetchContainer(
-    Component,
-    {
-      viewer: graphql`
-        fragment todos_viewer on Viewer
-          @argumentDefinitions(
-            numberOfTodos: { type: "Int", defaultValue: 10 }
-          ) {
-          id
-          todos(last: $numberOfTodos)
-            @connection(key: "AllTodos_todos", filters: []) {
-            edges {
-              node {
-                id
-                text
-                complete
-              }
+export default createRefetchContainer(
+  Todos,
+  {
+    viewer: graphql`
+      fragment todos_viewer on Viewer
+        @argumentDefinitions(numberOfTodos: { type: "Int", defaultValue: 10 }) {
+        id
+        todos(last: $numberOfTodos)
+          @connection(key: "AllTodos_todos", filters: []) {
+          edges {
+            node {
+              id
+              text
+              complete
             }
           }
-          numberOfTodos
         }
-      `
-    },
-    graphql`
-      query todos_RefetchQuery($numberOfTodos: Int) {
-        viewer {
-          ...todos_viewer @arguments(numberOfTodos: $numberOfTodos)
-        }
+        numberOfTodos
       }
     `
-  )
-)(Todos);
+  },
+  graphql`
+    query todos_RefetchQuery($numberOfTodos: Int) {
+      viewer {
+        ...todos_viewer @arguments(numberOfTodos: $numberOfTodos)
+      }
+    }
+  `
+);
