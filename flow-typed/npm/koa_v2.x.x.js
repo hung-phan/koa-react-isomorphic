@@ -1,5 +1,5 @@
-// flow-typed signature: 26dadb20fd4d4f339a77cedda2cbb044
-// flow-typed version: 21d851f60a/koa_v2.x.x/flow_>=v0.47.x
+// flow-typed signature: 1a33220ead1c6b6e3205a55b2a2ec3a0
+// flow-typed version: 18b7d8b101/koa_v2.x.x/flow_>=v0.47.x
 
 /*
  * Type def from from source code of koa.
@@ -14,7 +14,7 @@ declare module 'koa' {
   // Currently, import type doesnt work well ?
   // so copy `Server` from flow/lib/node.js#L820
   declare class Server extends net$Server {
-    listen(port: number, hostname?: string, backlog?: number, callback?: Function): Server,
+    listen(port?: number, hostname?: string, backlog?: number, callback?: Function): Server,
     listen(path: string, callback?: Function): Server,
     listen(handle: Object, callback?: Function): Server,
     close(callback?: Function): Server,
@@ -207,7 +207,7 @@ declare module 'koa' {
     overwrite: boolean, //  whether to overwrite previously set cookies of the same name (false by default).
   };
   declare type Cookies = {
-    get: (name: string, options: {signed: boolean}) => string|void,
+    get: (name: string, options?: {signed: boolean}) => string|void,
     set: ((name: string, value: string, options?: CookiesSetOptions) => Context)&
     // delete cookie (an outbound header with an expired date is used.)
     ( (name: string) => Context),
@@ -286,7 +286,7 @@ declare module 'koa' {
     ips: $PropertyType<Request, 'ips'>,
     ip: $PropertyType<Request, 'ip'>,
 
-    [key: string]: mixed, // props added by middlewares.
+    [key: string]: any, // props added by middlewares.
   }
 
   declare type Middleware =
