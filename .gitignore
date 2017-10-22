@@ -5,6 +5,7 @@ build/
 node_modules/
 public/assets/
 public/sw.js
+public/sw.js.gz
 __generated__/
 tmp/
 coverage
