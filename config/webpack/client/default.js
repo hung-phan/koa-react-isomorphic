@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const cssnext = require("postcss-cssnext");
 const StyleLintPlugin = require("stylelint-webpack-plugin");
-const ROOT = require("../../path-helper").ROOT;
+const { ROOT } = require("../../path-helper");
 const config = require("../..");
 
 module.exports = {

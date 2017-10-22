@@ -3,7 +3,7 @@ const path = require("path");
 const crypto = require("crypto");
 const webpack = require("webpack");
 const developmentConfig = require("./default");
-const ROOT = require("../../path-helper").ROOT;
+const { ROOT } = require("../../path-helper");
 const config = require("../..");
 
 _.mergeWith(
