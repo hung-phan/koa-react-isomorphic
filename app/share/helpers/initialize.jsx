@@ -6,6 +6,7 @@ import createRouter from "./createRouter";
 
 const renderComponent = (router: Object, domNode: Object) => {
   if (process.env.SERVER_RENDERING) {
+    // $FlowFixMe
     ReactDOM.hydrate(<App router={router} />, domNode);
   } else {
     ReactDOM.render(<App router={router} />, domNode);

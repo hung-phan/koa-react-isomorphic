@@ -1,5 +1,5 @@
-// flow-typed signature: 6c119bee4c19ddc7f2e88a6eaae67dd9
-// flow-typed version: e8ca1e6a1a/redux-actions_v2.x.x/flow_>=v0.34.x
+// flow-typed signature: bf662b9ad2fd7889b5d488ef5dc22b00
+// flow-typed version: 49ae7fdfd6/redux-actions_v2.x.x/flow_>=v0.39.x
 
 declare module 'redux-actions' {
 
@@ -33,22 +33,22 @@ declare module 'redux-actions' {
     $?: empty  // hack to force Flow to not use this signature when more than one argument is given
   ): (payload: P, ...rest: any[]) => { type: T, payload: P, error?: boolean };
 
-  declare function createAction<T, P, P2>(
+  declare function createAction<T, A, P>(
     type: T,
-    payloadCreator: (_: P) => P2,
+    payloadCreator: (...rest: A) => P,
     $?: empty
-  ): (payload: P, ...rest: any[]) => { type: T, payload: P2, error?: boolean };
+  ): (...rest: A) => { type: T, payload: P, error?: boolean };
 
-  declare function createAction<T, P, P2, M>(
+  declare function createAction<T, P, M>(
     type: T,
-    payloadCreator: (_: P) => P2,
-    metaCreator: (_: P) => M
-  ): (payload: P, ...rest: any[]) => { type: T, payload: P2, error?: boolean, meta: M };
+    payloadCreator: (...rest: any[]) => P,
+    metaCreator: (...rest: any[]) => M
+  ): (...rest: any[]) => { type: T, payload: P, error?: boolean, meta: M };
 
   declare function createAction<T, P, M>(
     type: T,
     payloadCreator: null | void,
-    metaCreator: (_: P) => M
+    metaCreator: (payload: P, ...rest: any[]) => M
   ): (payload: P, ...rest: any[]) => { type: T, payload: P, error?: boolean, meta: M };
 
   // `createActions` is quite difficult to write a type for. Maybe try not to
