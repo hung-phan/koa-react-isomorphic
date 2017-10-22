@@ -1,5 +1,5 @@
 const path = require("path");
-const ROOT = require("./config/path-helper").ROOT;
+const { ROOT } = require("./config/path-helper");
 const WebpackIsomorphicTools = require("webpack-isomorphic-tools");
 
 require("source-map-support").install({ environment: "node" });

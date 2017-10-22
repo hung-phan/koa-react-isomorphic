@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
-const ROOT = require("../../path-helper").ROOT;
+const { ROOT } = require("../../path-helper");
 const config = require("../..");
 
 const assets =
