@@ -6,7 +6,7 @@ export const getBaseUrl = () => {
     return "";
   }
 
-  const PORT = process.env.PORT;
+  const { PORT } = process.env;
 
   if (!PORT) {
     throw new Error("Missing 'process.env.PORT'.");

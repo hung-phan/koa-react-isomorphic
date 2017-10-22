@@ -10,9 +10,14 @@ import { getClientHistory } from "./routes";
 import "./client/loadExternalLibs";
 
 const appDOM = document.getElementById("app");
+
+if (!appDOM) {
+  throw new Error("Cannot initialise app");
+}
+
 const store = createStore(window.prerenderData);
 const history = getClientHistory(store);
-let getRoutes = require("./routes").getRoutes;
+let { getRoutes } = require("./routes");
 
 function initialize() {
   const routes = getRoutes(history, store);
@@ -21,6 +26,7 @@ function initialize() {
 
   if (process.env.SERVER_RENDERING) {
     match({ history, routes }, (error, redirectLocation, renderProps) => {
+      // $FlowFixMe
       ReactDOM.hydrate(
         <App store={store} routes={<Router {...renderProps} />} />,
         appDOM
@@ -34,7 +40,7 @@ function initialize() {
 if (process.env.NODE_ENV === "development" && module.hot) {
   // $FlowFixMe
   module.hot.accept("./routes", () => {
-    getRoutes = require("./routes").getRoutes;
+    ({ getRoutes } = require("./routes"));
     initialize();
   });
 }
