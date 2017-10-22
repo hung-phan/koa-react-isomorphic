@@ -60,6 +60,22 @@ productionConfig.plugins.push(
     filename: "[name].[contenthash].css",
     allChunks: true
   }),
+  new OfflinePlugin({
+    safeToUseOptionalCaches: true,
+    caches: {
+      main: ["*.js", "*.css"],
+      additional: [":externals:"],
+      optional: [":rest:"]
+    },
+    externals: ["*.woff", "*.woff2", "*.eot", "*.ttf"],
+    relativePaths: false,
+    ServiceWorker: {
+      minify: true,
+      output: "../sw.js",
+      publicPath: "/sw.js",
+      events: true
+    }
+  }),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
@@ -71,22 +87,7 @@ productionConfig.plugins.push(
     }
   ),
   new CompressionPlugin(),
-  webpackIsomorphicToolsPlugin,
-  new OfflinePlugin({
-    safeToUseOptionalCaches: true,
-    caches: {
-      main: ["*.js", "*.css", "/"],
-      additional: ["*.woff", "*.woff2", "*.eot", "*.ttf"],
-      optional: [":rest:"]
-    },
-    externals: ["/"],
-    relativePaths: false,
-    ServiceWorker: {
-      output: "../sw.js",
-      publicPath: "/sw.js",
-      events: true
-    }
-  })
+  webpackIsomorphicToolsPlugin
 );
 
 module.exports = productionConfig;
