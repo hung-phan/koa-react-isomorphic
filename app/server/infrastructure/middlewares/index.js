@@ -9,7 +9,7 @@ import conditionalGet from "koa-conditional-get";
 import etag from "koa-etag";
 import CSRF from "koa-csrf";
 import convert from "koa-convert";
-import session from "koa-generic-session";
+import session from "koa-session";
 import compress from "koa-compress";
 import helmet from "koa-helmet";
 import settings from "../settings";
@@ -51,7 +51,7 @@ export const securityLayer = (app: Object) => {
   const csrf = new CSRF();
 
   app
-    .use(session()) // https://github.com/koajs/session
+    .use(session({ maxAge: 86400000 }, app)) // https://github.com/koajs/session
     .use((ctx, next) => {
       // don't check csrf for request coming from the server
       if (ctx.get("x-app-secret") === process.env.SECRET_KEY) {
