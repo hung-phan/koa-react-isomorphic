@@ -13,7 +13,6 @@ describe("Component: TodosFooter", () => {
   let component;
 
   beforeEach(() => {
-    console.log(Link);
     component = shallow(<TodosFooter />);
   });
 
