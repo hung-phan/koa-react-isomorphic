@@ -1,7 +1,9 @@
 /* @flow */
-import isEmpty from "lodash/isEmpty";
+/* global process */
 import { trigger } from "redial";
+import isEmpty from "lodash/isEmpty";
 import { match } from "react-router";
+import { getBaseUrl} from "./fetch";
 
 export const FETCH_DATA_HOOK = "FETCH_DATA_HOOK";
 
@@ -22,18 +24,19 @@ export const serverFetchData = (
     getDefaultParams(store, renderProps)
   );
 
+const redirectTo = (url: string): void => {
+  if (process.env.NODE_ENV === "test") {
+    global.jsdom.reconfigure({ url: `${getBaseUrl()}${url}` });
+  } else {
+    window.location.replace(url);
+  }
+};
+
 export const clientFetchData = (
   history: Object,
   routes: Object,
   store: Object
 ) => {
-  const redirectTo = (url: string): void => {
-    // use for jsdom test
-    Object.defineProperty(window.location, "href", {
-      writable: true,
-      value: url
-    });
-  };
   const callback = location =>
     match({ routes, location }, (error, redirectLocation, renderProps) => {
       if (error) {
