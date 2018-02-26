@@ -8,3 +8,11 @@ tmp/
 coverage
 *.marko.js
 __generated__/
+docker-compose.yml
+test-setup.js
+shim.js
+redux-structure.png
+flow-typed/
+__mocks__/
+CHANGELOG.md
+Dockerfile
