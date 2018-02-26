@@ -1,6 +1,6 @@
 FROM node:8 as builder
 
-ARG SECRET_KEY=secret_key
+ARG SECRET_KEY=secret
 
 WORKDIR /opt/application
 
@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM node:8
 
-ARG SECRET_KEY=secret_key
+ARG SECRET_KEY=secret
 
 WORKDIR /opt/application
 
