@@ -7,3 +7,13 @@ public/sw.js
 tmp/
 coverage
 *.marko.js
+docker-compose.yml
+test-setup.js
+shim.js
+redux-structure.png
+postcss.config.js
+mocha.opts
+flow-typed/
+__mocks__/
+CHANGELOG.md
+Dockerfile
