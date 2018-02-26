@@ -1,24 +1,31 @@
-FROM node:8
+FROM node:8 as builder
 
-MAINTAINER Hung Phan
+ARG SECRET_KEY=secret
 
-RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
-
-RUN chmod +x /usr/local/bin/dumb-init
-
-WORKDIR /usr/src/app
+WORKDIR /opt/application
 
 COPY package.json yarn.lock ./
+RUN yarn install
+COPY . .
+RUN npm run build
 
-COPY scripts/postinstall ./scripts/postinstall
 
+FROM node:8
+
+ARG SECRET_KEY=secret
+
+WORKDIR /opt/application
+
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64
+RUN chmod +x /usr/local/bin/dumb-init
+COPY package.json yarn.lock ./
 RUN yarn install --production
+COPY . .
+COPY --from=builder /opt/application/public/assets ./public/assets
+COPY --from=builder /opt/application/public/sw.js ./public/sw.js
+COPY --from=builder /opt/application/build ./build
 
 ENV NODE_ENV=production \
-    SECRET_KEY=secret
-
-COPY . .
-
-RUN npm run build
+    SECRET_KEY=${SECRET_KEY}
 
 CMD ["dumb-init", "npm", "start"]
