@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App in development mode 1`] = `
-<AppContainer>
+<t>
   <div />
-</AppContainer>
+</t>
 `;
 
 exports[`App in production mode 1`] = `<div />`;
