@@ -2,9 +2,9 @@ const _ = require("lodash");
 const webpack = require("webpack");
 const OfflinePlugin = require("offline-plugin");
 const MinifyPlugin = require("babel-minify-webpack-plugin");
-const ShakePlugin = require("webpack-common-shake").Plugin;
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require("../../webpack/webpack-isomorphic-tools")
@@ -12,53 +12,66 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
 const productionConfig = require("./default");
 const config = require("../..");
 
-_.mergeWith(
+_.merge(
   productionConfig,
   {
+    mode: "production",
     devtool: false,
     output: {
       publicPath: config.path.assets,
       filename: "[name].[chunkhash].js",
       chunkFilename: "[id].[chunkhash].js"
-    }
-  },
-  (obj1, obj2) => (_.isArray(obj2) ? obj2.concat(obj1) : undefined)
-);
-
-productionConfig.module.loaders.push(
-  {
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract({
-      fallback: "style-loader",
-      use: `css-loader${config.cssModules}!postcss-loader`
-    })
-  },
-  {
-    test: /\.less$/,
-    loader: ExtractTextPlugin.extract({
-      fallback: "style-loader",
-      use: `css-loader${config.cssModules}!postcss-loader!less-loader`
-    })
-  },
-  {
-    test: /\.scss$/,
-    loader: ExtractTextPlugin.extract({
-      fallback: "style-loader",
-      use: `css-loader${config.cssModules}!postcss-loader!sass-loader`
-    })
+    },
+    optimization: {
+      minimizer: [
+        new MinifyPlugin(
+          {},
+          {
+            comments: false
+          }
+        ),
+        new OptimizeCSSAssetsPlugin({})
+      ]
+    },
   }
 );
 
-productionConfig.plugins.unshift(new ShakePlugin());
+productionConfig.module.rules.push(
+  {
+    test: /\.css$/,
+    use: [
+      MiniCssExtractPlugin.loader,
+      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 1 } },
+      "postcss-loader"
+    ]
+  },
+  {
+    test: /\.less$/,
+    use: [
+      MiniCssExtractPlugin.loader,
+      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
+      "postcss-loader",
+      "less-loader"
+    ]
+  },
+  {
+    test: /\.scss$/,
+    use: [
+      MiniCssExtractPlugin.loader,
+      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
+      "postcss-loader",
+      "sass-loader"
+    ]
+  }
+);
 
 productionConfig.plugins.push(
   new webpack.DefinePlugin({
-    "process.env.NODE_ENV": "'production'",
     "process.env.SERVER_RENDERING": true
   }),
-  new ExtractTextPlugin({
+  new MiniCssExtractPlugin({
     filename: "[name].[contenthash].css",
-    allChunks: true
+    chunkFilename: "[id].[contenthash].css"
   }),
   new OfflinePlugin({
     safeToUseOptionalCaches: true,
@@ -70,7 +83,8 @@ productionConfig.plugins.push(
     externals: ["*.woff", "*.woff2", "*.eot", "*.ttf"],
     relativePaths: false,
     ServiceWorker: {
-      minify: true,
+      // disable minifier for webpack 4
+      minify: false,
       output: "../sw.js",
       publicPath: "/sw.js",
       events: true

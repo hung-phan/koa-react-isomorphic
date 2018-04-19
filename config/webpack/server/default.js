@@ -45,11 +45,11 @@ module.exports = {
     modules: [path.resolve(ROOT, "app"), "node_modules"]
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: ["babel-loader", "eslint-loader"]
+        use: ["babel-loader", "eslint-loader"]
       }
     ]
   },

@@ -12,6 +12,7 @@ const config = require("../..");
 _.mergeWith(
   developmentConfig,
   {
+    mode: "development",
     entry: {
       app: ["react-hot-loader/patch"]
     },
@@ -30,35 +31,49 @@ _.mergeWith(
       },
       inline: true
     },
-    recordsPath: path.join(ROOT, config.path.tmp, "client-records.json")
+    recordsPath: path.join(ROOT, config.path.tmp, "client-records.json"),
+    optimization: {
+      noEmitOnErrors: true
+    }
   },
   (obj1, obj2) => (_.isArray(obj2) ? obj2.concat(obj1) : undefined)
 );
 
-developmentConfig.module.loaders.push(
+developmentConfig.module.rules.push(
   {
     test: /\.css$/,
-    loader: `style-loader!css-loader${config.cssModules}!postcss-loader`
+    use: [
+      "style-loader",
+      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 1 } },
+      "postcss-loader"
+    ]
   },
   {
     test: /\.less$/,
-    loader: `style-loader!css-loader${config.cssModules}!postcss-loader!less-loader`
+    use: [
+      "style-loader",
+      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
+      "postcss-loader",
+      "less-loader"
+    ]
   },
   {
     test: /\.scss$/,
-    loader: `style-loader!css-loader${config.cssModules}!postcss-loader!sass-loader`
+    use: [
+      "style-loader",
+      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
+      "postcss-loader",
+      "sass-loader"
+    ]
   }
 );
 
 developmentConfig.plugins.push(
   new webpack.DefinePlugin({
-    "process.env.NODE_ENV": "'development'",
     "process.env.SERVER_RENDERING": process.env.SERVER_RENDERING || false
   }),
-  new webpack.NamedModulesPlugin(),
   webpackIsomorphicToolsPlugin.development(),
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoEmitOnErrorsPlugin()
+  new webpack.HotModuleReplacementPlugin()
 );
 
 module.exports = developmentConfig;

@@ -1,6 +1,15 @@
+const _ = require("lodash");
 const webpack = require("webpack");
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const productionConfig = require("./default");
+
+_.merge(
+  productionConfig,
+  {
+    mode: "production",
+    devtool: false
+  }
+);
 
 productionConfig.plugins.push(
   new webpack.LoaderOptionsPlugin({
@@ -14,7 +23,6 @@ productionConfig.plugins.push(
     }
   ),
   new webpack.DefinePlugin({
-    "process.env.NODE_ENV": "'production'",
     "process.env.SERVER_RENDERING": true
   })
 );

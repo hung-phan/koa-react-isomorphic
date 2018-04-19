@@ -6,5 +6,7 @@ module.exports = {
     build: "/build/",
     tmp: "/tmp/"
   },
-  cssModules: "?importLoaders=1&localIdentName=[local]__[hash:base64:5]"
+  cssModules: {
+    localIdentName: "[local]__[hash:base64:5]"
+  }
 };

@@ -8,8 +8,7 @@ const config = require("../..");
 module.exports = {
   context: ROOT,
   entry: {
-    app: [path.join(ROOT, config.path.app, "app")],
-    vendor: [path.join(ROOT, config.path.app, "client/loadExternalLibs")]
+    app: [path.join(ROOT, config.path.app, "app")]
   },
   output: {
     path: path.join(ROOT, config.path.publicAssets)
@@ -23,21 +22,50 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.modernizrrc$/,
-        loader: "modernizr-loader"
+        use: ["modernizr-loader"]
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: ["babel-loader", "eslint-loader"]
+        use: ["babel-loader", "eslint-loader"]
       },
       {
         test: /\.(gif|jpg|jpeg|png|svg|ttf|eot|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        use: ["file-loader"]
       }
     ]
+  },
+  optimization: {
+    // https://webpack.js.org/plugins/split-chunks-plugin/#optimization-splitchunks
+    splitChunks: {
+      chunks: "async",
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          test: /\.(css|less|sass)$/,
+          chunks: "all"
+        },
+        vendors: {
+          name: "vendors",
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          name: "default",
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    },
+    concatenateModules: true
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
@@ -61,21 +89,6 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       "process.env.RUNTIME_ENV": "'client'"
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor",
-      minChunks: module =>
-        module.context && module.context.includes("node_modules")
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "manifest",
-      minChunks: Infinity
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      async: true,
-      children: true,
-      minChunks: 4
     })
   ]
 };
