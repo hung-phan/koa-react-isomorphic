@@ -1,13 +1,19 @@
 const _ = require("lodash");
 const path = require("path");
 const webpack = require("webpack");
-const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
-  require("../../webpack/webpack-isomorphic-tools")
-);
-const developmentConfig = require("./default");
+const cssnext = require("postcss-cssnext");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
+const { clientConfiguration } = require("universal-webpack");
 const { ROOT } = require("../../path-helper");
 const config = require("../..");
+
+const developmentConfig = clientConfiguration(
+  require("../default-config"),
+  require("../universal-webpack-settings"),
+  {
+    development: true
+  }
+);
 
 _.mergeWith(
   developmentConfig,
@@ -22,7 +28,6 @@ _.mergeWith(
       chunkFilename: "[id].js"
     },
     cache: true,
-    devtool: "source-map",
     devServer: {
       contentBase: ROOT,
       hot: true,
@@ -39,40 +44,20 @@ _.mergeWith(
   (obj1, obj2) => (_.isArray(obj2) ? obj2.concat(obj1) : undefined)
 );
 
-developmentConfig.module.rules.push(
-  {
-    test: /\.css$/,
-    use: [
-      "style-loader",
-      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 1 } },
-      "postcss-loader"
-    ]
-  },
-  {
-    test: /\.less$/,
-    use: [
-      "style-loader",
-      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
-      "postcss-loader",
-      "less-loader"
-    ]
-  },
-  {
-    test: /\.scss$/,
-    use: [
-      "style-loader",
-      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
-      "postcss-loader",
-      "sass-loader"
-    ]
-  }
-);
-
 developmentConfig.plugins.push(
   new webpack.DefinePlugin({
+    "process.env.RUNTIME_ENV": "'client'",
     "process.env.SERVER_RENDERING": process.env.SERVER_RENDERING || false
   }),
-  webpackIsomorphicToolsPlugin.development(),
+  new webpack.LoaderOptionsPlugin({
+    test: /\.(css|less|scss)$/,
+    options: {
+      postcss() {
+        return [cssnext()];
+      }
+    }
+  }),
+  new StyleLintPlugin(),
   new webpack.HotModuleReplacementPlugin()
 );
 

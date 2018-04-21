@@ -1,9 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
-const cssnext = require("postcss-cssnext");
-const StyleLintPlugin = require("stylelint-webpack-plugin");
-const { ROOT } = require("../../path-helper");
-const config = require("../..");
+const { ROOT } = require("../path-helper");
+const config = require("..");
 
 module.exports = {
   context: ROOT,
@@ -13,6 +11,7 @@ module.exports = {
   output: {
     path: path.join(ROOT, config.path.publicAssets)
   },
+  devtool: "source-map",
   externals: [],
   resolve: {
     extensions: [".js", ".jsx"],
@@ -35,6 +34,41 @@ module.exports = {
       {
         test: /\.(gif|jpg|jpeg|png|svg|ttf|eot|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: ["file-loader"]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { ...config.cssModules, importLoaders: 1 }
+          },
+          "postcss-loader"
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { ...config.cssModules, importLoaders: 2 }
+          },
+          "postcss-loader",
+          "less-loader"
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { ...config.cssModules, importLoaders: 2 }
+          },
+          "postcss-loader",
+          "sass-loader"
+        ]
       }
     ]
   },
@@ -47,11 +81,6 @@ module.exports = {
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
       cacheGroups: {
-        styles: {
-          name: "styles",
-          test: /\.(css|less|sass)$/,
-          chunks: "all"
-        },
         vendors: {
           name: "vendors",
           test: /[\\/]node_modules[\\/]/,
@@ -64,8 +93,7 @@ module.exports = {
           reuseExistingChunk: true
         }
       }
-    },
-    concatenateModules: true
+    }
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
@@ -75,20 +103,6 @@ module.exports = {
           emitWarning: true
         }
       }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      test: /\.(css|less|scss)$/,
-      options: {
-        postcss() {
-          return [cssnext()];
-        }
-      }
-    }),
-    new StyleLintPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      "process.env.RUNTIME_ENV": "'client'"
     })
   ]
 };

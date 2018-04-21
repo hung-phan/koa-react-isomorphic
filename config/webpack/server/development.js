@@ -2,17 +2,19 @@ const _ = require("lodash");
 const path = require("path");
 const crypto = require("crypto");
 const webpack = require("webpack");
-const developmentConfig = require("./default");
+const { serverConfiguration } = require("universal-webpack");
 const { ROOT } = require("../../path-helper");
 const config = require("../..");
+
+const developmentConfig = serverConfiguration(
+  require("../default-config"),
+  require("../universal-webpack-settings")
+);
 
 _.mergeWith(
   developmentConfig,
   {
     mode: "development",
-    entry: {
-      server: ["webpack/hot/poll?1000"]
-    },
     recordsPath: path.join(ROOT, config.path.tmp, "server-records.json"),
     optimization: {
       noEmitOnErrors: true
@@ -23,6 +25,7 @@ _.mergeWith(
 
 developmentConfig.plugins.push(
   new webpack.DefinePlugin({
+    "process.env.RUNTIME_ENV": "'server'",
     "process.env.SECRET_KEY": `"${crypto.randomBytes(8).toString("hex")}"`,
     "process.env.SERVER_RENDERING": process.env.SERVER_RENDERING || false
   }),

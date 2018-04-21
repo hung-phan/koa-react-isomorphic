@@ -10,7 +10,6 @@
 
         <link rel="manifest" href="/manifest.json">
         <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <webpack-css-bundle-tag env=input.env.NODE_ENV asset-manifest=input.assetManifest.styles name="styles" />
         <webpack-css-bundle-tag env=input.env.NODE_ENV asset-manifest=input.assetManifest.styles name="app" />
     </head>
 
@@ -24,7 +23,6 @@
             window.__csrf = "$!{input.csrf}";
         </script>
 
-        <webpack-bundle-tag name='styles' asset-manifest=input.assetManifest.javascript />
         <webpack-bundle-tag name='app' asset-manifest=input.assetManifest.javascript />
     </body>
 </html>

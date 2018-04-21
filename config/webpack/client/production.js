@@ -1,74 +1,58 @@
 const _ = require("lodash");
 const webpack = require("webpack");
+const cssnext = require("postcss-cssnext");
 const OfflinePlugin = require("offline-plugin");
-const MinifyPlugin = require("babel-minify-webpack-plugin");
+const MinifyPlugin = require("uglifyjs-webpack-plugin");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const WebpackIsomorphicToolsPlugin = require("webpack-isomorphic-tools/plugin");
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
-  require("../../webpack/webpack-isomorphic-tools")
-);
-const productionConfig = require("./default");
+const { clientConfiguration } = require("universal-webpack");
 const config = require("../..");
 
-_.merge(
-  productionConfig,
+const productionConfig = clientConfiguration(
+  require("../default-config"),
+  require("../universal-webpack-settings"),
   {
-    mode: "production",
-    devtool: false,
-    output: {
-      publicPath: config.path.assets,
-      filename: "[name].[chunkhash].js",
-      chunkFilename: "[id].[chunkhash].js"
-    },
-    optimization: {
-      minimizer: [
-        new MinifyPlugin(
-          {},
-          {
-            comments: false
-          }
-        ),
-        new OptimizeCSSAssetsPlugin({})
-      ]
-    },
+    development: false,
+    useMiniCssExtractPlugin: true
   }
 );
 
-productionConfig.module.rules.push(
-  {
-    test: /\.css$/,
-    use: [
-      MiniCssExtractPlugin.loader,
-      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 1 } },
-      "postcss-loader"
-    ]
+_.merge(productionConfig, {
+  mode: "production",
+  devtool: false,
+  output: {
+    publicPath: config.path.assets,
+    filename: "[name].[chunkhash].js",
+    chunkFilename: "[id].[chunkhash].js"
   },
-  {
-    test: /\.less$/,
-    use: [
-      MiniCssExtractPlugin.loader,
-      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
-      "postcss-loader",
-      "less-loader"
-    ]
-  },
-  {
-    test: /\.scss$/,
-    use: [
-      MiniCssExtractPlugin.loader,
-      { loader: "css-loader", options: { ...config.cssModules, importLoaders: 2 } },
-      "postcss-loader",
-      "sass-loader"
+  optimization: {
+    minimizer: [
+      new MinifyPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   }
-);
+});
 
 productionConfig.plugins.push(
   new webpack.DefinePlugin({
+    "process.env.RUNTIME_ENV": "'client'",
     "process.env.SERVER_RENDERING": true
   }),
+  new webpack.LoaderOptionsPlugin({
+    test: /\.(css|less|scss)$/,
+    options: {
+      postcss() {
+        return [cssnext()];
+      }
+    }
+  }),
+  new StyleLintPlugin(),
   new MiniCssExtractPlugin({
     filename: "[name].[contenthash].css",
     chunkFilename: "[id].[contenthash].css"
@@ -94,14 +78,12 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new MinifyPlugin(
-    {},
-    {
-      comments: false
-    }
-  ),
-  new CompressionPlugin(),
-  webpackIsomorphicToolsPlugin
+  new MinifyPlugin({
+    cache: true,
+    parallel: true,
+    sourceMap: false
+  }),
+  new CompressionPlugin()
 );
 
 module.exports = productionConfig;
