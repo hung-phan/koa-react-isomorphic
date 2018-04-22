@@ -37,8 +37,8 @@ function initialize() {
   }
 }
 
+// $FlowFixMe
 if (process.env.NODE_ENV === "development" && module.hot) {
-  // $FlowFixMe
   module.hot.accept("./routes", () => {
     ({ getRoutes } = require("./routes"));
     initialize();

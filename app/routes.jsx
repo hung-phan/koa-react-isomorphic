@@ -4,8 +4,8 @@ import { syncHistoryWithStore } from "react-router-redux";
 import {
   browserHistory,
   createMemoryHistory,
-  Router,
-  Route
+  Route,
+  Router
 } from "react-router";
 import { selectors } from "./share/components/routing/logicBundle";
 import injectReducers from "./share/helpers/injectReducers";
@@ -28,34 +28,27 @@ export const getRoutes = (
   <Router history={history} {...options}>
     <Route
       path="/"
-      getComponent={(nextState, cb) => {
-        // $FlowFixMe
-        require.ensure(
-          [],
-          require => {
-            const {
-              default: todosReducer,
-              mountPoint: todosMountPoint
-            } = require("./share/components/todos/logicBundle");
+      getComponent={async (nextState, cb) => {
+        const [
+          { default: TodosComponent },
+          { mountPoint: todosMountPoint, default: todosReducer }
+        ] = await Promise.all([
+          import(/* webpackChunkName: "todos-page", webpackPreload: true */ "./share/components/todos"),
+          import(/* webpackChunkName: "todos-page", webpackPreload: true */ "./share/components/todos/logicBundle")
+        ]);
 
-            injectReducers(store, { [todosMountPoint]: todosReducer });
-            cb(null, require("./share/components/todos").default);
-          },
-          "todos-page"
-        );
+        injectReducers(store, { [todosMountPoint]: todosReducer });
+        cb(null, TodosComponent);
       }}
     />
     <Route
       path="/static-page"
-      getComponent={(nextState, cb) => {
-        // $FlowFixMe
-        require.ensure(
-          [],
-          require => {
-            cb(null, require("./share/components/static-page").default);
-          },
-          "static-page"
-        );
+      getComponent={async (nextState, cb) => {
+        const {
+          default: StaticPageComponent
+        } = await import(/* webpackChunkName: "static-page" */ "./share/components/static-page");
+
+        cb(null, StaticPageComponent);
       }}
     />
   </Router>

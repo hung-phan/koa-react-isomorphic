@@ -1,8 +1,9 @@
 /* @flow */
 /* global process */
 import { fromJS } from "immutable";
+import { applyMiddleware, compose } from "redux";
 import { combineReducers } from "redux-immutable";
-import { applyMiddleware, compose, createStore } from "redux";
+import { createStore } from "redux-dynamic-reducer";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import injectReducers from "./helpers/injectReducers";
@@ -34,12 +35,8 @@ export default (initialState: Object = {}) => {
     compose(applyMiddleware(...middlewares), ...enhancers)
   );
 
-  // enable async reducers for each page load
   // $FlowFixMe
-  store.reducers = reducers;
-
   if (process.env.NODE_ENV === "development" && module.hot) {
-    // $FlowFixMe
     module.hot.accept("./createReducer", () =>
       injectReducers(store, combineReducers(require("./createReducer").default))
     );
