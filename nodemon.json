@@ -5,7 +5,6 @@
     "app/server/domain",
     "app/server/infrastructure",
     "app/server.js",
-    "prod-server.js",
-    "build/server.js"
+    "prod-server.js"
   ]
 }
