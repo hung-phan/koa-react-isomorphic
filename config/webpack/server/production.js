@@ -1,20 +1,29 @@
+const _ = require("lodash");
 const webpack = require("webpack");
-const MinifyPlugin = require("babel-minify-webpack-plugin");
-const productionConfig = require("./default");
+const MinifyPlugin = require("uglifyjs-webpack-plugin");
+const { serverConfiguration } = require("universal-webpack");
+
+const productionConfig = serverConfiguration(
+  require("../default-config"),
+  require("../universal-webpack-settings")
+);
+
+_.merge(productionConfig, {
+  mode: "production"
+});
 
 productionConfig.plugins.push(
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
   }),
-  new MinifyPlugin(
-    {},
-    {
-      comments: false
-    }
-  ),
+  new MinifyPlugin({
+    cache: true,
+    parallel: true,
+    sourceMap: true
+  }),
   new webpack.DefinePlugin({
-    "process.env.NODE_ENV": "'production'",
+    "process.env.RUNTIME_ENV": "'server'",
     "process.env.SERVER_RENDERING": true
   })
 );

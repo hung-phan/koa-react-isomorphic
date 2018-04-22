@@ -4,7 +4,8 @@
     ["relay", {
       "schema": "./build/schema.graphql"
     }],
-    "transform-export-extensions"
+    "transform-export-extensions",
+    "dynamic-import-node"
   ],
   "env": {
     "development": {

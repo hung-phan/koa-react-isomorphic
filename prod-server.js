@@ -1,51 +1,29 @@
 const path = require("path");
 const { ROOT } = require("./config/path-helper");
-const WebpackIsomorphicTools = require("webpack-isomorphic-tools");
+const startServer = require("universal-webpack/server");
 
-require("source-map-support").install({ environment: "node" });
-
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(
-  require("./config/webpack/webpack-isomorphic-tools")
-);
-
-// to get the node require instead of dynamic require by webpack
+// expose node require function
 global.nodeRequire = require;
 
-global.webpackIsomorphicTools
-  .server(ROOT, () => {
-    if (process.env.NODE_DEBUGGER) {
-      // Define require.ensure and require.include
-      const proto = Object.getPrototypeOf(require);
+// enable source-map support
+require("source-map-support").install({ environment: "node" });
 
-      // eslint-disable-next-line no-prototype-builtins
-      if (!proto.hasOwnProperty("ensure")) {
-        Object.defineProperties(proto, {
-          "ensure": {
-            value: function ensure(modules, callback) {
-              callback(this);
-            },
-            writable: false
-          },
-          "include": {
-            value: function include() {
-            },
-            writable: false
-          }
-        });
-      }
+// enable hot-reload for template on development
+if (process.env.NODE_ENV === "development") {
+  require("marko/hot-reload").enable();
+  require("chokidar")
+    .watch("./app/server/application/templates/**/*.marko")
+    .on("change", filename => {
+      require("marko/hot-reload").handleFileModified(path.join(ROOT, filename));
+    });
+}
 
-      require("babel-core/register");
-      require("./app/server");
-    } else {
-      require("./build/server");
-    }
-
-    if (process.env.NODE_ENV === "development") {
-      require("marko/hot-reload").enable();
-      require("chokidar")
-        .watch("./app/server/application/templates/**/*.marko")
-        .on("change", filename => {
-          require("marko/hot-reload").handleFileModified(path.join(ROOT, filename));
-        });
-    }
-  });
+if (process.env.NODE_DEBUGGER) {
+  require("babel-core/register");
+  require("./app/server").default();
+} else {
+  startServer(
+    require("./config/webpack/default-config"),
+    require("./config/webpack/universal-webpack-settings")
+  );
+}

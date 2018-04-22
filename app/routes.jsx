@@ -7,17 +7,10 @@ export const routeConfig = makeRouteConfig(
   <Route path="/">
     <Route
       getComponent={() =>
-        new Promise((resolve, reject) => {
-          // $FlowFixMe
-          require.ensure(
-            [],
-            require => {
-              resolve(require("./share/components/todos").default);
-            },
-            reject,
-            "todos-page"
-          );
-        })}
+        import(/* webpackChunkName: "todos-page", webpackPreload: true */ "./share/components/todos").then(
+          module => module.default
+        )
+      }
       query={graphql`
         query routes_TodoQuery {
           viewer {
@@ -29,17 +22,10 @@ export const routeConfig = makeRouteConfig(
     <Route
       path="static-page"
       getComponent={() =>
-        new Promise((resolve, reject) => {
-          // $FlowFixMe
-          require.ensure(
-            [],
-            require => {
-              resolve(require("./share/components/static-page").default);
-            },
-            reject,
-            "static-page"
-          );
-        })}
+        import(/* webpackChunkName: "static-page" */ "./share/components/static-page").then(
+          module => module.default
+        )
+      }
     />
   </Route>
 );

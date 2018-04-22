@@ -16,7 +16,11 @@ import graphqlHTTP from "koa-graphql";
 import settings from "../settings";
 import error from "./error";
 
-export const loggingLayer = (app: Object) => app.use(logger()); // https://github.com/koajs/logger
+export const loggingLayer = (app: Object) => {
+  if (process.env.NODE_ENV === "development") {
+    app.use(logger()); // https://github.com/koajs/logger
+  }
+};
 
 export const initialLayer = (app: Object) =>
   app

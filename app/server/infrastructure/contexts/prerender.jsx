@@ -6,8 +6,8 @@ import App from "../../../share/components/app";
 
 let getRouter = require("../../helpers/getRouter").default;
 
+// $FlowFixMe
 if (process.env.NODE_ENV === "development" && module.hot) {
-  // $FlowFixMe
   module.hot.accept("../../helpers/getRouter", () => {
     getRouter = require("../../helpers/getRouter").default;
   });

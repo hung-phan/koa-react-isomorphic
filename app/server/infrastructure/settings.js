@@ -1,6 +1,6 @@
 /* @flow */
 /* global process */
-const { ROOT, PUBLIC } = global.nodeRequire("./config/path-helper");
+const { ROOT, PUBLIC } = require("../../../config/path-helper");
 
 // default settings
 const settings = {
@@ -12,9 +12,7 @@ const settings = {
   env: {
     NODE_ENV: process.env.NODE_ENV
   },
-  assetManifest:
-    (global.webpackIsomorphicTools && global.webpackIsomorphicTools.assets()) ||
-    {}
+  assetManifest: {}
 };
 
 // ignore assets build for test
@@ -23,6 +21,8 @@ if (process.env.NODE_ENV === "test") {
     javascript: {},
     styles: {}
   };
+} else {
+  settings.assetManifest = global.nodeRequire("./public/assets/webpack-chunks.json");
 }
 
 export default settings;
