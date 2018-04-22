@@ -4,12 +4,9 @@ exports[`Helmet 1`] = `
 <Provider
   store={
     Object {
+      "attachReducers": [Function],
       "dispatch": [Function],
       "getState": [Function],
-      "reducers": Object {
-        "helmet": [Function],
-        "routing": [Function],
-      },
       "replaceReducer": [Function],
       "subscribe": [Function],
       Symbol(observable): [Function],

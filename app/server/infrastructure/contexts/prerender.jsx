@@ -10,8 +10,8 @@ import { serverFetchData } from "../../../share/helpers/fetchData";
 
 let routesModule = require("../../../routes");
 
+// $FlowFixMe
 if (process.env.NODE_ENV === "development" && module.hot) {
-  // $FlowFixMe
   module.hot.accept("../../../routes", () => {
     routesModule = require("../../../routes");
   });

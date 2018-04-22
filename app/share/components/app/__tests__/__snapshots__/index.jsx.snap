@@ -6,12 +6,9 @@ exports[`App in development mode 1`] = `
     key="provider"
     store={
       Object {
+        "attachReducers": [Function],
         "dispatch": [Function],
         "getState": [Function],
-        "reducers": Object {
-          "helmet": [Function],
-          "routing": [Function],
-        },
         "replaceReducer": [Function],
         "subscribe": [Function],
         Symbol(observable): [Function],
@@ -31,12 +28,9 @@ exports[`App in production mode 1`] = `
   key="provider"
   store={
     Object {
+      "attachReducers": [Function],
       "dispatch": [Function],
       "getState": [Function],
-      "reducers": Object {
-        "helmet": [Function],
-        "routing": [Function],
-      },
       "replaceReducer": [Function],
       "subscribe": [Function],
       Symbol(observable): [Function],
