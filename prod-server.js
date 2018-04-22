@@ -18,14 +18,12 @@ if (process.env.NODE_ENV === "development") {
     });
 }
 
-startServer(
-  require("./config/webpack/default-config"),
-  require("./config/webpack/universal-webpack-settings")
-);
-
-// if (process.env.NODE_DEBUGGER) {
-//   require("babel-core/register");
-//   require("./app/server");
-// } else {
-//   require("./build/server");
-// }
+if (process.env.NODE_DEBUGGER) {
+  require("babel-core/register");
+  require("./app/server").default();
+} else {
+  startServer(
+    require("./config/webpack/default-config"),
+    require("./config/webpack/universal-webpack-settings")
+  );
+}
