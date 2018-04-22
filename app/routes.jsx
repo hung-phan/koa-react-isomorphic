@@ -28,8 +28,8 @@ export const getRoutes = (
           { default: TodosComponent },
           { mountPoint: todosMountPoint, default: todosReducer }
         ] = await Promise.all([
-          import(/* webpackChunkName: "todos-page" */ "./share/components/todos"),
-          import(/* webpackChunkName: "todos-page" */ "./share/components/todos/logicBundle")
+          import(/* webpackChunkName: "todos-page", webpackPreload: true */ "./share/components/todos"),
+          import(/* webpackChunkName: "todos-page", webpackPreload: true */ "./share/components/todos/logicBundle")
         ]);
 
         injectReducers(store, { [todosMountPoint]: todosReducer });
