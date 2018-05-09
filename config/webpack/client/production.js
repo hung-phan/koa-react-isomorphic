@@ -67,8 +67,6 @@ productionConfig.plugins.push(
     externals: ["*.woff", "*.woff2", "*.eot", "*.ttf"],
     relativePaths: false,
     ServiceWorker: {
-      // disable minifier for webpack 4
-      minify: false,
       output: "../sw.js",
       publicPath: "/sw.js",
       events: true
