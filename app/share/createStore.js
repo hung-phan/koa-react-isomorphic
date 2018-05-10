@@ -1,7 +1,7 @@
 /* @flow */
 /* global process */
-import { applyMiddleware, combineReducers, compose } from "redux";
-import { createStore } from "redux-dynamic-reducer";
+import _ from "lodash";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import injectReducers from "./helpers/injectReducers";
@@ -22,11 +22,26 @@ if (process.env.RUNTIME_ENV === "client") {
 }
 
 export default (initialState: Object = {}) => {
+  // preserve state in SSR
+  const newReducers = _.reduce(
+    Object.keys(initialState),
+    (prev, key) => {
+      if (!(key in prev)) {
+        prev[key] = _.constant(initialState[key]);
+      }
+
+      return prev;
+    },
+    reducers
+  );
+
   const store = createStore(
-    combineReducers(reducers),
+    combineReducers(newReducers),
     initialState,
     compose(applyMiddleware(...middlewares), ...enhancers)
   );
+
+  store.reducers = newReducers;
 
   // $FlowFixMe
   if (process.env.NODE_ENV === "development" && module.hot) {
