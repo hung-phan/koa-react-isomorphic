@@ -5,9 +5,9 @@ module.exports = {
       {
         targets:
           process.env.RUNTIME_ENV === "client"
-            ? { browsers: ["last 2 versions", "safari >= 7"] }
+            ? { browsers: ["> 1%", "last 2 versions", "Firefox ESR"] }
             : { node: "current" },
-        useBuiltIns: false,
+        useBuiltIns: true,
         modules: process.env.RUN_MODE === "es" ? false : "commonjs"
       }
     ]
