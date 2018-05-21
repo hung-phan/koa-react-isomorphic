@@ -23,13 +23,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.modernizrrc$/,
-        use: ["modernizr-loader"]
-      },
-      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ["babel-loader", "eslint-loader"]
+      },
+      {
+        test: /\.modernizrrc$/,
+        use: ["modernizr-loader"]
       },
       {
         test: /\.(gif|jpg|jpeg|png|svg|ttf|eot|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
