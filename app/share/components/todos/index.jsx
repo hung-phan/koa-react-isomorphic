@@ -39,9 +39,12 @@ export const Todos = ({
   </div>
 );
 
-export default compose(
-  createRedialHooks({
-    [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos()),
+const hooks: Object = {
+  [FETCH_DATA_HOOK]: ({ store }) => store.dispatch(fetchTodos())
+};
+
+if (process.env.RUNTIME_ENV === "client") {
+  Object.assign(hooks, {
     [UPDATE_HEADER_HOOK]: ({ store }) =>
       store.dispatch(
         updateLink([
@@ -53,7 +56,11 @@ export default compose(
           }
         ])
       )
-  }),
+  });
+}
+
+export default compose(
+  createRedialHooks(hooks),
   connect(
     state => ({
       todos: selectors.getTodos(state)
