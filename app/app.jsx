@@ -6,7 +6,7 @@ import { match, Router } from "react-router";
 import App from "./share/components/app";
 import createStore from "./share/createStore";
 import { clientFetchData } from "./share/helpers/fetchData";
-import { getClientHistory } from "./routes";
+import { getHistory } from "./routes";
 import "./client/loadExternalLibs";
 
 const appDOM = document.getElementById("app");
@@ -16,7 +16,7 @@ if (!appDOM) {
 }
 
 const store = createStore(window.prerenderData);
-const history = getClientHistory(store);
+const history = getHistory(store);
 let { getRoutes } = require("./routes");
 
 function initialize() {

@@ -20,6 +20,11 @@ export const getServerHistory = (store: Object, url: string): Object =>
     selectLocationState: selectors.selectLocationState
   });
 
+export const getHistory = (...args: any[]) =>
+  process.env.RUNTIME_ENV === "client"
+    ? getClientHistory(...args)
+    : getServerHistory(...args);
+
 export const getRoutes = (
   history: Object,
   store: Object,

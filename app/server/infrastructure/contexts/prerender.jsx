@@ -28,7 +28,7 @@ export default function(
 
   return new Promise((resolve, reject) => {
     const store = createStore(initialState);
-    const history = routesModule.getServerHistory(store, this.req.url);
+    const history = routesModule.getHistory(store, this.req.url);
     const routes = routesModule.getRoutes(history, store);
 
     match({ routes, history }, (error, redirectLocation, renderProps) => {

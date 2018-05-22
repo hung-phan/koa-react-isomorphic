@@ -27,7 +27,7 @@ export const serverFetchData = (
 const redirectTo = (url: string): void => {
   if (process.env.NODE_ENV === "test") {
     global.jsdom.reconfigure({ url: `${getBaseUrl()}${url}` });
-  } else {
+  } else if (process.env.RUNTIME_ENV === "client") {
     window.location.replace(url);
   }
 };
