@@ -9,11 +9,16 @@ import {
 } from "react-router";
 import injectReducers from "./share/helpers/injectReducers";
 
-export const getClientHistory = (store: Object): Object =>
+const getClientHistory = (store: Object): Object =>
   syncHistoryWithStore(browserHistory, store);
 
-export const getServerHistory = (store: Object, url: string): Object =>
+const getServerHistory = (store: Object, url: string): Object =>
   syncHistoryWithStore(createMemoryHistory(url), store);
+
+export const getHistory = (...args: any[]) =>
+  process.env.RUNTIME_ENV === "client"
+    ? getClientHistory(...args)
+    : getServerHistory(...args);
 
 export const getRoutes = (
   history: Object,
