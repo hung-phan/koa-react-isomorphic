@@ -48,8 +48,6 @@
     "rxjs": "^6.1.0"
   },
   "devDependencies": {
-    "uglifyjs-webpack-plugin": "^1.2.5",
-    "universal-webpack": "^0.6.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.1.2",
