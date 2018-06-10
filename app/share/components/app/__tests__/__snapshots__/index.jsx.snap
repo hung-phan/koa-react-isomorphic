@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App in development mode 1`] = `
-<t>
+<e>
   <Provider
     key="provider"
     store={
@@ -23,7 +23,7 @@ exports[`App in development mode 1`] = `
       New Routes
     </div>
   </Provider>
-</t>
+</e>
 `;
 
 exports[`App in production mode 1`] = `
