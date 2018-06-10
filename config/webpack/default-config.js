@@ -73,26 +73,12 @@ module.exports = {
     ]
   },
   optimization: {
-    // https://webpack.js.org/plugins/split-chunks-plugin/#optimization-splitchunks
+    // Automatically split vendor and commons
+    // https://twitter.com/wSokra/status/969633336732905474
+    // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
     splitChunks: {
-      chunks: "async",
-      minSize: 30000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      cacheGroups: {
-        vendors: {
-          name: "vendors",
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        },
-        default: {
-          name: "default",
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        }
-      }
+      chunks: "all",
+      name: "vendor",
     }
   },
   plugins: [

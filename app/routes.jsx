@@ -22,7 +22,7 @@ export const routeConfig = makeRouteConfig(
     <Route
       path="static-page"
       getComponent={() =>
-        import(/* webpackChunkName: "static-page" */ "./share/components/static-page").then(
+        import(/* webpackChunkName: "static-page", webpackPrefetch: true */ "./share/components/static-page").then(
           module => module.default
         )
       }
