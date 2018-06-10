@@ -38,7 +38,12 @@ _.mergeWith(
     },
     recordsPath: path.join(ROOT, config.path.tmp, "client-records.json"),
     optimization: {
-      noEmitOnErrors: true
+      noEmitOnErrors: true,
+      // Keep the runtime chunk separated to enable long term caching
+      // https://twitter.com/wSokra/status/969679223278505985
+      runtimeChunk: {
+        name: "runtime"
+      }
     }
   },
   (obj1, obj2) => (_.isArray(obj2) ? obj2.concat(obj1) : undefined)
