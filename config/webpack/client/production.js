@@ -81,11 +81,6 @@ productionConfig.plugins.push(
     minimize: true,
     debug: false
   }),
-  new MinifyPlugin({
-    cache: true,
-    parallel: true,
-    sourceMap: false
-  }),
   new CompressionPlugin()
 );
 
