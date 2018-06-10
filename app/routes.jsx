@@ -51,7 +51,7 @@ export const getRoutes = (
       getComponent={async (nextState, cb) => {
         const {
           default: StaticPageComponent
-        } = await import(/* webpackChunkName: "static-page" */ "./share/components/static-page");
+        } = await import(/* webpackChunkName: "static-page", webpackPrefetch: true */ "./share/components/static-page");
 
         cb(null, StaticPageComponent);
       }}
