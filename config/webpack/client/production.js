@@ -50,6 +50,10 @@ productionConfig.plugins.push(
     "process.env.SERVER_RENDERING": true
   }),
   new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false
+  }),
+  new webpack.LoaderOptionsPlugin({
     test: /\.(css|less|scss)$/,
     options: {
       postcss() {
@@ -76,10 +80,6 @@ productionConfig.plugins.push(
       publicPath: "/sw.js",
       events: true
     }
-  }),
-  new webpack.LoaderOptionsPlugin({
-    minimize: true,
-    debug: false
   }),
   new CompressionPlugin()
 );
