@@ -1,4 +1,4 @@
-# React and Koa boilerplate
+# React and Koa boilerplate (deprecated. New project available at https://github.com/hung-phan/micro-nextjs)
 [![build status](https://secure.travis-ci.org/hung-phan/koa-react-isomorphic.svg)](http://travis-ci.org/hung-phan/koa-react-isomorphic/)
 [![codecov](https://codecov.io/gh/hung-phan/koa-react-isomorphic/branch/master/graph/badge.svg)](https://codecov.io/gh/hung-phan/koa-react-isomorphic)
 [![Dependency Status](https://david-dm.org/hung-phan/koa-react-isomorphic.svg)](https://david-dm.org/hung-phan/koa-react-isomorphic)
